@@ -1,0 +1,411 @@
+1                                        The WPS System        17:08 Friday, March 13, 2015     
+
+NOTE: (c) Copyright World Programming Limited 2002-2014.  All rights reserved.
+NOTE: World Programming System 3.01 (03.01.01.00.000635)
+      Licensed to Cognesia
+NOTE: This session is executing on the LINUX platform and is running in 64 bit mode
+
+NOTE: AUTOEXEC processing beginning; file is
+      /home/software/wps-3.1.1.0.635-maintenance/autoexec.sas
+MPRINT(DIRECT_LIBS):  libname base "/project17/CACDIRECT/DATA/BASE_DEMO/A";
+NOTE: Library base assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/BASE_DEMO/A
+
+MPRINT(DIRECT_LIBS):  libname indiv "/project17/CACDIRECT/DATA/INDIV_DEMO/A";
+NOTE: Library indiv assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/INDIV_DEMO/A
+
+MPRINT(DIRECT_LIBS):  libname scf "/project17/CACDIRECT/DATA/SCF_MKEY/A";
+NOTE: Library scf assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/SCF_MKEY/A
+
+MPRINT(DIRECT_LIBS):  libname process "/project17/CACDIRECT/DATA/PROCESS";
+NOTE: Library process assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/PROCESS
+
+MPRINT(DIRECT_LIBS):  libname geo "/project17/CACDIRECT/DATA/GEO/A";
+NOTE: Library geo assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/GEO/A
+
+MPRINT(DIRECT_LIBS):  libname easi "/project17/CENSUS/DATA/2010/EASI";
+NOTE: Library easi assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/2010/EASI
+
+MPRINT(DIRECT_LIBS):  libname cen2010 "/project17/CENSUS/DATA/2010/FINAL";
+NOTE: Library cen2010 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/2010/FINAL
+
+MPRINT(DIRECT_LIBS):  libname cen2000 "/project17/CENSUS/DATA/FINAL";
+NOTE: Library cen2000 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/FINAL
+
+MPRINT(DIRECT_LIBS):  libname samp "/project/CACDIRECT/DATA/SAMPLES/A";
+NOTE: Library samp assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/SAMPLES/A
+
+MPRINT(DIRECT_LIBS):  libname dev "/project17/CACDIRECT/DATA/DEVELOPMENT";
+NOTE: Library dev assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DEVELOPMENT
+
+MPRINT(DIRECT_LIBS):  libname et "/project17/CACDIRECT/DATA/ETECH/A";
+NOTE: Library et assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/ETECH/A
+
+MPRINT(DIRECT_LIBS):  libname jhs "/project17/CACDIRECT/DATA/JOB_HISTORY";
+NOTE: Library jhs assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/JOB_HISTORY
+
+MPRINT(DIRECT_LIBS):  libname buycnc "/project17/CACDIRECT/DATA/BUYER_CONNECT/A";
+NOTE: Library buycnc assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/BUYER_CONNECT/A
+
+MPRINT(DIRECT_LIBS):  libname foret "/project17/CACDIRECT/DATA/ETECH/FORETECH";
+NOTE: Library foret assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/ETECH/FORETECH
+
+MPRINT(DIRECT_LIBS):  libname newsilh "/project17/CACDIRECT/DATA/SILH3D/A";
+NOTE: Library newsilh assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/SILH3D/A
+
+MPRINT(DIRECT_LIBS):  libname ddnc "/project17/CACDIRECT/DATA/DDNC";
+NOTE: Library ddnc assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DDNC
+
+MPRINT(DIRECT_LIBS):  libname domsilh "/project17/CACDIRECT/DATA/DOM_SILH/A";
+NOTE: Library domsilh assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DOM_SILH/A
+
+MPRINT(DIRECT_LIBS):  libname m_table "/project/CACDIRECT/DATA/RECODES/A";
+NOTE: Library m_table does not exist
+MPRINT(DIRECT_LIBS):  libname intmdl "/project/CACDIRECT/DATA/INTMDL/A";
+NOTE: Library intmdl assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/INTMDL/A
+
+MPRINT(DIRECT_LIBS):  libname for_rts "/project/CACDIRECT/DATA/REAL_TIME/A";
+NOTE: Library for_rts assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/REAL_TIME/A
+
+MPRINT(DIRECT_LIBS):  libname v12 "/project/CACDIRECT/DATA/V12/A";
+NOTE: Library v12 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/V12/A
+
+NOTE: Library dma assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/DMA/A
+
+NOTE: Format cdif output
+NOTE: Procedure format step took :
+      real time : 0.028
+      cpu time  : 0.027
+
+
+NOTE: Format cac_le_a output
+NOTE: Format cac_le_b output
+NOTE: Format $cac_le_c output
+NOTE: Format match output
+NOTE: Format geo_match output
+NOTE: Format $cac_cdi output
+NOTE: Format prod_act output
+NOTE: Format cac_act output
+NOTE: Format cac_prod output
+NOTE: Format cac_kids output
+NOTE: Format cac_mar output
+NOTE: Format cac_age output
+NOTE: Format $cac_inc output
+NOTE: Format $cac_ninc output
+NOTE: Format $silh_ld output
+NOTE: Format $silh_super output
+NOTE: Format $silh output
+NOTE: Format pofaage output
+NOTE: Format pofaagi output
+NOTE: Format cac_edu output
+NOTE: Format cac_occ output
+NOTE: Format $etethnic output
+NOTE: Format $etrelig output
+NOTE: Format $etlang output
+NOTE: Format $ethisporg output
+NOTE: Format $ethispasm output
+NOTE: Format $etasiaasm output
+NOTE: Format $etgender output
+NOTE: Procedure format step took :
+      real time : 0.009
+      cpu time  : 0.008
+
+
+NOTE: Format $val_st_scf output
+NOTE: Procedure format step took :
+      real time : 0.009
+      cpu time  : 0.008
+
+
+MPRINT(B2B_LIBS):  libname b2b '/project/B2B/DATA/PRODUCTION/FIRM/B';
+NOTE: Library b2b assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/FIRM/B
+
+MPRINT(B2B_LIBS):  libname b2bem '/project/B2B/DATA/PRODUCTION/EM/B';
+NOTE: Library b2bem assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/EM/B
+
+MPRINT(B2B_LIBS):  libname b2bmkey '/project/B2B/DATA/PRODUCTION/MATCHKEYS/B';
+NOTE: Library b2bmkey assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/MATCHKEYS/B
+
+MPRINT(B2B_LIBS):  libname b2bsamp '/project18/CLIENT/B2B/DATA/PRODUCTION/SAMPLES/B';
+NOTE: Library b2bsamp assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project18/CLIENT/B2B/DATA/PRODUCTION/SAMPLES/B
+
+MPRINT(B2B_LIBS):  libname b2bprocs '/project/B2B/DATA/PRODUCTION/PROCESS';
+NOTE: Library b2bprocs assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/PROCESS
+
+NOTE: Format $salesvol output
+NOTE: Format $empsize output
+NOTE: Format $offsize output
+NOTE: Format $adsize output
+NOTE: Format $location output
+NOTE: Format $ctitle output
+NOTE: Format $callstat output
+NOTE: Format $b2bcred output
+NOTE: Format $sqftg output
+NOTE: Format $teleexp output
+NOTE: Format $utilexp output
+NOTE: Format $adexp output
+NOTE: Format $payexp output
+NOTE: Format $rentexp output
+NOTE: Format $pcexp output
+NOTE: Format $osupexp output
+NOTE: Format $acctexp output
+NOTE: Format $packexp output
+NOTE: Format $labrexp output
+NOTE: Format $insrexp output
+NOTE: Format $prntexp output
+NOTE: Format $admnexp output
+NOTE: Format $leglexp output
+NOTE: Format $cstatus output
+NOTE: Format $exptype output
+NOTE: Format $actflag output
+NOTE: Format $tcode output
+NOTE: Format $ttype output
+NOTE: Format $wealth output
+NOTE: Format $addrtype output
+NOTE: Format $busstat output
+NOTE: Format $govflag output
+NOTE: Format $indflag output
+NOTE: Format $sic1cac output
+NOTE: Format $sic2cac output
+NOTE: Format $sic4cac output
+NOTE: Procedure format step took :
+      real time : 0.025
+      cpu time  : 0.025
+
+
+NOTE: Format $sicdis output
+NOTE: Procedure format step took :
+      real time : 0.083
+      cpu time  : 0.082
+
+
+NOTE: AUTOEXEC processing completed
+
+1         libname test '/project/TRAINING/NAN/TEST';
+NOTE: Library test assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/TRAINING/NAN/TEST
+
+2         %include "../.mover_includes.inc";
+NOTE: Library nmsql assigned as follows:
+      Engine:        ODBC
+      Physical Name: 
+
+NOTE: Library nmsas assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/SAS
+
+TODAY: 13MAR15
+12        /*
+13        %let fdate = today()-53;
+14        
+15        proc sql;
+16           create table test.this_week_database as
+17           select a.*
+18           from nmsql.COGENSIA_MOVERS as a
+19           where cac_nm_file_dt = &fdate;
+20        quit;
+21        */
+22        
+23        
+24        
+25        
+26        proc sort data=test.dm_only_ponp (drop=udc) nodupkey out=ponp; by zip_code state; run;
+NOTE: 1814 observations were read from "TEST.dm_only_ponp"
+NOTE: 183 observations were found and deleted due to having duplicate sort keys
+NOTE: Data set "WORK.ponp" has 1631 observation(s) and 2 variable(s)
+NOTE: Specifying compression for data set "WORK.ponp" has increased its size from 4 to 8 pages
+      (a 100% increase)
+NOTE: Procedure sort step took :
+      real time : 0.017
+      cpu time  : 0.020
+
+
+26      !                                                                                       
+*** HAVE DUPES ***;
+27        proc sort data=test.dm_only_vs_ponp (drop=udc) nodupkey out=vs_ponp; by zip_code
+state; run;
+NOTE: 1358 observations were read from "TEST.dm_only_vs_ponp"
+NOTE: No observations with duplicate sort keys were found
+NOTE: Data set "WORK.vs_ponp" has 1358 observation(s) and 2 variable(s)
+NOTE: Specifying compression for data set "WORK.vs_ponp" has increased its size from 4 to 7
+      pages (a 75% increase)
+NOTE: Procedure sort step took :
+      real time : 0.003
+      cpu time  : 0.004
+
+
+28        proc sort data=test.obtm_only_mhp (drop=udc) nodupkey out=mhp; by zip_code state; run;
+NOTE: 7397 observations were read from "TEST.obtm_only_mhp"
+NOTE: 1338 observations were found and deleted due to having duplicate sort keys
+NOTE: Data set "WORK.mhp" has 6059 observation(s) and 2 variable(s)
+NOTE: Specifying compression for data set "WORK.mhp" has increased its size from 12 to 22 pages
+      (a 84% increase)
+NOTE: Procedure sort step took :
+      real time : 0.008
+      cpu time  : 0.014
+
+
+29        proc sort data=test.obtm_only_vs_mhp (drop=udc) nodupkey out=vs_mhp; by zip_code; run;
+NOTE: 2608 observations were read from "TEST.obtm_only_vs_mhp"
+NOTE: 522 observations were found and deleted due to having duplicate sort keys
+NOTE: Data set "WORK.vs_mhp" has 2086 observation(s) and 2 variable(s)
+NOTE: Specifying compression for data set "WORK.vs_mhp" has increased its size from 5 to 9 pages
+      (a 80% increase)
+NOTE: Procedure sort step took :
+      real time : 0.005
+      cpu time  : 0.007
+
+
+30        
+31        proc sort data=test.this_week_update out=database (rename=(cac_nm_zip_code = zip_code
+cac_nm_state_abbreviation = state)); by cac_nm_zip_code cac_nm_state_abbreviation;run;
+NOTE: 129562 observations were read from "TEST.this_week_update"
+NOTE: Data set "WORK.database" has 129562 observation(s) and 17 variable(s)
+NOTE: Specifying compression for data set "WORK.database" has decreased its size from 4629 to
+      3062 pages (a 34% reduction)
+NOTE: Procedure sort step took :
+      real time : 0.227
+      cpu time  : 0.262
+
+
+32        
+33        data test.raw_1_update;
+34           merge database (in=a)
+35                 ponp (in=b);
+36           by zip_code state;
+37           if a and b;
+38        run;
+
+NOTE: 129562 observations were read from "WORK.database"
+NOTE: 1631 observations were read from "WORK.ponp"
+NOTE: Data set "TEST.raw_1_update" has 6513 observation(s) and 17 variable(s)
+NOTE: Specifying compression for data set "TEST.raw_1_update" has decreased its size from 234 to
+      187 pages (a 21% reduction)
+NOTE: The data step took :
+      real time : 0.135
+      cpu time  : 0.134
+
+
+39        
+40        
+41        data test.raw_2_update;
+42           merge database (in=a)
+43                 vs_ponp (in=b);
+44           by zip_code state;
+45           if a and b then do;
+46              if cac_nm_target_valuescore in ('A' 'A1H''A2H' 'B1H' 'B2H' 'C1H' 'C2H') then
+output test.raw_2_update;
+47           end;
+48        run;
+
+NOTE: 129562 observations were read from "WORK.database"
+NOTE: 1358 observations were read from "WORK.vs_ponp"
+NOTE: Data set "TEST.raw_2_update" has 2371 observation(s) and 17 variable(s)
+NOTE: Specifying compression for data set "TEST.raw_2_update" has decreased its size from 86 to
+      68 pages (a 21% reduction)
+NOTE: The data step took :
+      real time : 0.125
+      cpu time  : 0.124
+
+
+49        
+50        
+51        data test.raw_3_update;
+52           merge database (in=a)
+53                 mhp (in=b);
+54           by zip_code state;
+55           if a and b then do ;
+56              if cac_nm_area_code_with_supp_appl ~='' and cac_nm_telephone_with_supp_appl ~=''
+then output test.raw_3_update;
+57           end;
+58        run;
+
+NOTE: 129562 observations were read from "WORK.database"
+NOTE: 6059 observations were read from "WORK.mhp"
+NOTE: Data set "TEST.raw_3_update" has 6147 observation(s) and 17 variable(s)
+NOTE: Specifying compression for data set "TEST.raw_3_update" has decreased its size from 221 to
+      185 pages (a 17% reduction)
+NOTE: The data step took :
+      real time : 0.136
+      cpu time  : 0.135
+
+
+59        
+60        
+61        data test.raw_4_update;
+62           merge database (in=a)
+63                 vs_mhp (in=b);
+64           by zip_code state;
+65           if a and b then do;
+66              if cac_nm_target_valuescore in ('A' 'A1H''A2H' 'B1H' 'B2H' 'C1H' 'C2H') and
+cac_nm_area_code_with_supp_appl ~='' and cac_nm_telephone_with_supp_appl ~='' then output
+test.raw_4_update;
+67           end;
+68        run;
+
+NOTE: 129562 observations were read from "WORK.database"
+NOTE: 2086 observations were read from "WORK.vs_mhp"
+NOTE: Data set "TEST.raw_4_update" has 575 observation(s) and 17 variable(s)
+NOTE: Specifying compression for data set "TEST.raw_4_update" has decreased its size from 22 to
+      20 pages (a 10% reduction)
+NOTE: The data step took :
+      real time : 0.123
+      cpu time  : 0.123
+
+
+
+NOTE: Submitted statements took :
+      real time : 1.380
+      cpu time  : 1.074

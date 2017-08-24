@@ -1,0 +1,279 @@
+1                                        The WPS System       16:23 Tuesday, March 17, 2015     
+
+NOTE: (c) Copyright World Programming Limited 2002-2014.  All rights reserved.
+NOTE: World Programming System 3.01 (03.01.01.00.000635)
+      Licensed to Cognesia
+NOTE: This session is executing on the LINUX platform and is running in 64 bit mode
+
+NOTE: AUTOEXEC processing beginning; file is
+      /home/software/wps-3.1.1.0.635-maintenance/autoexec.sas
+MPRINT(DIRECT_LIBS):  libname base "/project17/CACDIRECT/DATA/BASE_DEMO/B";
+NOTE: Library base assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/BASE_DEMO/B
+
+MPRINT(DIRECT_LIBS):  libname indiv "/project17/CACDIRECT/DATA/INDIV_DEMO/B";
+NOTE: Library indiv assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/INDIV_DEMO/B
+
+MPRINT(DIRECT_LIBS):  libname scf "/project17/CACDIRECT/DATA/SCF_MKEY/B";
+NOTE: Library scf assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/SCF_MKEY/B
+
+MPRINT(DIRECT_LIBS):  libname process "/project17/CACDIRECT/DATA/PROCESS";
+NOTE: Library process assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/PROCESS
+
+MPRINT(DIRECT_LIBS):  libname geo "/project17/CACDIRECT/DATA/GEO/B";
+NOTE: Library geo assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/GEO/B
+
+MPRINT(DIRECT_LIBS):  libname easi "/project17/CENSUS/DATA/2010/EASI";
+NOTE: Library easi assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/2010/EASI
+
+MPRINT(DIRECT_LIBS):  libname cen2010 "/project17/CENSUS/DATA/2010/FINAL";
+NOTE: Library cen2010 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/2010/FINAL
+
+MPRINT(DIRECT_LIBS):  libname cen2000 "/project17/CENSUS/DATA/FINAL";
+NOTE: Library cen2000 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/FINAL
+
+MPRINT(DIRECT_LIBS):  libname samp "/project/CACDIRECT/DATA/SAMPLES/B";
+NOTE: Library samp assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/SAMPLES/B
+
+MPRINT(DIRECT_LIBS):  libname dev "/project17/CACDIRECT/DATA/DEVELOPMENT";
+NOTE: Library dev assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DEVELOPMENT
+
+MPRINT(DIRECT_LIBS):  libname et "/project17/CACDIRECT/DATA/ETECH/B";
+NOTE: Library et assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/ETECH/B
+
+MPRINT(DIRECT_LIBS):  libname jhis "/project17/CACDIRECT/DATA/JOB_HISTORY";
+NOTE: Library jhis assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/JOB_HISTORY
+
+MPRINT(DIRECT_LIBS):  libname buycnc "/project17/CACDIRECT/DATA/BUYER_CONNECT/B";
+NOTE: Library buycnc assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/BUYER_CONNECT/B
+
+MPRINT(DIRECT_LIBS):  libname foret "/project17/CACDIRECT/DATA/ETECH/FORETECH";
+NOTE: Library foret assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/ETECH/FORETECH
+
+MPRINT(DIRECT_LIBS):  libname newsilh "/project17/CACDIRECT/DATA/SILH3D/B";
+NOTE: Library newsilh assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/SILH3D/B
+
+MPRINT(DIRECT_LIBS):  libname ddnc "/project17/CACDIRECT/DATA/DDNC";
+NOTE: Library ddnc assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DDNC
+
+MPRINT(DIRECT_LIBS):  libname domsilh "/project17/CACDIRECT/DATA/DOM_SILH/B";
+NOTE: Library domsilh assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DOM_SILH/B
+
+MPRINT(DIRECT_LIBS):  libname intmdl "/project/CACDIRECT/DATA/INTMDL/B";
+NOTE: Library intmdl assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/INTMDL/B
+
+MPRINT(DIRECT_LIBS):  libname for_rts "/project/CACDIRECT/DATA/REAL_TIME/B";
+NOTE: Library for_rts assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/REAL_TIME/B
+
+MPRINT(DIRECT_LIBS):  libname v12 "/project/CACDIRECT/DATA/V12/B";
+NOTE: Library v12 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/V12/B
+
+MPRINT(DIRECT_LIBS):  libname bridge "/project/CACDIRECT/DATA/BRIDGE/B";
+NOTE: Library bridge assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/BRIDGE/B
+
+MPRINT(DIRECT_LIBS):  libname geoagg "/project/CACDIRECT/DATA/GEOAGG/B";
+NOTE: Library geoagg assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/GEOAGG/B
+
+NOTE: Library dma assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/DMA/A
+
+NOTE: Format cdif output
+NOTE: Procedure format step took :
+      real time : 0.028
+      cpu time  : 0.027
+
+
+NOTE: Format cac_le_a output
+NOTE: Format cac_le_b output
+NOTE: Format $cac_le_c output
+NOTE: Format match output
+NOTE: Format geo_match output
+NOTE: Format $cac_cdi output
+NOTE: Format prod_act output
+NOTE: Format cac_act output
+NOTE: Format cac_prod output
+NOTE: Format cac_kids output
+NOTE: Format cac_mar output
+NOTE: Format cac_age output
+NOTE: Format $cac_inc output
+NOTE: Format $cac_ninc output
+NOTE: Format $silh_ld output
+NOTE: Format $silh_super output
+NOTE: Format $silh output
+NOTE: Format pofaage output
+NOTE: Format pofaagi output
+NOTE: Format cac_edu output
+NOTE: Format cac_occ output
+NOTE: Format $etethnic output
+NOTE: Format $etrelig output
+NOTE: Format $etlang output
+NOTE: Format $ethisporg output
+NOTE: Format $ethispasm output
+NOTE: Format $etasiaasm output
+NOTE: Format $etgender output
+NOTE: Procedure format step took :
+      real time : 0.008
+      cpu time  : 0.008
+
+
+NOTE: Format $val_st_scf output
+NOTE: Procedure format step took :
+      real time : 0.009
+      cpu time  : 0.009
+
+
+MPRINT(B2B_LIBS):  libname b2b '/project/B2B/DATA/PRODUCTION/FIRM/B';
+NOTE: Library b2b assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/FIRM/B
+
+MPRINT(B2B_LIBS):  libname b2bem '/project/B2B/DATA/PRODUCTION/EM/B';
+NOTE: Library b2bem assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/EM/B
+
+MPRINT(B2B_LIBS):  libname b2bmkey '/project/B2B/DATA/PRODUCTION/MATCHKEYS/B';
+NOTE: Library b2bmkey assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/MATCHKEYS/B
+
+MPRINT(B2B_LIBS):  libname b2bsamp '/project18/CLIENT/B2B/DATA/PRODUCTION/SAMPLES/B';
+NOTE: Library b2bsamp assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project18/CLIENT/B2B/DATA/PRODUCTION/SAMPLES/B
+
+MPRINT(B2B_LIBS):  libname b2bprocs '/project/B2B/DATA/PRODUCTION/PROCESS';
+NOTE: Library b2bprocs assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/PROCESS
+
+NOTE: Format $salesvol output
+NOTE: Format $empsize output
+NOTE: Format $offsize output
+NOTE: Format $adsize output
+NOTE: Format $location output
+NOTE: Format $ctitle output
+NOTE: Format $callstat output
+NOTE: Format $b2bcred output
+NOTE: Format $sqftg output
+NOTE: Format $teleexp output
+NOTE: Format $utilexp output
+NOTE: Format $adexp output
+NOTE: Format $payexp output
+NOTE: Format $rentexp output
+NOTE: Format $pcexp output
+NOTE: Format $osupexp output
+NOTE: Format $acctexp output
+NOTE: Format $packexp output
+NOTE: Format $labrexp output
+NOTE: Format $insrexp output
+NOTE: Format $prntexp output
+NOTE: Format $admnexp output
+NOTE: Format $leglexp output
+NOTE: Format $cstatus output
+NOTE: Format $exptype output
+NOTE: Format $actflag output
+NOTE: Format $tcode output
+NOTE: Format $ttype output
+NOTE: Format $wealth output
+NOTE: Format $addrtype output
+NOTE: Format $busstat output
+NOTE: Format $govflag output
+NOTE: Format $indflag output
+NOTE: Format $sic1cac output
+NOTE: Format $sic2cac output
+NOTE: Format $sic4cac output
+NOTE: Procedure format step took :
+      real time : 0.026
+      cpu time  : 0.025
+
+
+NOTE: Format $sicdis output
+NOTE: Procedure format step took :
+      real time : 0.084
+      cpu time  : 0.083
+
+
+NOTE: AUTOEXEC processing completed
+
+1         %include "../.mover_includes.inc";
+NOTE: Library nmsql assigned as follows:
+      Engine:        ODBC
+      Physical Name: 
+
+NOTE: Library nmsas assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/SAS
+
+TODAY: 17MAR15
+11        
+12        libname test '/project/TRAINING/NAN/TEST';
+NOTE: Library test assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/TRAINING/NAN/TEST
+
+13        
+14           proc sql;
+15              create table test.database_new as
+16              select a.*
+17              from nmsql.COGENSIA_MOVERS as a
+18              where a.cac_nm_file_dt = 20114;*20107;
+NOTE: Specifying compression for data set "WORK.___wpstemp17422466076330" has decreased its size
+      from 12902 to 9495 pages (a 27% reduction)
+NOTE: Data set "TEST.database_new" has 258009 observation(s) and 36 variable(s)
+NOTE: Specifying compression for data set "TEST.database_new" has decreased its size from 6452
+      to 5096 pages (a 22% reduction)
+19           quit;
+NOTE: Procedure sql step took :
+      real time : 15.113
+      cpu time  : 4.397
+
+
+
+NOTE: Submitted statements took :
+      real time : 15.780
+      cpu time  : 4.655

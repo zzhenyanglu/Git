@@ -1,0 +1,10 @@
+%macro ind_label_it;
+label
+CAC_HH_PID = 'Household Persistent ID'
+CAC_IND1_PID = 'Person 1 Persistent ID'
+CAC_IND2_PID= 'Person 2 Persistent ID'
+CAC_IND3_PID = 'Person 3 Persistent ID'
+CAC_IND4_PID = 'Person 4 Persistent ID'
+CAC_IND5_PID = 'Person 5 Persistent ID'
+;
+%mend ind_label_it;

@@ -1,0 +1,55 @@
+#!/bin/sh
+
+cidatapath=$1
+
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_AK.txt.gz | wc -l >  wc_AK.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_AL.txt.gz | wc -l >  wc_AL.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_AZ.txt.gz | wc -l >  wc_AZ.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_AR.txt.gz | wc -l >  wc_AR.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_CA.txt.gz | wc -l >  wc_CA.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_CO.txt.gz | wc -l >  wc_CO.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_CT.txt.gz | wc -l >  wc_CT.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_DC.txt.gz | wc -l >  wc_DC.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_DE.txt.gz | wc -l >  wc_DE.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_FL.txt.gz | wc -l >  wc_FL.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_GA.txt.gz | wc -l >  wc_GA.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_HI.txt.gz | wc -l >  wc_HI.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_ID.txt.gz | wc -l >  wc_ID.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_IL.txt.gz | wc -l >  wc_IL.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_IN.txt.gz | wc -l >  wc_IN.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_IA.txt.gz | wc -l >  wc_IA.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_KS.txt.gz | wc -l >  wc_KS.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_KY.txt.gz | wc -l >  wc_KY.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_LA.txt.gz | wc -l >  wc_LA.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_ME.txt.gz | wc -l >  wc_ME.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_MD.txt.gz | wc -l >  wc_MD.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_MA.txt.gz | wc -l >  wc_MA.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_MI.txt.gz | wc -l >  wc_MI.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_MN.txt.gz | wc -l >  wc_MN.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_MS.txt.gz | wc -l >  wc_MS.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_MO.txt.gz | wc -l >  wc_MO.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_MT.txt.gz | wc -l >  wc_MT.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_NE.txt.gz | wc -l >  wc_NE.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_NV.txt.gz | wc -l >  wc_NV.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_NH.txt.gz | wc -l >  wc_NH.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_NJ.txt.gz | wc -l >  wc_NJ.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_NM.txt.gz | wc -l >  wc_NM.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_NY.txt.gz | wc -l >  wc_NY.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_NC.txt.gz | wc -l >  wc_NC.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_ND.txt.gz | wc -l >  wc_ND.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_OH.txt.gz | wc -l >  wc_OH.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_OK.txt.gz | wc -l >  wc_OK.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_OR.txt.gz | wc -l >  wc_OR.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_PA.txt.gz | wc -l >  wc_PA.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_RI.txt.gz | wc -l >  wc_RI.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_SC.txt.gz | wc -l >  wc_SC.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_SD.txt.gz | wc -l >  wc_SD.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_TN.txt.gz | wc -l >  wc_TN.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_TX.txt.gz | wc -l >  wc_TX.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_UT.txt.gz | wc -l >  wc_UT.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_VT.txt.gz | wc -l >  wc_VT.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_VA.txt.gz | wc -l >  wc_VA.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_WA.txt.gz | wc -l >  wc_WA.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_WV.txt.gz | wc -l >  wc_WV.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_WI.txt.gz | wc -l >  wc_WI.txt
+zcat /project/CACDIRECT/$cidatapath/RAW/O0000???_WY.txt.gz | wc -l >  wc_WY.txt

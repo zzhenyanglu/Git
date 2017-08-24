@@ -1,0 +1,584 @@
+1                                        The WPS System         12:07 Monday, July 27, 2015     
+
+NOTE: (c) Copyright World Programming Limited 2002-2014.  All rights reserved.
+NOTE: World Programming System 3.01 (03.01.01.00.000635)
+      Licensed to Cognesia
+NOTE: This session is executing on the LINUX platform and is running in 64 bit mode
+
+NOTE: AUTOEXEC processing beginning; file is
+      /home/software/wps-3.1.1.0.635-maintenance/autoexec.sas
+MPRINT(DIRECT_LIBS):  libname base "/project17/CACDIRECT/DATA/BASE_DEMO/A";
+NOTE: Library base assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/BASE_DEMO/A
+
+MPRINT(DIRECT_LIBS):  libname indiv "/project17/CACDIRECT/DATA/INDIV_DEMO/A";
+NOTE: Library indiv assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/INDIV_DEMO/A
+
+MPRINT(DIRECT_LIBS):  libname scf "/project17/CACDIRECT/DATA/SCF_MKEY/A";
+NOTE: Library scf assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/SCF_MKEY/A
+
+MPRINT(DIRECT_LIBS):  libname process "/project17/CACDIRECT/DATA/PROCESS";
+NOTE: Library process assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/PROCESS
+
+MPRINT(DIRECT_LIBS):  libname geo "/project17/CACDIRECT/DATA/GEO/A";
+NOTE: Library geo assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/GEO/A
+
+MPRINT(DIRECT_LIBS):  libname easi "/project17/CENSUS/DATA/2010/EASI";
+NOTE: Library easi assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/2010/EASI
+
+MPRINT(DIRECT_LIBS):  libname cen2010 "/project17/CENSUS/DATA/2010/FINAL";
+NOTE: Library cen2010 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/2010/FINAL
+
+MPRINT(DIRECT_LIBS):  libname cen2000 "/project17/CENSUS/DATA/FINAL";
+NOTE: Library cen2000 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/FINAL
+
+MPRINT(DIRECT_LIBS):  libname samp "/project/CACDIRECT/DATA/SAMPLES/A";
+NOTE: Library samp assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/SAMPLES/A
+
+MPRINT(DIRECT_LIBS):  libname dev "/project17/CACDIRECT/DATA/DEVELOPMENT";
+NOTE: Library dev assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DEVELOPMENT
+
+MPRINT(DIRECT_LIBS):  libname et "/project17/CACDIRECT/DATA/ETECH/A";
+NOTE: Library et assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/ETECH/A
+
+MPRINT(DIRECT_LIBS):  libname jhs "/project17/CACDIRECT/DATA/JOB_HISTORY";
+NOTE: Library jhs assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/JOB_HISTORY
+
+MPRINT(DIRECT_LIBS):  libname buycnc "/project17/CACDIRECT/DATA/BUYER_CONNECT/A";
+NOTE: Library buycnc assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/BUYER_CONNECT/A
+
+MPRINT(DIRECT_LIBS):  libname foret "/project17/CACDIRECT/DATA/ETECH/FORETECH";
+NOTE: Library foret assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/ETECH/FORETECH
+
+MPRINT(DIRECT_LIBS):  libname newsilh "/project17/CACDIRECT/DATA/SILH3D/A";
+NOTE: Library newsilh assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/SILH3D/A
+
+MPRINT(DIRECT_LIBS):  libname ddnc "/project17/CACDIRECT/DATA/DDNC";
+NOTE: Library ddnc assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DDNC
+
+MPRINT(DIRECT_LIBS):  libname domsilh "/project17/CACDIRECT/DATA/DOM_SILH/A";
+NOTE: Library domsilh assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DOM_SILH/A
+
+MPRINT(DIRECT_LIBS):  libname intmdl "/project/CACDIRECT/DATA/INTMDL/A";
+NOTE: Library intmdl assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/INTMDL/A
+
+MPRINT(DIRECT_LIBS):  libname for_rts "/project/CACDIRECT/DATA/REAL_TIME/A";
+NOTE: Library for_rts assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/REAL_TIME/A
+
+MPRINT(DIRECT_LIBS):  libname v12 "/project/CACDIRECT/DATA/V12/A";
+NOTE: Library v12 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/V12/A
+
+MPRINT(DIRECT_LIBS):  libname bridge "/project/CACDIRECT/DATA/BRIDGE/A";
+NOTE: Library bridge assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/BRIDGE/A
+
+MPRINT(DIRECT_LIBS):  libname geoagg "/project/CACDIRECT/DATA/GEOAGG/A";
+NOTE: Library geoagg assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/GEOAGG/A
+
+NOTE: Library dma assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/DMA/A
+
+NOTE: Format cdif output
+NOTE: Procedure format step took :
+      real time : 0.028
+      cpu time  : 0.027
+
+
+NOTE: Format cac_le_a output
+NOTE: Format cac_le_b output
+NOTE: Format $cac_le_c output
+NOTE: Format match output
+NOTE: Format geo_match output
+NOTE: Format $cac_cdi output
+NOTE: Format prod_act output
+NOTE: Format cac_act output
+NOTE: Format cac_prod output
+NOTE: Format cac_kids output
+NOTE: Format cac_mar output
+NOTE: Format cac_age output
+NOTE: Format $cac_inc output
+NOTE: Format $cac_ninc output
+NOTE: Format $silh_ld output
+NOTE: Format $silh_super output
+NOTE: Format $silh output
+NOTE: Format pofaage output
+NOTE: Format pofaagi output
+NOTE: Format cac_edu output
+NOTE: Format cac_occ output
+NOTE: Format $etethnic output
+NOTE: Format $etrelig output
+NOTE: Format $etlang output
+NOTE: Format $ethisporg output
+NOTE: Format $ethispasm output
+NOTE: Format $etasiaasm output
+NOTE: Format $etgender output
+NOTE: Procedure format step took :
+      real time : 0.008
+      cpu time  : 0.008
+
+
+NOTE: Format $val_st_scf output
+NOTE: Procedure format step took :
+      real time : 0.009
+      cpu time  : 0.009
+
+
+MPRINT(B2B_LIBS):  libname b2b '/project/B2B/DATA/PRODUCTION/FIRM/A';
+NOTE: Library b2b assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/FIRM/A
+
+MPRINT(B2B_LIBS):  libname b2bem '/project/B2B/DATA/PRODUCTION/EM/A';
+NOTE: Library b2bem assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/EM/A
+
+MPRINT(B2B_LIBS):  libname b2bmkey '/project/B2B/DATA/PRODUCTION/MATCHKEYS/A';
+NOTE: Library b2bmkey assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/MATCHKEYS/A
+
+MPRINT(B2B_LIBS):  libname b2bsamp '/project18/CLIENT/B2B/DATA/PRODUCTION/SAMPLES/A';
+NOTE: Library b2bsamp assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project18/CLIENT/B2B/DATA/PRODUCTION/SAMPLES/A
+
+MPRINT(B2B_LIBS):  libname b2bprocs '/project/B2B/DATA/PRODUCTION/PROCESS';
+NOTE: Library b2bprocs assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/PROCESS
+
+NOTE: Format $salesvol output
+NOTE: Format $empsize output
+NOTE: Format $offsize output
+NOTE: Format $adsize output
+NOTE: Format $location output
+NOTE: Format $ctitle output
+NOTE: Format $callstat output
+NOTE: Format $b2bcred output
+NOTE: Format $sqftg output
+NOTE: Format $teleexp output
+NOTE: Format $utilexp output
+NOTE: Format $adexp output
+NOTE: Format $payexp output
+NOTE: Format $rentexp output
+NOTE: Format $pcexp output
+NOTE: Format $osupexp output
+NOTE: Format $acctexp output
+NOTE: Format $packexp output
+NOTE: Format $labrexp output
+NOTE: Format $insrexp output
+NOTE: Format $prntexp output
+NOTE: Format $admnexp output
+NOTE: Format $leglexp output
+NOTE: Format $cstatus output
+NOTE: Format $exptype output
+NOTE: Format $actflag output
+NOTE: Format $tcode output
+NOTE: Format $ttype output
+NOTE: Format $wealth output
+NOTE: Format $addrtype output
+NOTE: Format $busstat output
+NOTE: Format $govflag output
+NOTE: Format $indflag output
+NOTE: Format $sic1cac output
+NOTE: Format $sic2cac output
+NOTE: Format $sic4cac output
+NOTE: Procedure format step took :
+      real time : 0.025
+      cpu time  : 0.024
+
+
+NOTE: Format $sicdis output
+NOTE: Procedure format step took :
+      real time : 0.082
+      cpu time  : 0.081
+
+
+NOTE: AUTOEXEC processing completed
+
+1         %include "./.mover_includes.inc";
+NOTE: Library nmsql assigned as follows:
+      Engine:        ODBC
+      Physical Name: 
+
+NOTE: Library nmsas assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/SAS
+
+TODAY: 27JUL15
+11        
+12        %macro cleanit;
+13        
+14        *MOVE ALL RAW IMPORTED FILES INTO THE IMPORTED SUBFOLDER*;
+15           filename nmlst temp;
+16           data nmlsttemp;
+17              infile "./file_listing.txt";
+18              format filename $50.;
+19              input filename $;
+20              if index(filename,"gz") gt 0 and index(filename,"txt") gt 0 /* and
+substr(upcase(strip(filename)),1,2)="N0" */ then output;
+21           run;
+22        
+23           %nobs(data=nmlsttemp);
+24           %let pknobs=&nobs;
+25        
+26           data _null_;
+27              file nmlst;
+28              set nmlsttemp end=eof;
+29              if _n_=1 then put '%let nmlst=';
+30              put filename;
+31              if eof then put ';';
+32           run;
+33        
+34           %include nmlst;
+35        
+36        %put LIST OF IMPORTED: &nmlst;
+37        
+38        %do pk=1 %to &pknobs;
+39           x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/%scan(&nmlst,&pk,' ')
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/IMPORTED";
+40        %end;
+41        
+42        
+43        *** MOVE UPDATE RAW FILE ***;
+44        
+45           filename nmlst_1 temp;
+46           data nmlsttemp_1;
+47              infile "./file_listing_update.txt";
+48              format filename $50.;
+49              input filename $;
+50              if index(filename,"gz") gt 0 and index(filename,"txt") gt 0 /* and
+substr(upcase(strip(filename)),1,2)="N0" */ then output;
+51           run;
+52        
+53           %nobs(data=nmlsttemp_1);
+54           %let pknobs_1=&nobs;
+55        
+56           data _null_;
+57              file nmlst_1;
+58              set nmlsttemp_1 end=eof;
+59              if _n_=1 then put '%let nmlst_1=';
+60              put filename;
+61              if eof then put ';';
+62           run;
+63        
+64           %include nmlst_1;
+65        
+66        %put LIST OF UPDATE IMPORTED: &nmlst_1;
+67        
+68        %do pk=1 %to &pknobs_1;
+69           x "mv
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/%scan(&nmlst_1,&pk,' ')
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/IMPORTED";
+70        %end;
+71        
+72        
+73        *MOVE ALL LOGS LSTS AND OTHER THINGS INTO TIMESTAMPED FILES IN SUBFOLDER*;
+74        x "mv ./010_mover_import.log ./LOGS/010_mover_import_&tdate..log";
+75        x "mv ./010_mover_import.lst ./LOGS/010_mover_import_&tdate..lst";
+76        x "mv ./020_update_import.log ./LOGS/020_update_import_&tdate..log";
+77        x "mv ./020_update_import.lst ./LOGS/020_update_import_&tdate..lst";
+78        x "mv ./030_mover_processing.log ./LOGS/030_mover_processing_&tdate..log";
+79        x "mv ./030_mover_processing.lst ./LOGS/030_mover_processing_&tdate..lst";
+80        
+81        x "mv ./qc_report*htm ./LOGS";
+82        x "mv ./file_listing.txt ./LOGS/file_listing_&tdate..txt";
+83        x "mv ./file_listing_update.txt ./LOGS/file_listing_update_&tdate..txt";
+84        
+85        *MOVE ALL SUPPORTING DOCUMENTATION FOR RAW DATA INTO DOCUMENTATION SUBFOLDER*;
+86        x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/*.html
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+87        x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/*xml
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+88        x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/*rtf
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+89        x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/*PDF
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+90        
+91        *** FOR UPDATE FILE ***;
+92        x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/*.html
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+93        x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/*xml
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+94        x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/*rtf
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+95        x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/*PDF
+/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+96        
+97        *GZIP SAS DATASET*;
+98        x "gzip /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/SAS/*.sas7bdat";
+99        
+100       *DELETE SAS DATASET IF 30 DAYS OLD*;
+101       %global deldt;
+102       data _null_;
+103          format newdt date9.;
+104          newdt=today()-30;
+105          day=put(day(newdt),z2.);
+106          mo=put(newdt,monname3.);
+107          yr=substr(put(year(newdt),4.),3,2);
+108         
+deldt=compress("/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/SAS/new_mover_"||day||lowcase(mo)||yr|
+|".sas7bdat.gz");
+109          call symput("deldt",deldt);
+110       run;
+111       %put DELETE FILENAME: &deldt;
+112       
+113       %if %sysfunc(fileexist(&deldt)) %then %do;
+114          x "rm &deldt";
+115       %end;
+116       
+117       %mend cleanit;
+118       %cleanit;
+MPRINT(CLEANIT):  *MOVE ALL RAW IMPORTED FILES INTO THE IMPORTED SUBFOLDER*;
+MPRINT(CLEANIT):  filename nmlst temp;
+MPRINT(CLEANIT):  data nmlsttemp;
+MPRINT(CLEANIT):  infile "./file_listing.txt";
+MPRINT(CLEANIT):  format filename $50.;
+MPRINT(CLEANIT):  input filename $;
+MPRINT(CLEANIT):  if index(filename,"gz") gt 0 and index(filename,"txt") gt 0 then output;
+MPRINT(CLEANIT):  run;
+
+NOTE: The file '/project17/CACDIRECT/CODE/PROD/NEW_MOVER/file_listing.txt' is:
+      File Name=/project17/CACDIRECT/CODE/PROD/NEW_MOVER/file_listing.txt,
+      Access Permissions=-rw-rw-rw-,Number of Links=1,
+      Owner Name=intellibase,Group Name=intellibase,
+      File Size=80,Last Modified=Jul 27 2015,
+      Created=Jul 27 2015,Lrecl=256, Recfm=V
+
+NOTE: 4 records were read from file '/project17/CACDIRECT/CODE/PROD/NEW_MOVER/file_listing.txt'
+      The minimum record length was 8
+      The maximum record length was 38
+NOTE: Data set "WORK.nmlsttemp" has 1 observation(s) and 1 variable(s)
+NOTE: Specifying compression for data set "WORK.nmlsttemp" has increased its size from 2 to 3
+      pages (a 50% increase)
+NOTE: The data step took :
+      real time : 0.005
+      cpu time  : 0.005
+
+
+MPRINT(CLEANIT):  *^^^^^^^^^^^^^^^^^^^MACRO2.1^^^^^^^^^^^^^^^^^^^^*;
+MPRINT(CLEANIT):  *****NOBS;
+MPRINT(CLEANIT):  **********************************************************************;
+MPRINT(CLEANIT):  ** Arguments are: ***;
+MPRINT(CLEANIT):  ** DATA - Name of dataset ***;
+MPRINT(CLEANIT):  **********************************************************************;
+MPRINT(CLEANIT):  *^^^^^^^^^^^^^^^^^^^END MACRO2.1^^^^^^^^^^^^^^^^^^^^*;
+MPRINT(NOBS):  data _null_;
+MPRINT(NOBS):  ds = open("nmlsttemp");
+MPRINT(NOBS):  name = dsname(ds);
+MPRINT(NOBS):  library = scan(name, 1, '.');
+MPRINT(NOBS):  member = scan(name, 2, '.');
+MPRINT(NOBS):  type = scan(name, 3, '.');
+MPRINT(NOBS):  nobs = attrn(ds,"nobs");
+MPRINT(NOBS):  ds = close(ds);
+MPRINT(NOBS):  call symput("LIBRARY", trim(library));
+MPRINT(NOBS):  call symput("MEMBER", trim(member));
+MPRINT(NOBS):  call symput("NOBS",trim(left(put(nobs,20.0))));
+MPRINT(NOBS):  run;
+
+NOTE: The data step took :
+      real time : 0.011
+      cpu time  : 0.002
+
+
+MPRINT(CLEANIT):  ;
+MPRINT(CLEANIT):  data _null_;
+MPRINT(CLEANIT):  file nmlst;
+MPRINT(CLEANIT):  set nmlsttemp end=eof;
+MPRINT(CLEANIT):  if _n_=1 then put '%let nmlst=';
+MPRINT(CLEANIT):  put filename;
+MPRINT(CLEANIT):  if eof then put ';';
+MPRINT(CLEANIT):  run;
+
+NOTE: The file nmlst is:
+      File Name=/project18/SASWORK/WPS_work805500004331_vince/#LN00002,
+      Access Permissions=-rw-rw-rw-,Number of Links=1,
+      Owner Name=intellibase,Group Name=intellibase,
+      File Size=0,Last Modified=Jul 27 2015,
+      Created=Jul 27 2015,Lrecl=256, Recfm=V
+
+NOTE: 3 records were written to file nmlst
+      The minimum record length was 1
+      The maximum record length was 38
+NOTE: 1 observations were read from "WORK.nmlsttemp"
+NOTE: The data step took :
+      real time : 0.001
+      cpu time  : 0.002
+
+
+LIST OF IMPORTED: New_Mover_Install_WE_07-27-2015.txt.gz
+MPRINT(CLEANIT):  x "mv
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/New_Mover_Install_WE_07-27-2015.
+                  txt.gz /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/IMPORTED";
+MPRINT(CLEANIT):  *** MOVE UPDATE RAW FILE ***;
+MPRINT(CLEANIT):  filename nmlst_1 temp;
+MPRINT(CLEANIT):  data nmlsttemp_1;
+MPRINT(CLEANIT):  infile "./file_listing_update.txt";
+MPRINT(CLEANIT):  format filename $50.;
+MPRINT(CLEANIT):  input filename $;
+MPRINT(CLEANIT):  if index(filename,"gz") gt 0 and index(filename,"txt") gt 0 then output;
+MPRINT(CLEANIT):  run;
+
+NOTE: The file '/project17/CACDIRECT/CODE/PROD/NEW_MOVER/file_listing_update.txt' is:
+      File Name=/project17/CACDIRECT/CODE/PROD/NEW_MOVER/file_listing_update.txt,
+      Access Permissions=-rw-rw-rw-,Number of Links=1,
+      Owner Name=intellibase,Group Name=intellibase,
+      File Size=42,Last Modified=Jul 27 2015,
+      Created=Jul 27 2015,Lrecl=256, Recfm=V
+
+NOTE: 1 record was read from file
+      '/project17/CACDIRECT/CODE/PROD/NEW_MOVER/file_listing_update.txt'
+      The minimum record length was 41
+      The maximum record length was 41
+NOTE: Data set "WORK.nmlsttemp_1" has 1 observation(s) and 1 variable(s)
+NOTE: Specifying compression for data set "WORK.nmlsttemp_1" has increased its size from 2 to 3
+      pages (a 50% increase)
+NOTE: The data step took :
+      real time : 0.001
+      cpu time  : 0.001
+
+
+MPRINT(NOBS):  data _null_;
+MPRINT(NOBS):  ds = open("nmlsttemp_1");
+MPRINT(NOBS):  name = dsname(ds);
+MPRINT(NOBS):  library = scan(name, 1, '.');
+MPRINT(NOBS):  member = scan(name, 2, '.');
+MPRINT(NOBS):  type = scan(name, 3, '.');
+MPRINT(NOBS):  nobs = attrn(ds,"nobs");
+MPRINT(NOBS):  ds = close(ds);
+MPRINT(NOBS):  call symput("LIBRARY", trim(library));
+MPRINT(NOBS):  call symput("MEMBER", trim(member));
+MPRINT(NOBS):  call symput("NOBS",trim(left(put(nobs,20.0))));
+MPRINT(NOBS):  run;
+
+NOTE: The data step took :
+      real time : 0.000
+      cpu time  : 0.001
+
+
+MPRINT(CLEANIT):  ;
+MPRINT(CLEANIT):  data _null_;
+MPRINT(CLEANIT):  file nmlst_1;
+MPRINT(CLEANIT):  set nmlsttemp_1 end=eof;
+MPRINT(CLEANIT):  if _n_=1 then put '%let nmlst_1=';
+MPRINT(CLEANIT):  put filename;
+MPRINT(CLEANIT):  if eof then put ';';
+MPRINT(CLEANIT):  run;
+
+NOTE: The file nmlst_1 is:
+      File Name=/project18/SASWORK/WPS_work805500004331_vince/#LN00003,
+      Access Permissions=-rw-rw-rw-,Number of Links=1,
+      Owner Name=intellibase,Group Name=intellibase,
+      File Size=0,Last Modified=Jul 27 2015,
+      Created=Jul 27 2015,Lrecl=256, Recfm=V
+
+NOTE: 3 records were written to file nmlst_1
+      The minimum record length was 1
+      The maximum record length was 41
+NOTE: 1 observations were read from "WORK.nmlsttemp_1"
+NOTE: The data step took :
+      real time : 0.000
+      cpu time  : 0.001
+
+
+LIST OF UPDATE IMPORTED: Constellation_TNM_FULL_WE_06-08-15.txt.gz
+MPRINT(CLEANIT):  x "mv
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/Constellation_
+                  TNM_FULL_WE_06-08-15.txt.gz
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/IMPORTED";
+MPRINT(CLEANIT):  *MOVE ALL LOGS LSTS AND OTHER THINGS INTO TIMESTAMPED FILES IN SUBFOLDER*;
+MPRINT(CLEANIT):  x "mv ./010_mover_import.log ./LOGS/010_mover_import_27JUL15.log";
+MPRINT(CLEANIT):  x "mv ./010_mover_import.lst ./LOGS/010_mover_import_27JUL15.lst";
+MPRINT(CLEANIT):  x "mv ./020_update_import.log ./LOGS/020_update_import_27JUL15.log";
+MPRINT(CLEANIT):  x "mv ./020_update_import.lst ./LOGS/020_update_import_27JUL15.lst";
+MPRINT(CLEANIT):  x "mv ./030_mover_processing.log ./LOGS/030_mover_processing_27JUL15.log";
+MPRINT(CLEANIT):  x "mv ./030_mover_processing.lst ./LOGS/030_mover_processing_27JUL15.lst";
+MPRINT(CLEANIT):  x "mv ./qc_report*htm ./LOGS";
+MPRINT(CLEANIT):  x "mv ./file_listing.txt ./LOGS/file_listing_27JUL15.txt";
+MPRINT(CLEANIT):  x "mv ./file_listing_update.txt ./LOGS/file_listing_update_27JUL15.txt";
+MPRINT(CLEANIT):  *MOVE ALL SUPPORTING DOCUMENTATION FOR RAW DATA INTO DOCUMENTATION SUBFOLDER*;
+MPRINT(CLEANIT):  x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/*.html
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+MPRINT(CLEANIT):  x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/*xml
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+MPRINT(CLEANIT):  x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/*rtf
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+MPRINT(CLEANIT):  x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/*PDF
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+MPRINT(CLEANIT):  *** FOR UPDATE FILE ***;
+MPRINT(CLEANIT):  x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/*.html
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+MPRINT(CLEANIT):  x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/*xml
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+MPRINT(CLEANIT):  x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/*rtf
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+MPRINT(CLEANIT):  x "mv /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/VALUESCORE_UPDATE/*PDF
+                  /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/RAW/DOCUMENTATION";
+MPRINT(CLEANIT):  *GZIP SAS DATASET*;
+MPRINT(CLEANIT):  x "gzip /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/SAS/*.sas7bdat";
+MPRINT(CLEANIT):  *DELETE SAS DATASET IF 30 DAYS OLD*;
+MPRINT(CLEANIT):  data _null_;
+MPRINT(CLEANIT):  format newdt date9.;
+MPRINT(CLEANIT):  newdt=today()-30;
+MPRINT(CLEANIT):  day=put(day(newdt),z2.);
+MPRINT(CLEANIT):  mo=put(newdt,monname3.);
+MPRINT(CLEANIT):  yr=substr(put(year(newdt),4.),3,2);
+MPRINT(CLEANIT):  deldt=compress("/project/CACDIRECT/DATA/NEW_MOVER/EPSILON/SAS/new_mover_"||day
+                  ||lowcase(mo)||yr||".sas7bdat.gz");
+MPRINT(CLEANIT):  call symput("deldt",deldt);
+MPRINT(CLEANIT):  run;
+
+NOTE: The data step took :
+      real time : 0.009
+      cpu time  : 0.000
+
+
+DELETE FILENAME: /project/CACDIRECT/DATA/NEW_MOVER/EPSILON/SAS/new_mover_27jun15.sas7bdat.gz
+
+NOTE: Submitted statements took :
+      real time : 5.867
+      cpu time  : 0.292

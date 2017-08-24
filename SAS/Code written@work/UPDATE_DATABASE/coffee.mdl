@@ -1,0 +1,90 @@
+M_HOH_AGE_18_24_ENH=((CAC_DEMO_AGE_ENH=1));
+M_ADLT_55_64_1PLUS_ENH=((CAC_DEMO_ADULT_55_64_ENH) not in (.,0));
+M_ADLT_65_74_1PLUS_ENH=((CAC_DEMO_ADULT_65_74_ENH) not in (.,0));
+M_GEO_CAC_INT_27=GEO_CAC_INT_27;
+M_GEO_CAC_INT_36=GEO_CAC_INT_36;
+M_GEO_CAC_INT_39=GEO_CAC_INT_39;
+M_GEO_CAC_INT_58=GEO_CAC_INT_58;
+M_GEO_CAC_INT_69=GEO_CAC_INT_69;
+M_CAC_INT_ART_HIGH=(sum (of CAC_INT_5 CAC_INT_26 CAC_INT_27 CAC_INT_28 CAC_INT_33 CAC_INT_51 CAC_INT_61 CAC_INT_41 CAC_INT_52 CAC_INT_53 CAC_INT_23 CAC_INT_24 CAC_INT_54) ge 3);
+M_CAC_LIFESTAGE_5=((CAC_SILH_LIFESTAGE_GROUP=5));
+M_CAC_LIFESTAGE_6=((CAC_SILH_LIFESTAGE_GROUP=6));
+M_CAC_SILH_GEO_1=((CAC_SILH_GEO=1));
+M_CAC_SILH_GEO_2=((CAC_SILH_GEO=2));
+M_CAC_SILH_GEO_6=((CAC_SILH_GEO=6));
+M_CAC_SILH_GEO_8=((CAC_SILH_GEO=8));
+M_CAC_BUYSTYLE_1=((CAC_SILH_BUY_STYLE_GROUP=1));
+M_CAC_TECH_2=((CAC_SILH_TECH=2));
+M_CAC_SOCIAL_1=((CAC_SILH_SOCIAL=1));
+M_CAC_SOCIAL_2=((CAC_SILH_SOCIAL=2));
+M_CAC_SOCIAL_3=((CAC_SILH_SOCIAL=3));
+M_SOCIAL_HIGH=sum(of M_CAC_SOCIAL_1 M_CAC_SOCIAL_2 M_CAC_SOCIAL_3);
+M_CAC_SILHOUETTE_C4=((CAC_SILH='C4'));
+M_CAC_SILHOUETTE_H5=((CAC_SILH='H5'));
+
+
+/******* Missfill *****/
+attrib _miss42_ length=3 label='M_GEO_CAC_INT_27 missing';
+_miss42_ = 0;
+if nmiss(M_GEO_CAC_INT_27) GT 0 then do;
+   _miss42_ = 1;
+   _miss_ = _miss_ + 1;
+   M_GEO_CAC_INT_27 = 0.1142138616 ;
+end;
+
+attrib _miss76_ length=3 label='M_GEO_CAC_INT_58 missing';
+_miss76_ = 0;
+if nmiss(M_GEO_CAC_INT_58) GT 0 then do;
+   _miss76_ = 1;
+   _miss_ = _miss_ + 1;
+   M_GEO_CAC_INT_58 = 0.1336107893 ;
+end;
+
+attrib _miss55_ length=3 label='M_GEO_CAC_INT_39 missing';
+_miss55_ = 0;
+if nmiss(M_GEO_CAC_INT_39) GT 0 then do;
+   _miss55_ = 1;
+   _miss_ = _miss_ + 1;
+   M_GEO_CAC_INT_39 = 0.1032125995 ;
+end;
+
+
+attrib _miss88_ length=3 label='M_GEO_CAC_INT_69 missing';
+_miss88_ = 0;
+if nmiss(M_GEO_CAC_INT_69) GT 0 then do;
+   _miss88_ = 1;
+   _miss_ = _miss_ + 1;
+   M_GEO_CAC_INT_69 = 0.0064445437 ;
+end;
+
+attrib _miss52_ length=3 label='M_GEO_CAC_INT_36 missing';
+_miss52_ = 0;
+if nmiss(M_GEO_CAC_INT_36) GT 0 then do;
+   _miss52_ = 1;
+   _miss_ = _miss_ + 1;
+   M_GEO_CAC_INT_36 = 0.0590603357 ;
+end;
+label   M_HOH_AGE_18_24_ENH=' HOH AGE 18-24 FLAG  ENH';
+label   M_ADLT_55_64_1PLUS_ENH=' ADULT AGE 55-64 FLAG  ENH';
+label   M_ADLT_65_74_1PLUS_ENH=' ADULT AGE 65-74 FLAG  ENH';
+label   M_CAC_INT_ART_HIGH='AT LEAST 3 INTS IN ART FLAG';
+label   M_SOCIAL_HIGH='SOCIAL: IN TOP THREE BUCKETS';
+label   M_CAC_BUYSTYLE_1 = 'BUYSTYLE: MISSING' ;
+label   M_CAC_LIFESTAGE_5 = 'LIFESTAGE: EMERGING PARENTS' ;
+label   M_CAC_LIFESTAGE_6 = 'LIFESTAGE: EMERGING SINGLES' ;
+label   M_CAC_SILHOUETTE_C4 = 'SILHOUETTE: The Culturally Connected ';
+label   M_CAC_SILHOUETTE_H5 = 'SILHOUETTE: Cultured Elite';
+label   M_CAC_SILH_GEO_1 = 'GEO DIMENSION: In a metro area with at least 1MM residents' ;
+label   M_CAC_SILH_GEO_2 = 'GEO DIMENSION: In a metro area with fewer than 1MM residents' ;
+label   M_CAC_SILH_GEO_6 = 'GEO DIMENSION: College Towns' ;
+label   M_CAC_SILH_GEO_8 = 'GEO DIMENSION: Affluent Zip Codes' ;
+label   M_CAC_SOCIAL_1 = 'SOCIAL DIMENSION: MOST SOCIAL DIGITAL' ;
+label   M_CAC_SOCIAL_2 = 'SOCIAL DIMENSION: SECOND-MOST SOCIAL DIGITAL';
+label   M_CAC_SOCIAL_3 = 'SOCIAL DIMENSION: THIRD-MOST SOCIAL DIGITAL';
+label   M_CAC_TECH_2 = 'TECH DIMENSION: GADGETS' ;
+label M_GEO_CAC_INT_27 ='Z2: Cultural/Arts Events';
+label M_GEO_CAC_INT_58 ='Z2: Cooking/Culinary';
+label M_GEO_CAC_INT_39 ='Z2: RV Travel';
+label M_GEO_CAC_INT_69 ='Z2: Donor - Arts or Cultural';
+label M_GEO_CAC_INT_36 ='Z2: Fashion';
+

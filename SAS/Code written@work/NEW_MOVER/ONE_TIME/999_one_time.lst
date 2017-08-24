@@ -1,0 +1,100 @@
+                                                                                       NUMBER OF RECORDS OVERLAP                                                    10:26 Wednesday, March 11, 2015    1
+
+                                                                                                --------
+                                                                                                  123960
+                                                                                       NUMBER OF RECORDS OVERLAP                                                    10:26 Wednesday, March 11, 2015    2
+
+                                                                                           The FREQ Procedure
+
+                                                                                                            Cumulative    Cumulative
+                                                                    update_flag    Frequency     Percent     Frequency      Percent 
+                                                                    ----------------------------------------------------------------
+                                                                    1                 74495      100.00         74495       100.00  
+
+                                                                                       Frequency Missing = 7343448
+                                                                                       NUMBER OF RECORDS OVERLAP                                                    10:26 Wednesday, March 11, 2015    3
+
+                                                                                           The FREQ Procedure
+
+                                                                                                            Cumulative    Cumulative
+                                                                    update_flag    Frequency     Percent     Frequency      Percent 
+                                                                    ----------------------------------------------------------------
+                                                                    1                123960      100.00        123960       100.00  
+
+                                                                                       Frequency Missing = 7293983
+                                                                                       NUMBER OF RECORDS OVERLAP                                                    10:26 Wednesday, March 11, 2015    4
+
+                                                                                         The CONTENTS Procedure
+
+
+                                                                           Data Set Name            MOVERS                   
+                                                                           Member Type              DATA                     
+                                                                           Engine                   WPD                      
+                                                                           Created                  11MAR2015:15:35:23       
+                                                                           Last Modified            11MAR2015:15:35:23       
+                                                                           Observations                7417943               
+                                                                           Variables                36                       
+                                                                           Indexes                  0                        
+                                                                           Observation Length       200                      
+                                                                           Deleted Observations              0               
+                                                                           Data Set Type                                     
+                                                                           Label                                             
+                                                                           Compressed               CHAR                     
+                                                                           Point to Observations    YES                      
+                                                                           Sorted                   NO                       
+                                                                           Data Representation      Little endian, IEEE Unix 
+                                                                           Encoding                 latin1 ISO-8859-1 Western
+
+                                                                                   Engine/Host Dependent Information
+
+                                                          Data Set Page Size          4096                                                    
+                                                          Number of Data Set Pages    270481                                                  
+                                                          Data Set Diagnostic Code    0009                                                    
+                                                          File Name                   /project18/SASWORK/WPS_work3302000081d2_vince/MOVERS.wpd
+                                                          WPD Engine Version          3                                                       
+                                                          Large Data Set Support      no                                                      
+                                                          Inode Number                133170737                                               
+                                                          Access Permission           rw-rw-rw-                                               
+                                                          Owner Name                  intellibase                                             
+                                                          File Size (bytes)           1107890176                                              
+
+                                                                              Alphabetic List of Variables and Attributes
+
+                                  Number    Variable                           Type             Len         Pos        Format    Informat    Label                          
+                            ________________________________________________________________________________________________________________________________________________
+                                       1    CAC_NM_AREA_CODE_WITH_SUPP_APPL    Char               3              24    $3.       $3.         CAC_NM_AREA_CODE_WITH_SUPP_APPL
+                                       2    CAC_NM_CARRIER_ROUTE               Char               4              27    $4.       $4.         CAC_NM_CARRIER_ROUTE           
+                                       3    CAC_NM_CEN_HOME_VALUE              Char               3              31    $3.       $3.         CAC_NM_CEN_HOME_VALUE          
+                                       4    CAC_NM_CEN_INC_CODE_NEW_ADDR       Char               3              34    $3.       $3.         CAC_NM_CEN_INC_CODE_NEW_ADDR   
+                                       5    CAC_NM_CEN_INC_CODE_NEW_ADDR_R     Char               3              37    $3.       $3.         CAC_NM_CEN_INC_CODE_NEW_ADDR_R 
+                                       6    CAC_NM_CEN_INC_CODE_PREV_ADDR      Char               3              40    $3.       $3.         CAC_NM_CEN_INC_CODE_PREV_ADDR  
+                                       7    CAC_NM_CEN_INC_CODE_PREV_ADDR_R    Char               3              43    $3.       $3.         CAC_NM_CEN_INC_CODE_PREV_ADDR_R
+                                       8    CAC_NM_CITY                        Char              13              46    $13.      $13.        CAC_NM_CITY                    
+                                       9    CAC_NM_CONTRACTED_ADDR             Char              40              59    $40.      $40.        CAC_NM_CONTRACTED_ADDR         
+                                      10    CAC_NM_CONTRACTED_NAME             Char              40              99    $40.      $40.        CAC_NM_CONTRACTED_NAME         
+                                      11    CAC_NM_COUNTY_CODE                 Char               3             139    $3.       $3.         CAC_NM_COUNTY_CODE             
+                                      12    CAC_NM_COUNTY_CODE_OLD_ADDR        Char               3             142    $3.       $3.         CAC_NM_COUNTY_CODE_OLD_ADDR    
+                                      13    CAC_NM_DELIVERY_POINT_CODE         Char               3             145    $3.       $3.         CAC_NM_DELIVERY_POINT_CODE     
+                                      14    CAC_NM_DISTANCE_OF_MOVE            Char               4             148    $4.       $4.         CAC_NM_DISTANCE_OF_MOVE        
+                                      15    CAC_NM_DPV_FLAG                    Char               1             152    $1.       $1.         CAC_NM_DPV_FLAG                
+                                      16    CAC_NM_DWELLING_ADDR_TYPE          Char               1             153    $1.       $1.         CAC_NM_DWELLING_ADDR_TYPE      
+                                      17    CAC_NM_FILE_DT                     Num                8               0    DATE9.    DATE9.      CAC_NM_FILE_DT                 
+                                      18    CAC_NM_FIPS_STATE_CODE             Char               2             154    $2.       $2.         CAC_NM_FIPS_STATE_CODE         
+                                      19    CAC_NM_GENDER                      Char               1             156    $1.       $1.         CAC_NM_GENDER                  
+                                      20    CAC_NM_HH_AGE                      Char               2             157    $2.       $2.         CAC_NM_HH_AGE                  
+                                      21    CAC_NM_HH_MOVE_DATE                Char               6             159    $6.       $6.         CAC_NM_HH_MOVE_DATE            
+                                      22    CAC_NM_HOMEOWNER_RENTER_CODE       Char               1             165    $1.       $1.         CAC_NM_HOMEOWNER_RENTER_CODE   
+                                      23    CAC_NM_ID                          Num                8               8                          CAC_NM_ID                      
+                                      24    CAC_NM_IMPORT_DATE                 Num                8              16    DATE9.    DATE9.      CAC_NM_IMPORT_DATE             
+                                      25    CAC_NM_INDIV_TWO_YEAR_AGE_BAND     Char               6             166    $6.       $6.         CAC_NM_INDIV_TWO_YEAR_AGE_BAND 
+                                      26    CAC_NM_MARITAL_STATUS              Char               1             172    $1.       $1.         CAC_NM_MARITAL_STATUS          
+                                      27    CAC_NM_MARITAL_STATUS_WITHIN_HH    Char               1             173    $1.       $1.         CAC_NM_MARITAL_STATUS_WITHIN_HH
+                                      28    CAC_NM_NUMBER_OF_ADULTS_IN_HH      Char               2             174    $2.       $2.         CAC_NM_NUMBER_OF_ADULTS_IN_HH  
+                                      29    CAC_NM_NUMBER_OF_KIDS_IN_HH        Char               1             176    $1.       $1.         CAC_NM_NUMBER_OF_KIDS_IN_HH    
+                                      30    CAC_NM_PET_OWNER                   Char               1             177    $1.       $1.         CAC_NM_PET_OWNER               
+                                      31    CAC_NM_STATE_ABBREVIATION          Char               2             178    $2.       $2.         CAC_NM_STATE_ABBREVIATION      
+                                      32    CAC_NM_TARGET_INC                  Char               1             180    $1.       $1.         CAC_NM_TARGET_INC              
+                                      33    CAC_NM_TARGET_VALUESCORE           Char               3             181    $3.       $3.         CAC_NM_TARGET_VALUESCORE       
+                                      34    CAC_NM_TELEPHONE_WITH_SUPP_APPL    Char               7             184    $7.       $7.         CAC_NM_TELEPHONE_WITH_SUPP_APPL
+                                      36    CAC_NM_ZIPPLUS_4                   Char               4             196    $4.       $4.         CAC_NM_ZIPPLUS_4               
+                                      35    CAC_NM_ZIP_CODE                    Char               5             191    $5.       $5.         CAC_NM_ZIP_CODE                

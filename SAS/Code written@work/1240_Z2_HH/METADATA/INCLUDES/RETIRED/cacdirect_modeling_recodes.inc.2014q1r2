@@ -1,0 +1,1304 @@
+***;
+* CACDIRECT MODELING RECODES;
+* LAST UPDATED MM 8/12/2013;
+* ADDED NON_ENHANCED PARAMTER WHICH CONTROLS WHETHER OR NOT TO CREATE LEGACY RECODES USING NON ENHANCED VERSIONS OF VARIABLES;
+***;
+
+%macro cacdirect_recode(demos= 
+                        ,home= 
+                        ,geo=
+                        ,interests=
+                        ,credit= 
+                        ,life_events=
+                        ,segments_old= 
+                        ,segments_new= 
+                        ,enhanced=
+                        ,non_enhanced=N
+                        );
+
+*DEMO RECODES*;
+
+%if %qscan(&demos,1,%str( )) =Y %then %do;
+
+   %let valuelp='A' 'B' 'C' 'D';
+   %let namelp=A B C D;
+
+   %do loopme=1 %to 4;
+      M_CAC_ADDR_CDI_%scan(&namelp,&loopme," ")=((CAC_ADDR_CDI=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_CAC_ADDR_CDI_LARGEST=(sum (of M_CAC_ADDR_CDI_A M_CAC_ADDR_CDI_B));
+   M_CAC_ADDR_CDI_SMALLEST=(sum (of M_CAC_ADDR_CDI_C M_CAC_ADDR_CDI_D));
+
+   %let valuelp=1 2;
+   %let namelp=NO_HS HS;
+
+   %do loopme=1 %to 2;
+      M_EDU_%scan(&namelp,&loopme," ")=((CAC_DEMO_EDUCATION=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_EDU_COLLEGE = ((CAC_DEMO_EDUCATION) in (3,4,5));
+   
+   %let valuelp= '2' '3' '4' '5' '6' '7' '8' '9' 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' 'P' 'Q' 'R' 'S' 'T' 'U' 'V' 'W' 'X' 'Y' 'Z';
+   %let namelp=20_25 25_30 30_35 35_40 40_45 45_50 50_55 55_60 60_65 65_70 70_75 75_80 80_85 85_90 90_95 95_100 100_105 105_110 110_115 115_120
+               120_125 125_130 130_135 135_140 140_145 145_150 150_160 160_170 170_175 175_190 190_200 200_225 225_250 250_PLUS;
+
+   %do loopme=1 %to 34;
+      M_INC_%scan(&namelp,&loopme," ")=((CAC_DEMO_INCOME_NARROW=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   %let valuelp= '1' '2' '3' '4' '5' '6' '7' '8' '9';
+   %let namelp=UNDER_15 15_20 20_30 30_40 40_50 50_75 75_100 100_125 125_150;
+
+   %do loopme=1 %to 9;
+      M_INC_%scan(&namelp,&loopme," ")=((CAC_DEMO_INCOME=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_INC_150_PLUS=(strip(CAC_DEMO_INCOME)in ('A','B','C','D'));
+   M_INCOME = M_INC_UNDER_15*7.5 + M_INC_15_20*17.5 + M_INC_20_25*22.5 + M_INC_25_30*27.5 + M_INC_30_35*32.5 +
+              M_INC_35_40*37.5 + M_INC_40_45*42.5 + M_INC_45_50*47.5 + M_INC_50_55*52.5 + M_INC_55_60*57.5 + 
+              M_INC_60_65*62.5 + M_INC_65_70*67.5 + M_INC_70_75*72.5 + M_INC_75_80*77.5 + M_INC_80_85*82.5 + 
+              M_INC_85_90*87.5 + M_INC_90_95*92.5 + M_INC_95_100*97.5 + M_INC_100_105*102.5 + M_INC_105_110*107.5 + 
+              M_INC_110_115*112.5 + M_INC_115_120*117.5 + M_INC_120_125*122.5 + M_INC_125_130*127.5 + M_INC_130_135*132.5 + 
+              M_INC_135_140*137.5 + M_INC_140_145*142.5 + M_INC_145_150*147.5 + M_INC_150_PLUS*250; 
+   if M_INCOME = 0 then M_INCOME = .;
+
+   %let valuelp= 1 2 3;
+   %let namelp=1 2 3;
+
+   %do loopme=1 %to 3;
+      M_NUM_ADULT_%scan(&namelp,&loopme," ")=((CAC_DEMO_NUM_ADULTS=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_NUM_ADULT_4PLUS=((CAC_DEMO_NUM_ADULTS) in (4,5));
+   M_NUM_ADULT = CAC_DEMO_NUM_ADULTS;
+
+
+   %let valuelp= 1 2 3 5 6 7 8 9 10 11 12 13 14 15 16 17 18 20;
+   %let namelp= DOCTOR HEALTH_CARE LWYR_JUDGE PROF_TECH MANAGEMENT TCHR_LBRY SALES_MKTG CLERICAL TRADESMAN FARM 
+                STUDENT HOMEMAKER RETIRED FEDERAL FEDERAL_RETIRED MILITARY MILITARY_RETIRED PROPRIETER;
+
+   %do loopme=1 %to 18;
+      M_OCC_%scan(&namelp,&loopme," ")=((CAC_DEMO_OCCUPATION=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_HOH_GENDER_M=((CAC_IND1_GENDER)=1);
+   M_HOH_GENDER_F=((CAC_IND1_GENDER) in (2,3));
+
+   %let valuelp= 1 2 3;
+   %let namelp= MARRIED_PRESENT SINGLE_PRESENT MARRIED_SINGLE;
+
+   %do loopme=1 %to 3;
+      M_%scan(&namelp,&loopme," ")=((CAC_DEMO_MARITAL_STATUS=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_MAIL_BUY_SINGLE=((CAC_INT_MAIL_BUY)=1);
+   M_MAIL_BUY_MULT=((CAC_INT_MAIL_BUY)=2);
+   M_MAIL_DONOR_SNGLE=((CAC_INT_MAIL_DONOR)=1);
+   M_MAIL_DONOR_MULT=((CAC_INT_MAIL_DONOR)=2);
+
+   %let valuelp= 1 2 3;
+   %let namelp= DEM REP IND;
+
+
+   %do loopme=1 %to 3;
+      M_POL_PARTY_%scan(&namelp,&loopme," ")=((CAC_INT_POL_PARTY=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_POL_PARTY_MIX=(CAC_INT_POL_PARTY>3);
+
+%end; *<------------ RECODES FOR DEMOS;
+
+   ***************************************;
+   * LEGACY RECODES NON ENHANCED DEMO VARS;
+   ***************************************;
+   
+   %if %qscan(&non_enhanced,1,%str( )) =Y %then %do; *<------------ RECODES FOR LEGACY NON ENHANCED DEMO VARIABLES;
+   
+       %let valuelp=0 1 2 3 4 5 6 7 8 9;
+       %let namelp=UNDER_25 25_50 50_75 75_100 100_150 150_250 250_500 500_750 750_1MM OVER_1MM;
+       
+       %do loopme=1 %to 10;
+           M_NET_WORTH_%scan(&namelp,&loopme," ")=((CAC_DEMO_NET_WORTH=%scan(&valuelp,&loopme," ")));
+       %end;
+
+       M_NET_WORTH=M_NET_WORTH_UNDER_25*12.5+ M_NET_WORTH_25_50*37.5+ M_NET_WORTH_50_75*62.5+ M_NET_WORTH_75_100*87.5+  M_NET_WORTH_100_150*125+
+                     M_NET_WORTH_150_250*200+  M_NET_WORTH_250_500*375+   M_NET_WORTH_500_750*625+   M_NET_WORTH_750_1MM*825+ M_NET_WORTH_OVER_1MM*1000;
+       if M_NET_WORTH=0 then M_NET_WORTH=.;       
+           
+       %let valuelp=18_24 25_34 35_44 45_54 55_64 65_74 75_PLUS;
+       %let namelp=18_24_1PLUS 25_34_1PLUS 35_44_1PLUS 45_54_1PLUS 55_64_1PLUS 65_74_1PLUS 75PLUS_1PLUS;
+
+       %do loopme=1 %to 7;
+           M_ADLT_%scan(&namelp,&loopme," ")=((CAC_DEMO_ADULT_%scan(&valuelp,&loopme," ")) not in (.,0));
+       %end;
+
+       %let valuelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
+       %let namelp=01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16;
+
+       %do loopme=1 %to 16;
+           M_FAM_COMP_%scan(&namelp,&loopme," ")=((CAC_DEMO_HH_TYPE=%scan(&valuelp,&loopme," ")));
+       %end;
+
+       %let valuelp=1 2 3 4 5 6 7;
+       %let namelp=18_24 25_34 35_44 45_54 55_64 65_74 75PLUS;
+
+       %do loopme=1 %to 7;
+           M_HOH_AGE_%scan(&namelp,&loopme," ")=((CAC_DEMO_AGE=%scan(&valuelp,&loopme," ")));
+       %end;
+     
+       %let valuelp=00_02 03_05 06_10 11_15 16_17;
+       %let namelp=00_02_PRES 03_05_PRES 06_10_PRES 11_15_PRES 16_17_PRES;
+ 
+       %do loopme=1 %to 5;
+           M_KID_%scan(&namelp,&loopme," ")=((CAC_DEMO_KIDS_%scan(&valuelp,&loopme," ")) ge 1);
+       %end;
+
+       %let valuelp= 1 2 3 4;
+       %let namelp=1 2 3 4;
+
+       %do loopme=1 %to 4;
+           M_NUM_KIDS_%scan(&namelp,&loopme," ")=((CAC_DEMO_NUM_KIDS=%scan(&valuelp,&loopme," ")));
+       %end;
+
+       M_NUM_KIDS_5PLUS=((CAC_DEMO_NUM_KIDS) in (5,6,7,8,9));
+       M_NUM_KIDS = CAC_DEMO_NUM_KIDS;
+       if M_NUM_KIDS = . then M_NUM_KIDS = 0;     
+ 
+       %let valuelp= 1 2 3 4 5;
+       %let namelp=1 2 3 4 5;
+
+       %do loopme=1 %to 5;
+           M_NUM_PERS_%scan(&namelp,&loopme," ")=(sum(of CAC_DEMO_NUM_ADULTS CAC_DEMO_NUM_KIDS)=%scan(&valuelp,&loopme," "));
+       %end;
+
+       M_NUM_PERS_6PLUS=(sum(of CAC_DEMO_NUM_ADULTS CAC_DEMO_NUM_KIDS) ge 6);
+       M_NUM_PERS = sum(of CAC_DEMO_NUM_ADULTS CAC_DEMO_NUM_KIDS) + 0;
+
+      %do personnum=1 %to 5;
+          M_P&personnum._AGE_18_24=(18 le CAC_IND&personnum._AGE le 24);
+          M_P&personnum._AGE_25_34=(25 le CAC_IND&personnum._AGE le 34);
+          M_P&personnum._AGE_35_44=(35 le CAC_IND&personnum._AGE le 44);
+          M_P&personnum._AGE_45_54=(45 le CAC_IND&personnum._AGE le 54);
+          M_P&personnum._AGE_55_64=(55 le CAC_IND&personnum._AGE le 64);
+          M_P&personnum._AGE_65_74=(65 le CAC_IND&personnum._AGE le 74);
+          M_P&personnum._AGE_75_PLUS=(CAC_IND&personnum._AGE ge 75);
+      %end;
+ 
+      %let namebc=A1 A2 B1 B2 C1 C2 D1 D2 D3 E1 E2 E3;
+      %let namelp='A1' 'A2' 'B1' 'B2' 'C1' 'C2' 'D1' 'D2' 'D3' 'E1' 'E2' 'E3'; 
+ 
+      %do loopme=1 %to 12;
+          M_VALUE_SCORE_%scan(&namebc,&loopme," ")=((CAC_VALUE_SCORE_ALL=%scan(&namelp,&loopme," ")));
+      %end;
+
+      M_VALUE_SCORE_HIGH=0;
+      M_VALUE_SCORE_MEDIUM=0;
+      M_VALUE_SCORE_LOW=0;
+
+      if cac_value_score_all in ('A1' 'A2' 'B1' 'B2') then M_VALUE_SCORE_HIGH=1; 
+         else if cac_value_score_all in ('C1' 'C2') then M_VALUE_SCORE_MEDIUM=1; 
+         else if cac_value_score_all in ('D1' 'D2' 'D3' 'E1' 'E2' 'E3') then M_VALUE_SCORE_LOW=1; 
+        
+   %end; *<------------ RECODES FOR LEGACY NON ENHANCED DEMO VARIABLES;
+   
+   ******************;
+   *ENHANCED RECODES*;
+   ******************;
+
+   %if %qscan(&enhanced,1,%str( )) =Y %then %do;
+
+       %let valuelp=0 1 2 3 4 5 6 7 8 9;
+       %let namelp=UNDER_25 25_50 50_75 75_100 100_150 150_250 250_500 500_750 750_1MM OVER_1MM;
+       
+       %do loopme=1 %to 10;
+           M_NET_WORTH_%scan(&namelp,&loopme," ")_ENH =((CAC_DEMO_NET_WORTH_ENH=%scan(&valuelp,&loopme," ")));
+       %end;
+
+       M_NET_WORTH_ENH=M_NET_WORTH_UNDER_25_ENH*12.5+ M_NET_WORTH_25_50_ENH*37.5+ M_NET_WORTH_50_75_ENH*62.5+ M_NET_WORTH_75_100_ENH*87.5+  M_NET_WORTH_100_150_ENH*125+
+                     M_NET_WORTH_150_250_ENH*200+  M_NET_WORTH_250_500_ENH*375+   M_NET_WORTH_500_750_ENH*625+   M_NET_WORTH_750_1MM_ENH*825+ M_NET_WORTH_OVER_1MM_ENH*1000;
+       if M_NET_WORTH_ENH=0 then M_NET_WORTH_ENH=.;    
+       
+       %let valuelp=1 2 3 4 5 6 7;
+       %let namelp=18_24 25_34 35_44 45_54 55_64 65_74 75PLUS;
+   
+       %do loopme=1 %to 7;
+           M_HOH_AGE_%scan(&namelp,&loopme," ")_ENH=((CAC_DEMO_AGE_ENH=%scan(&valuelp,&loopme," ")));
+       %end;
+
+       %let valuelp=18_24 25_34 35_44 45_54 55_64 65_74 75_PLUS;
+       %let namelp=18_24_1PLUS 25_34_1PLUS 35_44_1PLUS 45_54_1PLUS 55_64_1PLUS 65_74_1PLUS 75PLUS_1PLUS;
+ 
+       %do loopme=1 %to 7;
+           M_ADLT_%scan(&namelp,&loopme," ")_ENH=((CAC_DEMO_ADULT_%scan(&valuelp,&loopme," ")_ENH) not in (.,0));
+       %end;
+
+       %let valuelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
+       %let namelp=01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16;
+
+       %do loopme=1 %to 16;
+           M_FAM_COMP_%scan(&namelp,&loopme," ")_ENH=((CAC_DEMO_HH_TYPE_ENH=%scan(&valuelp,&loopme," ")));
+       %end;
+
+       %let valuelp=00_02 03_05 06_10 11_15 16_17;
+       %let namelp=00_02_PRES 03_05_PRES 06_10_PRES 11_15_PRES 16_17_PRES;
+
+       %do loopme=1 %to 5;
+           M_KID_%scan(&namelp,&loopme," ")_ENH=((CAC_DEMO_KIDS_%scan(&valuelp,&loopme," ")_ENH) ge 1);
+       %end;
+
+       %let valuelp= 1 2 3 4;
+       %let namelp=1 2 3 4;
+  
+       %do loopme=1 %to 4;
+           M_NUM_KIDS_%scan(&namelp,&loopme," ")_ENH=((CAC_DEMO_NUM_KIDS_ENH=%scan(&valuelp,&loopme," ")));
+       %end;
+
+       M_NUM_KIDS_5PLUS_ENH=((CAC_DEMO_NUM_KIDS_ENH) in (5,6,7,8,9));
+       M_NUM_KIDS_ENH = CAC_DEMO_NUM_KIDS_ENH;
+       if M_NUM_KIDS_ENH = . then M_NUM_KIDS_ENH = 0;
+
+       %do personnum=1 %to 5;
+           M_P&personnum._AGE_18_24_ENH=(18 le CAC_IND&personnum._AGE_ENH le 24);
+           M_P&personnum._AGE_25_34_ENH=(25 le CAC_IND&personnum._AGE_ENH le 34);
+           M_P&personnum._AGE_35_44_ENH=(35 le CAC_IND&personnum._AGE_ENH le 44);
+           M_P&personnum._AGE_45_54_ENH=(45 le CAC_IND&personnum._AGE_ENH le 54);
+           M_P&personnum._AGE_55_64_ENH=(55 le CAC_IND&personnum._AGE_ENH le 64);
+           M_P&personnum._AGE_65_74_ENH=(65 le CAC_IND&personnum._AGE_ENH le 74);
+           M_P&personnum._AGE_75_PLUS_ENH=(CAC_IND&personnum._AGE_ENH ge 75);
+       %end;
+
+       %let valuelp= 1 2 3 4 5;
+       %let namelp=1 2 3 4 5;
+
+       %do loopme=1 %to 5;
+           M_NUM_PERS_%scan(&namelp,&loopme," ")_ENH=(sum(of CAC_DEMO_NUM_ADULTS CAC_DEMO_NUM_KIDS_ENH)=%scan(&valuelp,&loopme," "));
+       %end;
+ 
+       M_NUM_PERS_6PLUS_ENH=(sum(of CAC_DEMO_NUM_ADULTS CAC_DEMO_NUM_KIDS_ENH) ge 6);
+       M_NUM_PERS_ENH = sum(of CAC_DEMO_NUM_ADULTS CAC_DEMO_NUM_KIDS_ENH) + 0;
+ 
+      %let namebc=A1 A2 B1 B2 C1 C2 D1 D2 D3 E1 E2 E3;
+      %let namelp='A1' 'A2' 'B1' 'B2' 'C1' 'C2' 'D1' 'D2' 'D3' 'E1' 'E2' 'E3'; 
+
+      %do loopme=1 %to 12;
+          M_VALUE_SCORE_%scan(&namebc,&loopme," ")_ENH=((CAC_VALUE_SCORE_ALL_ENH=%scan(&namelp,&loopme," ")));
+      %end;
+
+      M_VALUE_SCORE_HIGH_ENH=0;
+      M_VALUE_SCORE_MEDIUM_ENH=0;
+      M_VALUE_SCORE_LOW_ENH=0;
+
+     if cac_value_score_all_enh in ('A1' 'A2' 'B1' 'B2') then M_VALUE_SCORE_HIGH_ENH=1; 
+        else if cac_value_score_all_enh in ('C1' 'C2') then M_VALUE_SCORE_MEDIUM_ENH=1; 
+        else if cac_value_score_all_enh in ('D1' 'D2' 'D3' 'E1' 'E2' 'E3') then M_VALUE_SCORE_LOW_ENH=1;   
+   %end;
+
+   *HOME RECODES*; *<------ HOME RECODES;
+   %if %qscan(&home,1,%str( )) =Y %then %do;
+
+       M_CAC_HOME_SQ_FOOT_NUM=CAC_HOME_SQ_FOOT_NUM; 
+       M_CAC_HOME_SQ_FOOT_LOW=(CAC_HOME_SQ_FOOT in ('A' 'B' 'C' 'D'));
+       M_CAC_HOME_SQ_FOOT_HIGH=(CAC_HOME_SQ_FOOT in ('I' 'J' 'K' 'L' 'M' 'N'));
+
+       M_DWELL_SINGLE=((CAC_HOME_DWELL_TYPE)=1);
+       M_DWELL_MULTI=((CAC_HOME_DWELL_TYPE)=2);
+       
+      %let valuelp= 1 2 3 4;
+      %let namelp=KNOWN_RENTER LIKELY_RENTER LIKELY_OWNER KNOWN_OWNER;
+
+      %do loopme=1 %to 4;
+          M_%scan(&namelp,&loopme," ")=((CAC_HOME_OWN=%scan(&valuelp,&loopme," ")));
+      %end;
+
+      M_HOME_OWNER = (M_LIKELY_OWNER = 1 or M_KNOWN_OWNER = 1);
+
+      if CAC_HOME_BUILT_YEAR ne '' then do;
+         TODAYS_YEAR=year(today());
+         YEAR_DIFF=TODAYS_YEAR-CAC_HOME_BUILT_YEAR;
+         M_HOME_BUILT_0_5_YRS = (0 le YEAR_DIFF and 5 ge YEAR_DIFF);
+         M_HOME_BUILT_6_10_YRS = (5 lt YEAR_DIFF and 10 ge YEAR_DIFF);
+         M_HOME_BUILT_11_25_YRS = (10 lt YEAR_DIFF and 25 ge YEAR_DIFF);
+         M_HOME_BUILT_26_50_YRS = (25 lt YEAR_DIFF and 50 ge YEAR_DIFF);
+         M_HOME_BUILT_51_PLUS_YRS = (YEAR_DIFF gt 50);
+         drop TODAYS_YEAR YEAR_DIFF;
+     end;
+
+     %let valuelp= 1 2 3 4 5 6 7 8;
+     %let namelp=0_6MOS 7_12MOS 1_2_YRS 3_5_YRS 6_10_YRS 11_15_YRS 16_20_YRS 20_PLUS_YRS;
+
+     %do loopme=1 %to 8;
+         M_LOR_%scan(&namelp,&loopme," ")=((CAC_HOME_RES_LENGTH=%scan(&valuelp,&loopme," ")));
+     %end;
+
+     M_LOR = .5*M_LOR_0_6MOS+1*M_LOR_7_12MOS+1.5*M_LOR_1_2_YRS+4*M_LOR_3_5_YRS+8*M_LOR_6_10_YRS+13*M_LOR_11_15_YRS+18*M_LOR_16_20_YRS+20*M_LOR_20_PLUS_YRS;
+     if M_LOR = 0 then M_LOR = .;
+
+  %end; *<------ HOME RECODES;
+
+*GEO INTEREST RECODES*;
+%if %qscan(&geo,1,%str( )) =Y %then %do;
+
+   %do renamenum=1 %to 121;
+      RENAME GEO_CAC_INT_&renamenum=M_GEO_CAC_INT_&renamenum;
+   %end;
+
+%end;
+
+*INTERESTS RECODES*;
+%if %qscan(&interests,1,%str( )) =Y %then %do;
+
+      M_CAC_INT_DONATE_ANY=(sum (of CAC_INT_66 CAC_INT_67 CAC_INT_68 CAC_INT_69 CAC_INT_70 CAC_INT_71 CAC_INT_35 CAC_INT_72 
+                                    CAC_INT_73 CAC_INT_74 CAC_INT_75 CAC_INT_76 CAC_INT_77 CAC_INT_78 CAC_INT_79) ge 1);
+      M_CAC_INT_DONATE_HIGH=(sum (of CAC_INT_66 CAC_INT_67 CAC_INT_68 CAC_INT_69 CAC_INT_70 CAC_INT_71 CAC_INT_35 CAC_INT_72 
+                                    CAC_INT_73 CAC_INT_74 CAC_INT_75 CAC_INT_76 CAC_INT_77 CAC_INT_78 CAC_INT_79) ge 3);
+      M_CAC_INT_MAIL_ORD_ANY=(sum (of CAC_INT_92 CAC_INT_93 CAC_INT_94 CAC_INT_95 CAC_INT_96 CAC_INT_97 CAC_INT_98 
+                                      CAC_INT_21 CAC_INT_99 CAC_INT_100 CAC_INT_22 CAC_INT_101) ge 1);
+      M_CAC_INT_MAIL_ORD_HIGH=(sum (of CAC_INT_92 CAC_INT_93 CAC_INT_94 CAC_INT_95 CAC_INT_96 CAC_INT_97 CAC_INT_98 
+                                      CAC_INT_21 CAC_INT_99 CAC_INT_100 CAC_INT_22 CAC_INT_101) ge 3);
+      M_CAC_INT_COLLECT_ANY=(sum (of CAC_INT_2 CAC_INT_84 CAC_INT_81 CAC_INT_82 CAC_INT_83) ge 1);
+      M_CAC_INT_COLLECT_HIGH=(sum (of CAC_INT_2 CAC_INT_84 CAC_INT_81 CAC_INT_82 CAC_INT_83) ge 3);
+      M_CAC_INT_MUSIC_ANY=(sum (of CAC_INT_102 CAC_INT_103 CAC_INT_104 CAC_INT_105 CAC_INT_107 CAC_INT_108) ge 1);
+      M_CAC_INT_MUSIC_HIGH=(sum (of CAC_INT_102 CAC_INT_103 CAC_INT_104 CAC_INT_105 CAC_INT_107 CAC_INT_108) ge 3);
+      M_CAC_INT_HEALTH_ANY=(sum (of CAC_INT_6 CAC_INT_7 CAC_INT_8 CAC_INT_9 CAC_INT_10 CAC_INT_37 CAC_INT_113 CAC_INT_38 CAC_INT_62 
+                                    CAC_INT_44 CAC_INT_109 CAC_INT_115 CAC_INT_11 CAC_INT_12 CAC_INT_110 CAC_INT_13 CAC_INT_30 CAC_INT_116) ge 1);
+      M_CAC_INT_HEALTH_HIGH=(sum (of CAC_INT_6 CAC_INT_7 CAC_INT_8 CAC_INT_9 CAC_INT_10 CAC_INT_37 CAC_INT_113 CAC_INT_38 CAC_INT_62 
+                                    CAC_INT_44 CAC_INT_109 CAC_INT_115 CAC_INT_11 CAC_INT_12 CAC_INT_110 CAC_INT_13 CAC_INT_30 CAC_INT_116) ge 3);
+      M_CAC_INT_TRAVEL_ANY=(sum (of CAC_INT_117 CAC_INT_118 CAC_INT_31 CAC_INT_119 CAC_INT_39 CAC_INT_120 CAC_INT_121 CAC_INT_32) ge 1);
+      M_CAC_INT_TRAVEL_HIGH=(sum (of CAC_INT_117 CAC_INT_118 CAC_INT_31 CAC_INT_119 CAC_INT_39 CAC_INT_120 CAC_INT_121 CAC_INT_32) ge 3);
+      M_CAC_INT_FINANCE_ANY=(sum (of CAC_INT_85 CAC_INT_17 CAC_INT_60 CAC_INT_86 CAC_INT_19 CAC_INT_87 CAC_INT_88 
+                                     CAC_INT_89 CAC_INT_90 CAC_INT_111 CAC_INT_18 CAC_INT_91) ge 1);
+      M_CAC_INT_FINANCE_HIGH=(sum (of CAC_INT_85 CAC_INT_17 CAC_INT_60 CAC_INT_86 CAC_INT_19 CAC_INT_87 CAC_INT_88 
+                                     CAC_INT_89 CAC_INT_90 CAC_INT_111 CAC_INT_18 CAC_INT_91) ge 3);
+      M_CAC_INT_BOOKS_ANY=(sum (of CAC_INT_55 CAC_INT_3 CAC_INT_57 CAC_INT_4) ge 1);
+      M_CAC_INT_BOOKS_HIGH=(sum (of CAC_INT_55 CAC_INT_3 CAC_INT_57 CAC_INT_4) ge 3);
+      M_CAC_INT_ART_ANY=(sum (of CAC_INT_5 CAC_INT_26 CAC_INT_27 CAC_INT_28 CAC_INT_33 CAC_INT_51 CAC_INT_61 
+                                     CAC_INT_41 CAC_INT_52 CAC_INT_53 CAC_INT_23 CAC_INT_24 CAC_INT_54) ge 1);
+      M_CAC_INT_ART_HIGH=(sum (of CAC_INT_5 CAC_INT_26 CAC_INT_27 CAC_INT_28 CAC_INT_33 CAC_INT_51 CAC_INT_61 
+                                     CAC_INT_41 CAC_INT_52 CAC_INT_53 CAC_INT_23 CAC_INT_24 CAC_INT_54) ge 3);
+      M_CAC_INT_FOOD_ANY=(sum (of CAC_INT_46 CAC_INT_49 CAC_INT_58 CAC_INT_40 CAC_INT_42) ge 1);
+      M_CAC_INT_FOOD_HIGH=(sum (of CAC_INT_46 CAC_INT_49 CAC_INT_58 CAC_INT_40 CAC_INT_42) ge 3);
+      M_CAC_INT_ANIMALS_ANY=(sum (of CAC_INT_47 CAC_INT_14 CAC_INT_15 CAC_INT_16 CAC_INT_80) ge 1);
+      M_CAC_INT_ANIMALS_HIGH=(sum (of CAC_INT_47 CAC_INT_14 CAC_INT_15 CAC_INT_16 CAC_INT_80) ge 3);
+
+%end;
+
+*CREDIT RECODES*;
+%if %qscan(&credit,1,%str( )) =Y %then %do;
+
+   %let valuelp= CAC_CRED_ANY CAC_CRED_AMEX CAC_CRED_AUTO_LOAN CAC_CRED_BANK CAC_CRED_CATALOG CAC_CRED_COMP_ELECTRONIC CAC_CRED_DEBIT 
+                 CAC_CRED_EDUCATION_LOAN CAC_CRED_FIN_SER_INSURE CAC_CRED_FINANCE CAC_CRED_FINANCIAL_BANKING CAC_CRED_FINANCIAL_INSTALLMENT 
+                 CAC_CRED_FURNITURE CAC_CRED_GROCERY CAC_CRED_HOME_IMPROVE CAC_CRED_HOME_MORTGAGE CAC_CRED_HOME_OFFICE CAC_CRED_LEASING 
+                 CAC_CRED_LOW_DEPT CAC_CRED_MAIN_ST_RETAIL CAC_CRED_MASTERCARD CAC_CRED_WAREHOUSE CAC_CRED_MISC CAC_CRED_OIL CAC_CRED_SPEC_APPAREL 
+                 CAC_CRED_SPORT CAC_CRED_STD_RETAIL CAC_CRED_STD_SPECIALTY CAC_CRED_TRAVEL CAC_CRED_TV_MAIL_ORD CAC_CRED_HIGH_STD_RETAIL 
+                 CAC_CRED_HIGH_SPEC_RETAIL CAC_CRED_VISA ;
+   %let namelp= CRED_ANY CRED_AMEX CRED_AUTO_LOAN CRED_BANK CRED_CATALOG CRED_COMP_ELEC CRED_DEBIT CRED_EDUCATION CRED_FIN_SER_ CRED_FINANCE 
+                CRED_FIN_BANKING CRED_FIN_INSTALL CRED_FURNITURE CRED_GROCERY CRED_HOME_IMP CRED_HOME_MORTGAGE CRED_HOME_OFFICE CRED_LEASING 
+                CRED_LOW_DEPT CRED_MAIN_RETAIL CRED_MASTERCARD CRED_WAREHOUSE CRED_MISC CRED_OIL CRED_SPEC_APP CRED_SPORT CRED_STD_RETAIL 
+                CRED_STD_SPECIAL CRED_TRAVEL CRED_TV_MAIL_ORD CRED_HIGH_STD_RETAIL CRED_HIGH_RETAIL CRED_VISA ;
+
+   %do loopme=1 %to 33;
+      M_%scan(&namelp,&loopme," ")=((%scan(&valuelp,&loopme," ")=1));
+   %end;
+
+   M_CRED_CNT_TYPES=(sum(of M_CRED_:));
+   
+%end;
+
+*LIFE EVENT RECODES*;
+%if %qscan(&life_events,1,%str( )) =Y %then %do;
+
+  array lifevent CAC_LE_ADULT_KIDS_AT_HOME CAC_LE_CHANGE_INCOME CAC_LE_CHANGE_NUM_VEHICLES CAC_LE_EDUCATION_INCREASE CAC_LE_HOME_OWN 
+                 CAC_LE_JUST_RETIRED CAC_LE_MARITAL_STATUS CAC_LE_NEW_CHILD CAC_LE_NEW_DIVORCED CAC_LE_NEW_EMPTY_NESTER CAC_LE_NEW_HOME_OWNER 
+                 CAC_LE_NEW_JOB CAC_LE_NEW_MARRIED CAC_LE_NEW_PARENT CAC_LE_RECENT_COLLEGE_GRAD CAC_LE_RECENT_GRADUATE_GRAD CAC_LE_RECENT_HS_GRAD;
+               
+  do over lifevent;
+     if lifevent = . then lifevent = 0;
+  end;
+          
+  M_LE_HOME_STATUS_OLDER_HOME=(CAC_LE_HOME_STATUS='older home');
+  M_LE_HOME_STATUS_NEWER_HOME=(CAC_LE_HOME_STATUS='newer home');
+
+%end;
+
+*OLD SEGMENT RECODES*;
+%if %qscan(&segments_old,1,%str( )) =Y %then %do;
+
+   %let valuelp= '21X' '22X' '41X' '42X' '43X' '61X' '62X' '63X' '71X' '72X' '73X' '91X' '92X' '93X' '111X'
+                 '112X' '113X' '114X' '161F' '161M' '162F' '162M' '163F' '163M' '181F' '181M' '182F' '182M' '183F' '183M'
+                 '191F' '191M' '192F' '192M' '193F' '193M' '251F' '252F' '281F' '281M' '282F' '282M';
+
+   %let namelp=   21X 22X 41X 42X 43X 61X 62X 63X 71X 72X 73X 91X 92X 93X 111X 112X 113X 114X 161F 161M 162F
+                  162M 163F 163M 181F 181M 182F 182M 183F 183M 191F 191M 192F 192M 193F 193M 251F 252F 281F
+                  281M 282F 282M;
+
+   %do loopme=1 %to 42;
+      M_OLD_LIFESTAGE_%scan(&namelp,&loopme," ")=(strip(CAC_SILH1_LIFESTAGE)=(%scan(&valuelp,&loopme," ")));
+   %end;
+
+   %let valuelp= 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15;
+   %let namelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15;
+
+   %do loopme=1 %to 15;
+      M_OLD_LIFESTAGE_GRP2_%scan(&namelp,&loopme," ")=(CAC_SILH1_LIFESTAGE_MACRO=(%scan(&valuelp,&loopme," ")));
+   %end;
+
+   %let valuelp=0 1 2 3 4 5 6 7 8 9 10 11 14 15 16 17 18 19 20 21 24;
+   %let namelp=0 1 2 3 4 5 6 7 8 9 10 11 14 15 16 17 18 19 20 21 24;
+
+   %do loopme=1 %to 21;
+      M_OLD_LIFESTYLE_DIM1_%scan(&namelp,&loopme," ")=(CAC_SILH1_LIFESTYLE=(%scan(&valuelp,&loopme," ")));
+   %end;
+
+   %let valuelp=0 1 2 3 4 5 6 7 8;
+   %let namelp=0 1 2 3 4 5 6 7 8;
+
+   %do loopme=1 %to 9;
+      M_OLD_LIFESTYLE_DIM2_%scan(&namelp,&loopme," ")=(CAC_SILH1_LIFESTYLE_MACRO=(%scan(&valuelp,&loopme," ")));
+   %end;
+
+   %let valuelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+                31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48;
+   %let namelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+                31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48;
+
+   %do loopme=1 %to 48;
+     M_OLD_SILHOUETTE_%scan(&namelp,&loopme," ")=(CAC_SILH1=(%scan(&valuelp,&loopme," ")));
+   %end;
+
+%end;
+
+*NEW SEGMENT RECODES*;
+%if %qscan(&segments_new,1,%str( )) =Y %then %do;
+*LIFESTAGE*;
+
+   %let valuelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19;
+   %let namelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19;
+
+   %do loopme=1 %to 19;
+      M_CAC_LIFESTAGE_%scan(&namelp,&loopme," ")=((CAC_SILH_LIFESTAGE_GROUP=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*LIFESTYLE*;
+
+   %let valuelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19;
+   %let namelp=1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19;
+
+   %do loopme=1 %to 19;
+      M_CAC_LIFESTYLE_%scan(&namelp,&loopme," ")=((CAC_SILH_LIFESTYLE=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*GEO*;
+
+   %let valuelp=1 2 6 7 8;
+   %let namelp=1 2 6 7 8;
+
+   %do loopme=1 %to 5;
+      M_CAC_SILH_GEO_%scan(&namelp,&loopme," ")=((CAC_SILH_GEO=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*BUY STYLE*;
+
+   %let valuelp=1 2 3 4 5 6 7;
+   %let namelp=1 2 3 4 5 6 7;
+
+   %do loopme=1 %to 7;
+      M_CAC_BUYSTYLE_%scan(&namelp,&loopme," ")=((CAC_SILH_BUY_STYLE_GROUP=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*TECH*;
+
+   %let valuelp=1 2 3 4;
+   %let namelp=1 2 3 4;
+
+   %do loopme=1 %to 4;
+      M_CAC_TECH_%scan(&namelp,&loopme," ")=((CAC_SILH_TECH=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*ECOMMERCE*;
+
+   %let valuelp=1 2 3 4 5;
+   %let namelp=1 2 3 4 5;
+
+   %do loopme=1 %to 5;
+      M_CAC_ECOM_%scan(&namelp,&loopme," ")=((CAC_SILH_ECOM=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*SOCIAL*;
+
+   %let valuelp=1 2 3 4 5 6 7 8 9 10;
+   %let namelp=1 2 3 4 5 6 7 8 9 10;
+
+   %do loopme=1 %to 10;
+      M_CAC_SOCIAL_%scan(&namelp,&loopme," ")=((CAC_SILH_SOCIAL=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_SOCIAL_LOW=sum(of M_CAC_SOCIAL_8 M_CAC_SOCIAL_9 M_CAC_SOCIAL_10);
+   M_SOCIAL_HIGH=sum(of M_CAC_SOCIAL_1 M_CAC_SOCIAL_2 M_CAC_SOCIAL_3);
+
+*DIGITAL INFLUENCER*;
+
+   %let valuelp=1 2 3 4 5 6 7 8 9 10;
+   %let namelp=1 2 3 4 5 6 7 8 9 10;
+
+   %do loopme=1 %to 10;
+      M_CAC_DIGINF_%scan(&namelp,&loopme," ")=((CAC_SILH_DIG_INF=%scan(&valuelp,&loopme," ")));
+   %end;
+
+   M_DIGINF_LOW=sum(of M_CAC_DIGINF_8 M_CAC_DIGINF_9 M_CAC_DIGINF_10);
+   M_DIGINF_HIGH=sum(of M_CAC_DIGINF_1 M_CAC_DIGINF_2 M_CAC_DIGINF_3);
+
+*SILHOUETTE*;
+
+   %let valuelp= 'A1' 'A2' 'A3' 'A4' 'A5' 'A6' 'B1' 'B2' 'B3' 'B4' 'C1' 'C2' 'C3' 'C4' 'C5' 'D1' 'D2' 'D3' 'D4' 'D5' 'E1'
+                 'E2' 'E3' 'E4' 'F1' 'F2' 'F3' 'F4' 'F5' 'F6' 'F7' 'G1' 'G2' 'G3' 'H1' 'H2' 'H3' 'H4' 'H5' 'I1' 'I2' 'I3'
+                 'I4' 'I5' 'J1' 'J2' 'J3' 'J4' 'K1' 'K2' 'K3' 'K4' 'L1' 'L2' 'L3' 'L4' 'L5' 'L6';
+
+   %let namelp= A1 A2 A3 A4 A5 A6 B1 B2 B3 B4 C1 C2 C3 C4 C5 D1 D2 D3 D4 D5 E1 E2 E3 E4 F1 F2 F3 F4 F5 F6 F7 G1 G2 G3 H1
+                H2 H3 H4 H5 I1 I2 I3 I4 I5 J1 J2 J3 J4 K1 K2 K3 K4 L1 L2 L3 L4 L5 L6;
+
+   %do loopme=1 %to 58;
+      M_CAC_SILHOUETTE_%scan(&namelp,&loopme," ")=((CAC_SILH=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*SUPER SILH*;
+
+   %let valuelp='A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'X';
+   %let namelp=A B C D E F G H I J K L X;
+
+   %do loopme=1 %to 13;
+      M_CAC_SILH_SUPER_%scan(&namelp,&loopme," ")=((CAC_SILH_SUPER=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*PRICE*;
+
+   %let valuelp=1 2 3 4 5;
+   %let namelp=1 2 3 4 5;
+
+   %do loopme=1 %to 5;
+      M_CAC_SILH_PRICE_%scan(&namelp,&loopme," ")=((CAC_SILH_PRICE=%scan(&valuelp,&loopme," ")));
+   %end;
+
+*LOYAL*;
+
+   %let valuelp=1 2 3 4 5;
+   %let namelp=1 2 3 4 5;
+
+   %do loopme=1 %to 5;
+      M_CAC_SILH_LOYAL_%scan(&namelp,&loopme," ")=((CAC_SILH_LOYAL=%scan(&valuelp,&loopme," ")));
+   %end;
+
+%end;
+
+*LABEL ALL CREATED VARIABLES*;
+
+   label
+
+   %if %qscan(&non_enhanced,1,%str( )) =Y %then %do;
+        M_NET_WORTH_UNDER_25= 'CAC_DEMO_NET_WORTH = Less than $25k' 
+        M_NET_WORTH_25_50= 'CAC_DEMO_NET_WORTH = $25,000 - $49,999' 
+        M_NET_WORTH_50_75= 'CAC_DEMO_NET_WORTH = $50,000 - $74,999' 
+        M_NET_WORTH_75_100= 'CAC_DEMO_NET_WORTH = $75,000 - $99,999' 
+        M_NET_WORTH_100_150= 'CAC_DEMO_NET_WORTH = $100,000 - $149,999' 
+        M_NET_WORTH_150_250= 'CAC_DEMO_NET_WORTH = $150,000 - $249,999' 
+        M_NET_WORTH_250_500= 'CAC_DEMO_NET_WORTH = $250,000 - $499,999' 
+        M_NET_WORTH_500_750= 'CAC_DEMO_NET_WORTH = $500,000 - $749,999' 
+        M_NET_WORTH_750_1MM= 'CAC_DEMO_NET_WORTH = $750,000 - $999,999' 
+        M_NET_WORTH_OVER_1MM= 'CAC_DEMO_NET_WORTH = $1,000,000 or More' 
+        M_NET_WORTH= 'CAC_DEMO_NET_WORTH' 
+        M_ADLT_18_24_1PLUS = 'ADULT AGE 18-24 FLAG' 
+        M_ADLT_25_34_1PLUS = 'ADULT AGE 25-34 FLAG' 
+        M_ADLT_35_44_1PLUS = 'ADULT AGE 34-44 FLAG' 
+        M_ADLT_45_54_1PLUS = 'ADULT AGE 45-54 FLAG' 
+        M_ADLT_55_64_1PLUS = 'ADULT AGE 55-64 FLAG' 
+        M_ADLT_65_74_1PLUS = 'ADULT AGE 65-74 FLAG' 
+        M_ADLT_75PLUS_1PLUS = 'ADULT AGE 75+ FLAG'
+        M_FAM_COMP_01 = 'MARRIED HUSBAND AND WIFE PRESENT WITH KIDS FLAG' 
+        M_FAM_COMP_02 = 'MARRIED HUSBAND AND WIFE PRESENT NO KIDS FLAG' 
+        M_FAM_COMP_03 = 'ONE MALE ONE FEMALE WITH KIDS FLAG' 
+        M_FAM_COMP_04 = 'ONE MALE ONE FEMALE NO KIDS FLAG' 
+        M_FAM_COMP_05 = 'MALE HOH WITH OTHER PERSON WITH KIDS FLAG' 
+        M_FAM_COMP_06 = 'MALE HOH WITH OTHER PERSON NO KIDS FLAG' 
+        M_FAM_COMP_07 = 'FEMALE HOH WITH OTHER PERSON WITH KIDS FLAG' 
+        M_FAM_COMP_08 = 'FEMALE HOH WITH OTHER PERSON NO KIDS FLAG' 
+        M_FAM_COMP_09 = 'TWO PERSONS WITH KIDS FLAG' 
+        M_FAM_COMP_10 = 'TWO PERSONS NO KIDS FLAG' 
+        M_FAM_COMP_11 = 'ONE ADULT MALE HOH WITH KIDS' 
+        M_FAM_COMP_12 = 'ONE ADULT MALE HOH NO KIDS' 
+        M_FAM_COMP_13 = 'ONE ADULT FEMALE HOH WITH KIDS' 
+        M_FAM_COMP_14 = 'ONE ADULT FEMALE HOH NO KIDS' 
+        M_FAM_COMP_15 = 'ONE ADULT UNKNOWN GENDER WITH KIDS' 
+        M_FAM_COMP_16 = 'ONE ADULT UNKNOWN GENDER NO KIDS'  
+        M_HOH_AGE_18_24= 'HOH AGE 18-24 FLAG' 
+        M_HOH_AGE_25_34= 'HOH AGE 25-34 FLAG' 
+        M_HOH_AGE_35_44= 'HOH AGE 35-44 FLAG' 
+        M_HOH_AGE_45_54= 'HOH_AGE 45-54 FLAG' 
+        M_HOH_AGE_55_64= 'HOH_AGE 55-64 FLAG' 
+        M_HOH_AGE_65_74= 'HOH_AGE 65-74 FLAG' 
+        M_HOH_AGE_75PLUS= 'HOH AGE 75 AND OVER FLAG'         
+        M_KID_00_02_PRES='AT LEAST ONE KID AGE 0-2' 
+        M_KID_03_05_PRES='AT LEAST ONE KID AGE 3-5' 
+        M_KID_06_10_PRES='AT LEAST ONE KID AGE 6-10' 
+        M_KID_11_15_PRES='AT LEAST ONE KID AGE 11-15' 
+        M_KID_16_17_PRES='AT LEAST ONE KID AGE 16-17'      
+        M_NUM_KIDS_1='CAC_DEMO_NUM_KIDS=1' 
+        M_NUM_KIDS_2='CAC_DEMO_NUM_KIDS=2' 
+        M_NUM_KIDS_3='CAC_DEMO_NUM_KIDS=3' 
+        M_NUM_KIDS_4='CAC_DEMO_NUM_KIDS=4' 
+        M_NUM_KIDS_5PLUS='CAC_DEMO_NUM_KIDS AT LEAST 5' 
+        M_NUM_KIDS='NUMBER OF KIDS'       
+        M_NUM_PERS_1='NUMBER OF KIDS AND ADULTS=1' 
+        M_NUM_PERS_2='NUMBER OF KIDS AND ADULTS=2' 
+        M_NUM_PERS_3='NUMBER OF KIDS AND ADULTS=3' 
+        M_NUM_PERS_4='NUMBER OF KIDS AND ADULTS=4' 
+        M_NUM_PERS_5='NUMBER OF KIDS AND ADULTS=5' 
+        M_NUM_PERS_6PLUS='NUMBER OF KIDS AND ADULTS AT LEAST 6' 
+        M_NUM_PERS='NUMBER OF KIDS AND ADULTS'       
+        M_P1_AGE_18_24='P1 AGE 18-24 FLAG' 
+        M_P1_AGE_25_34='P1 AGE 25-34 FLAG' 
+        M_P1_AGE_35_44='P1 AGE 35-44 FLAG' 
+        M_P1_AGE_45_54='P1 AGE 45-54 FLAG' 
+        M_P1_AGE_55_64='P1 AGE 55-64 FLAG' 
+        M_P1_AGE_65_74='P1 AGE 65-74 FLAG' 
+        M_P1_AGE_75_PLUS='P1 AGE 75+ FLAG' 
+        M_P2_AGE_18_24='P2 AGE 18-24 FLAG' 
+        M_P2_AGE_25_34='P2 AGE 25-34 FLAG' 
+        M_P2_AGE_35_44='P2 AGE 35-44 FLAG' 
+        M_P2_AGE_45_54='P2 AGE 45-54 FLAG' 
+        M_P2_AGE_55_64='P2 AGE 55-64 FLAG' 
+        M_P2_AGE_65_74='P2 AGE 65-74 FLAG' 
+        M_P2_AGE_75_PLUS='P2 AGE 75+ FLAG' 
+        M_P3_AGE_18_24='P3 AGE 18-24 FLAG' 
+        M_P3_AGE_25_34='P3 AGE 25-34 FLAG' 
+        M_P3_AGE_35_44='P3 AGE 35-44 FLAG' 
+        M_P3_AGE_45_54='P3 AGE 45-54 FLAG' 
+        M_P3_AGE_55_64='P3 AGE 55-64 FLAG' 
+        M_P3_AGE_65_74='P3 AGE 65-74 FLAG' 
+        M_P3_AGE_75_PLUS='P3 AGE 75+ FLAG' 
+        M_P4_AGE_18_24='P4 AGE 18-24 FLAG' 
+        M_P4_AGE_25_34='P4 AGE 25-34 FLAG' 
+        M_P4_AGE_35_44='P4 AGE 35-44 FLAG' 
+        M_P4_AGE_45_54='P4 AGE 45-54 FLAG' 
+        M_P4_AGE_55_64='P4 AGE 55-64 FLAG' 
+        M_P4_AGE_65_74='P4 AGE 65-74 FLAG' 
+        M_P4_AGE_75_PLUS='P4 AGE 75+ FLAG' 
+        M_P5_AGE_18_24='P5 AGE 18-24 FLAG' 
+        M_P5_AGE_25_34='P5 AGE 25-34 FLAG' 
+        M_P5_AGE_35_44='P5 AGE 35-44 FLAG' 
+        M_P5_AGE_45_54='P5 AGE 45-54 FLAG' 
+        M_P5_AGE_55_64='P5 AGE 55-64 FLAG' 
+        M_P5_AGE_65_74='P5 AGE 65-74 FLAG' 
+        M_P5_AGE_75_PLUS='P5 AGE 75+ FLAG'           
+        M_VALUE_SCORE_A1='Value Score Inidcator A1'
+        M_VALUE_SCORE_A2='Value Score Inidcator A2'
+        M_VALUE_SCORE_B1='Value Score Inidcator B1'
+        M_VALUE_SCORE_B2='Value Score Inidcator B2'
+        M_VALUE_SCORE_C1='Value Score Inidcator C1'
+        M_VALUE_SCORE_C2='Value Score Inidcator C2'
+        M_VALUE_SCORE_D1='Value Score Inidcator D1'
+        M_VALUE_SCORE_D2='Value Score Inidcator D2'
+        M_VALUE_SCORE_D3='Value Score Inidcator D3'
+        M_VALUE_SCORE_E1='Value Score Inidcator E1'
+        M_VALUE_SCORE_E2='Value Score Inidcator E2'
+        M_VALUE_SCORE_E3='Value Score Inidcator E3'
+        M_VALUE_SCORE_HIGH='Above Average Value Score'
+        M_VALUE_SCORE_MEDIUM='Average Value Score'
+        M_VALUE_SCORE_LOW='Below Average Value Score'     
+   %end;
+   
+   %if %qscan(&demos,1,%str( )) =Y %then %do;
+      M_CAC_ADDR_CDI_A= 'TOP 20 MSAS FLAG' 
+      M_CAC_ADDR_CDI_B= 'NEXT 55 MSAS FLAG' 
+      M_CAC_ADDR_CDI_C= 'COUNTIES WITH DENSITY GT 44 HH PER MILE FLAG' 
+      M_CAC_ADDR_CDI_D= 'COUNTIES WITH DENSITY LT 44 HH PER MILE FLAG' 
+      M_CAC_ADDR_CDI_LARGEST='IN TOP 75 MSAS FLAG' 
+      M_CAC_ADDR_CDI_SMALLEST='NOT IN TOP 75 MSAS FLAG' 
+      M_EDU_NO_HS = 'HOH EDUCATION LESS THAN HIGH SCHOOL FLAG' 
+      M_EDU_HS = 'HOH EDUCATION HIGH SCHOOL GRADUATE ONLY FLAG' 
+      M_EDU_COLLEGE = 'HOH EDUCATION COLLEGE OR HIGHER FLAG' 
+      M_INC_20_25='CAC_DEMO_INCOME_NARROW=20-25k' 
+      M_INC_25_30='CAC_DEMO_INCOME_NARROW=25-30k' 
+      M_INC_30_35='CAC_DEMO_INCOME_NARROW=30-35k' 
+      M_INC_35_40='CAC_DEMO_INCOME_NARROW=35-40k' 
+      M_INC_40_45='CAC_DEMO_INCOME_NARROW=40-45k' 
+      M_INC_45_50='CAC_DEMO_INCOME_NARROW=45-50k' 
+      M_INC_50_55='CAC_DEMO_INCOME_NARROW=50-55k' 
+      M_INC_55_60='CAC_DEMO_INCOME_NARROW=55-60k' 
+      M_INC_60_65='CAC_DEMO_INCOME_NARROW=60-65k' 
+      M_INC_65_70='CAC_DEMO_INCOME_NARROW=65-70k' 
+      M_INC_70_75='CAC_DEMO_INCOME_NARROW=70-75k' 
+      M_INC_75_80='CAC_DEMO_INCOME_NARROW=75-80k' 
+      M_INC_80_85='CAC_DEMO_INCOME_NARROW=80-85k' 
+      M_INC_85_90='CAC_DEMO_INCOME_NARROW=85-90k' 
+      M_INC_90_95='CAC_DEMO_INCOME_NARROW=90-95k' 
+      M_INC_95_100='CAC_DEMO_INCOME_NARROW=95-100k' 
+      M_INC_100_105='CAC_DEMO_INCOME_NARROW=100-105k' 
+      M_INC_105_110='CAC_DEMO_INCOME_NARROW=105-110k' 
+      M_INC_110_115='CAC_DEMO_INCOME_NARROW=110-115k' 
+      M_INC_115_120='CAC_DEMO_INCOME_NARROW=115-120k' 
+      M_INC_120_125='CAC_DEMO_INCOME_NARROW=120-125k' 
+      M_INC_125_130='CAC_DEMO_INCOME_NARROW=125-130k' 
+      M_INC_130_135='CAC_DEMO_INCOME_NARROW=130-135k' 
+      M_INC_135_140='CAC_DEMO_INCOME_NARROW=135-140k' 
+      M_INC_140_145='CAC_DEMO_INCOME_NARROW=140-145k' 
+      M_INC_145_150='CAC_DEMO_INCOME_NARROW=145-150k' 
+      M_INC_150_160='CAC_DEMO_INCOME_NARROW=150-160k' 
+      M_INC_160_170='CAC_DEMO_INCOME_NARROW=160-170k' 
+      M_INC_170_175='CAC_DEMO_INCOME_NARROW=170-175k' 
+      M_INC_175_190='CAC_DEMO_INCOME_NARROW=175-190k' 
+      M_INC_190_200='CAC_DEMO_INCOME_NARROW=190-200k' 
+      M_INC_200_225='CAC_DEMO_INCOME_NARROW=200-225k' 
+      M_INC_225_250='CAC_DEMO_INCOME_NARROW=225-250k' 
+      M_INC_250_PLUS='CAC_DEMO_INCOME_NARROW=250k+' 
+      M_INC_UNDER_15='CAC_DEMO_INCOME=Less than 15k' 
+      M_INC_15_20='CAC_DEMO_INCOME=15-20k' 
+      M_INC_20_30='CAC_DEMO_INCOME=20-30k' 
+      M_INC_30_40='CAC_DEMO_INCOME=30-40k' 
+      M_INC_40_50='CAC_DEMO_INCOME=40-50k' 
+      M_INC_50_75='CAC_DEMO_INCOME=50-75k' 
+      M_INC_75_100='CAC_DEMO_INCOME=75-100k' 
+      M_INC_100_125='CAC_DEMO_INCOME=100-125k' 
+      M_INC_125_150='CAC_DEMO_INCOME=125-150k' 
+      M_INC_150_PLUS='CAC_DEMO_INCOME=150k+' 
+      M_INCOME='NUMERIC INCOME BASED ON CAC_DEMO_INCOME' 
+      M_NUM_ADULT_1='CAC_DEMO_NUM_ADULTS=1' 
+      M_NUM_ADULT_2='CAC_DEMO_NUM_ADULTS=2' 
+      M_NUM_ADULT_3='CAC_DEMO_NUM_ADULTS=3' 
+      M_NUM_ADULT_4PLUS='CAC_DEMO_NUM_ADULTS=4 or 5' 
+      M_NUM_ADULT='NUMBER OF ADULTS' 
+      M_OCC_DOCTOR='OCCUPATION: PHYSICIAN OR DENTIST' 
+      M_OCC_HEALTH_CARE='OCCUPATION: HEALTH CARE' 
+      M_OCC_LWYR_JUDGE='OCCUPATION: LAWYER OR JUDGE' 
+      M_OCC_PROF_TECH='OCCUPATION: PROFESSIONAL OR TECHNICAL' 
+      M_OCC_MANAGEMENT='OCCUPATION: MANAGEMENT' 
+      M_OCC_TCHR_LBRY='OCCUPATION: TEACHER OR EDUCATOR' 
+      M_OCC_SALES_MKTG='OCCUPATION: SALES OR MARKETING' 
+      M_OCC_CLERICAL='OCCUPATION: CLERICAL OR SERVICE WORKER' 
+      M_OCC_TRADESMAN='OCCUPATION: TRADESMAN OR LABORER' 
+      M_OCC_FARM='OCCUPATION: FARMER' 
+      M_OCC_STUDENT='OCCUPATION: STUDENT' 
+      M_OCC_HOMEMAKER='OCCUPATION: HOMEMAKER' 
+      M_OCC_RETIRED='OCCUPATION: RETIRED' 
+      M_OCC_FEDERAL='OCCUPATION: FEDERAL EMPLOYEE' 
+      M_OCC_FEDERAL_RETIRED='OCCUPATION: RETIRED FEDERAL EMPLOYEE' 
+      M_OCC_MILITARY='OCCUPATION: MILITARY' 
+      M_OCC_MILITARY_RETIRED='OCCUPATION: RETIRED MILITARY' 
+      M_OCC_PROPRIETER='OCCUPATION: BUSINESS OWNER' 
+      M_HOH_GENDER_M='MALE HOH FLAG' 
+      M_HOH_GENDER_F='FEMALE HOH FLAG' 
+      M_MARRIED_PRESENT='AT LEAST ONE MARRIED FLAG' 
+      M_SINGLE_PRESENT='AT LEAST ONE SINGLE FLAG' 
+      M_MARRIED_SINGLE='BOTH MARRIED AND SINGLE FLAG' 
+      M_MAIL_BUY_SINGLE='SINGLE MAIL BUYER FLAG' 
+      M_MAIL_BUY_MULT='MULTIPLE MAIL BUYER FLAG' 
+      M_MAIL_DONOR_SNGLE='SINGLE MAIL DONOR FLAG' 
+      M_MAIL_DONOR_MULT='MULTIPLE MAIL DONOR FLAG' 
+      M_POL_PARTY_DEM='DEMOCRATIC HH' 
+      M_POL_PARTY_REP='REPUBLICAN HH' 
+      M_POL_PARTY_IND='INDEPENDENT HH' 
+      M_POL_PARTY_MIX='MIX OF DEMOCRATS REPUBLICANS AND INDEPENDENTS IN HH' 
+   %end;
+   %if %qscan(&enhanced,1,%str( )) =Y %then %do;
+      M_NET_WORTH_UNDER_25_ENH= 'CAC_DEMO_NET_WORTH = Less than $25k ENH' 
+      M_NET_WORTH_25_50_ENH= 'CAC_DEMO_NET_WORTH = $25,000 - $49,999 ENH' 
+      M_NET_WORTH_50_75_ENH= 'CAC_DEMO_NET_WORTH = $50,000 - $74,999 ENH' 
+      M_NET_WORTH_75_100_ENH= 'CAC_DEMO_NET_WORTH = $75,000 - $99,999 ENH' 
+      M_NET_WORTH_100_150_ENH= 'CAC_DEMO_NET_WORTH = $100,000 - $149,999 ENH' 
+      M_NET_WORTH_150_250_ENH= 'CAC_DEMO_NET_WORTH = $150,000 - $249,999 ENH' 
+      M_NET_WORTH_250_500_ENH= 'CAC_DEMO_NET_WORTH = $250,000 - $499,999 ENH' 
+      M_NET_WORTH_500_750_ENH= 'CAC_DEMO_NET_WORTH = $500,000 - $749,999 ENH' 
+      M_NET_WORTH_750_1MM_ENH= 'CAC_DEMO_NET_WORTH = $750,000 - $999,999 ENH' 
+      M_NET_WORTH_OVER_1MM_ENH= 'CAC_DEMO_NET_WORTH = $1,000,000 or More ENH' 
+      M_NET_WORTH_ENH= 'CAC_DEMO_NET_WORTH ENH'    
+      M_HOH_AGE_18_24_ENH=' HOH AGE 18-24 FLAG  ENH'
+      M_HOH_AGE_25_34_ENH=' HOH AGE 25-34 FLAG  ENH'
+      M_HOH_AGE_35_44_ENH=' HOH AGE 35-44 FLAG  ENH'
+      M_HOH_AGE_45_54_ENH=' HOH_AGE 45-54 FLAG  ENH'
+      M_HOH_AGE_55_64_ENH=' HOH_AGE 55-64 FLAG  ENH'
+      M_HOH_AGE_65_74_ENH=' HOH_AGE 65-74 FLAG  ENH'
+      M_HOH_AGE_75PLUS_ENH=' HOH AGE 75 AND OVER FLAG  ENH'     
+      M_ADLT_18_24_1PLUS_ENH=' ADULT AGE 18-24 FLAG  ENH'
+      M_ADLT_25_34_1PLUS_ENH=' ADULT AGE 25-34 FLAG  ENH'
+      M_ADLT_35_44_1PLUS_ENH=' ADULT AGE 34-44 FLAG  ENH'
+      M_ADLT_45_54_1PLUS_ENH=' ADULT AGE 45-54 FLAG  ENH'
+      M_ADLT_55_64_1PLUS_ENH=' ADULT AGE 55-64 FLAG  ENH'
+      M_ADLT_65_74_1PLUS_ENH=' ADULT AGE 65-74 FLAG  ENH'
+      M_ADLT_75PLUS_1PLUS_ENH=' ADULT AGE 75+ FLAG  ENH'   
+      M_FAM_COMP_01_ENH=' MARRIED HUSBAND AND WIFE PRESENT WITH KIDS FLAG  ENH'
+      M_FAM_COMP_02_ENH=' MARRIED HUSBAND AND WIFE PRESENT NO KIDS FLAG  ENH'
+      M_FAM_COMP_03_ENH=' ONE MALE ONE FEMALE WITH KIDS FLAG  ENH'
+      M_FAM_COMP_04_ENH=' ONE MALE ONE FEMALE NO KIDS FLAG  ENH'
+      M_FAM_COMP_05_ENH=' MALE HOH WITH OTHER PERSON WITH KIDS FLAG  ENH'
+      M_FAM_COMP_06_ENH=' MALE HOH WITH OTHER PERSON NO KIDS FLAG  ENH'
+      M_FAM_COMP_07_ENH=' FEMALE HOH WITH OTHER PERSON WITH KIDS FLAG  ENH'
+      M_FAM_COMP_08_ENH=' FEMALE HOH WITH OTHER PERSON NO KIDS FLAG  ENH'
+      M_FAM_COMP_09_ENH=' TWO PERSONS WITH KIDS FLAG  ENH'
+      M_FAM_COMP_10_ENH=' TWO PERSONS NO KIDS FLAG  ENH'
+      M_FAM_COMP_11_ENH=' ONE ADULT MALE HOH WITH KIDS  ENH'
+      M_FAM_COMP_12_ENH=' ONE ADULT MALE HOH NO KIDS  ENH'
+      M_FAM_COMP_13_ENH=' ONE ADULT FEMALE HOH WITH KIDS  ENH'
+      M_FAM_COMP_14_ENH=' ONE ADULT FEMALE HOH NO KIDS  ENH'
+      M_FAM_COMP_15_ENH=' ONE ADULT UNKNOWN GENDER WITH KIDS  ENH'
+      M_FAM_COMP_16_ENH=' ONE ADULT UNKNOWN GENDER NO KIDS  ENH'  
+      M_KID_00_02_PRES_ENH='AT LEAST ONE KID AGE 0-2  ENH'
+      M_KID_03_05_PRES_ENH='AT LEAST ONE KID AGE 3-5  ENH'
+      M_KID_06_10_PRES_ENH='AT LEAST ONE KID AGE 6-10  ENH'
+      M_KID_11_15_PRES_ENH='AT LEAST ONE KID AGE 11-15  ENH'
+      M_KID_16_17_PRES_ENH='AT LEAST ONE KID AGE 16-17  ENH'
+      M_NUM_KIDS_1_ENH='CAC_DEMO_NUM_KIDS=1 ENH' 
+      M_NUM_KIDS_2_ENH='CAC_DEMO_NUM_KIDS=2 ENH' 
+      M_NUM_KIDS_3_ENH='CAC_DEMO_NUM_KIDS=3 ENH' 
+      M_NUM_KIDS_4_ENH='CAC_DEMO_NUM_KIDS=4 ENH' 
+      M_NUM_KIDS_5PLUS_ENH='CAC_DEMO_NUM_KIDS AT LEAST 5 ENH' 
+      M_NUM_KIDS_ENH='NUMBER OF KIDS ENH'  
+      M_P1_AGE_18_24_ENH='P1 AGE 18-24 FLAG  ENH'
+      M_P1_AGE_25_34_ENH='P1 AGE 25-34 FLAG  ENH'
+      M_P1_AGE_35_44_ENH='P1 AGE 35-44 FLAG  ENH'
+      M_P1_AGE_45_54_ENH='P1 AGE 45-54 FLAG  ENH'
+      M_P1_AGE_55_64_ENH='P1 AGE 55-64 FLAG  ENH'
+      M_P1_AGE_65_74_ENH='P1 AGE 65-74 FLAG  ENH'
+      M_P1_AGE_75_PLUS_ENH='P1 AGE 75+ FLAG  ENH'
+      M_P2_AGE_18_24_ENH='P2 AGE 18-24 FLAG  ENH'
+      M_P2_AGE_25_34_ENH='P2 AGE 25-34 FLAG  ENH'
+      M_P2_AGE_35_44_ENH='P2 AGE 35-44 FLAG  ENH'
+      M_P2_AGE_45_54_ENH='P2 AGE 45-54 FLAG  ENH'
+      M_P2_AGE_55_64_ENH='P2 AGE 55-64 FLAG  ENH'
+      M_P2_AGE_65_74_ENH='P2 AGE 65-74 FLAG  ENH'
+      M_P2_AGE_75_PLUS_ENH='P2 AGE 75+ FLAG  ENH'
+      M_P3_AGE_18_24_ENH='P3 AGE 18-24 FLAG  ENH'
+      M_P3_AGE_25_34_ENH='P3 AGE 25-34 FLAG  ENH'
+      M_P3_AGE_35_44_ENH='P3 AGE 35-44 FLAG  ENH'
+      M_P3_AGE_45_54_ENH='P3 AGE 45-54 FLAG  ENH'
+      M_P3_AGE_55_64_ENH='P3 AGE 55-64 FLAG  ENH'
+      M_P3_AGE_65_74_ENH='P3 AGE 65-74 FLAG  ENH'
+      M_P3_AGE_75_PLUS_ENH='P3 AGE 75+ FLAG  ENH'
+      M_P4_AGE_18_24_ENH='P4 AGE 18-24 FLAG  ENH'
+      M_P4_AGE_25_34_ENH='P4 AGE 25-34 FLAG  ENH'
+      M_P4_AGE_35_44_ENH='P4 AGE 35-44 FLAG  ENH'
+      M_P4_AGE_45_54_ENH='P4 AGE 45-54 FLAG  ENH'
+      M_P4_AGE_55_64_ENH='P4 AGE 55-64 FLAG  ENH'
+      M_P4_AGE_65_74_ENH='P4 AGE 65-74 FLAG  ENH'
+      M_P4_AGE_75_PLUS_ENH='P4 AGE 75+ FLAG  ENH'
+      M_P5_AGE_18_24_ENH='P5 AGE 18-24 FLAG  ENH'
+      M_P5_AGE_25_34_ENH='P5 AGE 25-34 FLAG  ENH'
+      M_P5_AGE_35_44_ENH='P5 AGE 35-44 FLAG  ENH'
+      M_P5_AGE_45_54_ENH='P5 AGE 45-54 FLAG  ENH'
+      M_P5_AGE_55_64_ENH='P5 AGE 55-64 FLAG  ENH'
+      M_P5_AGE_65_74_ENH='P5 AGE 65-74 FLAG  ENH'
+      M_P5_AGE_75_PLUS_ENH='P5 AGE 75+ FLAG  ENH'
+      M_VALUE_SCORE_A1_ENH='Enhanced Value Score Inidcator A1'
+      M_VALUE_SCORE_A2_ENH='Enhanced Value Score Inidcator A2'
+      M_VALUE_SCORE_B1_ENH='Enhanced Value Score Inidcator B1'
+      M_VALUE_SCORE_B2_ENH='Enhanced Value Score Inidcator B2'
+      M_VALUE_SCORE_C1_ENH='Enhanced Value Score Inidcator C1'
+      M_VALUE_SCORE_C2_ENH='Enhanced Value Score Inidcator C2'
+      M_VALUE_SCORE_D1_ENH='Enhanced Value Score Inidcator D1'
+      M_VALUE_SCORE_D2_ENH='Enhanced Value Score Inidcator D2'
+      M_VALUE_SCORE_D3_ENH='Enhanced Value Score Inidcator D3'
+      M_VALUE_SCORE_E1_ENH='Enhanced Value Score Inidcator E1'
+      M_VALUE_SCORE_E2_ENH='Enhanced Value Score Inidcator E2'
+      M_VALUE_SCORE_E3_ENH='Enhanced Value Score Inidcator E3'
+      M_VALUE_SCORE_HIGH_ENH='Above Average Enhanced Value Score'
+      M_VALUE_SCORE_MEDIUM_ENH='Average Enhanced Value Score'
+      M_VALUE_SCORE_LOW_ENH='Below Average Enhanced Value Score'   
+      
+   %end;
+
+   %if %qscan(&home,1,%str( )) =Y %then %do;
+      M_CAC_HOME_SQ_FOOT_NUM='HOME SQUARE FOOTAGE: NUMERIC'
+      M_CAC_HOME_SQ_FOOT_LOW='HOME SQUARE FOOTAGE: UNDER 1500 SQ FEET'
+      M_CAC_HOME_SQ_FOOT_HIGH='HOME SQUARE FOOTAGE: OVER 3000 SQ FEET'
+      M_DWELL_SINGLE='SFDU FLAG'
+      M_DWELL_MULTI='MFDU FLAG'
+      M_LIKELY_RENTER='PROBABLE RENTER'
+      M_KNOWN_RENTER='KNOWN RENTER'
+      M_LIKELY_OWNER='PROBABLE HOME OWNER'
+      M_KNOWN_OWNER='KNOWN HOME OWNER'
+      M_HOME_OWNER='PROBABLE OR KNOWN HOME OWNER'
+      M_HOME_BUILT_0_5_YRS = 'HOME 5 YEARS OLD OR LESS'
+      M_HOME_BUILT_6_10_YRS = 'HOME 5-10 YEARS OLD'
+      M_HOME_BUILT_11_25_YRS = 'HOME 10-25 YEARS OLD'
+      M_HOME_BUILT_26_50_YRS = 'HOME 25-50 YEARS OLD'
+      M_HOME_BUILT_51_PLUS_YRS = 'HOME OVER 50 YEARS OLD'
+      M_LOR_0_6MOS='LENGTH OF RES 0-6 MONTHS'
+      M_LOR_7_12MOS='LENGTH OF RES 7-12 MONTHS'
+      M_LOR_1_2_YRS='LENGTH OF RES 1-2 YEARS'
+      M_LOR_3_5_YRS='LENGTH OF RES 3-5 YEARS'
+      M_LOR_6_10_YRS='LENGTH OF RES 6-10 YEARS'
+      M_LOR_11_15_YRS='LENGTH OF RES 11-15 YEARS'
+      M_LOR_16_20_YRS='LENGTH OF RES 16-20 YEARS'
+      M_LOR_20_PLUS_YRS='LENGTH OF RES 20+ YEARS'
+      M_LOR = 'NUMERIC LENGTH OF RES'
+   %end;
+   %if %qscan(&geo,1,%str( )) =Y %then %do;
+   %end;
+   %if %qscan(&interests,1,%str( )) =Y %then %do;
+      M_CAC_INT_DONATE_ANY='ANY INT IN DONATIONS FLAG'
+      M_CAC_INT_DONATE_HIGH='AT LEAST 3 INTS IN DONATIONS FLAG'
+      M_CAC_INT_MAIL_ORD_ANY='ANY INT IN MAIL ORDER FLAG'
+      M_CAC_INT_MAIL_ORD_HIGH='AT LEAST 3 INTS IN MAIL ORDER FLAG'
+      M_CAC_INT_COLLECT_ANY='ANY INT IN COLLECTING FLAG'
+      M_CAC_INT_COLLECT_HIGH='AT LEAST 3 INTS IN COLLECTING FLAG'
+      M_CAC_INT_MUSIC_ANY='ANY INT IN MUSIC FLAG'
+      M_CAC_INT_MUSIC_HIGH='AT LEAST 3 INTS IN MUSIC FLAG'
+      M_CAC_INT_HEALTH_ANY='ANY INT IN HEALTH FLAG'
+      M_CAC_INT_HEALTH_HIGH='AT LEAST 3 INTS IN HEALTH FLAG'
+      M_CAC_INT_TRAVEL_ANY='ANY INT IN TRAVEL FLAG'
+      M_CAC_INT_TRAVEL_HIGH='AT LEAST 3 INTS IN TRAVEL FLAG'
+      M_CAC_INT_FINANCE_ANY='ANY INT IN FINANCE FLAG'
+      M_CAC_INT_FINANCE_HIGH='AT LEAST 3 INTS IN FINANCE FLAG'
+      M_CAC_INT_BOOKS_ANY='ANY INT IN BOOKS FLAG'
+      M_CAC_INT_BOOKS_HIGH='AT LEAST 3 INTS IN BOOKS FLAG'
+      M_CAC_INT_ART_ANY='ANY INT IN ART FLAG'
+      M_CAC_INT_ART_HIGH='AT LEAST 3 INTS IN ART FLAG'
+      M_CAC_INT_FOOD_ANY='ANY IN FOOD FLAG'
+      M_CAC_INT_FOOD_HIGH='AT LEAST 3 INTS IN FOOD FLAG'
+      M_CAC_INT_ANIMALS_ANY='ANY INT IN ANIMALS FLAG'
+      M_CAC_INT_ANIMALS_HIGH='AT LEAST 3 INTS IN ANIMALS FLAG'
+   %end;
+   %if %qscan(&credit,1,%str( )) =Y %then %do;
+      M_CRED_ANY='ANY CREDIT CARD FLAG' 
+      M_CRED_AMEX='AMERICAN EXPRESS CREDIT CARD FLAG' 
+      M_CRED_AUTO_LOAN='OTHER CREDIT AUTO LOANS FLAG' 
+      M_CRED_BANK='BANK CARD FLAG' 
+      M_CRED_CATALOG='CATALOG SHOWROOM CREDIT CARD FLAG' 
+      M_CRED_COMP_ELEC='COMPUTER ELECTRONIC CREDIT CARD FLAG' 
+      M_CRED_DEBIT='DEBIT CARD FLAG' 
+      M_CRED_EDUCATION='OTHER CREDIT EDUCATION STUDENT LOANS FLAG' 
+      M_CRED_FIN_SER_='FINANCIAL SERVICES INSURANCE FLAG' 
+      M_CRED_FINANCE='FINANCE CREDIT CARD FLAG' 
+      M_CRED_FIN_BANKING='FINANCIAL SERVICES BANKING FLAG' 
+      M_CRED_FIN_INSTALL='FINANCIAL SERVICES INSTALLMENT FLAG' 
+      M_CRED_FURNITURE='FURNITURE CREDIT CARD FLAG' 
+      M_CRED_GROCERY='GROCERY CREDIT CARD FLAG' 
+      M_CRED_HOME_IMP='HOME IMPROVEMENT CREDIT CARD FLAG' 
+      M_CRED_HOME_MORTGAGE='OTHER CREDIT HOME MORTGAGE FLAG' 
+      M_CRED_HOME_OFFICE='HOME OFFICE SUPPLY CREDIT CARD FLAG' 
+      M_CRED_LEASING='OTHER CREDIT LEASING FLAG' 
+      M_CRED_LOW_DEPT='LOW END DEPT STORE CREDIT CARD FLAG' 
+      M_CRED_MAIN_RETAIL='MAIN STREET RETAIL CREDIT CARD FLAG' 
+      M_CRED_MASTERCARD='MASTERCARD CREDIT CARD FLAG' 
+      M_CRED_WAREHOUSE='MEMBERSHIP WAREHOUSE CREDIT CARD FLAG' 
+      M_CRED_MISC='MISCELLANEOUS CREDIT CARD FLAG' 
+      M_CRED_OIL='OIL GAS CREDIT CARD FLAG' 
+      M_CRED_SPEC_APP='SPECIALTY APPAREL CREDIT CARD FLAG' 
+      M_CRED_SPORT='SPORTING GOODS CREDIT CARD FLAG' 
+      M_CRED_STD_RETAIL='STANDARD RETAIL CREDIT CARD FLAG' 
+      M_CRED_STD_SPECIAL='STANDARD SPECIALTY CARD FLAG' 
+      M_CRED_TRAVEL='TRAVEL ENTERTAINMENT CREDIT CARD FLAG' 
+      M_CRED_TV_MAIL_ORD='TV MAIL ORDER CREDIT CARD FLAG' 
+      M_CRED_HIGH_STD_RETAIL='UPSCALE RETAIL CREDIT CARD FLAG' 
+      M_CRED_HIGH_RETAIL='UPSCALE SPEC RETAIL CREDIT CARD FLAG' 
+      M_CRED_VISA='VISA CREDIT CARD FLAG' 
+      M_CRED_CNT_TYPES='SUM OF CREDIT CARD FLAGS' 
+   %end;
+   %if %qscan(&life_events,1,%str( )) =Y %then %do;
+     M_LE_HOME_STATUS_OLDER_HOME='LIVE IN A OLDER HOME FLAG' 
+     M_LE_HOME_STATUS_NEWER_HOME='LIVE IN A NEW HOME FLAG' 
+   %end;
+   %if %qscan(&segments_old,1,%str( )) =Y %then %do;
+      M_OLD_LIFESTAGE_21X = 'OLD LIFESTAGE: Young Low Income Couples'
+      M_OLD_LIFESTAGE_22X = 'OLD LIFESTAGE: Up and Coming Couples'
+      M_OLD_LIFESTAGE_41X = 'OLD LIFESTAGE: Blue Collar Couples'
+      M_OLD_LIFESTAGE_42X = 'OLD LIFESTAGE: Middle Income Couples'
+      M_OLD_LIFESTAGE_43X = 'OLD LIFESTAGE: Six-Figure Couples'
+      M_OLD_LIFESTAGE_61X = 'OLD LIFESTAGE: Needy Nesters'
+      M_OLD_LIFESTAGE_62X = 'OLD LIFESTAGE: Saving Nesters'
+      M_OLD_LIFESTAGE_63X = 'OLD LIFESTAGE: Six-Figure Nesters'
+      M_OLD_LIFESTAGE_71X = 'OLD LIFESTAGE: Fixed-Income Retired Couples'
+      M_OLD_LIFESTAGE_72X = 'OLD LIFESTAGE: Comfortable Retired Couples'
+      M_OLD_LIFESTAGE_73X = 'OLD LIFESTAGE: Senior Wealth'
+      M_OLD_LIFESTAGE_91X = 'OLD LIFESTAGE: Young Low Income Families'
+      M_OLD_LIFESTAGE_92X = 'OLD LIFESTAGE: Up and Coming Families'
+      M_OLD_LIFESTAGE_93X = 'OLD LIFESTAGE: Young Wealthy Families'
+      M_OLD_LIFESTAGE_111X = 'OLD LIFESTAGE: Struggling to Provide'
+      M_OLD_LIFESTAGE_112X = 'OLD LIFESTAGE: Blue Collar Families'
+      M_OLD_LIFESTAGE_113X = 'OLD LIFESTAGE: Upper Middle Class Families'
+      M_OLD_LIFESTAGE_114X = 'OLD LIFESTAGE: Six-Figure Families'
+      M_OLD_LIFESTAGE_161F = 'OLD LIFESTAGE: Young Low Income Singles (Women)'
+      M_OLD_LIFESTAGE_161M = 'OLD LIFESTAGE: Young Low Income Singles (Men)'
+      M_OLD_LIFESTAGE_162F = 'OLD LIFESTAGE: Up and Coming Singles (Women)'
+      M_OLD_LIFESTAGE_162M = 'OLD LIFESTAGE: Up and Coming Singles (Men)'
+      M_OLD_LIFESTAGE_163F = 'OLD LIFESTAGE: Young Success Stories (Women)'
+      M_OLD_LIFESTAGE_163M = 'OLD LIFESTAGE: Young Success Stories (Men)'
+      M_OLD_LIFESTAGE_181F = 'OLD LIFESTAGE: Running in Place (Women)'
+      M_OLD_LIFESTAGE_181M = 'OLD LIFESTAGE: Running in Place (Men)'
+      M_OLD_LIFESTAGE_182F = 'OLD LIFESTAGE: Mid-Level Singles (Women)'
+      M_OLD_LIFESTAGE_182M = 'OLD LIFESTAGE: Mid-Level Singles (Men)'
+      M_OLD_LIFESTAGE_183F = 'OLD LIFESTAGE: Successful Singles (Women)'
+      M_OLD_LIFESTAGE_183M = 'OLD LIFESTAGE: Successful Singles (Men)'
+      M_OLD_LIFESTAGE_191F = 'OLD LIFESTAGE: Waiting for Payday (Women)'
+      M_OLD_LIFESTAGE_191M = 'OLD LIFESTAGE: Waiting for Payday (Men)'
+      M_OLD_LIFESTAGE_192F = 'OLD LIFESTAGE: Established Singles (Women)'
+      M_OLD_LIFESTAGE_192M = 'OLD LIFESTAGE: Established Singles (Men)'
+      M_OLD_LIFESTAGE_193F = 'OLD LIFESTAGE: Wealthy Singles (Women)'
+      M_OLD_LIFESTAGE_193M = 'OLD LIFESTAGE: Wealthy Singles (Men)'
+      M_OLD_LIFESTAGE_251F = 'OLD LIFESTAGE: Stressed Single Parents'
+      M_OLD_LIFESTAGE_252F = 'OLD LIFESTAGE: Single Parents Providing'
+      M_OLD_LIFESTAGE_281F = 'OLD LIFESTAGE: Struggling Seniors (Women)'
+      M_OLD_LIFESTAGE_281M = 'OLD LIFESTAGE: Struggling Seniors (Men)'
+      M_OLD_LIFESTAGE_282F = 'OLD LIFESTAGE: Relaxed Retired (Women)'
+      M_OLD_LIFESTAGE_282M = 'OLD LIFESTAGE: Relaxed Retired (Men)'
+      M_OLD_LIFESTAGE_GRP2_1 = 'OLD LIFESTAGE GRP 2: Just Getting Started' 
+      M_OLD_LIFESTAGE_GRP2_2 = 'OLD LIFESTAGE GRP 2: Young Professionals' 
+      M_OLD_LIFESTAGE_GRP2_3 = 'OLD LIFESTAGE GRP 2: Young Families' 
+      M_OLD_LIFESTAGE_GRP2_4 = 'OLD LIFESTAGE GRP 2: Sustaining Singles' 
+      M_OLD_LIFESTAGE_GRP2_5 = 'OLD LIFESTAGE GRP 2: Mid-Career Singles' 
+      M_OLD_LIFESTAGE_GRP2_6 = 'OLD LIFESTAGE GRP 2: Double Income No Kids' 
+      M_OLD_LIFESTAGE_GRP2_7 = 'OLD LIFESTAGE GRP 2: Struggling Families' 
+      M_OLD_LIFESTAGE_GRP2_8 = 'OLD LIFESTAGE GRP 2: Middle-Class Families' 
+      M_OLD_LIFESTAGE_GRP2_9 = 'OLD LIFESTAGE GRP 2: Successful Providers' 
+      M_OLD_LIFESTAGE_GRP2_10 = 'OLD LIFESTAGE GRP 2: Blue-Collar Independents' 
+      M_OLD_LIFESTAGE_GRP2_11 = 'OLD LIFESTAGE GRP 2: Well-Established Singles' 
+      M_OLD_LIFESTAGE_GRP2_12 = 'OLD LIFESTAGE GRP 2: Empty Nesting' 
+      M_OLD_LIFESTAGE_GRP2_13 = 'OLD LIFESTAGE GRP 2: Fixed-Income Retirees' 
+      M_OLD_LIFESTAGE_GRP2_14 = 'OLD LIFESTAGE GRP 2: Middle-Income Retirees' 
+      M_OLD_LIFESTAGE_GRP2_15 = 'OLD LIFESTAGE GRP 2: Golden Years' 
+      M_OLD_LIFESTYLE_DIM1_0 = 'OLD LIFESTYLE DIM1: Unable to Classify' 
+      M_OLD_LIFESTYLE_DIM1_1 = 'OLD LIFESTYLE DIM1: Health & Fitness' 
+      M_OLD_LIFESTYLE_DIM1_2 = 'OLD LIFESTYLE DIM1: Fine Living' 
+      M_OLD_LIFESTYLE_DIM1_3 = 'OLD LIFESTYLE DIM1: Knitting Nannies' 
+      M_OLD_LIFESTYLE_DIM1_4 = 'OLD LIFESTYLE DIM1: DIY Gearheads' 
+      M_OLD_LIFESTYLE_DIM1_5 = 'OLD LIFESTYLE DIM1: Back to Nature' 
+      M_OLD_LIFESTYLE_DIM1_6 = 'OLD LIFESTYLE DIM1: Outdoor Actives' 
+      M_OLD_LIFESTYLE_DIM1_7 = 'OLD LIFESTYLE DIM1: Audio/Videophiles' 
+      M_OLD_LIFESTYLE_DIM1_8 = 'OLD LIFESTYLE DIM1: Investors R Us' 
+      M_OLD_LIFESTYLE_DIM1_9 = 'OLD LIFESTYLE DIM1: Fine Tastes' 
+      M_OLD_LIFESTYLE_DIM1_10 = 'OLD LIFESTYLE DIM1: Lights, Camera, Action' 
+      M_OLD_LIFESTYLE_DIM1_11 = 'OLD LIFESTYLE DIM1: Crafts & Collecting' 
+      M_OLD_LIFESTYLE_DIM1_14 = 'OLD LIFESTYLE DIM1: On the Water' 
+      M_OLD_LIFESTYLE_DIM1_15 = 'OLD LIFESTYLE DIM1: Paradise by the RV Dashboard Light' 
+      M_OLD_LIFESTYLE_DIM1_16 = 'OLD LIFESTYLE DIM1: Clean Living' 
+      M_OLD_LIFESTYLE_DIM1_17 = 'OLD LIFESTYLE DIM1: Climbing Ladders' 
+      M_OLD_LIFESTYLE_DIM1_18 = 'OLD LIFESTYLE DIM1: Good Neighbors' 
+      M_OLD_LIFESTYLE_DIM1_19 = 'OLD LIFESTYLE DIM1: Sports Fans' 
+      M_OLD_LIFESTYLE_DIM1_20 = 'OLD LIFESTYLE DIM1: Science & Nature' 
+      M_OLD_LIFESTYLE_DIM1_21 = 'OLD LIFESTYLE DIM1: Sci-Fi Enthusiasts' 
+      M_OLD_LIFESTYLE_DIM1_24 = 'OLD LIFESTYLE DIM1: Road Trips & Riverboats' 
+      M_OLD_LIFESTYLE_DIM2_0 = 'OLD LIFESTYLE DIM2: Unscored' 
+      M_OLD_LIFESTYLE_DIM2_1 = 'OLD LIFESTYLE DIM2: Careers Investing & Finances' 
+      M_OLD_LIFESTYLE_DIM2_2 = 'OLD LIFESTYLE DIM2: God & Country' 
+      M_OLD_LIFESTYLE_DIM2_3 = 'OLD LIFESTYLE DIM2: Travel & Cultures' 
+      M_OLD_LIFESTYLE_DIM2_4 = 'OLD LIFESTYLE DIM2: Crafts & Collecting' 
+      M_OLD_LIFESTYLE_DIM2_5 = 'OLD LIFESTYLE DIM2: Outdoor Actives' 
+      M_OLD_LIFESTYLE_DIM2_6 = 'OLD LIFESTYLE DIM2: Sports & Recreation' 
+      M_OLD_LIFESTYLE_DIM2_7 = 'OLD LIFESTYLE DIM2: Technology & Entertainment' 
+      M_OLD_LIFESTYLE_DIM2_8 = 'OLD LIFESTYLE DIM2: Open Road' 
+      M_OLD_SILHOUETTE_1 = 'OLD SILH: Left the Nest' 
+      M_OLD_SILHOUETTE_2 = 'OLD SILH: Rustic Beginnings' 
+      M_OLD_SILHOUETTE_3 = 'OLD SILH: Struggles in the City' 
+      M_OLD_SILHOUETTE_4 = 'OLD SILH: Active Country Singles' 
+      M_OLD_SILHOUETTE_5 = 'OLD SILH: Traditional Country Singles' 
+      M_OLD_SILHOUETTE_6 = 'OLD SILH: Hiking through the Woods' 
+      M_OLD_SILHOUETTE_7 = 'OLD SILH: Rustic Struggles for Family' 
+      M_OLD_SILHOUETTE_8 = 'OLD SILH: In the Now' 
+      M_OLD_SILHOUETTE_9 = 'OLD SILH: Day in Day Out' 
+      M_OLD_SILHOUETTE_10 = 'OLD SILH: Caring Single Neighbor' 
+      M_OLD_SILHOUETTE_11 = 'OLD SILH: Needy Families' 
+      M_OLD_SILHOUETTE_12 = 'OLD SILH: Beginning the Journey' 
+      M_OLD_SILHOUETTE_13 = 'OLD SILH: On the Move' 
+      M_OLD_SILHOUETTE_14 = 'OLD SILH: Young Elite' 
+      M_OLD_SILHOUETTE_15 = 'OLD SILH: Emerging Success' 
+      M_OLD_SILHOUETTE_16 = 'OLD SILH: Mid-Life Actives' 
+      M_OLD_SILHOUETTE_17 = 'OLD SILH: Emerging Urban Executives' 
+      M_OLD_SILHOUETTE_18 = 'OLD SILH: Wall Street Calling' 
+      M_OLD_SILHOUETTE_19 = 'OLD SILH: Emerging Singles' 
+      M_OLD_SILHOUETTE_20 = 'OLD SILH: Community Neighbors' 
+      M_OLD_SILHOUETTE_21 = 'OLD SILH: Americana Families' 
+      M_OLD_SILHOUETTE_22 = 'OLD SILH: Active Suburbanites' 
+      M_OLD_SILHOUETTE_23 = 'OLD SILH: Emerging Small Town Leaders' 
+      M_OLD_SILHOUETTE_24 = 'OLD SILH: Middle Management' 
+      M_OLD_SILHOUETTE_25 = 'OLD SILH: Executive Club' 
+      M_OLD_SILHOUETTE_26 = 'OLD SILH: Successful Singles' 
+      M_OLD_SILHOUETTE_27 = 'OLD SILH: Cultured Elite' 
+      M_OLD_SILHOUETTE_28 = 'OLD SILH: Elite Providers' 
+      M_OLD_SILHOUETTE_29 = 'OLD SILH: Culture with Kids' 
+      M_OLD_SILHOUETTE_30 = 'OLD SILH: Successful Families' 
+      M_OLD_SILHOUETTE_31 = 'OLD SILH: Blue Collar Couples' 
+      M_OLD_SILHOUETTE_32 = 'OLD SILH: Settling in by the Fire' 
+      M_OLD_SILHOUETTE_33 = 'OLD SILH: Comfortable Singles' 
+      M_OLD_SILHOUETTE_34 = 'OLD SILH: Hitched and Happening' 
+      M_OLD_SILHOUETTE_35 = 'OLD SILH: In My Own Skin' 
+      M_OLD_SILHOUETTE_36 = 'OLD SILH: Downtown Elite' 
+      M_OLD_SILHOUETTE_37 = 'OLD SILH: Mid-Life Success Story' 
+      M_OLD_SILHOUETTE_38 = 'OLD SILH: Refined Elite' 
+      M_OLD_SILHOUETTE_39 = 'OLD SILH: Nesting in the Country' 
+      M_OLD_SILHOUETTE_40 = 'OLD SILH: Metro Nesters' 
+      M_OLD_SILHOUETTE_41 = 'OLD SILH: Living off the Land' 
+      M_OLD_SILHOUETTE_42 = 'OLD SILH: Hanging On' 
+      M_OLD_SILHOUETTE_43 = 'OLD SILH: Retired Needy Neighbors' 
+      M_OLD_SILHOUETTE_44 = 'OLD SILH: Refined, Relaxed, Retired' 
+      M_OLD_SILHOUETTE_45 = 'OLD SILH: Settled in the Country' 
+      M_OLD_SILHOUETTE_46 = 'OLD SILH: Settled in the Suburbs' 
+      M_OLD_SILHOUETTE_47 = 'OLD SILH: Thriving Seniors' 
+      M_OLD_SILHOUETTE_48 = 'OLD SILH: Established Country Estates' 
+   %end;
+   %if %qscan(&segments_new,1,%str( )) =Y %then %do;
+      M_SOCIAL_LOW='SOCIAL: IN BOTTOM THREE BUCKETS'
+      M_SOCIAL_HIGH='SOCIAL: IN TOP THREE BUCKETS'
+      M_DIGINF_LOW='DIG INFLUENCER: IN BOTTOM THREE BUCKETS'
+      M_DIGINF_HIGH='DIG INFLUENCER: IN TOP THREE BUCKETS'
+      M_CAC_BUYSTYLE_1 = 'BUYSTYLE: MISSING' 
+      M_CAC_BUYSTYLE_2 = 'BUYSTYLE: WANT IT NOW'
+      M_CAC_BUYSTYLE_3 = 'BUYSTYLE: ENVIRONMENTAL/HEALTH' 
+      M_CAC_BUYSTYLE_4 = 'BUYSTYLE: BRAND LOYAL'
+      M_CAC_BUYSTYLE_5 = 'BUYSTYLE: PRICE' 
+      M_CAC_BUYSTYLE_6 = 'BUYSTYLE: SHOPPING IS RELAXATION'
+      M_CAC_BUYSTYLE_7 = 'BUYSTYLE: LEAVE ME ALONE'
+      M_CAC_DIGINF_1 = 'DIG INFLUENCER: MOST INFLUENTIAL'
+      M_CAC_DIGINF_2 = 'DIG INFLUENCER: SECOND-MOST INFLUENTIAL'
+      M_CAC_DIGINF_3 = 'DIG INFLUENCER: THIRD-MOST INFLUENTIAL'
+      M_CAC_DIGINF_4 = 'DIG INFLUENCER: FOURTH-MOST INFLUENTIAL'
+      M_CAC_DIGINF_5 = 'DIG INFLUENCER: FIFTH-MOST INFLUENTIAL'
+      M_CAC_DIGINF_6 = 'DIG INFLUENCER: FIFTH-LEAST INFLUENTIAL'
+      M_CAC_DIGINF_7 = 'DIG INFLUENCER: FOURTH-LEAST INFLUENTIAL'
+      M_CAC_DIGINF_8 = 'DIG INFLUENCER: THIRD-LEAST INFLUENTIAL'
+      M_CAC_DIGINF_9 = 'DIG INFLUENCER: SECOND-LEAST INFLUENTIAL'
+      M_CAC_DIGINF_10 = 'DIG INFLUENCER: LEAST INFLUENTIAL'
+      M_CAC_ECOM_1 = 'ECOM SEG: SHOP FROM COUCH' 
+      M_CAC_ECOM_2 = 'ECOM SEG: ONLINE MARKETPLACE' 
+      M_CAC_ECOM_3 = 'ECOM SEG: SOMETIMES ONLINE' 
+      M_CAC_ECOM_4 = 'ECOM SEG: CAUTIOUS INTERNET' 
+      M_CAC_ECOM_5 = 'ECOM SEG: BRICK AND MORTAR'
+      M_CAC_LIFESTAGE_1 = 'LIFESTAGE: YOUNG SINGLES' 
+      M_CAC_LIFESTAGE_2 = 'LIFESTAGE: YOUNG PARENTS' 
+      M_CAC_LIFESTAGE_3 = 'LIFESTAGE: YOUNG COUPLES'
+      M_CAC_LIFESTAGE_4 = 'LIFESTAGE: YOUNG SINGLE PARENTS' 
+      M_CAC_LIFESTAGE_5 = 'LIFESTAGE: EMERGING PARENTS' 
+      M_CAC_LIFESTAGE_6 = 'LIFESTAGE: EMERGING SINGLES' 
+      M_CAC_LIFESTAGE_7 = 'LIFESTAGE: EMERGING COUPLES' 
+      M_CAC_LIFESTAGE_8 = 'LIFESTAGE: ESTABLISHED COUPLES' 
+      M_CAC_LIFESTAGE_9 = 'LIFESTAGE: ESTABLISHED FAMILIES' 
+      M_CAC_LIFESTAGE_10 = 'LIFESTAGE: ESTABLISHED SINGLES' 
+      M_CAC_LIFESTAGE_11 = 'LIFESTAGE: ESTABLISHED SINGLE PARENTS'
+      M_CAC_LIFESTAGE_12 = 'LIFESTAGE: EMPTY NESTERS'
+      M_CAC_LIFESTAGE_13 = 'LIFESTAGE: PRE-RETIRED SINGLES'
+      M_CAC_LIFESTAGE_14 = 'LIFESTAGE: ALMOST EMPTY NESTERS'
+      M_CAC_LIFESTAGE_15 = 'LIFESTAGE: RETIRED COUPLES' 
+      M_CAC_LIFESTAGE_16 = 'LIFESTAGE: RETIRED SINGLES' 
+      M_CAC_LIFESTAGE_17 = 'LIFESTAGE: ELDERLY SINGLES' 
+      M_CAC_LIFESTAGE_18 = 'LIFESTAGE: ELDERLY COUPLES' 
+      M_CAC_LIFESTAGE_19 = 'LIFESTAGE: UNSCORED' 
+      M_CAC_LIFESTYLE_1 = 'LIFESTYLE: DIET & EXERCISE' 
+      M_CAC_LIFESTYLE_2 = 'LIFESTYLE: BOOKS & MUSIC' 
+      M_CAC_LIFESTYLE_3 = 'LIFESTYLE: COUNTRY DECORATING' 
+      M_CAC_LIFESTYLE_4 = 'LIFESTYLE: FINE DINING & WORLD TRAVEL' 
+      M_CAC_LIFESTYLE_5 = 'LIFESTYLE: CAMPING & HUNTING' 
+      M_CAC_LIFESTYLE_6 = 'LIFESTYLE: HOMEMAKING' 
+      M_CAC_LIFESTYLE_7 = 'LIFESTYLE: CHRISTIAN CONSERVATIONS' 
+      M_CAC_LIFESTYLE_8 = 'LIFESTYLE: INVESTORS' 
+      M_CAC_LIFESTYLE_9 = 'LIFESTYLE: MUSIC' 
+      M_CAC_LIFESTYLE_10 = 'LIFESTYLE: CRAFTS & PHOTOGRAPHY' 
+      M_CAC_LIFESTYLE_11 = 'LIFESTYLE: GEARHEADS' 
+      M_CAC_LIFESTYLE_12 = 'LIFESTYLE: LIBERAL DONORS' 
+      M_CAC_LIFESTYLE_13 = 'LIFESTYLE: OUTDOOR SPORTS' 
+      M_CAC_LIFESTYLE_14 = 'LIFESTYLE: HOME HOBBIES' 
+      M_CAC_LIFESTYLE_15 = 'LIFESTYLE: SCRAPBOOKING & YOGA' 
+      M_CAC_LIFESTYLE_16 = 'LIFESTYLE: ENVIRONMENTAL CAUSES' 
+      M_CAC_LIFESTYLE_17 = 'LIFESTYLE: MILITARY' 
+      M_CAC_LIFESTYLE_18 = 'LIFESTYLE: CIGAR SMOKING' 
+      M_CAC_LIFESTYLE_19 = 'LIFESTYLE: MISSING' 
+      M_CAC_SILHOUETTE_A1 = 'SILHOUETTE: Shes in the Now'
+      M_CAC_SILHOUETTE_A2 = 'SILHOUETTE: Hes Starting Out'
+      M_CAC_SILHOUETTE_A3 = 'SILHOUETTE: Shes Still Here'
+      M_CAC_SILHOUETTE_A4 = 'SILHOUETTE: Hes Still Here'
+      M_CAC_SILHOUETTE_A5 = 'SILHOUETTE: Shes Left Behind'
+      M_CAC_SILHOUETTE_A6 = 'SILHOUETTE: Hes Settling In'
+      M_CAC_SILHOUETTE_B1 = 'SILHOUETTE: Starting Out Families'
+      M_CAC_SILHOUETTE_B2 = 'SILHOUETTE: Americana Families'
+      M_CAC_SILHOUETTE_B3 = 'SILHOUETTE: Emerging Wealthy'
+      M_CAC_SILHOUETTE_B4 = 'SILHOUETTE: Young Neighbors'
+      M_CAC_SILHOUETTE_C1 = 'SILHOUETTE: Wall Street Dreaming'
+      M_CAC_SILHOUETTE_C2 = 'SILHOUETTE: Execs on the Move'
+      M_CAC_SILHOUETTE_C3 = 'SILHOUETTE: Successful Social Techies'
+      M_CAC_SILHOUETTE_C4 = 'SILHOUETTE: The Culturally Connected '
+      M_CAC_SILHOUETTE_C5 = 'SILHOUETTE: New Luxury'
+      M_CAC_SILHOUETTE_D1 = 'SILHOUETTE: Outskirts '
+      M_CAC_SILHOUETTE_D2 = 'SILHOUETTE: Shes a Little Bit Country'
+      M_CAC_SILHOUETTE_D3 = 'SILHOUETTE: Country Gals'
+      M_CAC_SILHOUETTE_D4 = 'SILHOUETTE: Growin up Country'
+      M_CAC_SILHOUETTE_D5 = 'SILHOUETTE: NASCAR Country'
+      M_CAC_SILHOUETTE_E1 = 'SILHOUETTE: Suburban Family'
+      M_CAC_SILHOUETTE_E2 = 'SILHOUETTE: Suburban Bourgeoisie'
+      M_CAC_SILHOUETTE_E3 = 'SILHOUETTE: Executive Families'
+      M_CAC_SILHOUETTE_E4 = 'SILHOUETTE: Successful Providers'
+      M_CAC_SILHOUETTE_F1 = 'SILHOUETTE: Midlife Survivor'
+      M_CAC_SILHOUETTE_F2 = 'SILHOUETTE: Alone in the City'
+      M_CAC_SILHOUETTE_F3 = 'SILHOUETTE: Solo in Style'
+      M_CAC_SILHOUETTE_F4 = 'SILHOUETTE: Emerging Urban Executives'
+      M_CAC_SILHOUETTE_F5 = 'SILHOUETTE: Cultural Singles'
+      M_CAC_SILHOUETTE_F6 = 'SILHOUETTE: Comfortable Singles'
+      M_CAC_SILHOUETTE_F7 = 'SILHOUETTE: The Intellectual'
+      M_CAC_SILHOUETTE_G1 = 'SILHOUETTE: Downtown Success'
+      M_CAC_SILHOUETTE_G2 = 'SILHOUETTE: Power Elite'
+      M_CAC_SILHOUETTE_G3 = 'SILHOUETTE: Arrived'
+      M_CAC_SILHOUETTE_H1 = 'SILHOUETTE: Rustic Families'
+      M_CAC_SILHOUETTE_H2 = 'SILHOUETTE: Small Town Providers'
+      M_CAC_SILHOUETTE_H3 = 'SILHOUETTE: Neighborly Families'
+      M_CAC_SILHOUETTE_H4 = 'SILHOUETTE: Established Families'
+      M_CAC_SILHOUETTE_H5 = 'SILHOUETTE: Cultured Elite'
+      M_CAC_SILHOUETTE_I1 = 'SILHOUETTE: Metro Couples'
+      M_CAC_SILHOUETTE_I2 = 'SILHOUETTE: In The Now'
+      M_CAC_SILHOUETTE_I3 = 'SILHOUETTE: Settling by the Fire'
+      M_CAC_SILHOUETTE_I4 = 'SILHOUETTE: Metro Nesters'
+      M_CAC_SILHOUETTE_I5 = 'SILHOUETTE: Rural Empty Nesters'
+      M_CAC_SILHOUETTE_J1 = 'SILHOUETTE: Hanging On'
+      M_CAC_SILHOUETTE_J2 = 'SILHOUETTE: Rustic Retired'
+      M_CAC_SILHOUETTE_J3 = 'SILHOUETTE: Settled In'
+      M_CAC_SILHOUETTE_J4 = 'SILHOUETTE: Living Off The Land'
+      M_CAC_SILHOUETTE_K1 = 'SILHOUETTE: Retired Needy'
+      M_CAC_SILHOUETTE_K2 = 'SILHOUETTE: Hometown Seniors'
+      M_CAC_SILHOUETTE_K3 = 'SILHOUETTE: Struggling Seniors'
+      M_CAC_SILHOUETTE_K4 = 'SILHOUETTE: Simple Life Retirees'
+      M_CAC_SILHOUETTE_L1 = 'SILHOUETTE: The Cultural Estate'
+      M_CAC_SILHOUETTE_L2 = 'SILHOUETTE: Settled in the Suburbs'
+      M_CAC_SILHOUETTE_L3 = 'SILHOUETTE: Settled in the Country'
+      M_CAC_SILHOUETTE_L4 = 'SILHOUETTE: Social Seniors'
+      M_CAC_SILHOUETTE_L5 = 'SILHOUETTE: Single Seniors'
+      M_CAC_SILHOUETTE_L6 = 'SILHOUETTE: Cultured Alone'
+      M_CAC_SILH_GEO_1 = 'GEO DIMENSION: In a metro area with at least 1MM residents' 
+      M_CAC_SILH_GEO_2 = 'GEO DIMENSION: In a metro area with fewer than 1MM residents' 
+      M_CAC_SILH_GEO_6 = 'GEO DIMENSION: College Towns' 
+      M_CAC_SILH_GEO_7 = 'GEO DIMENSION: National and State Capitals' 
+      M_CAC_SILH_GEO_8 = 'GEO DIMENSION: Affluent Zip Codes' 
+      M_CAC_SILH_LOYAL_1 = 'LOYAL DIMENSION: MOST Brand LOYAL' 
+      M_CAC_SILH_LOYAL_2 = 'LOYAL DIMENSION: SECOND-Most BRAND LOYAL' 
+      M_CAC_SILH_LOYAL_3 = 'LOYAL DIMENSION: THIRD-Most BRAND LOYAL' 
+      M_CAC_SILH_LOYAL_4 = 'LOYAL DIMENSION: SECOND-Least BRAND LOYAL' 
+      M_CAC_SILH_LOYAL_5 = 'LOYAL DIMENSION: LEAST BRAND LOYAL' 
+      M_CAC_SILH_PRICE_1 = 'PRICE DIMENSION: MOST PRICE SENSITIVE' 
+      M_CAC_SILH_PRICE_2 = 'PRICE DIMENSION: SECOND-MOST PRICE SENSITIVE' 
+      M_CAC_SILH_PRICE_3 = 'PRICE DIMENSION: THIRD-MOST PRICE SENSITIVE' 
+      M_CAC_SILH_PRICE_4 = 'PRICE DIMENSION: SECOND-LEAST PRICE SENSITIVE' 
+      M_CAC_SILH_PRICE_5 = 'PRICE DIMENSION: LEAST PRICE SENSITIVE' 
+      M_CAC_SILH_SUPER_A = 'SILH SUPER: ROUGH BEGINNINGS'
+      M_CAC_SILH_SUPER_B = 'SILH SUPER: WHITE PICKET FENCE'
+      M_CAC_SILH_SUPER_C = 'SILH SUPER: ON THEIR WAY'
+      M_CAC_SILH_SUPER_D = 'SILH SUPER: RUSTIC LIFE'
+      M_CAC_SILH_SUPER_E = 'SILH SUPER: PRIVILEDGED PROVIDERS' 
+      M_CAC_SILH_SUPER_F = 'SILH SUPER: GOOD TIMES' 
+      M_CAC_SILH_SUPER_G = 'SILH SUPER: POWER PLAYERS' 
+      M_CAC_SILH_SUPER_H = 'SILH SUPER: DOWN HOME' 
+      M_CAC_SILH_SUPER_I = 'SILH SUPER: SECURING THE NEST' 
+      M_CAC_SILH_SUPER_J = 'SILH SUPER: MAKE IT SOMEHOW' 
+      M_CAC_SILH_SUPER_K = 'SILH SUPER: ROCKY RETIREMENT'
+      M_CAC_SILH_SUPER_L = 'SILH SUPER: GOLDEN SUNSET' 
+      M_CAC_SILH_SUPER_X = 'SILH SUPER: UNSCORED' 
+      M_CAC_SOCIAL_1 = 'SOCIAL DIMENSION: MOST SOCIAL DIGITAL' 
+      M_CAC_SOCIAL_2 = 'SOCIAL DIMENSION: SECOND-MOST SOCIAL DIGITAL'
+      M_CAC_SOCIAL_3 = 'SOCIAL DIMENSION: THIRD-MOST SOCIAL DIGITAL'
+      M_CAC_SOCIAL_4 = 'SOCIAL DIMENSION: FOURTH-MOST SOCIAL DIGITAL'
+      M_CAC_SOCIAL_5 = 'SOCIAL DIMENSION: FIFTH-MOST SOCIAL DIGITAL'
+      M_CAC_SOCIAL_6 = 'SOCIAL DIMENSION: FIFTH-LEAST SOCIAL DIGITAL'
+      M_CAC_SOCIAL_7 = 'SOCIAL DIMENSION: FOURTH-LEAST SOCIAL DIGITAL'
+      M_CAC_SOCIAL_8 = 'SOCIAL DIMENSION: THIRD-LEAST SOCIAL DIGITAL'
+      M_CAC_SOCIAL_9 = 'SOCIAL DIMENSION: SECOND-LEAST SOCIAL DIGITAL'
+      M_CAC_SOCIAL_10 = 'SOCIAL DIMENSION: LEAST SOCIAL DIGITAL'
+      M_CAC_TECH_1 = 'TECH DIMENSION: TECHIE' 
+      M_CAC_TECH_2 = 'TECH DIMENSION: GADGETS' 
+      M_CAC_TECH_3 = 'TECH DIMENSION: MAINSTREAM TECH' 
+      M_CAC_TECH_4 = 'TECH DIMENSION: UNPLUGGED' 
+
+   %end;;
+
+%mend cacdirect_recode;

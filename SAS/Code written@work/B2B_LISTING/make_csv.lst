@@ -1,0 +1,106 @@
+                                                                                             The WPS System                                                            14:13 Tuesday, June  2, 2015    1
+
+  Obs    B2B_COMPANY_NAME                B2B_ADDR_FULL                 B2B_ADDR_STATE    B2B_ADDR_ZIP5    B2B_ADDR_CITY    B2B_800_PHONE_NUM    B2B_PHONE_NUM    B2B_NAICS_CODE_DESCRIP    B2B_NAICS1
+
+    1    MOSES ANSHELL                   20 W JACKSON ST                     AZ              85003         PHOENIX                               6022547312       ADVERTISING AGENCIES               
+    2    DITZEN ADVERTISING              4500 N 32ND ST # 110                AZ              85018         PHOENIX                               6022523383       ADVERTISING AGENCIES               
+    3    LANE TERRALEVER                 733 W MCDOWELL RD                   AZ              85007         PHOENIX                               6022585263       ADVERTISING AGENCIES      54182004 
+    4    MEDIA IMPRESSIONS               777 E THOMAS RD # 250               AZ              85014         PHOENIX            8009553285         6022663562       ADVERTISING AGENCIES               
+    5    PAPAGALOS & ASSOC               7330 N 16TH ST # B102               AZ              85020         PHOENIX                               6022792933       ADVERTISING AGENCIES               
+    6    LAVIDGE CO ADVG & PUBC RLTNS    2777 E CAMELBACK RD # 300           AZ              85016         PHOENIX                               4809982600       ADVERTISING AGENCIES      54182004 
+    7    MARKETING PARTNERS              3010 N 16TH AVE                     AZ              85015         PHOENIX                               6022664121       ADVERTISING AGENCIES               
+    8    COMMOTION PROMOTIONS            2999 N 44TH ST # 340                AZ              85018         PHOENIX                               6029960006       ADVERTISING AGENCIES      56142201 
+    9    MARTZ PUBLIC RELATIONS          7077 E MARILYN RD # 5               AZ              85254         SCOTTSDALE         8004263663         4809983154       ADVERTISING AGENCIES      54189008 
+   10    INKSLINGER'S INC                2420 S INDUSTRIAL PARK AVE          AZ              85282         TEMPE                                 4809664603       ADVERTISING AGENCIES      32311109 
+
+  Obs    B2B_NAICS1_DESCRIP                             B2B_NAICS2    B2B_NAICS2_DESCRIP                            B2B_NAICS3    B2B_NAICS3_DESCRIP                       B2B_NAICS4
+
+    1                                                                                                                                                                                
+    2                                                                                                                                                                                
+    3    PUBLIC RELATIONS AGENCIES                                                                                                                                                   
+    4                                                                                                                                                                                
+    5                                                                                                                                                                                
+    6    PUBLIC RELATIONS AGENCIES                                                                                                                                                   
+    7                                                                                                                                                                                
+    8    TELEMARKETING BUREAUS & OTHER CONTACT CTRS      54189008     OTHER SERVICES RELATED TO ADVERTISING          54189006     OTHER SERVICES RELATED TO ADVERTISING     99999005 
+    9    OTHER SERVICES RELATED TO ADVERTISING           54182004     PUBLIC RELATIONS AGENCIES                      54183002     MEDIA BUYING AGENCIES                              
+   10    COMMERCIAL PRINTING (EXCEPT SCREEN & BOOKS)     56142201     TELEMARKETING BUREAUS & OTHER CONTACT CTRS     54189006     OTHER SERVICES RELATED TO ADVERTISING     32311148 
+
+  Obs    B2B_NAICS4_DESCRIP                             B2B_BUSINESS_STATUS_CODE    B2B_EMPLOYEE_SIZE    B2B_SALES_VOLUME    B2B_FIRST_YEAR_CCYY    B2B_CONTACT_LAST_NAME    B2B_CONTACT_FIRST_NAME
+
+    1                                                                                       E                   E                   1993                  ANSHELL                   JOSEPH         
+    2                                                                                       A                   A                   1984                  DITZEN                    JERRY          
+    3                                                              1                        E                                       1984                  LANE                      BEAU           
+    4                                                                                       C                   D                   1985                  GIRAUD                    SUZANNE        
+    5                                                                                       B                   C                   1984                  PAPAGALOS                 NICHOLAS       
+    6                                                                                       E                   F                   1984                  LAVIDGE                   BILL           
+    7                                                                                       B                   C                   1984                  STARR                     ALLAN          
+    8    UNCLASSIFIED ESTABLISHMENTS                                                        D                   E                   2012                  KRAVITZ                   KAREN          
+    9                                                                                       E                   E                   1989                  CURRAN                    MARIANNE       
+   10    COMMERCIAL PRINTING (EXCEPT SCREEN & BOOKS)                                        A                   B                   2015                  BAZARNIC                  RICHARD        
+
+  Obs    B2B_CONTACT_TITLE    B2B_CONTACT_TITLE_CODE    B2B_PRIMARY_SIC         B2B_PRIMARY_SIC_DESCRIP         total_contacts
+
+    1                                   C                   731101         ADVERTISING-AGENCIES & COUNSELORS           6      
+    2                                   1                   731101         ADVERTISING-AGENCIES & COUNSELORS           1      
+    3                                   C                   731101         ADVERTISING-AGENCIES & COUNSELORS           6      
+    4                                   1                   731101         ADVERTISING-AGENCIES & COUNSELORS           1      
+    5                                   1                   731101         ADVERTISING-AGENCIES & COUNSELORS           2      
+    6                                   1                   731101         ADVERTISING-AGENCIES & COUNSELORS           4      
+    7                                   1                   731101         ADVERTISING-AGENCIES & COUNSELORS           1      
+    8                                   2                   731101         ADVERTISING-AGENCIES & COUNSELORS           3      
+    9                                   C                   731101         ADVERTISING-AGENCIES & COUNSELORS           4      
+   10                                   1                   731101         ADVERTISING-AGENCIES & COUNSELORS           1      
+                                                                                             The WPS System                                                            14:13 Tuesday, June  2, 2015    2
+
+ Obs B2B_COMPANY_NAME               B2B_ADDR_FULL                B2B_ADDR_STATE B2B_ADDR_ZIP5 B2B_ADDR_CITY   B2B_800_PHONE_NUM B2B_PHONE_NUM B2B_SIC_CODE B2B_SIC_DESCRIP                         
+
+   1 TRANS-LUX CORP                 445 PARK AVE # 2001                NY           10022     NEW YORK           8002435544      2120001111      399302    SIGNS (MFRS)                            
+   2 NIAGARA CUTTER LLC             200 JOHN JAMES AUDUBON # 202       NY           14228     AMHERST            8886898400      7166898400      354598    CUTTING TOOLS/ACCES/MEASURING DVCS (MFR)
+   3 HRG GROUP INC                  450 PARK AVE # 29                  NY           10022     NEW YORK                           2129068555      621111    INVESTMENTS                             
+   4 PALL CORP                      25 HARBOR PARK DR                  NY           11050     PORT WASHINGTON                    5164845400      359901    FILTERS (MFRS)                          
+   5 SENECA FOODS CORP              3736 S MAIN ST                     NY           14505     MARION                             3159268100      209903    FOOD PRODUCTS & MANUFACTURERS           
+   6 NEW YORK TIMES CO              620 8TH AVE # 5                    NY           10018     NEW YORK           8009723550      2125561234      271101    NEWSPAPERS (PUBLISHERS/MFRS)            
+   7 VOXX INTERNATIONAL CORP        180 MARCUS BLVD                    NY           11788     HAUPPAUGE                          6312317750      506519    ELECTRONIC EQUIPMENT & SUPPLIES-WHLS    
+   8 HAMMER PACKAGING INC           PO BOX 22678                       NY           14692     ROCHESTER                          5854243880      738988    PACKAGING SERVICE                       
+   9 TRANSCAT INC                   35 VANTAGE POINT DR                NY           14624     ROCHESTER          8008281470      5853527777      731908    DISTRIBUTION SERVICES                   
+  10 BROOKLYN BOTTLING OF MILTON NY PO BOX 808                         NY           12547     MILTON                             8457952171      514202    FRUIT JUICES (WHLS)                     
+
+ Obs B2B_NAICS_CODE B2B_NAICS_CODE_DESCRIP                             B2B_NAICS1 B2B_NAICS1_DESCRIP                           B2B_NAICS2 B2B_NAICS2_DESCRIP                                B2B_NAICS3
+
+   1    33995008    SIGN MANUFACTURING                                  54161303  MARKETING CONSULTING SERVICES                 42385067  SERVICE ESTABLISHMENT EQUIP/SUPLS MERCHANT WHLSRS  51791916 
+   2    33351504    CUTTING TOOL & MACHINE TOOL ACCESSORY MFG                                                                                                                                         
+   3    52391001    MISCELLANEOUS INTERMEDIATION                        52393005  INVESTMENT ADVICE                                                                                                   
+   4    33331839    OTHER COMMERCIAL & SERVICE INDUSTRY MACHINERY MFG   33399907  ALL OTHER MISC GENERAL PURPOSE MACHINERY MFG  33399909  ALL OTHER MISC GENERAL PURPOSE MACHINERY MFG       33639002 
+   5    31199906    ALL OTHER MISCELLANEOUS FOOD MANUFACTURING          31142101  FRUIT & VEGETABLE CANNING                     31321022  BROADWOVEN FABRIC MILLS                            31321001 
+   6    51111003    NEWSPAPER PUBLISHERS                                51512001  TELEVISION BROADCASTING                       54161303  MARKETING CONSULTING SERVICES                      45121202 
+   7    42369015    OTHER ELECTRONIC PARTS & EQUIPMENT MERCHANT WHLSRS  33431003  AUDIO & VIDEO EQUIPMENT MANUFACTURING         33639002  OTHER MOTOR VEHICLE PARTS MANUFACTURING            33421001 
+   8    56191002    PACKAGING & LABELING SERVICES                       32311109  COMMERCIAL PRINTING (EXCEPT SCREEN & BOOKS)   32311114  COMMERCIAL PRINTING (EXCEPT SCREEN & BOOKS)                 
+   9    54187005    ADVERTISING MATERIAL DISTRIBUTION SERVICES          54161303  MARKETING CONSULTING SERVICES                 54138005  TESTING LABORATORIES                               42361016 
+  10    42442007    PACKAGED FROZEN FOOD MERCHANT WHOLESALERS           31211103  SOFT DRINK MANUFACTURING                                                                                            
+
+ Obs B2B_NAICS3_DESCRIP                                 B2B_NAICS4 B2B_NAICS4_DESCRIP                                 B2B_EMPLOYEE_SIZE B2B_SALES_VOLUME B2B_FIRST_YEAR_CCYY B2B_CONTACT_LAST_NAME
+
+   1 ALL OTHER TELECOMMUNICATIONS                        51119906  ALL OTHER PUBLISHERS                                       D                                 2011               ALLAIN         
+   2                                                                                                                          C                                 2011               BOLLIER        
+   3                                                                                                                          D                                 2004               ASALI          
+   4 OTHER MOTOR VEHICLE PARTS MANUFACTURING             54161303  MARKETING CONSULTING SERVICES                              H                                 1999               KINGSLEY       
+   5 BROADWOVEN FABRIC MILLS                             31171005  SEAFOOD PRODUCT PREPARATION & PACKAGING                    E                                 1989               KAYSER         
+   6 NEWS DEALERS & NEWSSTANDS                           99999005  UNCLASSIFIED ESTABLISHMENTS                                G                                 2013               THOMPSON       
+   7 TELEPHONE APPARATUS MANUFACTURING                   33451939  OTHER MEASURING & CONTROLLING DEVICE MANUFACTURING         G                                 2007               LAVELLE        
+   8                                                                                                                          F                                 2014               HAMMER         
+   9 ELECTRICAL APPARATUS/WIRING SUPLS/REL EQUIP WHLSRS  99999005  UNCLASSIFIED ESTABLISHMENTS                                F                                 2003               RUDOW          
+  10                                                                                                                          F                F                2014               MILLER         
+
+ Obs B2B_CONTACT_FIRST_NAME B2B_CONTACT_TITLE B2B_BUSINESS_STATUS_CODE B2B_CONTACT_TITLE_CODE B2B_PRIMARY_SIC B2B_PRIMARY_SIC_DESCRIP                  total_contacts
+
+   1       JEAN-MARC                                     1                       C                399302      SIGNS (MFRS)                                    6      
+   2       SHERWOOD                                      1                       2                354598      CUTTING TOOLS/ACCES/MEASURING DVCS (MFR)        6      
+   3       OMAR M                                        1                       C                621111      INVESTMENTS                                     6      
+   4       LAWRENCE D                                    1                       C                359901      FILTERS (MFRS)                                  6      
+   5       KRAIG H                                       1                       C                209903      FOOD PRODUCTS & MANUFACTURERS                   6      
+   6       MARK                                          1                       C                271101      NEWSPAPERS (PUBLISHERS/MFRS)                    6      
+   7       PATRICK M                                     1                       C                506519      ELECTRONIC EQUIPMENT & SUPPLIES-WHLS            6      
+   8       JAMES                                         1                       2                738988      PACKAGING SERVICE                               2      
+   9       LEE D                                         1                       C                731908      DISTRIBUTION SERVICES                           6      
+  10       ERIC S                                        1                       2                514202      FRUIT JUICES (WHLS)                             5      

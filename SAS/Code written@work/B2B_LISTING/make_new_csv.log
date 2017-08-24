@@ -1,0 +1,617 @@
+1                                        The WPS System       15:27 Thursday, June 18, 2015     
+
+NOTE: (c) Copyright World Programming Limited 2002-2014.  All rights reserved.
+NOTE: World Programming System 3.01 (03.01.01.00.000635)
+      Licensed to Cognesia
+NOTE: This session is executing on the LINUX platform and is running in 64 bit mode
+
+NOTE: AUTOEXEC processing beginning; file is
+      /home/software/wps-3.1.1.0.635-maintenance/autoexec.sas
+MPRINT(DIRECT_LIBS):  libname base "/project17/CACDIRECT/DATA/BASE_DEMO/B";
+NOTE: Library base assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/BASE_DEMO/B
+
+MPRINT(DIRECT_LIBS):  libname indiv "/project17/CACDIRECT/DATA/INDIV_DEMO/B";
+NOTE: Library indiv assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/INDIV_DEMO/B
+
+MPRINT(DIRECT_LIBS):  libname scf "/project17/CACDIRECT/DATA/SCF_MKEY/B";
+NOTE: Library scf assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/SCF_MKEY/B
+
+MPRINT(DIRECT_LIBS):  libname process "/project17/CACDIRECT/DATA/PROCESS";
+NOTE: Library process assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/PROCESS
+
+MPRINT(DIRECT_LIBS):  libname geo "/project17/CACDIRECT/DATA/GEO/B";
+NOTE: Library geo assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/GEO/B
+
+MPRINT(DIRECT_LIBS):  libname easi "/project17/CENSUS/DATA/2010/EASI";
+NOTE: Library easi assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/2010/EASI
+
+MPRINT(DIRECT_LIBS):  libname cen2010 "/project17/CENSUS/DATA/2010/FINAL";
+NOTE: Library cen2010 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/2010/FINAL
+
+MPRINT(DIRECT_LIBS):  libname cen2000 "/project17/CENSUS/DATA/FINAL";
+NOTE: Library cen2000 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CENSUS/DATA/FINAL
+
+MPRINT(DIRECT_LIBS):  libname samp "/project/CACDIRECT/DATA/SAMPLES/B";
+NOTE: Library samp assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/SAMPLES/B
+
+MPRINT(DIRECT_LIBS):  libname dev "/project17/CACDIRECT/DATA/DEVELOPMENT";
+NOTE: Library dev assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DEVELOPMENT
+
+MPRINT(DIRECT_LIBS):  libname et "/project17/CACDIRECT/DATA/ETECH/B";
+NOTE: Library et assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/ETECH/B
+
+MPRINT(DIRECT_LIBS):  libname jhis "/project17/CACDIRECT/DATA/JOB_HISTORY";
+NOTE: Library jhis assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/JOB_HISTORY
+
+MPRINT(DIRECT_LIBS):  libname buycnc "/project17/CACDIRECT/DATA/BUYER_CONNECT/B";
+NOTE: Library buycnc assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/BUYER_CONNECT/B
+
+MPRINT(DIRECT_LIBS):  libname foret "/project17/CACDIRECT/DATA/ETECH/FORETECH";
+NOTE: Library foret assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/ETECH/FORETECH
+
+MPRINT(DIRECT_LIBS):  libname newsilh "/project17/CACDIRECT/DATA/SILH3D/B";
+NOTE: Library newsilh assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/SILH3D/B
+
+MPRINT(DIRECT_LIBS):  libname ddnc "/project17/CACDIRECT/DATA/DDNC";
+NOTE: Library ddnc assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DDNC
+
+MPRINT(DIRECT_LIBS):  libname domsilh "/project17/CACDIRECT/DATA/DOM_SILH/B";
+NOTE: Library domsilh assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project17/CACDIRECT/DATA/DOM_SILH/B
+
+MPRINT(DIRECT_LIBS):  libname intmdl "/project/CACDIRECT/DATA/INTMDL/B";
+NOTE: Library intmdl assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/INTMDL/B
+
+MPRINT(DIRECT_LIBS):  libname for_rts "/project/CACDIRECT/DATA/REAL_TIME/B";
+NOTE: Library for_rts assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/REAL_TIME/B
+
+MPRINT(DIRECT_LIBS):  libname v12 "/project/CACDIRECT/DATA/V12/B";
+NOTE: Library v12 assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/V12/B
+
+MPRINT(DIRECT_LIBS):  libname bridge "/project/CACDIRECT/DATA/BRIDGE/B";
+NOTE: Library bridge assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/BRIDGE/B
+
+MPRINT(DIRECT_LIBS):  libname geoagg "/project/CACDIRECT/DATA/GEOAGG/B";
+NOTE: Library geoagg assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/GEOAGG/B
+
+NOTE: Library dma assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/CACDIRECT/DATA/DMA/A
+
+NOTE: Format cdif output
+NOTE: Procedure format step took :
+      real time : 0.028
+      cpu time  : 0.027
+
+
+NOTE: Format cac_le_a output
+NOTE: Format cac_le_b output
+NOTE: Format $cac_le_c output
+NOTE: Format match output
+NOTE: Format geo_match output
+NOTE: Format $cac_cdi output
+NOTE: Format prod_act output
+NOTE: Format cac_act output
+NOTE: Format cac_prod output
+NOTE: Format cac_kids output
+NOTE: Format cac_mar output
+NOTE: Format cac_age output
+NOTE: Format $cac_inc output
+NOTE: Format $cac_ninc output
+NOTE: Format $silh_ld output
+NOTE: Format $silh_super output
+NOTE: Format $silh output
+NOTE: Format pofaage output
+NOTE: Format pofaagi output
+NOTE: Format cac_edu output
+NOTE: Format cac_occ output
+NOTE: Format $etethnic output
+NOTE: Format $etrelig output
+NOTE: Format $etlang output
+NOTE: Format $ethisporg output
+NOTE: Format $ethispasm output
+NOTE: Format $etasiaasm output
+NOTE: Format $etgender output
+NOTE: Procedure format step took :
+      real time : 0.008
+      cpu time  : 0.008
+
+
+NOTE: Format $val_st_scf output
+NOTE: Procedure format step took :
+      real time : 0.009
+      cpu time  : 0.009
+
+
+MPRINT(B2B_LIBS):  libname b2b '/project/B2B/DATA/PRODUCTION/FIRM/A';
+NOTE: Library b2b assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/FIRM/A
+
+MPRINT(B2B_LIBS):  libname b2bem '/project/B2B/DATA/PRODUCTION/EM/A';
+NOTE: Library b2bem assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/EM/A
+
+MPRINT(B2B_LIBS):  libname b2bmkey '/project/B2B/DATA/PRODUCTION/MATCHKEYS/A';
+NOTE: Library b2bmkey assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/MATCHKEYS/A
+
+MPRINT(B2B_LIBS):  libname b2bsamp '/project18/CLIENT/B2B/DATA/PRODUCTION/SAMPLES/A';
+NOTE: Library b2bsamp assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project18/CLIENT/B2B/DATA/PRODUCTION/SAMPLES/A
+
+MPRINT(B2B_LIBS):  libname b2bprocs '/project/B2B/DATA/PRODUCTION/PROCESS';
+NOTE: Library b2bprocs assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/B2B/DATA/PRODUCTION/PROCESS
+
+NOTE: Format $salesvol output
+NOTE: Format $empsize output
+NOTE: Format $offsize output
+NOTE: Format $adsize output
+NOTE: Format $location output
+NOTE: Format $ctitle output
+NOTE: Format $callstat output
+NOTE: Format $b2bcred output
+NOTE: Format $sqftg output
+NOTE: Format $teleexp output
+NOTE: Format $utilexp output
+NOTE: Format $adexp output
+NOTE: Format $payexp output
+NOTE: Format $rentexp output
+NOTE: Format $pcexp output
+NOTE: Format $osupexp output
+NOTE: Format $acctexp output
+NOTE: Format $packexp output
+NOTE: Format $labrexp output
+NOTE: Format $insrexp output
+NOTE: Format $prntexp output
+NOTE: Format $admnexp output
+NOTE: Format $leglexp output
+NOTE: Format $cstatus output
+NOTE: Format $exptype output
+NOTE: Format $actflag output
+NOTE: Format $tcode output
+NOTE: Format $ttype output
+NOTE: Format $wealth output
+NOTE: Format $addrtype output
+NOTE: Format $busstat output
+NOTE: Format $govflag output
+NOTE: Format $indflag output
+NOTE: Format $sic1cac output
+NOTE: Format $sic2cac output
+NOTE: Format $sic4cac output
+NOTE: Procedure format step took :
+      real time : 0.025
+      cpu time  : 0.024
+
+
+NOTE: Format $sicdis output
+NOTE: Procedure format step took :
+      real time : 0.082
+      cpu time  : 0.081
+
+
+NOTE: AUTOEXEC processing completed
+
+1         libname haha "/project/DS_DEV/DATA/TO_BRAD";
+NOTE: Library haha assigned as follows:
+      Engine:        SAS7BDAT
+      Physical Name: /project/DS_DEV/DATA/TO_BRAD
+
+2         options mlogic mprint;
+3         
+4         %let st_lst =AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN
+MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY;
+5         %let st_lst_len= %sysfunc(countw(&st_lst));
+6         /*
+7         %macro haha();
+8         
+9         
+10        %do i=1 %to &st_lst_len;
+11        
+12        %let cstate = %lowcase(%qscan(&st_lst,&i));
+13        
+14        proc sql; create table SIC_573135_573401_&i. as select
+15                       B2B_COMPANY_NAME,
+16                       B2B_ADDR_FULL,
+17                       B2B_ADDR_STATE,
+18                       B2B_ADDR_ZIP5,
+19                       B2B_ADDR_CITY,
+20                       B2B_800_PHONE_NUM,
+21                       B2B_PHONE_NUM,
+22                       B2B_INDIVIDUAL_FLAG,
+23                       B2B_SIC_CODE,
+24                       B2B_SIC_DESCRIP,
+25                       B2B_SECONDARY_SIC_CODE1,
+26                       B2B_SECONDARY_SIC_DESCRIP1,
+27                       B2B_SECONDARY_SIC_CODE2,
+28                       B2B_SECONDARY_SIC_DESCRIP2,
+29                       B2B_SECONDARY_SIC_CODE3,
+30                       B2B_SECONDARY_SIC_DESCRIP3,
+31                       B2B_SECONDARY_SIC_CODE4,
+32                       B2B_SECONDARY_SIC_DESCRIP4,
+33                       B2B_NAICS_CODE,
+34                       B2B_NAICS_CODE_DESCRIP,
+35                       B2B_NAICS1,
+36                       B2B_NAICS1_DESCRIP,
+37                       B2B_NAICS2,
+38                       B2B_NAICS2_DESCRIP,
+39                       B2B_NAICS3,
+40                       B2B_NAICS3_DESCRIP,
+41                       B2B_NAICS4,
+42                       B2B_NAICS4_DESCRIP,
+43                       B2B_EMPLOYEE_SIZE,
+44                       B2B_SALES_VOLUME,
+45                       B2B_TOT_SALES,
+46                       B2B_SALES_VOLUME_ESTIM,
+47                       B2B_FIRST_YEAR_CCYY,
+48                       B2B_CONTACT_LAST_NAME,
+49                       B2B_CONTACT_FIRST_NAME,
+50                       B2B_CONTACT_TITLE,
+51                       B2B_BUSINESS_STATUS_CODE,
+52                       B2B_CONTACT_TITLE_CODE,
+53                       B2B_PRIMARY_SIC,
+54                       B2B_PRIMARY_SIC_DESCRIP,
+55        
+56                       ( (CASE WHEN missing(B2B_SECOND_CONTACT) then 0 else 1 end)+ (CASE WHEN
+missing(B2B_THIRD_CONTACT) then 0 else 1 end)+ (CASE WHEN missing(B2B_FOURTH_CONTACT) then 0
+else 1 end
+56      ! )+
+57                         (CASE WHEN missing(B2B_FIFTH_CONTACT) then 0 else 1 end)+ (CASE WHEN
+missing(B2B_SIXTH_CONTACT) then 0 else 1 end)+1) as total_contacts
+58        
+59                       from b2b.cac_b2b_&cstate. where B2B_PRIMARY_SIC in ("573135","573401")
+60                                                       or B2B_SIC_CODE in ("573135","573401")
+61                      ; quit;
+62        %end;
+63        
+64        
+65           data haha.SIC_573135_573401;
+66              set
+67              %do i=1 %to &st_lst_len;
+68                   SIC_573135_573401_&i.
+69              %end;
+70              ;
+71           run;
+72        
+73        %mend;
+74        
+75        
+76        %haha;
+77        
+78        
+79        proc freq data =haha.SIC_573135_573401; table B2B_SIC_CODE B2B_PRIMARY_SIC;run;
+80        */
+81        %flat (data =haha.SIC_573135_573401, droporkeep = keep, _vars = _all_, idvar = ,
+path=,outfile = SIC_573135_573401, dd =N, write_flat=Y, ff_obs =max, dlm=|, ffwhere=);
+MLOGIC(FLAT): Beginning execution
+MLOGIC(FLAT): This macro was compiled from the autocall file /home/software/wps-3.1.1.0.635-main
+              tenance/inc_macs/flat.sas
+MLOGIC(FLAT): Parameter DATA has value haha.SIC_573135_573401
+MLOGIC(FLAT): Parameter DROPORKEEP has value keep
+MLOGIC(FLAT): Parameter _VARS has value _all_
+MLOGIC(FLAT): Parameter IDVAR has value 
+MLOGIC(FLAT): Parameter PATH has value 
+MLOGIC(FLAT): Parameter OUTFILE has value SIC_573135_573401
+MLOGIC(FLAT): Parameter DD has value N
+MLOGIC(FLAT): Parameter WRITE_FLAT has value Y
+MLOGIC(FLAT): Parameter FF_OBS has value max
+MLOGIC(FLAT): Parameter DLM has value |
+MLOGIC(FLAT): Parameter FFWHERE has value 
+MPRINT(FLAT):  data data;
+MLOGIC(FLAT): %IF condition %qscan(&droporkeep,1, ) ne   evaluated to TRUE
+MPRINT(FLAT):  set haha.SIC_573135_573401 (obs = 0 keep = _all_ );
+MPRINT(FLAT):  run;
+
+NOTE: 0 observations were read from "HAHA.SIC_573135_573401"
+NOTE: Data set "WORK.data" has 0 observation(s) and 41 variable(s)
+NOTE: The data step took :
+      real time : 0.004
+      cpu time  : 0.003
+
+
+MPRINT(FLAT):  proc contents data = data out=conts noprint ;
+MPRINT(FLAT):  run;
+NOTE: Data set "WORK.conts" has 41 observation(s) and 33 variable(s)
+NOTE: Specifying compression for data set "WORK.conts" has decreased its size from 12 to 4 pages
+      (a 67% reduction)
+NOTE: Procedure contents step took :
+      real time : 0.005
+      cpu time  : 0.006
+
+
+MPRINT(FLAT):  proc sort data = conts ;
+MPRINT(FLAT):  by varnum;
+MPRINT(FLAT):  run;
+NOTE: 41 observations were read from "WORK.conts"
+NOTE: Data set "WORK.conts" has 41 observation(s) and 33 variable(s)
+NOTE: Specifying compression for data set "WORK.conts" has decreased its size from 12 to 4 pages
+      (a 67% reduction)
+NOTE: Procedure sort step took :
+      real time : 0.008
+      cpu time  : 0.011
+
+
+MPRINT(FLAT):  filename vars temp;
+MPRINT(FLAT):  filename charvars temp;
+MPRINT(FLAT):  data _null_;
+MPRINT(FLAT):  set conts end=eof;
+MPRINT(FLAT):  retain numvars 0;
+MPRINT(FLAT):  if strip(upcase(name)) ne "" then numvars + 1;
+MPRINT(FLAT):  file vars;
+MPRINT(FLAT):  if _n_=1 then put '%let varlist=';
+MPRINT(FLAT):  if strip(upcase(name)) ne "" then put name ;
+MPRINT(FLAT):  if eof then put ";";
+MPRINT(FLAT):  file charvars;
+MPRINT(FLAT):  if _n_=1 then put '%let charvars=';
+MPRINT(FLAT):  if strip(upcase(name)) ne "" and type = 2 then put name ;
+MPRINT(FLAT):  if eof then put ";";
+MPRINT(FLAT):  if eof then call symput("numvars",numvars);
+MPRINT(FLAT):  if eof then call symput("charvars",charvars);
+MPRINT(FLAT):  run;
+NOTE: Variable "charvars" may not be initialized
+
+NOTE: Numeric values have been converted to character values at the places given by:
+      (Line):(Column)
+      81:194   81:247   
+NOTE: The file vars is:
+      File Name=/project18/SASWORK/WPS_work159600007da6_vince/#LN00002,
+      Access Permissions=-rw-rw-rw-,Number of Links=1,
+      Owner Name=felixlu,Group Name=staff,
+      File Size=0,Last Modified=Jun 18 2015,
+      Created=Jun 18 2015,Lrecl=256, Recfm=V
+
+NOTE: The file charvars is:
+      File Name=/project18/SASWORK/WPS_work159600007da6_vince/#LN00003,
+      Access Permissions=-rw-rw-rw-,Number of Links=1,
+      Owner Name=felixlu,Group Name=staff,
+      File Size=0,Last Modified=Jun 18 2015,
+      Created=Jun 18 2015,Lrecl=256, Recfm=V
+
+NOTE: 43 records were written to file vars
+      The minimum record length was 1
+      The maximum record length was 26
+NOTE: 41 records were written to file charvars
+      The minimum record length was 1
+      The maximum record length was 26
+NOTE: 41 observations were read from "WORK.conts"
+NOTE: The data step took :
+      real time : 0.003
+      cpu time  : 0.003
+
+
+MPRINT(FLAT):  data conts2 (keep = order name type format length label);
+MPRINT(FLAT):  set conts (where = (upcase(name) = "")) conts (where = (upcase(name) ne ""));
+MPRINT(FLAT):  retain order 0;
+MPRINT(FLAT):  order = order + 1;
+MPRINT(FLAT):  run;
+
+NOTE: 0 observations were read from "WORK.conts"
+NOTE: 41 observations were read from "WORK.conts"
+NOTE: Data set "WORK.conts2" has 41 observation(s) and 6 variable(s)
+NOTE: Specifying compression for data set "WORK.conts2" has decreased its size from 5 to 3 pages
+      (a 40% reduction)
+NOTE: The data step took :
+      real time : 0.003
+      cpu time  : 0.003
+
+
+MLOGIC(FLAT): %IF condition &dd = Y  evaluated to FALSE
+MLOGIC(FLAT): %PUT  numvars &numvars
+numvars           41
+MLOGIC(FLAT): %PUT  charvars &charvars
+charvars B2B_COMPANY_NAME B2B_ADDR_FULL B2B_ADDR_STATE B2B_ADDR_ZIP5 B2B_ADDR_CITY
+B2B_800_PHONE_NUM B2B_PHONE_NUM B2B_INDIVIDUAL_FLAG B2B_SIC_CODE B2B_SIC_DESCRIP
+B2B_SECONDARY_SIC_CODE1 B2B_SECONDARY_SIC_DESCRIP1 B2B_SECONDARY_SIC_CODE2
+B2B_SECONDARY_SIC_DESCRIP2 B2B_SECONDARY_SIC_CODE3 B2B_SECONDARY_SIC_DESCRIP3
+B2B_SECONDARY_SIC_CODE4 B2B_SECONDARY_SIC_DESCRIP4 B2B_NAICS_CODE B2B_NAICS_CODE_DESCRIP
+B2B_NAICS1 B2B_NAICS1_DESCRIP B2B_NAICS2 B2B_NAICS2_DESCRIP B2B_NAICS3 B2B_NAICS3_DESCRIP
+B2B_NAICS4 B2B_NAICS4_DESCRIP B2B_EMPLOYEE_SIZE B2B_SALES_VOLUME B2B_TOT_SALES
+B2B_FIRST_YEAR_CCYY B2B_CONTACT_LAST_NAME B2B_CONTACT_FIRST_NAME B2B_CONTACT_TITLE
+B2B_BUSINESS_STATUS_CODE B2B_CONTACT_TITLE_CODE B2B_PRIMARY_SIC B2B_PRIMARY_SIC_DESCRIP
+MLOGIC(FLAT): %PUT  varlist &varlist
+varlist B2B_COMPANY_NAME B2B_ADDR_FULL B2B_ADDR_STATE B2B_ADDR_ZIP5 B2B_ADDR_CITY
+B2B_800_PHONE_NUM B2B_PHONE_NUM B2B_INDIVIDUAL_FLAG B2B_SIC_CODE B2B_SIC_DESCRIP
+B2B_SECONDARY_SIC_CODE1 B2B_SECONDARY_SIC_DESCRIP1 B2B_SECONDARY_SIC_CODE2
+B2B_SECONDARY_SIC_DESCRIP2 B2B_SECONDARY_SIC_CODE3 B2B_SECONDARY_SIC_DESCRIP3
+B2B_SECONDARY_SIC_CODE4 B2B_SECONDARY_SIC_DESCRIP4 B2B_NAICS_CODE B2B_NAICS_CODE_DESCRIP
+B2B_NAICS1 B2B_NAICS1_DESCRIP B2B_NAICS2 B2B_NAICS2_DESCRIP B2B_NAICS3 B2B_NAICS3_DESCRIP
+B2B_NAICS4 B2B_NAICS4_DESCRIP B2B_EMPLOYEE_SIZE B2B_SALES_VOLUME B2B_TOT_SALES
+B2B_SALES_VOLUME_ESTIM B2B_FIRST_YEAR_CCYY B2B_CONTACT_LAST_NAME B2B_CONTACT_FIRST_NAME
+B2B_CONTACT_TITLE B2B_BUSINESS_STATUS_CODE B2B_CONTACT_TITLE_CODE B2B_PRIMARY_SIC
+B2B_PRIMARY_SIC_DESCRIP total_contacts
+MLOGIC(FLAT): %IF condition &write_flat = Y  evaluated to TRUE
+MPRINT(FLAT):  data _NULL_;
+MLOGIC(FLAT): %IF condition %qscan(&droporkeep,1, ) ne   evaluated to TRUE
+MLOGIC(FLAT): %IF condition %qscan(&ffwhere,1, ) ne   evaluated to FALSE
+MPRINT(FLAT):  set haha.SIC_573135_573401 (obs = max keep = _all_);
+MLOGIC(FLAT): %IF condition %qscan(&path,1, ) =   evaluated to TRUE
+MPRINT(FLAT):  file "./SIC_573135_573401.pdm" dlm = "|" lrecl = 32000;
+MPRINT(FLAT):  if _N_ = 1 then do;
+MLOGIC(FLAT): %DO loop beginning; index variable xxx; start value is 1; stop value is 41; by
+              value is 1
+MLOGIC(FLAT): %DO loop index variable xxx is now 2; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 3; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 4; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 5; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 6; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 7; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 8; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 9; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 10; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 11; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 12; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 13; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 14; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 15; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 16; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 17; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 18; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 19; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 20; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 21; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 22; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 23; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 24; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 25; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 26; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 27; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 28; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 29; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 30; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 31; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 32; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 33; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 34; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 35; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 36; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 37; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 38; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 39; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 40; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 41; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 42; loop will not iterate again
+MPRINT(FLAT):  putvar = compress("" ||"|"||"B2B_COMPANY_NAME" ||"|"||"B2B_ADDR_FULL"
+               ||"|"||"B2B_ADDR_STATE" ||"|"||"B2B_ADDR_ZIP5" ||"|"||"B2B_ADDR_CITY"
+               ||"|"||"B2B_800_PHONE_NUM" ||"|"||"B2B_PHONE_NUM" ||"|"||"B2B_INDIVIDUAL_FLAG"
+               ||"|"||"B2B_SIC_CODE" ||"|"||"B2B_SIC_DESCRIP" ||"|"||"B2B_SECONDARY_SIC_CODE1"
+               ||"|"||"B2B_SECONDARY_SIC_DESCRIP1" ||"|"||"B2B_SECONDARY_SIC_CODE2"
+               ||"|"||"B2B_SECONDARY_SIC_DESCRIP2" ||"|"||"B2B_SECONDARY_SIC_CODE3"
+               ||"|"||"B2B_SECONDARY_SIC_DESCRIP3" ||"|"||"B2B_SECONDARY_SIC_CODE4"
+               ||"|"||"B2B_SECONDARY_SIC_DESCRIP4" ||"|"||"B2B_NAICS_CODE"
+               ||"|"||"B2B_NAICS_CODE_DESCRIP" ||"|"||"B2B_NAICS1" ||"|"||"B2B_NAICS1_DESCRIP"
+               ||"|"||"B2B_NAICS2" ||"|"||"B2B_NAICS2_DESCRIP" ||"|"||"B2B_NAICS3"
+               ||"|"||"B2B_NAICS3_DESCRIP" ||"|"||"B2B_NAICS4" ||"|"||"B2B_NAICS4_DESCRIP"
+               ||"|"||"B2B_EMPLOYEE_SIZE" ||"|"||"B2B_SALES_VOLUME" ||"|"||"B2B_TOT_SALES"
+               ||"|"||"B2B_SALES_VOLUME_ESTIM" ||"|"||"B2B_FIRST_YEAR_CCYY"
+               ||"|"||"B2B_CONTACT_LAST_NAME" ||"|"||"B2B_CONTACT_FIRST_NAME"
+               ||"|"||"B2B_CONTACT_TITLE" ||"|"||"B2B_BUSINESS_STATUS_CODE"
+               ||"|"||"B2B_CONTACT_TITLE_CODE" ||"|"||"B2B_PRIMARY_SIC"
+               ||"|"||"B2B_PRIMARY_SIC_DESCRIP" ||"|"||"total_contacts");
+MPRINT(FLAT):  put putvar;
+MPRINT(FLAT):  end;
+MLOGIC(FLAT): %DO loop beginning; index variable xxx; start value is 1; stop value is 41; by
+              value is 1
+MLOGIC(FLAT): %DO loop index variable xxx is now 2; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 3; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 4; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 5; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 6; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 7; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 8; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 9; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 10; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 11; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 12; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 13; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 14; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 15; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 16; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 17; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 18; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 19; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 20; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 21; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 22; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 23; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 24; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 25; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 26; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 27; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 28; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 29; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 30; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 31; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 32; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 33; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 34; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 35; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 36; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 37; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 38; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 39; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 40; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 41; loop will iterate again
+MLOGIC(FLAT): %DO loop index variable xxx is now 42; loop will not iterate again
+MPRINT(FLAT):  put  B2B_COMPANY_NAME B2B_ADDR_FULL B2B_ADDR_STATE B2B_ADDR_ZIP5 B2B_ADDR_CITY
+               B2B_800_PHONE_NUM B2B_PHONE_NUM B2B_INDIVIDUAL_FLAG B2B_SIC_CODE B2B_SIC_DESCRIP
+               B2B_SECONDARY_SIC_CODE1 B2B_SECONDARY_SIC_DESCRIP1 B2B_SECONDARY_SIC_CODE2
+               B2B_SECONDARY_SIC_DESCRIP2 B2B_SECONDARY_SIC_CODE3 B2B_SECONDARY_SIC_DESCRIP3
+               B2B_SECONDARY_SIC_CODE4 B2B_SECONDARY_SIC_DESCRIP4 B2B_NAICS_CODE
+               B2B_NAICS_CODE_DESCRIP B2B_NAICS1 B2B_NAICS1_DESCRIP B2B_NAICS2
+               B2B_NAICS2_DESCRIP B2B_NAICS3 B2B_NAICS3_DESCRIP B2B_NAICS4 B2B_NAICS4_DESCRIP
+               B2B_EMPLOYEE_SIZE B2B_SALES_VOLUME B2B_TOT_SALES B2B_SALES_VOLUME_ESTIM
+               B2B_FIRST_YEAR_CCYY B2B_CONTACT_LAST_NAME B2B_CONTACT_FIRST_NAME
+               B2B_CONTACT_TITLE B2B_BUSINESS_STATUS_CODE B2B_CONTACT_TITLE_CODE B2B_PRIMARY_SIC
+               B2B_PRIMARY_SIC_DESCRIP total_contacts ;
+MPRINT(FLAT):  run;
+
+NOTE: The file '/project18/CLIENT/DS_DEV/CODE/TO_BRAD/SIC_573135_573401.pdm' is:
+      File Name=/project18/CLIENT/DS_DEV/CODE/TO_BRAD/SIC_573135_573401.pdm,
+      Access Permissions=-rw-rw-rw-,Number of Links=1,
+      Owner Name=felixlu,Group Name=staff,
+      File Size=0,Last Modified=Jun 18 2015,
+      Created=Jun 18 2015,Lrecl=32000, Recfm=V
+
+NOTE: 44513 records were written to file
+      '/project18/CLIENT/DS_DEV/CODE/TO_BRAD/SIC_573135_573401.pdm'
+      The minimum record length was 177
+      The maximum record length was 775
+NOTE: 44512 observations were read from "HAHA.SIC_573135_573401"
+NOTE: The data step took :
+      real time : 0.498
+      cpu time  : 0.497
+
+
+MLOGIC(FLAT): Ending execution
+
+NOTE: Submitted statements took :
+      real time : 0.748
+      cpu time  : 0.751
