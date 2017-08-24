@@ -1,0 +1,92 @@
+#for individual policy
+import random
+def simulate_ind():
+   if random.random()<0.02:
+      return random.uniform(1000.0, 100000.0)
+   return 0.0
+
+#for family policy, each member of families is independent to be ill, so the expected value for the family to claim is 
+def simulate_two():
+   cost = 0
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   return cost
+    
+#for family with three members, each member of families is independent to be ill, so the expected value for the family to claim is
+def simulate_three():
+   cost = 0
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   return cost
+
+#for family with four members, each member of families is independent to be ill, so the expected value for the family to claim is
+def simulate_four():
+   cost = 0
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   return cost
+
+#for family with five members, each member of families is independent to be ill, so the expected value for the family to claim is
+def simulate_five():
+   cost = 0
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   if random.random()<0.02:
+      cost=cost + random.uniform(1000.0,100000.0)
+   else: cost = cost
+   return cost
+
+def simulation(n):
+   n_1=n_2=cost = cost_2=0
+   for i in range(n):
+      x=random.random() 
+      if x<0.2:                             # equal possibilities for individual policy happens
+         cost_2 = cost_2 + simulate_ind()
+         n_2 = n_2+1
+      elif 0.2<x<0.4:                            # equal possibilities for two-member family policy happens
+         cost = cost + simulate_two()
+         n_1 = n_1+1
+      elif 0.4<x<0.6:                             # equal possibilities for three-member family policy happens
+         cost = cost + simulate_three()
+         n_1 = n_1+1
+      elif 0.6<x<0.8:                              # equal possibilities for four-member family policy happens
+         cost = cost + simulate_four()
+         n_1 = n_1+1
+      else:                                # equal possibilities for five-member family policy happens
+         cost = cost + simulate_five()
+         n_1 = n_1+1
+      
+   return (cost_2/n_2*0.2+1.6*cost/n_1)
+
+ 

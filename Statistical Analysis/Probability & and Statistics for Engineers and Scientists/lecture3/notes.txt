@@ -1,0 +1,45 @@
+g(x) = aX+b then
+E[g(x)] = aE(X) + b (not true if not linear)
+Var(g(x)) = a^2*var(x) 
+(adding a constant shifts the distribution, not stretch it) 
+(multiplying stretch it)
+
+PDF function sums up to 1 
+
+skewness of distributionn
+
+
+continuous distribution:
+exponential: analog of the geometric distribution, when n-> infinity, poisson process.
+
+lambda*e^-(lambda*x), x>0 , lambda is the time until incidence of event
+eg. chip fails every 15 years, lambda = 1/15.  
+
+E[x]=1/lambda(average time btw two events)
+Var(x) = 1/(lambda^2)
+memoryless property: both geometric and exponential have.
+proof: 
+ p(x> m + t| x > m) = p( x > m+t intersect x> m )/p(x>m) = p(x>m+t)/p(x>m) = e^(-lambda*t) = p(x>t) 
+
+
+ normal distribution:
+ related to exponential 
+ max value: 1/sigma*sqrt(2*pi), which is mean
+
+expectation of linear transformation of normal dist works. 
+
+X ~ Normal distribution
+g(x) = aX+b then
+E[g(x)] = aE(X) + b (not true if not linear)
+Var(g(x)) = a^2*var(x) 
+
+any function of a RV gives a RV. 
+
+
+joint distribution:
+
+
+continuous joint prob distribution:
+
+joint density function 
+marginal PDF of RV  g(x), h(y)

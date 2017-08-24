@@ -1,0 +1,55 @@
+*1.statistical work
+data paper;
+
+infile "C:\Users\felix\Desktop\paper.txt" firstobs=2;
+input white  yellow ;
+label white='thickness of white paper'
+      yellow='thickness of yellow paper';
+
+proc means mean median std lclm uclm;
+var white yellow;
+
+proc univariate;
+var white yellow;
+
+proc print data = paper;
+
+title 'Thickness';
+
+
+
+
+*2. reformat work
+data paper;
+
+infile "C:\Users\felix\Desktop\paper.txt" firstobs=2;
+input white  yellow ;
+label white='thickness of white paper'
+      yellow='thickness of yellow paper';
+proc print data = paper;
+
+data reformat;
+keep Thickness paperbrand;
+set paper;
+paperbrand = 'yellow';
+Thickness = yellow;
+output;
+
+paperbrand = 'white';
+Thickness = white;
+output;
+
+proc sort data = reformat;
+by paperbrand;
+
+proc univariate ;
+var Thickness;
+histogram Thickness / midpoint = 0.1 to 0.5 by 0.1;
+
+proc boxplot;
+  plot Thickness * paperbrand / boxstyle=schematic boxwidth=25;
+
+proc print data = reformat;
+title  ' sorted reformat Thickness';
+
+run;

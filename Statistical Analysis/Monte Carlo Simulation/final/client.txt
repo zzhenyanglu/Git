@@ -1,0 +1,34 @@
+sum1 = 0.0
+sum3=0.0
+sum6=.0
+sum9=0.0
+sum12 =0.0
+sum15 = 0.0
+sum20 = 0.0
+for i in range(20):
+    sum1+=x.simulate_once(1)
+print "average cost per server of 1 server(s) is", sum1/20
+
+for i in range(20):
+    sum3+=x.simulate_once(3)
+print "average cost per server of 3 server(s) is",sum3/20
+
+for i in range(20):
+    sum6+=x.simulate_once(6)
+print "average cost per server of 6 server(s) is",sum6/20
+
+for i in range(20):
+    sum9+=x.simulate_once(9)
+print "average cost per server of 9 server(s) is",sum9/20
+
+for i in range(20):
+    sum12+=x.simulate_once(12)
+print "average cost per server of 12 server(s) is",sum12/20
+
+for i in range(20):
+    sum15+=x.simulate_once(15)
+print "average cost per server of 15 server(s) is",sum15/20
+
+for i in range(20):
+    sum20+=x.simulate_once(20)
+print "average cost per server of 20 server(s) is",sum20/20

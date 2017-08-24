@@ -1,0 +1,63 @@
+proc import datafile='600062-long.csv' dbms=csv out=raw_1;
+getnames=yes;
+run;
+
+data raw;
+set raw_1;
+price_lag=lag(price);
+return=(price-price_lag)/price;
+return_abs = abs(return);
+return_sq = return**2;
+
+data predict; 
+RETAIN DATE '08 Mar 2013'D;
+do i=1 to 3;
+DATE=INTNX('Day',DATE,1);
+OUTPUT;
+end; format date date.;
+run;
+
+data raw; 
+merge raw predict; 
+by date; 
+drop i;
+run;
+/*
+proc arima;
+*identify var = return_abs stationarity = (adf =5) nlag=10 outcov=acf data = raw;
+identify var = return stationarity = (adf =5) nlag=20 outcov=acf data = raw;
+*identify var = return stationarity = (adf =5) nlag=10 outcov=acf data = raw;
+estimate p =2 plot method=ml;
+run;
+*/
+proc autoreg data=raw;
+model return = / nlag=2 garch = (p=1,q=1,type=exp) archtest normal dist =t noint;
+*model return = / GARCH = (p=2,q=2) archtest normal;
+output out=a cev=v  r=yresid predicted = pred ucl=ucl lcl=lcl;;
+run; 
+
+goptions reset=global;
+
+/*proc univariate data=a;
+var yresid;
+histogram/normal;
+qqplot/normal(mu=est sigma=est);
+run;
+*/
+
+data resid;
+set a;
+stres= yresid/sqrt(v);
+stres2 =stres*stres;
+pred_simp=exp(pred)-1;
+v_simp = exp(v)-1; 
+
+proc arima data=resid ;
+identify var = stres2 stationarity = (adf =5) nlag=20 outcov=acf data = resid;
+run;
+
+proc univariate data=resid;
+var stres;
+histogram/normal;
+qqplot/normal(mu=est sigma=est);
+run;

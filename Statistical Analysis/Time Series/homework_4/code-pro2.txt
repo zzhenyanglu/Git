@@ -1,0 +1,65 @@
+proc import datafile='ndx_0512.csv' dbms=csv out=ndx;
+getnames=yes;
+run;
+
+proc univariate data=ndx;
+var rtn;
+run;
+
+data ndx_1;
+set ndx;
+log_rtn = log(rtn+1);
+log_rtn_abs = abs(log_rtn);
+log_rtn_sq = log_rtn**2;
+run;
+
+data predict; 
+RETAIN DATE '31 Dec 2012'D;
+do i=1 to 7;
+DATE=INTNX('Day',DATE,1);
+OUTPUT;
+end; format date date.;
+run;
+
+data ndx_1; 
+merge ndx_1 predict; 
+by date; 
+drop i;
+run;
+
+proc arima;
+*identify var = log_rtn_abs stationarity = (adf =5) nlag=10 outcov=acf data = ndx_1;
+identify var = log_rtn_sq stationarity = (adf =5) nlag=20 outcov=acf data = ndx_1;
+*identify var = log_rtn stationarity = (adf =5) nlag=10 outcov=acf data = ndx_1;
+*estimate p =2 plot method=ml;
+run;
+
+proc autoreg data=ndx_1;
+*model log_rtn = / GARCH = (p=1,q=1) archtest normal dist=t;
+model log_rtn = / GARCH = (p=1,q=1) archtest normal;
+output out=a cev=v  r=yresid predicted = pred ucl=ucl lcl=lcl;;
+run; 
+
+data resid;
+set a;
+stres= yresid/sqrt(v);
+stres2 =stres*stres;
+pred_simp=exp(pred)-1;
+v_simp = exp(v)-1; 
+
+
+proc arima data=resid; 
+	  identify var=stres nlag=20;
+	  identify var=stres2 nlag=20;
+run;
+
+goptions reset = global;
+proc univariate data=resid;
+var stres;
+histogram/ normal;
+qqplot / normal(mu=est sigma =est);
+run;
+
+proc gplot data=resid;
+plot (pred lcl ucl rtn)*date/overlay;
+run;

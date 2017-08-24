@@ -1,0 +1,53 @@
+PROC IMPORT datafile= "apple_d_2000_2012.csv" out = apple_raw dbms=csv replace;
+delimiter=',';
+getnames = yes;
+RUN;
+
+DATA apple;
+set apple_raw;
+return = price/lag(price) -1;
+* PROBLEM-1-(a);
+lnreturn = log(return+1); 
+
+proc univariate data=apple normal;
+var lnreturn;
+histogram/normal;
+qqplot/normal(mu=est sigma=est);
+title 'apple stock';
+output out=apple_test kurtosis=kurtosis skewness=skewness N=ntot;
+run;
+
+data apple_computation;
+set apple_test;
+label pv_kur = "P-value for kurtosis test";
+*skewness statistic;
+skew_test = skewness/sqrt(6/Ntot);
+*kurtosis statistic;
+kurt_test = kurtosis/sqrt(24/Ntot);
+* jarque-bera statistic;
+jb = skew_test*skew_test+kurt_test*kurt_test;
+* tests p-values;
+pv_skew = 2* (1-cdf('NORMAL', abs(skew_test)));
+pv_kur = 2*(1-cdf('NORMAL', abs(kurt_test)));
+pv_jb = 1-cdf('CHISQUARE', jb,2);
+label pv_kur = "P-value for kurtosis test" 
+	pv_skew= "P-value for skewness test"
+	pv_jb = "P-value for Jarque & Bera test"
+	jb = "Jarque & Bera statistic";
+
+/* Print out results of tests*/
+Title " Results of test on skewness";
+proc print data= apple_computation label;
+var skewness skew_test pv_skew;
+run;
+Title " Results of test on kurtosis";
+proc print data= apple_computation label;
+var kurtosis kurt_test pv_kur;
+run;
+Title " Results of Jacque and Bera test on normality";
+proc print data= apple_computation label;
+var skewness kurtosis jb pv_jb;
+run;
+
+proc print;
+run;

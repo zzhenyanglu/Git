@@ -1,0 +1,17 @@
+from math import *
+import random
+
+def first():
+   "(1)   p(x) = a/(1 + x^2)"              
+   u = random.random()
+   return tan(pi*u/2.0) 
+
+def second():
+   "(2)   p(x) = bcos(x)/(bsin(x) + 1)"
+   u = random.random()
+   return asin((exp(u)-1)/(exp(1)-1))   
+
+def third(m, n):
+   "(3)   p(x) = cxm-1 /(xm-1)1-1/n"
+   u = random.random()
+   return (u**m+1)**(1.0/n)

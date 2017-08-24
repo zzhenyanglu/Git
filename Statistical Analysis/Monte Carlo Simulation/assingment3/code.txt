@@ -1,0 +1,44 @@
+# Assignment 3 (CSC 521) by Zhenyang Lu 
+
+import random
+from math import *
+
+working_days = 250
+
+def pareto(xm,pareto_a):    #define a pareto PRNG
+   u = random.random()
+   return xm*(1-u)**(-1.0/pareto_a)
+
+def poisson(lamb):       #define a poisson PRNG
+   u = random.random()
+   prob= exp(-lamb)
+   k=0
+   while 1:
+      if u <=prob:return k
+      else:u=u-prob
+      prob = float(lamb)/(k+1)*prob
+      k+=1
+
+package_loss = []          # define a list that contains pareto random numbers,
+for i in range(10000):     # which is used to resample the possible losses for lost parcel
+    package_loss.append(pareto(200, 3.0))
+
+package_shipped_perday = []     # define a list that contains poisson random numbers,
+for i in range(10000):           # which is used to resample the number of parcels shipped everyday
+    package_shipped_perday.append(poisson(100))
+
+def simulate_a_year():
+    sum = .0
+    amount =0.0
+    amount_list=[]
+    for i in range(0,working_days):
+        amount = .0
+        for p in range(0,package_shipped_perday[random.randint(0,len(package_shipped_perday)-1)]):
+            if 0.02>random.random() :
+                amount = amount + package_loss[random.randint(0, len(package_loss)-1)] 
+        amount_list.append(amount)
+    amount_list.sort()
+    for i in range(len(amount_list)):
+        print amount_list[i]
+        
+        

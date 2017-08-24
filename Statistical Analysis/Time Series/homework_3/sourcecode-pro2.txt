@@ -1,0 +1,28 @@
+data temp;
+infile "global_temp.txt" expandtabs firstobs=2;
+input year index;
+run;
+
+*proc gplot;
+*symbol i=join;
+*plot index*year;
+
+proc arima data=temp;
+identify var = index(1) nlag = 20 outcov=acf data=temp;
+*identify var = index(1) nlag =20 minic p=(0:7) q=(0:7);
+*identify var = index(1) nlag =20 scan p=(0:7) q=(0:7);
+*identify var = index(1) nlag =20 esacf p=(0:7) q=(0:7);
+estimate p=3 q=0 method=ml plot;
+forecast lead=4 printall interval=day id=date out=forecast;
+run;
+
+proc print data=forecast;
+run;
+
+goptions reset=global;
+
+proc univariate data=forecast;
+var residual;
+histogram /normal; 
+qqplot / normal (mu=est sigma=est);
+run;

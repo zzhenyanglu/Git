@@ -1,0 +1,21 @@
+
+list_9 = []
+list_10= []
+list_11 = []
+list_12 = []
+for i in range(50):
+    list_9.append(x.simulate_once(9))
+for i in range(50):
+    list_10.append(x.simulate_once(10))
+for i in range(50):
+    list_11.append(x.simulate_once(11))
+for i in range(50):
+    list_12.append(x.simulate_once(12))
+list_9.sort()
+list_10.sort()
+list_11.sort()
+list_12.sort()
+print "95% VaR for 9 servers is", list_9[int(.95*50)]
+print "95% VaR for 10 servers is", list_10[int(.95*50)]
+print "95% VaR for 11 servers is", list_11[int(.95*50)]
+print "95% VaR for 12 servers is", list_12[int(.95*50)]

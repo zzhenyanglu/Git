@@ -1,0 +1,58 @@
+PART A:******************************************************************************
+
+data Reaction;
+input monomer dimer rate;
+  datalines;
+0.34 0.73 5.75
+0.34 0.73 4.79
+0.58 0.69 5.44
+1.26 0.97 9.09
+1.26 0.97 8.59
+1.82 0.46 5.09
+;
+proc print;
+title "Rate Regression of monomer and dimer ";
+
+proc reg;
+model rate=monomer dimer / xpx i p r;
+
+run;
+quit;
+
+PART a:*****************************************************************************
+
+
+
+
+
+PART B:*****************************************************************************
+
+data Banking;
+infile "C:\Users\felix\Desktop\csc 423\project4\banking.txt" firstobs=2;
+input Age Education Income HomeVal Wealth Balance;
+label 
+Age="Median age of the population (Age)"
+Education="Median years of education (Education)"
+Income="Median income (Income) in $"
+HomeVal="Median home value (HomeVal) in $"
+Wealth="Median household wealth (Wealth) in $"
+Balance="Average bank balance (Balance) in $";
+
+proc print;
+title"predict the average bank balance as a function of the other variables";
+
+proc gplot ;
+plot Balance * Age Balance * Education Balance * HomeVal Balance * Income Balance * Wealth;
+	
+proc corr cov;
+var Balance Age Education Income HomeVal Wealth  ;
+
+proc reg;
+model Balance= Age Education Income HomeVal Wealth / influence vif tol;;
+ 
+proc reg;
+model Balance= Age Education Income  Wealth / influence vif tol stb; 
+  
+run;
+quit;
+PART B:*******************************************************************************

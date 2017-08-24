@@ -1,0 +1,185 @@
+R code
+#1. LOAD LIBRARIES
+library(tseries)
+library(fBasics)
+library(forecast)
+library(zoo)
+library(fGarch)
+library(fUnitRoots)
+library(rugarch)
+
+#2. IMPORT DATA
+#  Load data with no variable names into the data frame "da"
+myd=read.table("600062-long.csv",header=T,sep=',') 
+date = myd$date
+price = myd$price
+
+# creates time series object
+ts = zoo(myd[, 2], as.Date(as.character(myd[,1]), format = "%Y/%m/%d"))
+rate = (ts - lag(ts,-1))/lag(ts,-1)
+logrtn = log(rate+1)
+crate = coredata(logrtn)
+
+#3 COMPUTE SUMMARY STATISTICS
+basicStats(ts)
+basicStats(crate)
+
+#create  timeplot
+plot(logrtn, type='l', xlab='time', ylab='price')
+
+# CREATE HISTOGRAM
+# creates 2 by 2 display for 4 plots
+par(mfcol=c(1,1)) 
+hist(logrtn, xlab="price", prob=TRUE, main="Histogram")
+# add approximating normal density curve
+xfit<-seq(min(logrtn),max(logrtn),length=40)
+yfit<-dnorm(xfit,mean=mean(logrtn),sd=sd(logrtn))
+lines(xfit, yfit, col="blue", lwd=2) 
+
+#5. COMPUTE DICKEY FULLER TEST
+adfTest(logrtn, lags=3, type=c("c"))
+adfTest(logrtn, lags=5, type=c("c"))
+adfTest(logrtn, lags=7, type=c("c"))
+
+
+acf((coredata(logrtn))^2, plot=T,lag=20)
+acf(abs(coredata(logrtn)), plot=T,lag=20)
+
+# 7. APPLY MODEL SELECTION METHODS TO SELECT ARMA MODEL
+#EACF method
+source("eacf.R")
+#use numeric object not ts object. coredata() function retrieves numeric vector
+EACF(crate)
+
+
+# AIC/BIC criterion
+# use numeric object not ts object
+auto.arima(logrtn, max.p = 10, max.q = 10, stationary = F, ic =c("aic"), trace=TRUE, allowdrift=F, D=0) 
+auto.arima(logrtn, max.p = 10, max.q = 10, stationary = F, ic =c("bic"), trace=TRUE, allowdrift=F, D=0) 
+
+m1= arima(logrtn, order=c(2,0,0), method='ML')
+m1
+
+# T-tests on coefficients
+print('T-test table for model coefficients')
+matrix(c(m1$coef,sqrt(diag(m1$var.coef)), 2 * pnorm(-abs(m1$coef / sqrt(diag(m1$var.coef))))), 
+       nrow=length(m1$coef), ncol=3, byrow=F,
+       dimnames = list(names(m1$coef), c("estimates", "std error", "p-values")))
+
+m2= arima(logrtn, order=c(2,0,0), fixed=c(0,NA,0))
+m2
+
+print('T-test table for model coefficients')
+coef = c(m2$coef[2])
+matrix(prettyNum(c(coef,sqrt(diag(m2$var.coef)), 2 * pnorm(-abs(coef / sqrt(diag(m2$var.coef)))))), nrow=length(coef), ncol=3, byrow=F, dimnames = list(names(coef), c("estimates", "test stats", "p-values")))
+
+#residual analysis:
+plot(m2$resid, type='l')
+
+#test if residuals are white noise:
+
+Box.test(residuals(m2),lag=6,type='Ljung', fitdf=3)
+Box.test(residuals(m2),lag=12,type='Ljung', fitdf=3)
+
+acf(residuals(m2), na.action=na.remove)
+# Plot ACF of squared data to check for non-linear dependence
+acf((residuals(m2))^2, na.action=na.remove)
+# Computes Ljung-Box test on squared returns to test non-linear independence at lag 6 and 12
+Box.test((residuals(m2))^2,lag=6,type='Ljung')
+Box.test((residuals(m2))^2,lag=12,type='Ljung')
+
+m3=ar(crate, method='mle')
+m3
+
+#MODEL 3: ARIMA(2,0,0)-GARCH(1,1) with normally distributed errors
+#specify model using functions in rugarch package
+#Fit arIma(2,0,0)+garch(1,1) model 
+garch11.spec=ugarchspec(variance.model=list(garchOrder=c(1,1)), mean.model=list(arOrder=c(2,0)))
+#estimate model 
+garch11.fit=ugarchfit(spec=garch11.spec, data=logrtn)
+garch11.fit
+
+#MODEL 4: ARIMA(2,0,0)-GARCH(1,2) with normally distributed errors
+#specify model using functions in rugarch package
+#Fit arIma(2,0,0)+garch(1,2) model 
+garch12.spec=ugarchspec(variance.model=list(garchOrder=c(1,2)), mean.model=list(arOrder=c(2,0)))
+#estimate model 
+garch12.fit=ugarchfit(spec=garch11.spec, data=logrtn)
+garch12.fit
+
+#MODEL 5: ARIMA(2,0,0)-GARCH(2,1) with normally distributed errors
+#specify model using functions in rugarch package
+#Fit arIma(2,0,0)+garch(2,1) model 
+garch21.spec=ugarchspec(variance.model=list(garchOrder=c(2,1)), mean.model=list(arOrder=c(2,0)))
+#estimate model 
+garch21.fit=ugarchfit(spec=garch21.spec, data=logrtn)
+garch21.fit
+
+###################################################################################################
+
+#MODEL 5: ARIMA(2,0,0)-GARCH(2,1) with normally distributed errors
+#specify model using functions in rugarch package
+#Fit arIma(2,0,0)+garch(2,1) model 
+garch21.spec=ugarchspec(variance.model=list(garchOrder=c(2,1)), mean.model=list(arOrder=c(2,0)))
+#estimate model 
+garch21.fit=ugarchfit(spec=garch21.spec, data=logrtn)
+garch21.fit
+
+#MODEL 6: ARIMA(7,0,0)-GARCH(1,1) with normally distributed errors
+#specify model using functions in rugarch package
+#Fit arIma(7,0,0)+garch(1,1) model 
+garch711.spec=ugarchspec(variance.model=list(garchOrder=c(1,1)), mean.model=list(arOrder=c(7,0)))
+#estimate model 
+garch711.fit=ugarchfit(spec=garch711.spec, data=logrtn)
+garch711.fit
+######################################################################################################3
+
+#MODEL 6: ARIMA(2,0,0)-GARCH(1,1) with t-distributed errors
+tgarch11.spec=ugarchspec(variance.model=list(garchOrder=c(1,1)), mean.model=list(arOrder=c(2,0)), distribution.model = "std")
+#estimate model
+tgarch11.fit=ugarchfit(spec=tgarch11.spec, data=logrtn)
+tgarch11.fit
+
+#MODEL 7: ARIMA(2,0,0)-GARCH(1,1) with skewed t-distributed errors
+#specified model
+stgarch11.spec=ugarchspec(variance.model=list(garchOrder=c(1,1)), mean.model=list(arOrder=c(2,0)), distribution.model = "sstd")
+#estimate model
+stgarch11.fit=ugarchfit(spec=stgarch11.spec, data=logrtn)
+stgarch11.fit
+
+#MODEL 8: ARIMA(2,0,0)-eGARCH(1,1) with t-distributed errors
+#specified model
+etgarch11.spec=ugarchspec(variance.model=list(model='eGARCH', garchOrder=c(1,1)), mean.model=list(arOrder=c(2,0)), distribution.model = "std")
+#estimate model
+etgarch11.fit=ugarchfit(spec=etgarch11.spec, data=logrtn)
+etgarch11.fit
+
+#MODEL 9: ARIMA(2,0,0)-tGARCH(1,1) with t-distributed errors
+#specified model
+ttgarch11.spec=ugarchspec(variance.model=list(model='gjrGARCH', garchOrder=c(1,1)), mean.model=list(arOrder=c(2,0)), distribution.model = "std")
+#estimate model
+ttgarch11.fit=ugarchfit(spec=ttgarch11.spec, data=logrtn)
+ttgarch11.fit
+
+#MODEL COMPARISON
+#COMPARE INFORMATION CRITETRIA
+model.list = list(stgarch11=stgarch11.fit, etgarch11=etgarch11.fit, ttgarch11=ttgarch11.fit)
+info.mat = sapply(model.list, infocriteria)
+rownames(info.mat) = rownames(infocriteria(stgarch11.fit))
+info.mat
+
+mf=garchFit(~arma(2,0)+aparch(1,1),data=logrtn,trace=F,cond.dist=c("sstd"))
+mf
+
+forecast(mf, h=5)
+plot(ttgarch11.fit, which="all")
+plot(ttgarch11.fit, which=12)
+
+ttgarch11.fcst = ugarchforecast(ttgarch11.fit, n.ahead=10)
+
+
+#forecast
+plot(ttgarch11.fcst, which="all")
+plot(ttgarch11.fcst, which=1)
+plot(ttgarch11.fcst, which=2)
+plot(ttgarch11.fcst, which=3)

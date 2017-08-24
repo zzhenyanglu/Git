@@ -1,0 +1,43 @@
+#creat random number for uniform distribution of (0,1)
+import random 
+def make_data(n):
+   table=[]
+   for i in range(n):
+      a,b=random.random(),random.random()
+      table.append((a+2.0*b,a*b,a-b))
+   return table
+
+#assign those random numbers to a table
+table = make_data(100000)
+
+#compute the means for each column 
+mu_x=sum(row[0] for row in table)/len(table)
+mu_y=sum(row[1] for row in table)/len(table)
+mu_z=sum(row[2] for row in table)/len(table)
+
+#compute the variances of each column
+var_x= sum(row[0]**2 for row in table)/len(table)-mu_x**2
+var_y= sum(row[1]**2 for row in table)/len(table)-mu_y**2
+var_z= sum(row[2]**2 for row in table)/len(table)-mu_z**2
+
+#compute stardard deviation 
+std_x= var_x**(1.0/2)
+std_y= var_y**(1.0/2)
+std_z= var_z**(1.0/2)
+
+#compute covariance 
+cov_xy = sum(row[0]*row[1] for row in table)/len(table)-mu_x*mu_y
+cov_xz = sum(row[0]*row[2] for row in table)/len(table)-mu_x*mu_z
+cov_zy = sum(row[2]*row[1] for row in table)/len(table)-mu_z*mu_y
+
+#compute correlation
+corr_xy = cov_xy/(std_x*std_y)
+corr_xz = cov_xz/(std_x*std_z)
+corr_zy = cov_zy/(std_z*std_y) 
+
+#print the result of previous computations
+print(mu_x,mu_y,mu_z)
+print(var_x,var_y,var_z)
+print(std_x,std_y,std_z)
+print(cov_xy,cov_xz,cov_zy)
+print(corr_xy,corr_xz,corr_zy)

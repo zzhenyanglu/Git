@@ -1,0 +1,19 @@
+
+import random
+from numeric import *
+
+class webservice():
+    time=30*24*60  #assume one month, and 30 days per month
+    server = []   # how many servers
+    cost = 0.0
+    queue_mission =[]  # contains the mission on the queue.
+    queue_time = [] # since if mission's waiting time > 5 minutes we drop it, queue is no linger than 5 on average, I place 10 spots for the queue in case.
+                           # queue_time contains the waiting times of missions on queue
+
+    #a pareto PRNG  
+    def pareto(self,xm=5,alpha=2.5): 
+        return float(xm)*(1.-random.random())**(-1.0/alpha)
+  
+
+
+    

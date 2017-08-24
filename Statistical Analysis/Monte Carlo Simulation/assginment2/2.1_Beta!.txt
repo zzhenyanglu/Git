@@ -1,0 +1,52 @@
+import random
+from math import *
+
+exp_lamb = 12 # time intervals unit in month
+max_time = 1
+poisson_lamb = 1.5
+xm = 180
+pareto_a = 2.5
+T = 12 # a year
+
+def pareto(xm,pareto_a):               #define a pareto PRNG
+   u = random.random()
+   return xm*(1-u)**(-1.0/pareto_a)
+
+def poisson(lamb):                    #define a poisson PRNG
+   u = random.random()
+   prob= exp(-lamb)
+   k=0
+   while 1:
+      if u <=prob:return k
+      else:u=u-prob
+      prob = float(lamb)/(k+1)*prob
+      k+=1
+
+def simulate_once():                  #simulate individual policy
+   t = 0.0
+   amount = 0.0
+   for i in range(poisson(6)):
+      amount = amount + pareto(xm,pareto_a)
+   return amount   
+
+def simulate_family():               #simulate family policy
+   members = 2 + poisson(poisson_lamb)
+   amount = 0.0
+   for i in range(members):
+      amount = amount + simulate_once()
+   return amount 
+
+def simulate_IndiCost(n):         #simulate individual policy cost
+   amount = 0.0
+   for i in range(n):
+      amount =amount+ simulate_once()
+   return int((amount/n)/.7/12)     # precision of  $1
+
+def simulate_FamiCost(n):         #simulate family policy cost
+   amount = 0.0
+   for i in range(n):
+      amount += simulate_family()
+   return int((amount/n)/.7/12)     # precision of  $1
+
+
+

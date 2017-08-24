@@ -1,0 +1,62 @@
+data gdp;
+infile "C:/Users/felix/Desktop/csc 423/final project/GDP.txt" firstobs=2;
+input GDP  UFA	M2	TIE  SHI  UGDP  DRR   RUR  GNS  GGD  CPI;
+loggdp= log(gdp);
+logufa=log(ufa);
+logm2=log(m2);
+logtie=log(tie);
+logshi=log(shi);
+logugdp=log(ugdp);
+logdrr=log(drr);
+logrur=log(rur);
+
+loggns=log(gns);
+logggd=log(ggd);
+logcpi=log(cpi);
+/*label GDP ="Gross Domestic Product"
+	  UFA ="Fixed Assets Investment"
+	  M2 ="Broad Money Supply"
+	  TIE ="Total of Import and Export"
+	  SHI="SHANGHAI Composit Index"
+	  UGDP="United States GDP"
+	  DRR="Currency rate of Yuan & U.S. Dollar"
+	  RUR="Registered unemployment rate"
+	  IR="Inflation Rate"
+	  GNS="Gross National Savings"
+	  GGD="General government gross debt"
+      CPI="Consumers Price Index";*/
+
+*proc print;
+
+proc reg;
+model loggdp =UFA	M2	TIE  SHI  UGDP  DRR   RUR  GNS  GGD  CPI/vif;
+plot r.*p. r.*nqq.;
+
+proc glmselect data = gdp;
+
+proc gplot;
+plot GDP*ufa GDP*cpi	 GDP*m2  GDP*tie	GDP*shi 	GDP*ugdp  GDP*drr	GDP*rur		GDP*gns	GDP*ggd;
+
+
+model logGDP = logUFA	logM2	logTIE  logSHI  logUGDP  logDRR   logRUR   logIR  logGNS  logGGD logcpi;
+plot r.*p. r.*nqq.;
+influence vif tol stb; 
+
+model gdp = cpi iov pmi msr;
+plot r.*p. r.*nqq. r.*logaov r.*logpmi r.*logmsr r.*logcpi;
+plot r.*cpi r.*iov r.*pmi r.*msr;
+plot r.*logaov r.*logcpi r.*logufa r.*logiov r.*logm2 r.*logpmi r.*logrpi r.*logtie r.*logtrl r.*logmsr;
+
+proc reg;
+model logGDP= logm2 logrur/ p influence vif tol clm clb; 
+plot r.*p. r.*nqq. r.*logufa r.*logcpi; 
+model logGDP= logpmi logMSR logcpi logiov logaov logufa logm2 logrpi logtie logtrl/ selection = backward slstay=0.05;
+plot r.*p. r.*nqq. r.*logaov r.*logm2 r.*logtrl r.*logcpi;
+model logGDP= logpmi logMSR logcpi logiov logaov logufa logm2 logrpi logtie logtrl/ selection = forward ; 
+; 
+
+proc surveyselect data=propval method=srs seed=43543
+   samprate=0.5 rep=2 out=subsets;
+
+run;
+quit;

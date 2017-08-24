@@ -1,0 +1,503 @@
+ 
+                                                         Thickness                     14:58 Wednesday, January 18, 2012   5
+
+                                                   Obs    white    yellow
+
+                                                     1    0.103     0.092
+                                                     2    0.103     0.099
+                                                     3    0.098     0.110
+                                                     4    0.101     0.118
+                                                     5    0.101     0.103
+                                                     6    0.094     0.101
+                                                     7    0.096     0.100
+                                                     8    0.095     0.102
+                                                     9    0.115     0.111
+                                                    10    0.011     0.014
+                                                    11    0.190     0.184
+                                                    12    0.079     0.089
+                                                    13    0.094     0.097
+                                                    14    0.010     0.012
+                                                    15    0.098     0.095
+                                                    16    0.097     0.133
+                                                    17    0.101     0.102
+                                                    18    0.108     0.100
+                                                    19    0.097     0.099
+                                                    20    0.099     0.104
+                                                    21    0.099     0.103
+                                                    22    0.095     0.102
+                                                    23    0.100     0.103
+                                                    24    0.094     0.105
+                                                    25    0.104     0.100
+                                                    26    0.098     0.101
+                                                    27    0.103     0.109
+                                                    28    0.095     0.100
+                                                    29    0.096     0.101
+
+                                                         Thickness                     14:58 Wednesday, January 18, 2012   6
+
+                                                    The MEANS Procedure
+
+                                                                                               Lower 95%       Upper 95%
+   Variable    Label                                Mean          Median         Std Dev     CL for Mean     CL for Mean
+   ---------------------------------------------------------------------------------------------------------------------
+   white       thickness of white paper        0.0956552       0.0980000       0.0296386       0.0843812       0.1069291
+   yellow      thickness of yellow paper       0.0996207       0.1010000       0.0294053       0.0884355       0.1108059
+   ---------------------------------------------------------------------------------------------------------------------
+
+
+
+                                                         Thickness                     14:58 Wednesday, January 18, 2012   7
+
+                                                  The UNIVARIATE Procedure
+                                        Variable:  white  (thickness of white paper)
+
+                                                          Moments
+
+                              N                          29    Sum Weights                 29
+                              Mean               0.09565517    Sum Observations         2.774
+                              Std Deviation      0.02963863    Variance            0.00087845
+                              Skewness           -0.5723088    Kurtosis            7.24189201
+                              Uncorrected SS       0.289944    Corrected SS        0.02459655
+                              Coeff Variation    30.9848672    Std Error Mean      0.00550376
+
+
+                                                 Basic Statistical Measures
+
+                                       Location                    Variability
+
+                                   Mean     0.095655     Std Deviation            0.02964
+                                   Median   0.098000     Variance               0.0008784
+                                   Mode     0.094000     Range                    0.18000
+                                                         Interquartile Range      0.00600
+
+                           Note: The mode displayed is the smallest of 5 modes with a count of 3.
+
+
+                                                 Tests for Location: Mu0=0
+
+                                      Test           -Statistic-    -----p Value------
+
+                                      Student's t    t  17.37998    Pr > |t|    <.0001
+                                      Sign           M      14.5    Pr >= |M|   <.0001
+                                      Signed Rank    S     217.5    Pr >= |S|   <.0001
+
+
+                                                  Quantiles (Definition 5)
+
+                                                   Quantile      Estimate
+
+                                                   100% Max         0.190
+                                                   99%              0.190
+                                                   95%              0.115
+                                                   90%              0.108
+                                                   75% Q3           0.101
+                                                   50% Median       0.098
+                                                   25% Q1           0.095
+                                                   10%              0.079
+                                                   5%               0.011
+                                                   1%               0.010
+                                                   0% Min           0.010
+
+
+                                                    Extreme Observations
+
+                                           -----Lowest----        ----Highest----
+
+                                            Value      Obs         Value      Obs
+
+                                            0.010       14         0.103       27
+                                            0.011       10         0.104       25
+                                            0.079       12         0.108       18
+                                            0.094       24         0.115        9
+                                            0.094       13         0.190       11
+
+                                                         Thickness                     14:58 Wednesday, January 18, 2012   8
+
+                                                  The UNIVARIATE Procedure
+                                       Variable:  yellow  (thickness of yellow paper)
+
+                                                          Moments
+
+                              N                          29    Sum Weights                 29
+                              Mean               0.09962069    Sum Observations         2.889
+                              Std Deviation      0.02940531    Variance            0.00086467
+                              Skewness           -0.9868965    Kurtosis            6.40493391
+                              Uncorrected SS       0.312015    Corrected SS        0.02421083
+                              Coeff Variation    29.5172748    Std Error Mean      0.00546043
+
+
+                                                 Basic Statistical Measures
+
+                                       Location                    Variability
+
+                                   Mean     0.099621     Std Deviation            0.02941
+                                   Median   0.101000     Variance               0.0008647
+                                   Mode     0.100000     Range                    0.17200
+                                                         Interquartile Range      0.00500
+
+
+                                                 Tests for Location: Mu0=0
+
+                                      Test           -Statistic-    -----p Value------
+
+                                      Student's t    t  18.24411    Pr > |t|    <.0001
+                                      Sign           M      14.5    Pr >= |M|   <.0001
+                                      Signed Rank    S     217.5    Pr >= |S|   <.0001
+
+
+                                                  Quantiles (Definition 5)
+
+                                                   Quantile      Estimate
+
+                                                   100% Max         0.184
+                                                   99%              0.184
+                                                   95%              0.133
+                                                   90%              0.118
+                                                   75% Q3           0.104
+                                                   50% Median       0.101
+                                                   25% Q1           0.099
+                                                   10%              0.089
+                                                   5%               0.014
+                                                   1%               0.012
+                                                   0% Min           0.012
+
+
+                                                    Extreme Observations
+
+                                           -----Lowest----        ----Highest----
+
+                                            Value      Obs         Value      Obs
+
+                                            0.012       14         0.110        3
+                                            0.014       10         0.111        9
+                                            0.089       12         0.118        4
+                                            0.092        1         0.133       16
+                                            0.095       15         0.184       11
+
+                                                         Thickness                     14:58 Wednesday, January 18, 2012   9
+
+                                                    The MEANS Procedure
+
+                                                                                               Lower 95%       Upper 95%
+   Variable    Label                                Mean          Median         Std Dev     CL for Mean     CL for Mean
+   ---------------------------------------------------------------------------------------------------------------------
+   white       thickness of white paper        0.0956552       0.0980000       0.0296386       0.0843812       0.1069291
+   yellow      thickness of yellow paper       0.0996207       0.1010000       0.0294053       0.0884355       0.1108059
+   ---------------------------------------------------------------------------------------------------------------------
+
+                                                         Thickness                     14:58 Wednesday, January 18, 2012  10
+
+                                                  The UNIVARIATE Procedure
+                                        Variable:  white  (thickness of white paper)
+
+                                                          Moments
+
+                              N                          29    Sum Weights                 29
+                              Mean               0.09565517    Sum Observations         2.774
+                              Std Deviation      0.02963863    Variance            0.00087845
+                              Skewness           -0.5723088    Kurtosis            7.24189201
+                              Uncorrected SS       0.289944    Corrected SS        0.02459655
+                              Coeff Variation    30.9848672    Std Error Mean      0.00550376
+
+
+                                                 Basic Statistical Measures
+
+                                       Location                    Variability
+
+                                   Mean     0.095655     Std Deviation            0.02964
+                                   Median   0.098000     Variance               0.0008784
+                                   Mode     0.094000     Range                    0.18000
+                                                         Interquartile Range      0.00600
+
+                           Note: The mode displayed is the smallest of 5 modes with a count of 3.
+
+
+                                                 Tests for Location: Mu0=0
+
+                                      Test           -Statistic-    -----p Value------
+
+                                      Student's t    t  17.37998    Pr > |t|    <.0001
+                                      Sign           M      14.5    Pr >= |M|   <.0001
+                                      Signed Rank    S     217.5    Pr >= |S|   <.0001
+
+
+                                                  Quantiles (Definition 5)
+
+                                                   Quantile      Estimate
+
+                                                   100% Max         0.190
+                                                   99%              0.190
+                                                   95%              0.115
+                                                   90%              0.108
+                                                   75% Q3           0.101
+                                                   50% Median       0.098
+                                                   25% Q1           0.095
+                                                   10%              0.079
+                                                   5%               0.011
+                                                   1%               0.010
+                                                   0% Min           0.010
+
+
+                                                    Extreme Observations
+
+                                           -----Lowest----        ----Highest----
+
+                                            Value      Obs         Value      Obs
+
+                                            0.010       14         0.103       27
+                                            0.011       10         0.104       25
+                                            0.079       12         0.108       18
+                                            0.094       24         0.115        9
+                                            0.094       13         0.190       11
+
+                                                         Thickness                     14:58 Wednesday, January 18, 2012  11
+
+                                                  The UNIVARIATE Procedure
+                                       Variable:  yellow  (thickness of yellow paper)
+
+                                                          Moments
+
+                              N                          29    Sum Weights                 29
+                              Mean               0.09962069    Sum Observations         2.889
+                              Std Deviation      0.02940531    Variance            0.00086467
+                              Skewness           -0.9868965    Kurtosis            6.40493391
+                              Uncorrected SS       0.312015    Corrected SS        0.02421083
+                              Coeff Variation    29.5172748    Std Error Mean      0.00546043
+
+
+                                                 Basic Statistical Measures
+
+                                       Location                    Variability
+
+                                   Mean     0.099621     Std Deviation            0.02941
+                                   Median   0.101000     Variance               0.0008647
+                                   Mode     0.100000     Range                    0.17200
+                                                         Interquartile Range      0.00500
+
+
+                                                 Tests for Location: Mu0=0
+
+                                      Test           -Statistic-    -----p Value------
+
+                                      Student's t    t  18.24411    Pr > |t|    <.0001
+                                      Sign           M      14.5    Pr >= |M|   <.0001
+                                      Signed Rank    S     217.5    Pr >= |S|   <.0001
+
+
+                                                  Quantiles (Definition 5)
+
+                                                   Quantile      Estimate
+
+                                                   100% Max         0.184
+                                                   99%              0.184
+                                                   95%              0.133
+                                                   90%              0.118
+                                                   75% Q3           0.104
+                                                   50% Median       0.101
+                                                   25% Q1           0.099
+                                                   10%              0.089
+                                                   5%               0.014
+                                                   1%               0.012
+                                                   0% Min           0.012
+
+
+                                                    Extreme Observations
+
+                                           -----Lowest----        ----Highest----
+
+                                            Value      Obs         Value      Obs
+
+                                            0.012       14         0.110        3
+                                            0.014       10         0.111        9
+                                            0.089       12         0.118        4
+                                            0.092        1         0.133       16
+                                            0.095       15         0.184       11
+
+
+                                                    Thickness data paper               14:58 Wednesday, January 18, 2012  12
+
+                                                   Obs    white    yellow
+
+                                                     1    0.103     0.092
+                                                     2    0.103     0.099
+                                                     3    0.098     0.110
+                                                     4    0.101     0.118
+                                                     5    0.101     0.103
+                                                     6    0.094     0.101
+                                                     7    0.096     0.100
+                                                     8    0.095     0.102
+                                                     9    0.115     0.111
+                                                    10    0.011     0.014
+                                                    11    0.190     0.184
+                                                    12    0.079     0.089
+                                                    13    0.094     0.097
+                                                    14    0.010     0.012
+                                                    15    0.098     0.095
+                                                    16    0.097     0.133
+                                                    17    0.101     0.102
+                                                    18    0.108     0.100
+                                                    19    0.097     0.099
+                                                    20    0.099     0.104
+                                                    21    0.099     0.103
+                                                    22    0.095     0.102
+                                                    23    0.100     0.103
+                                                    24    0.094     0.105
+                                                    25    0.104     0.100
+                                                    26    0.098     0.101
+                                                    27    0.103     0.109
+                                                    28    0.095     0.100
+                                                    29    0.096     0.101
+
+                                                    Thickness data paper               14:58 Wednesday, January 18, 2012  13
+
+                                                  The UNIVARIATE Procedure
+                                                    Variable:  Thickness
+
+                                                          Moments
+
+                              N                          58    Sum Weights                 58
+                              Mean               0.09763793    Sum Observations         5.663
+                              Std Deviation      0.02933036    Variance            0.00086027
+                              Skewness            -0.752454    Kurtosis            6.01430278
+                              Uncorrected SS       0.601959    Corrected SS         0.0490354
+                              Coeff Variation    30.0399254    Std Error Mean      0.00385127
+
+
+                                                 Basic Statistical Measures
+
+                                       Location                    Variability
+
+                                   Mean     0.097638     Std Deviation            0.02933
+                                   Median   0.100000     Variance               0.0008603
+                                   Mode     0.101000     Range                    0.18000
+                                                         Interquartile Range      0.00700
+
+                           Note: The mode displayed is the smallest of 2 modes with a count of 6.
+
+
+                                                 Tests for Location: Mu0=0
+
+                                      Test           -Statistic-    -----p Value------
+
+                                      Student's t    t  25.35217    Pr > |t|    <.0001
+                                      Sign           M        29    Pr >= |M|   <.0001
+                                      Signed Rank    S     855.5    Pr >= |S|   <.0001
+
+
+                                                  Quantiles (Definition 5)
+
+                                                   Quantile      Estimate
+
+                                                   100% Max         0.190
+                                                   99%              0.190
+                                                   95%              0.133
+                                                   90%              0.111
+                                                   75% Q3           0.103
+                                                   50% Median       0.100
+                                                   25% Q1           0.096
+                                                   10%              0.089
+                                                   5%               0.012
+                                                   1%               0.010
+                                                   0% Min           0.010
+
+
+                                                    Extreme Observations
+
+                                           -----Lowest----        ----Highest----
+
+                                            Value      Obs         Value      Obs
+
+                                            0.010       14         0.115        9
+                                            0.011       10         0.118       33
+                                            0.012       43         0.133       45
+                                            0.014       39         0.184       40
+                                            0.079       12         0.190       11
+
+                                                  sorted reformat Thickness            14:58 Wednesday, January 18, 2012  14
+
+                                               Obs    paperbrand    Thickness
+
+                                                 1      white         0.103
+                                                 2      white         0.103
+                                                 3      white         0.098
+                                                 4      white         0.101
+                                                 5      white         0.101
+                                                 6      white         0.094
+                                                 7      white         0.096
+                                                 8      white         0.095
+                                                 9      white         0.115
+                                                10      white         0.011
+                                                11      white         0.190
+                                                12      white         0.079
+                                                13      white         0.094
+                                                14      white         0.010
+                                                15      white         0.098
+                                                16      white         0.097
+                                                17      white         0.101
+                                                18      white         0.108
+                                                19      white         0.097
+                                                20      white         0.099
+                                                21      white         0.099
+                                                22      white         0.095
+                                                23      white         0.100
+                                                24      white         0.094
+                                                25      white         0.104
+                                                26      white         0.098
+                                                27      white         0.103
+                                                28      white         0.095
+                                                29      white         0.096
+                                                30      yellow        0.092
+                                                31      yellow        0.099
+                                                32      yellow        0.110
+                                                33      yellow        0.118
+                                                34      yellow        0.103
+                                                35      yellow        0.101
+                                                36      yellow        0.100
+                                                37      yellow        0.102
+                                                38      yellow        0.111
+                                                39      yellow        0.014
+                                                40      yellow        0.184
+                                                41      yellow        0.089
+                                                42      yellow        0.097
+                                                43      yellow        0.012
+                                                44      yellow        0.095
+                                                45      yellow        0.133
+                                                46      yellow        0.102
+                                                47      yellow        0.100
+                                                48      yellow        0.099
+                                                49      yellow        0.104
+                                                50      yellow        0.103
+                                                51      yellow        0.102
+                                                52      yellow        0.103
+                                                53      yellow        0.105
+                                                54      yellow        0.100
+                                                55      yellow        0.101
+                                                56      yellow        0.109
+                                                57      yellow        0.100
+                                                58      yellow        0.101
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

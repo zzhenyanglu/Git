@@ -1,0 +1,38 @@
+data fedex; infile "fedex_earnings2010.txt" delimiter="09"x missover firstobs=2; 
+title 'Fedex Quarterly earnings'; 
+input earn date yyq6.; 
+format date yyq6.; 
+run;
+
+proc univariate;
+var earn;
+histogram/normal;
+qqplot/normal(mu=est sigma=est);
+
+data fedex_1;
+set fedex;
+fst_dif=earn-lag(earn);
+
+
+proc print data=fedex_1;
+run;
+
+goptions reset=global;
+proc univariate;
+var fst_dif;
+histogram/normal;
+qqplot/normal(mu=est sigma=est);
+
+goptions reset = global;
+proc arima;
+identify var = earn(1,4) stationarity = (adf =5) nlag=20 outcov=acf data = fedex;
+*estimate q =(1)(4) noconstant method=ml; 
+estimate q =(0)(4) noconstant method=ml; 
+forecast out=b lead=5 id=date;
+run;
+
+proc univariate data=b;
+var residual;
+histogram/normal;
+title 'residual of SARIMA(0,1,0)(0,1,1)4';
+qqplot/normal(mu=est sigma=est);

@@ -1,0 +1,50 @@
+from random import *
+from math import *
+
+class std():
+    T = 0.0     # if T > 1, jump happens.
+    def pareto(self,xm,pareto_a):    #define a pareto PRNG
+        u = random()
+        return xm*(1-u)**(-1.0/pareto_a)
+
+    def daily_return(self,N): # back out daily return!
+        
+        daily = 0.0
+        if self.T>1:
+            for i in range(N+1):
+                daily = daily + self.pareto(-0.33,1.5)
+            self.T= 0.0
+            return daily
+        else:
+            for i in range(N+1):
+                daily = daily + gauss(0.0005,0.04)
+            self.T = self.T+expovariate(2500)
+            return daily/N
+
+    """def std(self,N):
+        x = 0.0
+        sum = 0.0
+        sum_2 =0.0 
+        for i in range(1,N): # simulate N traders
+            self.T = 0.0
+            x = 0.0
+            sum = 0.0
+            sum_2 =0.0   
+            for j in range(250):  # compute a whole year`s standard deviation
+               x = self.daily_return(N)
+               sum = sum + x
+               sum_2 = sum_2 + x**2
+            print "stardard deviation for", i , "annual log return is", (sum_2/250 - (sum/250)**2)**1/2  ## std deviation """
+
+    def simulate_year(self,N):   ####simulate daily returns for a year in case of N traders!
+        fp = open('simulate_many.txt','w')
+        self.T =0.0
+        for i in range(250):
+            x = 0.0
+            print >>fp, self.daily_return(N)
+        print "done writing for ", N,"traders"
+        fp.close()
+            
+
+            
+    

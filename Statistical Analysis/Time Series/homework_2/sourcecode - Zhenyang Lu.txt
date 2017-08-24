@@ -1,0 +1,48 @@
+proc import datafile='oilprice.csv' dbms=csv out=oil_price;
+getnames=yes;
+run;
+
+Data oilprice;
+set oil_price;
+price_lag=lag(price);
+rate = (price-lag(price))/lag(price);
+
+proc sort;
+by date;
+
+proc print data=oilprice;
+run;
+
+proc gplot data=oilprice;
+symbol i=join;
+plot rate*Date;
+plot price*Date;
+
+proc arima data=oilprice;
+identify var = rate nlag = 20 outcov=acf data=oilprice noprint;
+estimate p =6 plot method=ml;
+estimate p =(1,3,6) plot method=ml;
+estimate q =6 plot method=ml;
+estimate q =(1,3,6) plot method=ml;
+forecast lead=5 printall interval=day id=date out=forecast;
+run;
+
+proc print data = forecast;
+run;
+
+goptions reset=global;
+symbol1 interpol =join value=star color=red w=1;
+symbol2 interpol = join color=black;
+symbol3 interpol = join value=none color = blue;
+symbol4 interpol = join value=none color = blue;
+legend1 label=none
+        shape=symbol(4,2)
+        position=(top center inside)
+        mode=share;
+
+proc gplot data=forecast;
+plot forecast*Date rate*Date u95*Date l95*date / overlay 
+haxis = '1JAN13:00:00:00'd to '29JAN13:00:00:00'd by day legend=legend1;
+
+run;
+

@@ -1,0 +1,18 @@
+
+The exploratory data analysis may suggest a model that is adequate for fitting the data. Do the data show a nonlinear relationship so that a data transform is needed?
+
+Did you check for collinearity among the independent variables?
+
+Did you use a variable selection procedure? If so, describe it.
+
+If several models appear equally good for predicting the data, discuss them all, including, perhaps, an intuitive choice of the model that makes the most sense.
+
+Analyze the residual plots. This might indicate failures in the assumptions or inadequacies in the model
+
+Check for leverage points, influential points, and outliers in your dataset. Decide if they should be deleted or if the model needs to be modified to account for them.
+
+Can your model be improved? Are you satisfied with the model you selected?
+
+Use your selected model to examine the relationships among the variables. Identify the strongest predictors among the independent variables?
+
+Apply cross-validation techniques to evaluate how well your model does for prediction.

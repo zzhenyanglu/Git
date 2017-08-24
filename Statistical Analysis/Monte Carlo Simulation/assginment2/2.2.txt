@@ -1,0 +1,44 @@
+from math import *
+import random
+
+annual_risk_free_rate = 0.03
+mortgage_type = 10              # 10 years 20 years 30 years
+default_prob = 0.01
+month = 12
+no_payment = mortgage_type * month 
+monthly_payment = 1000        # you could change it based on your need
+
+
+
+def default():                 # the function to test whether default
+   if random.random() < default_prob:
+      return 1
+   else: return 0
+
+def default_NPV(default_period,monthly_payment):  # compute NPV of the mortgage that insurance company have to pay for a random default period!
+   NPV = 0.0
+   t = default_period 
+   for i in range(t, no_payment):
+      NPV = NPV + (monthly_payment*exp(-(annual_risk_free_rate/month)*t))
+      t = t+1
+   return NPV 
+
+def default_one_person():  # simulate NPV of how much a insurance should pay if one defaulted
+   t = 0
+   sum = 0.0
+   for i in range(no_payment):
+      if default():
+         sum = default_NPV(t,monthly_payment)
+         break
+      else: 
+         t = t + 1
+   return sum
+
+def simulate_many( n ):     # simulate a number of n of persons`s default and take the expected value for those n persons`s insurance cost for the insurance company 
+   total = 0.0
+   for i in range(n):
+      total = total +  default_one_person()
+   return total/n     
+
+ 
+

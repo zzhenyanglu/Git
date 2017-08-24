@@ -1,0 +1,74 @@
+proc import datafile = "cpius12.csv" out = cpi;
+datarow=2;
+getnames = yes;
+run;
+
+proc univariate;
+var inflation;
+histogram /normal; 
+qqplot / normal (mu=est sigma=est);
+output out=stats kurtosis=kurtosis skewness=skewness N=ntot;
+run;
+
+data computation;
+set stats;
+label pv_kur = "P-value for kurtosis test";
+skew_test = skewness/sqrt(6/Ntot);
+kurt_test = kurtosis/sqrt(24/Ntot);
+jb = skew_test*skew_test+kurt_test*kurt_test;
+pv_skew = 2* (1-cdf('NORMAL', abs(skew_test)));
+pv_kur = 2*(1-cdf('NORMAL', abs(kurt_test)));
+pv_jb = 1-cdf('CHISQUARE', jb,2);
+label pv_kur = "P-value for kurtosis test" 
+	pv_skew= "P-value for skewness test"
+	pv_jb = "P-value for Jarque & Bera test"
+	jb = "Jarque & Bera statistic";
+
+Title " Results of test on skewness";
+proc print data= computation label;
+var skewness skew_test pv_skew;
+run;
+
+Title " Results of test on kurtosis";
+proc print data= computation label;
+var kurtosis kurt_test pv_kur;
+run;
+
+Title " Results of Jacque and Bera test on normality";
+proc print data= computation label;
+var skewness kurtosis jb pv_jb;
+run;
+
+proc gplot data=cpi;
+symbol i=join;  
+plot inflation*date; 
+format day year4.;
+title "Monthly inflation";
+run;  
+
+proc arima;
+identify var = inflation nlag = 15 outcov=acf data=cpi;
+run;
+
+data acf1;
+set acf;
+if lag=0 then up0=1;
+else up=1.96/sqrt(n);
+lo=-up;
+run;
+
+proc gplot data=acf1;
+axis1 order=-1 to 1 by 0.2 length=4in;
+axis2 order=0 to 15 by 5 length=4in;
+plot (corr up lo)*lag /frame overlay vaxis=axis1 haxis=axis2 vref=0 cvref=red;
+symbol1 color=blue i=needle v=none w= 6 ;
+symbol2 color=red i=join v=none w=2; 
+symbol3 color=red i=join v=none w=2;
+label corr='r(k)=Autocorrelation';
+title "Correlogram for inflation rate";
+run;
+quit;
+
+PROC ARIMA data=cpi;
+identify var=inflation nlag=15;
+run;

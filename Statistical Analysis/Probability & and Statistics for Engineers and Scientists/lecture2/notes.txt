@@ -1,0 +1,53 @@
+recap lecture 1:
+
+Geometric distribution's PMF coming from coin tossing, number of toss until a head comes up: p(1-p)^(n-1)
+
+Binomial PMF coming from coin tossing, number of head in n independent flips C(k,n)p^k(1-p)^(n-k)
+
+p(a<=X<b) = p(a<X<=b)
+
+to qualify as a PDF, f(x) is positive. sum of f(x) is 1.
+
+when smaller interval on a PDF axis, if a very small interval, probability that X takes a value can be approximately f(x)*interval. 
+
+
+
+lecture 2 (POSSIBLY HEAVY TEST ON uniform distribution)
+
+Geometric distribution E(x) = 1/p 
+
+
+E[X^2] != (E(x))^2
+
+E[g(x)] != g(E[x]), if it's not linear.
+
+if it is linear: 
+
+E[a] = a 
+E[aX] = aE[X]
+E[aX+b] = aE[X]+b
+
+g(x) = (x-E[x])^2
+E[g(x)] = E[(x-E[x])^2]=E[X^2] -(E[x])^2
+ 
+bernoulli
+CDF, PMF, mean, variance
+
+binomial (sample with replacement, so that there is no dependence)
+PMf, CDF, mean, variance
+
+var(x) = var(x1) +var(x2) ... + var(xn) # because it's indepedent process
+
+hypergeometric(binomial and sampling without replacement)
+
+n/N <= 5% , hypergeo and binomial are identical
+
+poisson 
+mu = np
+when n -> infinity, p -> -infinity, binomial dist -> poisson! 
+
+
+memorylessness
+geometric has it. 
+proof: P(X>m + t| x>m) = p((X>m+t) ^ (X>m)) / p(X>m) = p(X>m+t)/p(X>m) = p(1-p)^(m+t) / p(1-p)^m = (1-p)^t, which is P(X>t). 
+it only matters when you start.   

@@ -1,0 +1,76 @@
+data lathe; 
+input type$ rpm hours @@;
+
+dummy = (type = 'A');
+dummy_sym = dummy ;
+label 
+      type  = 'Cutting tool type' 
+      rpm   = 'Lathe speen in RPM'
+      hours = 'Tool life in hours';
+datalines;
+
+A 243 38.7 A 340 33.5 A 381 35.1 A 415 23.1 A 449 27.2 A 470 25.0 A 529 17.1 A 588 11.0 A 612 23.0 A 672 11.1
+B 519 40.3 B 522 43.1 B 624 35.9 B 711 36.3 B 712 26.4 B 791 37.7 B 820 20.2 B 900 14.6 B 947 17.1 B 988 11.2
+;
+
+proc print; 
+
+goption reset = all;
+symbol1 value = B color = black;
+symbol2 value = A color = blue; 
+
+proc gplot; 
+      plot hours * rpm = dummy_sym;
+
+symbol value = 'star'  color = black; 
+
+proc reg;
+   model hours = dummy rpm ;
+   plot r.*p. r.*nqq.;
+
+run;
+quit;
+
+
+
+
+
+
+
+
+
+
+
+data survey;
+infile "C:/Users/felix/Desktop/csc 423/project5/salary-survey.txt" firstobs=6;
+input exper educ mgt salary;
+label exper = 'Experience '
+      educ = 'Education'
+      mgt =  'Management Responsability'
+      salary = 'Salary';
+
+	  proc print;
+
+proc reg;
+model salary = exper  educ  mgt /p r clm alpha = 0.05;
+plot r.*p. r.*nqq. r.*exper r.*educ r.*mgt;
+
+proc gplot data = survey;
+plot salary*exper salary*educ salary*mgt exper*educ exper*mgt educ*mgt;
+
+
+data survey_dummy;
+set survey;
+
+dummy_mgt = (mgt =  1);
+dummy_educ_b = (educ = 2);
+dummy_educ_c = (educ = 3);
+
+keep exper dummy_mgt dummy_educ_c dummy_educ_b salary;
+
+*proc print;
+proc reg; 
+model salary = exper dummy_mgt dummy_educ_c dummy_educ_b;
+
+run;
+quit;

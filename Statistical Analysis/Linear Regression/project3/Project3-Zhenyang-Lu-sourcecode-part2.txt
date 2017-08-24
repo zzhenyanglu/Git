@@ -1,0 +1,67 @@
+data Usedcars;
+
+input Price Year Mile;
+title Used Car Price for Acura TL;
+
+datalines;
+8990   2003  157401
+9790   2004  108000
+10931  2004  106289
+11876  2005  96078
+11990  2005  110849
+12490  2004  97608
+13876  2005  92776
+13989  2005  88780
+13995  2005  98066
+14998  2005  74726
+29990  2011  9401
+29990  2009  16681
+30748  2010  30748
+30996  2010  18956
+12888  2005  117429
+13981  2006  130150
+16996  2007  111203
+16998  2004  52174
+17928  2007  63374
+19999  2008  64721
+20000  2008  61684
+20995  2007  62472
+21998  2008  43554
+21995  2008  21995
+22966  2008  34806
+23995  2009  34295
+23601  2009  34716
+24990  2009  48290
+26910  2009  34414
+26995  2009  12879
+;
+
+proc sort;
+by Price;
+
+proc print;
+
+proc gplot;
+plot Year*Mile;
+
+proc gplot;
+plot Year*Price;
+
+proc gplot;
+plot Mile*Price;
+
+proc reg corr data=Usedcars;
+model Price = Mile;
+plot Price*Mile r.*Mile r.*p. r.*nqq.;;
+
+model Price = Year;
+plot Price*Year r.*Year r.*p. r.*nqq.;
+
+model Year = Mile;
+plot Year*Mile  r.*Mile r.*p. r.*nqq.;
+
+proc reg;
+model Price = Year Mile;
+plot r.*p. r.*Year r.*Mile;
+
+run;
