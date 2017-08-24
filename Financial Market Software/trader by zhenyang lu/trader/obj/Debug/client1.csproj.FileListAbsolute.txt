@@ -1,0 +1,36 @@
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\bin\Debug\client1.exe.config
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\bin\Debug\client1.exe
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\bin\Debug\client1.pdb
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\obj\Debug\client1.csprojResolveAssemblyReference.cache
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\obj\Debug\client1.exe
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\obj\Debug\client1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.1\client1\bin\Debug\client1.exe.config
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.1\client1\obj\Debug\client1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.1\client1\obj\Debug\client1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.1\client1\obj\Debug\client1.csprojResolveAssemblyReference.cache
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.1\client1\bin\Debug\client1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.1\client1\bin\Debug\client1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.2\client1\bin\Debug\client1.exe.config
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.2\client1\obj\Debug\client1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.2\client1\obj\Debug\client1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.2\client1\bin\Debug\client1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.2\client1\bin\Debug\client1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.2\client1\obj\Debug\client1.csprojResolveAssemblyReference.cache
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.3\client1\bin\Debug\client1.exe.config
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.3\client1\obj\Debug\client1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.3\client1\obj\Debug\client1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.3\client1\bin\Debug\client1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.3\client1\bin\Debug\client1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.3\client1\obj\Debug\client1.csprojResolveAssemblyReference.cache
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.4\client1\bin\Debug\client1.exe.config
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.4\client1\obj\Debug\client1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.4\client1\obj\Debug\client1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.4\client1\obj\Debug\client1.csprojResolveAssemblyReference.cache
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.4\client1\bin\Debug\client1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\Client\client1.4\client1\bin\Debug\client1.pdb
+C:\Users\chuan\Dropbox\Chicago Salt Exchange\version-CN-1.1\client1.4\client1\bin\Debug\client1.exe.config
+C:\Users\chuan\Dropbox\Chicago Salt Exchange\version-CN-1.1\client1.4\client1\obj\Debug\client1.exe
+C:\Users\chuan\Dropbox\Chicago Salt Exchange\version-CN-1.1\client1.4\client1\obj\Debug\client1.pdb
+C:\Users\felix\Desktop\client1.4\client1\bin\Debug\client1.exe.config
+C:\Users\felix\Desktop\client1.4\client1\obj\Debug\client1.exe
+C:\Users\felix\Desktop\client1.4\client1\obj\Debug\client1.pdb

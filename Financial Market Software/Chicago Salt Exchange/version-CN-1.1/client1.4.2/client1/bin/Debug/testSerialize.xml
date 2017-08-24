@@ -1,0 +1,11 @@
+<XmlObjectSerializer ObjectType="client.FuturesOrder">
+  <Property PropertyName="TimeStamp">6/4/2013 4:26 PM</Property>
+  <Property PropertyName="Instrument">Salt</Property>
+  <Property PropertyName="OrderAction">New</Property>
+  <Property PropertyName="Active">True</Property>
+  <Property PropertyName="OrderType">Market</Property>
+  <Property PropertyName="BuySell">Sell</Property>
+  <Property PropertyName="Price">20.86</Property>
+  <Property PropertyName="Quantity">6</Property>
+  <Property PropertyName="OrderID">100000001</Property>
+</XmlObjectSerializer>

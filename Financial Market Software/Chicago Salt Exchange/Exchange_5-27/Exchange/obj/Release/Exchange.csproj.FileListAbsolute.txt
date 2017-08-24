@@ -1,0 +1,5 @@
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\bin\Release\Exchange.exe.config
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\bin\Release\Exchange.exe
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\bin\Release\Exchange.pdb
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\obj\Release\Exchange.exe
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\obj\Release\Exchange.pdb

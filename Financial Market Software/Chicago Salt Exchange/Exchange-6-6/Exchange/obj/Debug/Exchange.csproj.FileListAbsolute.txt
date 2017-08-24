@@ -1,0 +1,22 @@
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\bin\Debug\Exchange.exe
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\bin\Debug\Exchange.pdb
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\obj\Debug\Exchange.exe
+c:\users\mike\documents\visual studio 2012\Projects\Exchange\Exchange\obj\Debug\Exchange.pdb
+C:\Users\mbarabasz\Desktop\Exchange\Exchange\bin\Debug\Exchange.exe.config
+C:\Users\mbarabasz\Desktop\Exchange\Exchange\obj\Debug\Exchange.exe
+C:\Users\mbarabasz\Desktop\Exchange\Exchange\obj\Debug\Exchange.pdb
+C:\Users\mbarabasz\Desktop\Exchange\Exchange\bin\Debug\Exchange.exe
+C:\Users\mbarabasz\Desktop\Exchange\Exchange\bin\Debug\Exchange.pdb
+C:\Users\mbarabasz\Desktop\Exchange\Exchange\obj\Debug\Exchange.csprojResolveAssemblyReference.cache
+G:\Exchange\Exchange\bin\Debug\Exchange.exe.config
+G:\Exchange\Exchange\obj\Debug\Exchange.exe
+G:\Exchange\Exchange\obj\Debug\Exchange.pdb
+G:\Exchange\Exchange\obj\Debug\Exchange.csprojResolveAssemblyReference.cache
+G:\Exchange\Exchange\bin\Debug\Exchange.exe
+G:\Exchange\Exchange\bin\Debug\Exchange.pdb
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Exchange\obj\Debug\Exchange.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Exchange\bin\Debug\Exchange.exe.config
+G:\Exchange\Exchange\obj\Debug\Exchange.Form1.resources
+G:\Exchange\Exchange\obj\Debug\Exchange.csproj.GenerateResource.Cache
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Exchange\obj\Debug\Exchange.Form1.resources
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Exchange\obj\Debug\Exchange.csproj.GenerateResource.Cache

@@ -1,0 +1,5 @@
+C:\Exchange\Reflection\bin\Debug\Reflection.exe.config
+C:\Exchange\Reflection\bin\Debug\Reflection.exe
+C:\Exchange\Reflection\bin\Debug\Reflection.pdb
+C:\Exchange\Reflection\obj\Debug\Reflection.exe
+C:\Exchange\Reflection\obj\Debug\Reflection.pdb

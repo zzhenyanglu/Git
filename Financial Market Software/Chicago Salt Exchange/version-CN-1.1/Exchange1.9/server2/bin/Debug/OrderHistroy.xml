@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OrderHistory>
+  <Order Instrument="MSFT" OrderID="310000000" OrderType="Limit" BuySell="B" Price="500" Quantity="50" TimeStamp="6/9/2013 11:10:01 AM" Action="New" />
+  <Order Instrument="MSFT" OrderID="310000001" OrderType="Limit" BuySell="S" Price="19.5" Quantity="10" TimeStamp="6/9/2013 11:10:01 AM" Action="New" />
+  <Order Instrument="MSFT" OrderID="310000000" OrderType="Limit" BuySell="B" Price="500" Quantity="50" TimeStamp="6/9/2013 11:10:25 AM" Action="Cancel" />
+</OrderHistory>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClearingHouse>
+  <Trader ID="1" BankAccount="500" MarginAccount="0" TotalOrder="0" CurrentQuote="20.0" />
+  <Trader ID="2" BankAccount="1000" MarginAccount="0" TotalOrder="0" CurrentQuote="20.0" />
+  <Trader ID="3" BankAccount="8" MarginAccount="22" TotalOrder="0" CurrentQuote="500">
+  </Trader>
+</ClearingHouse>

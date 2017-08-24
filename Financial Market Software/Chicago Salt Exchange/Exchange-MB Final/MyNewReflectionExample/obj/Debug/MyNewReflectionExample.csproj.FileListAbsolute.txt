@@ -1,0 +1,11 @@
+C:\Exchange\MyNewReflectionExample\bin\Debug\MyNewReflectionExample.exe.config
+C:\Exchange\MyNewReflectionExample\bin\Debug\MyNewReflectionExample.exe
+C:\Exchange\MyNewReflectionExample\bin\Debug\MyNewReflectionExample.pdb
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.exe
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.pdb
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.csprojResolveAssemblyReference.cache
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.csproj.GenerateResource.Cache
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.Exchange_Starter.resources
+D:\Caleb\Dropbox\Chicago Salt Exchange\Exchange-MB Final\MyNewReflectionExample\bin\Debug\MyNewReflectionExample.exe.config
+D:\Caleb\Dropbox\Chicago Salt Exchange\Exchange-MB Final\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.exe
+D:\Caleb\Dropbox\Chicago Salt Exchange\Exchange-MB Final\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.pdb

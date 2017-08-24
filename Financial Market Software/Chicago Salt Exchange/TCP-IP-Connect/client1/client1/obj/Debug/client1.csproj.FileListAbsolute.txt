@@ -1,0 +1,6 @@
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\bin\Debug\client1.exe.config
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\bin\Debug\client1.exe
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\bin\Debug\client1.pdb
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\obj\Debug\client1.csprojResolveAssemblyReference.cache
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\obj\Debug\client1.exe
+c:\users\chuan\documents\visual studio 2012\Projects\client1\client1\obj\Debug\client1.pdb

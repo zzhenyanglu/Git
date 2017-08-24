@@ -1,0 +1,15 @@
+c:\users\chuan\documents\visual studio 2012\Projects\Exchange\Exchange\bin\Debug\Exchange.exe.config
+c:\users\chuan\documents\visual studio 2012\Projects\Exchange\Exchange\obj\Debug\Exchange.csprojResolveAssemblyReference.cache
+c:\users\chuan\documents\visual studio 2012\Projects\Exchange\Exchange\bin\Debug\Exchange.exe
+c:\users\chuan\documents\visual studio 2012\Projects\Exchange\Exchange\bin\Debug\Exchange.pdb
+c:\users\chuan\documents\visual studio 2012\Projects\Exchange\Exchange\obj\Debug\Exchange.exe
+c:\users\chuan\documents\visual studio 2012\Projects\Exchange\Exchange\obj\Debug\Exchange.pdb
+C:\Users\chuan\Documents\Visual Studio 2012\Projects\Exchange1.2\Exchange\bin\Debug\Exchange.exe.config
+C:\Users\chuan\Documents\Visual Studio 2012\Projects\Exchange1.2\Exchange\obj\Debug\Exchange.exe
+C:\Users\chuan\Documents\Visual Studio 2012\Projects\Exchange1.2\Exchange\obj\Debug\Exchange.pdb
+C:\Users\chuan\Documents\Visual Studio 2012\Projects\Exchange1.2\Exchange\bin\Debug\Exchange.exe
+C:\Users\chuan\Documents\Visual Studio 2012\Projects\Exchange1.2\Exchange\bin\Debug\Exchange.pdb
+C:\Users\chuan\Documents\Visual Studio 2012\Projects\Exchange1.2\Exchange\obj\Debug\Exchange.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Dropbox\Chicago Salt Exchange\Exchange1.2\Exchange\bin\Debug\Exchange.exe.config
+C:\Users\Mike\Dropbox\Chicago Salt Exchange\Exchange1.2\Exchange\obj\Debug\Exchange.exe
+C:\Users\Mike\Dropbox\Chicago Salt Exchange\Exchange1.2\Exchange\obj\Debug\Exchange.pdb

@@ -1,0 +1,6 @@
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\Service\bin\Debug\Service.exe.config
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\Service\bin\Debug\Service.exe
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\Service\bin\Debug\Service.pdb
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\Service\obj\Debug\Service.exe
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\Service\obj\Debug\Service.pdb

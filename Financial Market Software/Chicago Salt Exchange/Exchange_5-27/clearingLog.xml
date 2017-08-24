@@ -1,0 +1,27 @@
+<ClearingCorpLog>
+  <Trader ID="1">
+    <Balance>100000</Balance>
+    <Positions>
+      <Ticker Ticker="BAC">
+        <Quantity>0</Quantity>
+      </Ticker>
+      <Ticker Ticker="WFC">
+        <Quantity>50</Quantity>
+      </Ticker>
+    </Positions>
+  </Trader>
+  <Trader ID="2">
+    <Balance>56</Balance>
+    <Positions>
+      <Ticker Ticker="BAC">
+        <Quantity>50</Quantity>
+      </Ticker>
+      <Ticker Ticker="WFC">
+        <Quantity>0</Quantity>
+      </Ticker>
+      <Ticker Ticker="C">
+        <Quantity>0</Quantity>
+      </Ticker>
+    </Positions>
+  </Trader>
+</ClearingCorpLog>

@@ -1,0 +1,12 @@
+c:\users\chuan\documents\visual studio 2012\Projects\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe.config
+c:\users\chuan\documents\visual studio 2012\Projects\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+c:\users\chuan\documents\visual studio 2012\Projects\WindowsService1\WindowsService1\bin\Debug\WindowsService1.pdb
+c:\users\chuan\documents\visual studio 2012\Projects\WindowsService1\WindowsService1\obj\Debug\WindowsService1.csprojResolveAssemblyReference.cache
+c:\users\chuan\documents\visual studio 2012\Projects\WindowsService1\WindowsService1\obj\Debug\WindowsService1.exe
+c:\users\chuan\documents\visual studio 2012\Projects\WindowsService1\WindowsService1\obj\Debug\WindowsService1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe.config
+C:\Users\chuan\Desktop\CSC559\Final Project\WindowsService1\WindowsService1\obj\Debug\WindowsService1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\WindowsService1\WindowsService1\obj\Debug\WindowsService1.pdb
+C:\Users\chuan\Desktop\CSC559\Final Project\WindowsService1\WindowsService1\obj\Debug\WindowsService1.csprojResolveAssemblyReference.cache
+C:\Users\chuan\Desktop\CSC559\Final Project\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+C:\Users\chuan\Desktop\CSC559\Final Project\WindowsService1\WindowsService1\bin\Debug\WindowsService1.pdb

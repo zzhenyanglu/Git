@@ -1,0 +1,36 @@
+﻿Installing assembly 'C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.InstallLog
+   assemblypath = C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.exe
+   logtoconsole = 
+Installing service LoaderService...
+Service LoaderService has been successfully installed.
+Creating EventLog source LoaderService in log Application...
+Committing assembly 'C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.InstallLog
+   assemblypath = C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.exe
+   logtoconsole = 
+Uninstalling assembly 'C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.InstallLog
+   assemblypath = C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.exe
+Removing EventLog source LoaderService.
+Service LoaderService is being removed from the system...
+Service LoaderService was successfully removed from the system.
+Installing assembly 'D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\ApplicationLoaderService\bin\Debug\LoaderService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\ApplicationLoaderService\bin\Debug\LoaderService.InstallLog
+   assemblypath = D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\ApplicationLoaderService\bin\Debug\LoaderService.exe
+Installing service LoaderService...
+Service LoaderService has been successfully installed.
+Creating EventLog source LoaderService in log Application...
+Committing assembly 'D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\ApplicationLoaderService\bin\Debug\LoaderService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\ApplicationLoaderService\bin\Debug\LoaderService.InstallLog
+   assemblypath = D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\ApplicationLoaderService\bin\Debug\LoaderService.exe

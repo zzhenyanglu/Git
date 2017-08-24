@@ -1,0 +1,12 @@
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Clearing House\bin\Debug\Clearing House.exe.config
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Clearing House\bin\Debug\Clearing House.exe
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Clearing House\bin\Debug\Clearing House.pdb
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Clearing House\obj\Debug\Clearing House.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Clearing House\obj\Debug\Clearing House.exe
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Clearing House\obj\Debug\Clearing House.pdb
+G:\Exchange\Clearing House\bin\Debug\Clearing House.exe.config
+G:\Exchange\Clearing House\obj\Debug\Clearing House.exe
+G:\Exchange\Clearing House\obj\Debug\Clearing House.pdb
+G:\Exchange\Clearing House\obj\Debug\Clearing House.csprojResolveAssemblyReference.cache
+G:\Exchange\Clearing House\bin\Debug\Clearing House.exe
+G:\Exchange\Clearing House\bin\Debug\Clearing House.pdb

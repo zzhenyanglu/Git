@@ -1,0 +1,8 @@
+C:\Exchange\MyNewReflectionExample\bin\Debug\MyNewReflectionExample.exe.config
+C:\Exchange\MyNewReflectionExample\bin\Debug\MyNewReflectionExample.exe
+C:\Exchange\MyNewReflectionExample\bin\Debug\MyNewReflectionExample.pdb
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.exe
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.pdb
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.csprojResolveAssemblyReference.cache
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.starterForm.resources
+C:\Exchange\MyNewReflectionExample\obj\Debug\MyNewReflectionExample.csproj.GenerateResource.Cache

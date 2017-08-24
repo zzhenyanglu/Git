@@ -1,0 +1,12 @@
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Reflection\bin\Debug\Reflection.exe.config
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Reflection\obj\Debug\Reflection.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Reflection\bin\Debug\Reflection.exe
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Reflection\bin\Debug\Reflection.pdb
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Reflection\obj\Debug\Reflection.exe
+C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\Reflection\obj\Debug\Reflection.pdb
+C:\Exchange\Reflection\bin\Debug\Reflection.exe.config
+C:\Exchange\Reflection\obj\Debug\Reflection.exe
+C:\Exchange\Reflection\obj\Debug\Reflection.pdb
+C:\Exchange\Reflection\bin\Debug\Reflection.exe
+C:\Exchange\Reflection\bin\Debug\Reflection.pdb
+C:\Exchange\Reflection\obj\Debug\Reflection.csprojResolveAssemblyReference.cache

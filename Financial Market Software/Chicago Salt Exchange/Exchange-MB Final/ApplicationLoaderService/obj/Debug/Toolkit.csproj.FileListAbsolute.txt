@@ -1,0 +1,8 @@
+C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.exe
+C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\bin\Debug\LoaderService.pdb
+C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\obj\Debug\Toolkit.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\obj\Debug\Toolkit.LoaderService.resources
+C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\obj\Debug\Toolkit.ProjectInstaller.resources
+C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\obj\Debug\Toolkit.csproj.GenerateResource.Cache
+C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\obj\Debug\LoaderService.exe
+C:\Users\Mike\Desktop\vs\BypassVistaUAC\ApplicationLoaderService\obj\Debug\LoaderService.pdb

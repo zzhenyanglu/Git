@@ -1,0 +1,117 @@
+﻿Uninstalling assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+Removing EventLog source My Windows Service.
+Service My Windows Service is being removed from the system...
+Service My Windows Service was successfully removed from the system.
+Attempt to stop service My Windows Service.
+Installing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Installing service My Windows Service...
+Service My Windows Service has been successfully installed.
+Creating EventLog source My Windows Service in log Application...
+Committing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Uninstalling assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.exe
+Removing EventLog source My Windows Service.
+Service My Windows Service is being removed from the system...
+Service My Windows Service was successfully removed from the system.
+Attempt to stop service My Windows Service.
+Installing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Installing service My Windows Service...
+Service My Windows Service has been successfully installed.
+Creating EventLog source My Windows Service in log Application...
+Committing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Old Exchange holder\Exchange_5-8\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Uninstalling assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+Removing EventLog source My Windows Service.
+Service My Windows Service is being removed from the system...
+Service My Windows Service was successfully removed from the system.
+Installing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Installing service My Windows Service...
+Service My Windows Service has been successfully installed.
+Creating EventLog source My Windows Service in log Application...
+Committing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Uninstalling assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+Removing EventLog source My Windows Service.
+Service My Windows Service is being removed from the system...
+Service My Windows Service was successfully removed from the system.
+Installing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Installing service My Windows Service...
+Service My Windows Service has been successfully installed.
+Creating EventLog source My Windows Service in log Application...
+Committing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Uninstalling assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+Removing EventLog source My Windows Service.
+Service My Windows Service is being removed from the system...
+Service My Windows Service was successfully removed from the system.
+Installing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 
+Installing service My Windows Service...
+Service My Windows Service has been successfully installed.
+Creating EventLog source My Windows Service in log Application...
+Committing assembly 'C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe'.
+Affected parameters are:
+   i = 
+   logfile = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.InstallLog
+   assemblypath = C:\Users\Mike\Documents\Visual Studio 2012\Projects\Exchange\WindowsService\bin\Debug\WindowsService.exe
+   logtoconsole = 

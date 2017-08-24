@@ -1,0 +1,91 @@
+<ClearingCorpLog>
+  <Trader ID="0">
+    <Balance>1000000</Balance>
+    <RequiredMargin>999866.64</RequiredMargin>
+    <Positions>
+      <Ticker Ticker="RSXH">
+        <Quantity>0</Quantity>
+        <Price>50</Price>
+      </Ticker>
+      <Ticker Ticker="RSXM">
+        <Quantity>299</Quantity>
+        <Price>
+        </Price>
+      </Ticker>
+    </Positions>
+  </Trader>
+  <Trader ID="1">
+    <Balance>1000000</Balance>
+    <RequiredMargin>999922.38</RequiredMargin>
+    <Positions>
+      <Ticker Ticker="RSXH">
+        <Quantity>0</Quantity>
+        <Price>50</Price>
+      </Ticker>
+      <Ticker Ticker="RSXM">
+        <Quantity>36</Quantity>
+        <Price>103.22</Price>
+      </Ticker>
+    </Positions>
+  </Trader>
+  <Trader ID="2">
+    <Balance>100000</Balance>
+    <RequiredMargin>114.74</RequiredMargin>
+    <Positions>
+      <Ticker Ticker="RSXH">
+        <Quantity>0</Quantity>
+        <Price>114.78</Price>
+      </Ticker>
+      <Ticker Ticker="RSXM">
+        <Quantity>76</Quantity>
+        <Price>100.65</Price>
+      </Ticker>
+      <Ticker Ticker="RSXU">
+        <Quantity>0</Quantity>
+        <Price>50</Price>
+      </Ticker>
+    </Positions>
+  </Trader>
+  <Trader ID="3">
+    <Balance>100000</Balance>
+    <RequiredMargin>1437.5</RequiredMargin>
+    <Positions>
+      <Ticker Ticker="RSXH">
+        <Quantity>0</Quantity>
+        <Price>50</Price>
+      </Ticker>
+      <Ticker Ticker="RSXM">
+        <Quantity>971</Quantity>
+        <Price>97.43</Price>
+      </Ticker>
+    </Positions>
+  </Trader>
+  <Trader ID="4">
+    <Balance>100000</Balance>
+    <RequiredMargin>56</RequiredMargin>
+    <Positions>
+      <Ticker Ticker="RSXH">
+        <Quantity>0</Quantity>
+        <Price>50</Price>
+      </Ticker>
+      <Ticker Ticker="RSXM">
+        <Quantity>50</Quantity>
+        <Price>50</Price>
+      </Ticker>
+    </Positions>
+  </Trader>
+  <Trader ID="5">
+    <Balance>100000</Balance>
+    <RequiredMargin>56</RequiredMargin>
+    <Positions>
+      <Ticker Ticker="RSXH">
+        <Quantity>0</Quantity>
+        <Price>50</Price>
+      </Ticker>
+      <Ticker Ticker="RSXM">
+        <Quantity>50</Quantity>
+        <Price>50</Price>
+      </Ticker>
+    </Positions>
+  </Trader>
+</ClearingCorpLog>

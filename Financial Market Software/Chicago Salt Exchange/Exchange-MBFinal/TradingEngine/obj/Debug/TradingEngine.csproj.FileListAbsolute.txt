@@ -1,0 +1,27 @@
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\TradingEngine\bin\Debug\TradingEngine.exe.config
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\TradingEngine\obj\Debug\TradingEngine.csprojResolveAssemblyReference.cache
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\TradingEngine\obj\Debug\TradingEngine.Properties.Resources.resources
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\TradingEngine\obj\Debug\TradingEngine.csproj.GenerateResource.Cache
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\TradingEngine\bin\Debug\TradingEngine.exe
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\TradingEngine\bin\Debug\TradingEngine.pdb
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\TradingEngine\obj\Debug\TradingEngine.exe
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\TradingEngine\obj\Debug\TradingEngine.pdb
+G:\Exchange\TradingEngine\bin\Debug\TradingEngine.exe.config
+G:\Exchange\TradingEngine\obj\Debug\TradingEngine.exe
+G:\Exchange\TradingEngine\obj\Debug\TradingEngine.pdb
+G:\Exchange\TradingEngine\bin\Debug\TradingEngine.exe
+G:\Exchange\TradingEngine\bin\Debug\TradingEngine.pdb
+G:\Exchange\TradingEngine\obj\Debug\TradingEngine.csprojResolveAssemblyReference.cache
+G:\Exchange\TradingEngine\obj\Debug\TradingEngine.Properties.Resources.resources
+G:\Exchange\TradingEngine\obj\Debug\TradingEngine.csproj.GenerateResource.Cache
+C:\Exchange\TradingEngine\bin\Debug\TradingEngine.exe.config
+C:\Exchange\TradingEngine\obj\Debug\TradingEngine.exe
+C:\Exchange\TradingEngine\obj\Debug\TradingEngine.pdb
+C:\Exchange\TradingEngine\bin\Debug\TradingEngine.exe
+C:\Exchange\TradingEngine\bin\Debug\TradingEngine.pdb
+C:\Exchange\TradingEngine\obj\Debug\TradingEngine.csprojResolveAssemblyReference.cache
+C:\Exchange\TradingEngine\obj\Debug\TradingEngine.Properties.Resources.resources
+C:\Exchange\TradingEngine\obj\Debug\TradingEngine.csproj.GenerateResource.Cache
+D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\TradingEngine\bin\Debug\TradingEngine.exe.config
+D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\TradingEngine\obj\Debug\TradingEngine.exe
+D:\Caleb\Dropbox\ChicagoSaltExchange\Exchange-MBFinal\TradingEngine\obj\Debug\TradingEngine.pdb

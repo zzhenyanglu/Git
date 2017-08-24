@@ -1,0 +1,6 @@
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\WindowsService\bin\Release\WindowsService.exe.config
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\WindowsService\bin\Release\WindowsService.exe
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\WindowsService\bin\Release\WindowsService.pdb
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\WindowsService\obj\Release\WindowsService.csprojResolveAssemblyReference.cache
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\WindowsService\obj\Release\WindowsService.exe
+c:\Users\Mike\documents\visual studio 2012\Projects\Exchange\WindowsService\obj\Release\WindowsService.pdb
