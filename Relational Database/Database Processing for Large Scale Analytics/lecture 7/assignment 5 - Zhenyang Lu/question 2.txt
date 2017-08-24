@@ -1,0 +1,76 @@
+
+# -------------------------------------------------------
+# PART A
+# -------------------------------------------------------
+
+import sqlite3
+import urllib2
+import json
+
+conn = sqlite3.connect('csc455_HW4.db')
+c = conn.cursor()
+c.execute('''drop table tweet''')
+c.execute('''drop table user_entry''')
+
+c.execute('''CREATE TABLE if not exists user_entry (id Number(20),name Varchar2(50),screen_name Varchar2(50),description varchar(200),friends_count Number(4));''')
+
+# -------------------------------------------------------
+# PART B
+# -------------------------------------------------------
+
+# NOTICE: I read from http://www.sqlite.org/ that "ALTER TABLE tweet add CONSTRAINT" is not allowed.... I am not sure about this..
+#         But I had a hard time trying  '''alter table tweet add constraint ....". So I have a better idea, that is...recreate it! 
+
+
+c.execute('''CREATE TABLE if not exists Tweet (Creat_at Date, id Number(20) references user_entry(id),text Varchar2(200),source Varchar2(80),in_reply_to_user_id number(20),retweet_count Number(4));''')
+
+
+# -------------------------------------------------------
+# PART C
+# -------------------------------------------------------
+
+response = urllib2.urlopen('http://rasinsrv07.cstcis.cti.depaul.edu/CSC455/assignment5.txt')
+
+data = response.readline()
+alltweets = data.split('EndOfTweet')  #split
+
+tweet=json.loads(alltweets[0])
+
+
+for tweet in alltweets:
+   try:
+      dict = json.loads(tweet)
+      
+      a=dict['source'].find('>')   # extract source ! 
+      b=dict['source'].find('<',a)
+      c=dict['source'][a+1:b]
+
+      value_user_entry = [dict['user']['id'],dict['user']['name'],dict['user']['screen_name'],dict['user']['description'],dict['user']['friends_count']]
+      value_tweet = [dict['created_at'],dict['user']['id'],dict['text'],c,dict['in_reply_to_user_id'],dict['retweet_count']]
+
+      SQL_cmd_user_entry = '''INSERT INTO user_entry VALUES(?,?,?,?,?);'''
+      SQL_cmd_tweet = '''INSERT INTO tweet VALUES(?,?,?,?,?,?);'''
+      
+      conn.execute(SQL_cmd_user_entry,value_user_entry)
+      conn.execute(SQL_cmd_tweet,value_tweet)
+      
+   except ValueError:
+      print 'Warning! One of the message can not be read, which is \n',tweet, '\n'
+
+conn.commit()
+
+# -------------------------------------------------------
+# TEST program! 
+# -------------------------------------------------------
+
+
+tweet = conn.execute('''select * from tweet''').fetchall()
+user_entry = conn.execute('''select * from user_entry''').fetchall()
+
+#for i in tweet:
+#    print i
+
+#for i in user_entry:
+#    print i  
+
+

@@ -1,0 +1,47 @@
+from numpy import *
+
+def or_function(array_a=[],array_b=[]):
+    if array_a.shape != array_b.shape:    #check compatibility
+        return ' argument arrays should be the same size!'
+
+    array_return=[]
+
+    if array_a.ndim == 1: # if ndim =1
+        for i in range(len(array_a)): # 2-dimension
+            if (array_a.item(i)== True) or (array_b.item(i)== True):
+                array_return.append(True)
+            else: array_return.append(False)
+        return array_return
+        
+    elif array_a.ndim == 2:  # if ndim =2 
+        a,b=array_a.shape
+
+        for i in range(a):
+            for j in range(b):
+                if (array_a.item(i,j)== True) or (array_b.item(i,j)== True):
+                    array_return.append(True)
+                else: array_return.append(False)
+
+        return matrix(array_return).reshape(a,b)
+ 
+
+   
+# the following function is to generate a random matrix filled with True
+# or False. It is used to test the program
+
+def rand_TF(a,b):
+    matrix_rand = random.randn(a,b)
+    return matrix_rand <0
+
+# test test
+matrix_a = rand_TF(5,5)
+matrix_b = rand_TF(5,5)
+matrix_c = rand_TF(4,4)
+
+print or_function(matrix_a,matrix_b)
+print or_function(matrix_a,matrix_c)
+
+(matrix_a | matrix_b) == or_function(matrix_a,matrix_b)
+    
+                
+                                

@@ -1,0 +1,26 @@
+import urllib2, time
+
+wFD = urllib2.urlopen('http://rasinsrv07.cstcis.cti.depaul.edu/CSC455/Twitter_2013_11_12.txt')
+
+Lines = 100000  # how many tweets you want to output
+
+def readTweets(fd, numLines, output = ''):  
+
+    if output:
+        outFD = open(output, 'w')
+
+    while numLines > 0:
+        line = fd.readline()
+        numLines = numLines - 1
+        
+        if output:
+            outFD.write(line)
+
+    outFD.close()
+    
+
+start = time.time()
+readTweets(wFD, Lines, 'tweet_output.txt')
+end   = time.time()
+
+print "readTweets took ", (end-start), ' seconds.'

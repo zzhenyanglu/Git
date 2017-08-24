@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<img src="https://mpcs53001.cs.uchicago.edu/~zzhenyanglu/spotify.png" alt="spotify" style="width:200px;height:100px;"> 
+<head>
+<title>MPCS 53001 ASSIGNMENT 9 </title>
+</head>
+
+<body>
+<h1>MPCS 53001 ASSIGNMENT 9</h1>
+<h2>CNETID: zzhenyanglu</h2>
+CLICK <a href="https://mpcs53001.cs.uchicago.edu/~zzhenyanglu/src">SOURCE CODE</a> FOR ALL CODE USED FOR THE PROJECT
+<hr>
+
+<body>
+<h1> User </h1>   
+ 
+<a href="show_user_setting.php">Profile</a>
+<a href="show_playlists_by_user.php">Playlist</a>
+
+
+<hr>
+<h1> FakeSpotify: </h1>   
+<p>
+
+<p>
+<a href="show_artists.php">Artists</a>
+<a href="show_albums.php">Albums</a>
+<a href="show_genres.php">Genres</a>
+<a href="show_playlists.php">Public playlists</a>
+<a href="show_top_hits.php">Top Hits</a>
+<p>
+<p>
+<br>
+
+<h3> Search for songs: </h3>  
+<p>
+<form method=post action="listen_to_a_station.php">
+<b>by (either 'artist' or 'album'):</b><br>
+<input type="text" name="by_in"><BR>
+<b>keyword (<tt><</tt>artist name<tt>></tt> or <tt><</tt>album name<tt>></tt>):</b><br>
+<input type="text" name="keyword_in"><BR>
+<input type="submit" value="Submit">
+</form>
+<p>
+
+<br>
+<hr>
+<h2> Database related information: </h2>  
+<a href="list_tables.php">List all tables</a>
+<a href="count_tables.php"> Counts all tables</a>
+<p>
+Review table schema by table name:  
+<p>
+<form method=get action="show_schema.php">
+<b>Table name (try list all tables if you don't recall any table on the database):</b><br>
+<input type="text" name="table_name"><BR>
+<input type="submit" value="Submit">
+</form>
+<p>
+<p>
+
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+*******************************************PART I******************************************** 
+1. C  2. B  3. B  4. B  5. A  6. D  7. E  8. D  9. C  10. D 11. A  12. B
+
+*******************************************PART I******************************************** 
+
+
+
+*******************************************PART II******************************************** 
+----------------------------------------------------------------------------------------------------------------
+(1)
+----------------------------------------------------------------------------------------------------------------
+ACCEPT p_1 prompt 'Please Enter The Last name: '
+
+DECLARE 
+       CURSOR emp_output(v_name varchar2)  IS
+              SELECT 
+                     last_name ||','|| first_name as EMPLOYEE_NAME, 
+                     DECODE(employee_type,'F','Full-time employee','P','Part-time employee') as EMPLOYEE_TYPE, 
+                     NVL((select pilot_type from pilot where pilot.employee_id = person.employee_id),'N/A') as PILOT_TYPE,
+                     last_name
+              FROM person
+              ORDER BY last_name;
+              
+       v_1 person.last_name%type := initcap('&p_1');
+       counter number:=0;
+       v_local varchar2(10000);
+       
+BEGIN
+       dbms_output.put_line('EMPLOYEE_NAME        EMPLOYEE_TYPE          PILOT_TYPE');
+       dbms_output.put_line('-------------------- ---------------------- ---------------------');
+       
+       FOR tmp_emp in emp_output(v_1) LOOP
+           IF v_1 = tmp_emp.last_name THEN
+              dbms_output.put_line(rpad(tmp_emp.employee_name,21)||rpad(tmp_emp.employee_type,23)||rpad(tmp_emp.pilot_type,25)); 
+              counter:= counter +1;
+           ELSE 
+              IF v_local is null THEN
+                 v_local := v_local||rpad(tmp_emp.employee_name,21)||rpad(tmp_emp.employee_type,23)||rpad(tmp_emp.pilot_type,25);
+              ELSE
+                 v_local := v_local||'
+'||rpad(tmp_emp.employee_name,21)||rpad(tmp_emp.employee_type,23)||rpad(tmp_emp.pilot_type,25);
+              END IF;
+           END IF; 
+       END LOOP;
+         
+       IF counter = 0 THEN
+           dbms_output.put_line(v_local);
+       ELSE 
+           null;
+       END IF;
+END;
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+(2)
+----------------------------------------------------------------------------------------------------------------------------------
+DECLARE
+     CURSOR emp_lookup (v_name varchar2)  IS 
+          SELECT employee_name,salary,department_name
+          FROM department,employee
+          WHERE department.department_name = v_name AND employee.department_id = department.department_id
+          ORDER BY employee_name;
+     
+     CURSOR avg_sal (v_name varchar2) IS   -- look for department ave salary
+          SELECT avg(salary) 
+          FROM  employee,department 
+          WHERE department.department_name = v_name AND employee.department_id = department.department_id ;
+          
+     avg_sal_com number :=0;
+     avg_sal_dep number :=0;
+     multiplier varchar2(15);
+     counter number :=0;
+     
+BEGIN 
+     SELECT avg(salary)  --company avg salary
+     INTO  avg_sal_com 
+     FROM  employee;
+     
+     dbms_output.put_line('Company Average Salary:          $'||round(avg_sal_com,2));
+     
+     FOR i in 1..6 LOOP
+        IF i = 1 THEN     --create id number that suits the employee table
+           multiplier := 'accounting';
+        ELSIF i = 2 THEN
+           multiplier := 'executive';
+        ELSIF i = 3 THEN 
+           multiplier := 'it';
+        ELSIF i = 4 THEN
+           multiplier := 'marketing';
+        ELSIF i = 5 THEN
+           multiplier := 'research';
+        ELSIF i = 6 THEN
+           multiplier := 'sale';
+        ELSE null;
+        END IF;
+
+        OPEN avg_sal (multiplier);  -- look for the avg department salary
+        FETCH avg_sal INTO avg_sal_dep;
+        CLOSE avg_sal;
+     
+        counter := 0;
+     
+        FOR tmp in emp_lookup(multiplier) LOOP
+            IF tmp.salary < avg_sal_dep AND tmp.salary < avg_sal_com THEN --if the employees` salary satisfies output critiria.
+               IF counter = 0 THEN      --check if we need to output department avg salary
+                  dbms_output.put_line('------------------------------------------');
+                  dbms_output.put_line(rpad('Department Name:',33)||rpad(upper(tmp.department_name),10));
+                  dbms_output.put_line('Department Average Salary:     '||TO_CHAR(tmp.salary, '$99,990.00'));
+                  dbms_output.put_line(' ');
+                  dbms_output.put_line(rpad('Employee Name:',33)||rpad(upper(tmp.employee_name),10));
+                  dbms_output.put_line('Employee Salary:               '||TO_CHAR(tmp.salary, '$99,990.00'));
+                  counter := counter+1;
+               ELSE
+                  dbms_output.put_line(rpad('Employee Name:',33)||rpad(upper(tmp.employee_name),10));
+                  dbms_output.put_line('Employee Salary:               '||TO_CHAR(tmp.salary, '$99,990.00'));
+               END IF;
+            ELSE 
+               null;
+            END IF;   
+        END LOOP;
+     END LOOP;
+END; 
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+(3)
+---------------------------------------------------------------------------------------------------------------------------------- 
+declare
+   cursor emp_hire is 
+       select DEPARTMENT_NAME,EMPLOYEE_NAME AS employee_name,JOB, to_char(hire_date,'MM/DD/YYYY') as hire_day, 
+              TO_CHAR(hire_date,'Day') as hire_date, 
+              NVL((select employee_name from employee b where b.employee_id = a.manager_id),'N/A') as manager_name
+       from employee a,department
+       where department.department_id = a.department_id 
+       order by hire_date desc;
+       
+   counter number:=0;
+   min_hire number:= 15;
+   hire_day varchar2(10);
+   multiplier varchar2(10);
+begin
+
+   for emp in emp_hire loop
+      if hire_day is null then
+         hire_day := emp.hire_date;
+         counter := counter+1;
+      else
+         if hire_day = emp.hire_date then 
+            counter := counter+1;
+         else
+            hire_day :=emp.hire_date;
+            if counter <min_hire then
+               min_hire := counter;
+               counter:=1;
+            else 
+               counter:=1;
+            end if;
+         end if;
+      end if;
+   end loop;
+
+   FOR i in 1..5 LOOP
+        IF i = 1 THEN     --create id number that suits the employee table
+           multiplier := 'Monday   ';
+        ELSIF i = 2 THEN
+           multiplier := 'Tuesday  ';
+        ELSIF i = 3 THEN 
+           multiplier := 'Wednesday';
+        ELSIF i = 4 THEN
+           multiplier := 'Thursday ';
+        ELSIF i = 5 THEN
+           multiplier := 'Friday   ';
+        ELSE null;
+        END IF;
+
+        counter:=0;      
+        
+        for emp in emp_hire loop  ---- check how many employed in the day
+           if emp.hire_date = multiplier then
+              counter := counter +1;
+           else  null;
+           end if;
+        end loop;
+       
+        if counter = min_hire then
+           dbms_output.put_line('---------------------------------------------------------------------------');
+           dbms_output.put_line(lpad(multiplier,9)||'('||min_hire||' employees were hired.)');
+           for emp in emp_hire loop
+               if emp.hire_date = multiplier then 
+                  dbms_output.put_line(rpad(emp.hire_day,13)||rpad(emp.employee_name,11)||'('||'DEPARTMENT: '||emp.department_name||', '||'JOB: '||emp.job||', '||'MANAGER: '||emp.manager_name||')');
+               else 
+                  null;
+               end if;
+           end loop;
+        else null;
+        end if;
+   END LOOP;
+end;
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+(4)
+---------------------------------------------------------------------------------------------------------------------------------- 
+DECLARE  
+    cursor user_info (v_name varchar2) is 
+          select user_name,nvl(assigned_role,'N/A') as assigned_role,nvl(project_name,'N/A') as project_name
+          from dw_project,dw_user,dw_user_project
+          where dw_user.user_id = dw_user_project.user_id(+) and dw_project.project_id(+) = dw_user_project.project_id and user_name = v_name
+          order by user_name, project_name, assigned_role;
+          
+    cursor name_lookup is
+          select user_name
+          from dw_user
+          order by user_name;
+          
+    user_name dw_user.user_name%type := 'a';
+    user_proj dw_user_project.assigned_role%type :='b';
+    
+begin
+
+    dbms_output.put_line(rpad('Name',15)||rpad('Project',20)||rpad('Role',25));   
+    dbms_output.put_line('============================================================');
+    
+    for tmp in  name_lookup loop    -- look up for user_name
+        user_name := 'a';
+        user_proj :='b';
+        for tmp_2 in user_info(tmp.user_name) loop  -- find info under the looked-up name
+            if user_name != tmp_2.user_name then         --------check if we have to output name
+               user_name := tmp_2.user_name;
+               if user_proj  != tmp_2.project_name then   -------check input project
+                  dbms_output.put_line(rpad(user_name,15)||rpad(tmp_2.project_name,20)||rpad(tmp_2.assigned_role,25));
+                  user_proj := tmp_2.project_name;
+               else    
+                  dbms_output.put_line(rpad(user_name,15)||rpad(' ',20)||rpad(tmp_2.assigned_role,25)); 
+               end if;
+            else        -----------case in which we do not need to output user_name
+               if user_proj  = tmp_2.project_name then   -------check input project
+                  dbms_output.put_line(rpad(' ',15)||rpad(' ',20)||rpad(tmp_2.assigned_role,25));
+                  user_proj := tmp_2.project_name;
+               else    
+                  dbms_output.put_line(rpad(' ',15)||rpad(tmp_2.project_name,20)||rpad(tmp_2.assigned_role,25)); 
+                  user_proj := tmp_2.project_name;
+               end if;
+            end if;
+        end loop;
+    end loop;
+end;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+*******************************************PART II******************************************** ****************

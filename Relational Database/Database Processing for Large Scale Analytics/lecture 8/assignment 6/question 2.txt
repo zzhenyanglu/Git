@@ -1,0 +1,79 @@
+import urllib2, time, json, sqlite3
+
+conn = sqlite3.connect('CSC455-HW6.db')
+c = conn.cursor()
+data = urllib2.urlopen('http://rasinsrv07.cstcis.cti.depaul.edu/CSC455/Twitter_2013_11_12.txt')
+numLines = 1000
+createTable = '''CREATE TABLE Tweets (
+
+                 Created_At  DATE,
+                 ID          NUMBER(20) references Geo(ID),
+                 Text        CHAR(141),
+                 Source VARCHAR(200),
+                 In_Reply_to_User_ID NUMBER(20),
+                 Retweet_Count NUMBER(10)
+              );'''
+
+createTable2 = '''CREATE TABLE Geo (
+                 ID          Number(20), 
+                 Type        Varchar2(20),
+                 Latitute    number(10),
+                 Longitute   number(10),
+
+                 CONSTRAINT geo_PK  PRIMARY KEY(ID)
+              );'''
+
+createTable3 = '''CREATE TABLE user_entry (
+                  id Number(20),
+                  name Varchar2(50),
+                  screen_name Varchar2(50),
+                  description varchar(200),
+                  friends_count Number(4));'''
+
+c.execute('DROP TABLE IF EXISTS Tweets');
+c.execute(createTable)
+c.execute('DROP TABLE IF EXISTS Geo');
+c.execute(createTable2)
+c.execute('''drop table if exists user_entry''')
+c.execute(createTable3)
+
+######################################################################################################
+#    End of part a.
+######################################################################################################
+
+run_time = 1 # This controls how many times you want to run the programs that read 1000 lines of tweet.
+Lines_read = 1000 # change it to how many lines you want to read in a time, in this code. Combining with run_time, you can read 1*1000 lines of tweets. 
+
+while run_time > 0:
+    value_tweets =[]
+    value_geo = []
+    value_user_entry = []
+
+    run_time = run_time-1
+
+    while Lines_read > 0:
+        tweets=data.readline()
+
+        if tweets:
+            tweet=json.loads(tweets)
+
+            a=tweet['source'].find('>')   # extract source ! 
+            b=tweet['source'].find('<',a)
+            c=tweet['source'][a+1:b]
+
+            value_user_entry.append([tweet['user']['id'],tweet['user']['name'],tweet['user']['screen_name'],tweet['user']['description'],tweet['user']['friends_count']])
+            value_tweets.append([tweet['created_at'],tweet['user']['id'],tweet['text'],c,tweet['in_reply_to_user_id'],tweet['retweet_count']])
+
+            if tweet['place'] is not None:
+                record = tweet['place'].pop('bounding_box')
+                value_geo.append([tweet['user']['id'],record['type'],record['coordinates'][0][0][1],record['coordinates'][0][0][0]])
+                
+            Lines_read = Lines_read-1
+
+    conn.executemany('INSERT OR IGNORE INTO Tweets VALUES(?,?,?,?,?,?)', value_tweets)
+    conn.executemany('INSERT OR IGNORE INTO Geo VALUES(?,?,?,?)', value_geo)
+    conn.executemany('INSERT OR IGNORE INTO User_entry VALUES(?,?,?,?,?)', value_user_entry)
+
+######################################################################################################
+#    End of part b.
+######################################################################################################

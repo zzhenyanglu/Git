@@ -1,0 +1,34 @@
+import time
+
+wFD = open('tweet_output.txt',"r")
+
+numLines = 100000
+
+def longest_tweet(fd, numLines):
+
+    indexer = 0  # index of the longest tweet!
+    length = 0   # length of the longest tweet
+    content=''  # content of the longest tweet!
+
+    while numLines > 0:
+        line = fd.readline()
+    
+        if len(line)> length:
+            indexer = numLines
+            content = line
+            length = len(line)
+
+        numLines = numLines - 1
+
+    wFD.close()
+           
+    print 'Index of the longest tweet is ',indexer,'\nLength of the longest tweet is ',length,'\nContent of the longest tweet is ',content
+           
+start = time.time()
+longest_tweet(wFD, numLines)
+end   = time.time()
+print "finding the longest tweet took ", (end-start), ' seconds.'
+
+-------------------------------------------------------------------
+# finding the longest tweet took  6.24599981308  seconds.
+-------------------------------------------------------------------

@@ -1,0 +1,65 @@
+1. 
+DROP TABLE ACCOUNTS;
+DROP TABLE CLIENTS;
+DROP TABLE LOANS;
+
+CREATE TABLE Clients 
+( First Varchar2(10),
+  Last Varchar2(10),
+  Address Varchar2(30),
+  
+  CONSTRAINT Clients_PK
+     PRIMARY KEY(First,Last)
+);
+
+CREATE TABLE Loans 
+( Lnumber Number(2) PRIMARY KEY,
+  Interest Number(5,2),
+  Amount Number(10) 
+);
+
+CREATE TABLE Accounts( 
+  First Varchar2(10),
+  Last Varchar2(10),
+  Job Varchar(20),
+  Lnumber Number(5),
+
+  CONSTRAINT AccountsFK 
+      FOREIGN KEY (First,Last)
+          REFERENCES Clients(First,Last),
+
+  CONSTRAINT AccountsFK2 
+      FOREIGN KEY (Lnumber)
+          REFERENCES Loans(Lnumber),
+          
+  CONSTRAINT Accounts_PK
+     PRIMARY KEY(First,Last,Job,Lnumber)
+);
+
+INSERT INTO Loans values(5,1.0,200);
+INSERT INTO Loans values(1, 5.0, 10000);
+INSERT INTO Loans values(2, 11.8, 7000);
+INSERT INTO Loans values(7, 10.0, 100);
+INSERT INTO Loans values(8, 20.0, 25000);
+INSERT INTO Loans values(4, 3.3, 100000);
+INSERT INTO Loans values(3, 2.0, 12000);
+
+
+
+INSERT INTO Clients values('John','Smith','111 N. Wabash Avenue');
+INSERT INTO Clients values('Jane','Doe','243 S. Wabash Avenue');
+INSERT INTO Clients values('Mike','Jackson','1 Michigan Avenue');
+INSERT INTO Clients values('Mary','Who','NULL');
+
+
+INSERT INTO Accounts values('John','Smith','plumber',5);
+INSERT INTO Accounts values('John','Smith','bouncer',5);
+INSERT INTO Accounts values('Jane','Doe','waitress',1);
+INSERT INTO Accounts values('Jane','Doe','accountant',2);
+INSERT INTO Accounts values('Jane','Doe','waitress',2);
+INSERT INTO Accounts values('Jane','Doe','accountant',1);
+INSERT INTO Accounts values('Mike','Jackson','accountant',7);
+INSERT INTO Accounts values('Mike','Jackson','accountant',8);
+INSERT INTO Accounts values('Mike','Jackson','accountant',4);
+INSERT INTO Accounts values('Mary','Who','accountant',3);
+INSERT INTO Accounts values('Mary','Who','risk analyst',3);

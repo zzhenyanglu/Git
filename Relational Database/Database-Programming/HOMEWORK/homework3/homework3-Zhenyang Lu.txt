@@ -1,0 +1,186 @@
+***************************************************PART I****************************************************************
+DECLARE
+
+    CURSOR emp_sal IS 
+       select sum(salary) as sum_salary,department_name
+       from employee,department
+       where employee.department_id = department.department_id
+       group by department_name
+       order by sum_salary desc;
+
+    total employee.salary%type:=0;
+    tep_salary total%type;
+    tep_depart department.department_name%type;
+
+BEGIN
+
+SELECT SUM(salary) 
+INTO total
+FROM employee;
+
+dbms_output.put_line('COMPANY TOTAL SALARY: '||lpad(total,15));
+dbms_output.put_line('--------------------------------------');
+
+OPEN emp_sal;
+    FETCH emp_sal INTO tep_salary,tep_depart;
+    
+    WHILE emp_sal%found LOOP
+        IF tep_salary/total > .18 THEN
+            dbms_output.put_line('DEPARTMENT NAME: '||lpad(tep_depart,20));
+            dbms_output.put_line('DEPARTMENT TOTAL SALARY: '||lpad(tep_salary,12));
+            dbms_output.put_line('--------------------------------------');
+        ELSE NULL;
+        END IF;
+        FETCH emp_sal INTO tep_salary,tep_depart;
+    END LOOP;
+CLOSE emp_sal;
+END;
+    
+***************************************************PART I****************************************************************
+
+
+
+
+
+
+
+
+***************************************************PART II****************************************************************
+DECLARE         
+
+            
+BEGIN 
+       
+       FOR tmp_numb in (SELECT COUNT(employee_id) AS employee_number,MAX(salary+NVL(commision,0)) AS max_salary,department_name
+                        FROM  employee,department
+                        WHERE  employee.department_id(+) = department.department_id
+                        GROUP BY  department_name
+                        ORDER BY  department_name ASC) 
+       LOOP
+          dbms_output.put_line('DEPARTMENT NAME: '||lpad(NVL(upper(tmp_numb.department_name),'N/A'),20));
+          dbms_output.put_line('NUMBER OF EMPLOYEES: '||lpad(tmp_numb.employee_number,16));
+          dbms_output.put_line('HIGHEST TOTAL PAY: '|| lpad(NVL(to_char(tmp_numb.max_salary),'N/A'),18));
+          dbms_output.put_line('------------------------------------');
+       END LOOP;
+END;
+          
+***************************************************PART II****************************************************************
+
+
+
+
+
+
+
+
+
+***************************************************PART III****************************************************************
+DECLARE
+ 
+BEGIN 
+       dbms_output.put_line(lpad('DEPARTMENT NAME',15)||lpad('EMPLOYEE NAME',20)||lpad('JOB',34)||lpad('MANAGER NAME',16));
+       dbms_output.put_line('-------------------------------------------------------------------------------------');
+       
+       FOR tmp_numb in ( SELECT DEPARTMENT_NAME,a.EMPLOYEE_NAME AS employee_name,a.JOB AS job, 
+                         (select employee_name from employee b where b.employee_id = a.manager_id)
+                         AS manager_name
+                         FROM  EMPLOYEE a,DEPARTMENT
+                         WHERE a.DEPARTMENT_ID(+)= DEPARTMENT.DEPARTMENT_ID
+                         ORDER BY  department_name,employee_name asc) 
+       LOOP
+       dbms_output.put_line(lpad(tmp_numb.department_name,15)||lpad(NVL(tmp_numb.employee_name,'N/A'),20)||lpad(NVL(tmp_numb.job,'N/A'),34)||lpad(NVL(tmp_numb.manager_name,'N/A'),16));
+       END LOOP;
+END;
+
+***************************************************PART III*******************************************************************
+
+
+
+
+
+
+
+
+
+***************************************************PART IV*******************************************************************
+------------------------------------------------------------------------------------------------------------------------------
+(a)
+------------------------------------------------------------------------------------------------------------------------------
+
+DECLARE
+       v_previous_dname varchar(20); 
+BEGIN 
+       dbms_output.put_line(lpad('DEPARTMENT NAME',15)||lpad('EMPLOYEE NAME',20)||lpad('JOB',34)||lpad('MANAGER NAME',16));
+       dbms_output.put_line('-------------------------------------------------------------------------------------');
+       
+       FOR tmp_numb in ( SELECT DEPARTMENT_NAME,a.EMPLOYEE_NAME AS employee_name,a.JOB AS job, 
+                         (select employee_name from employee b where b.employee_id = a.manager_id)
+                         AS manager_name
+                         FROM  EMPLOYEE a,DEPARTMENT
+                         WHERE a.DEPARTMENT_ID(+)= DEPARTMENT.DEPARTMENT_ID
+                         ORDER BY  department_name,employee_name asc) 
+       LOOP
+       IF  v_previous_dname = tmp_numb.department_name THEN 
+           dbms_output.put_line(lpad(NVL(tmp_numb.employee_name,'N/A'),35)||lpad(NVL(tmp_numb.job,'N/A'),34)||lpad(NVL(tmp_numb.manager_name,'N/A'),16));
+       ELSE 
+           dbms_output.put_line(lpad(NVL(upper(tmp_numb.department_name),'N/A'),15)||lpad(NVL(tmp_numb.employee_name,'N/A'),20)||lpad(NVL(tmp_numb.job,'N/A'),34)||lpad(NVL(tmp_numb.manager_name,'N/A'),16));
+           v_previous_dname := tmp_numb.department_name;
+       END IF;
+       END LOOP;
+END;
+
+------------------------------------------------------------------------------------------------------------------------------
+(a)
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------
+(b)
+------------------------------------------------------------------------------------------------------------------------------
+
+DECLARE
+       cursor emp_numb_dep IS          
+                            select count(employee_name),department_name 
+                            from employee,department
+                            where employee.DEPARTMENT_ID(+)= DEPARTMENT.DEPARTMENT_ID
+                            group by department_name;
+                            
+       emp_number number:= 0;
+       v_previous_dname varchar(20);
+       
+BEGIN   
+       FOR tmp_numb in (SELECT DEPARTMENT_NAME,a.EMPLOYEE_NAME AS employee_name,a.JOB AS job, 
+                         (select employee_name from employee b where b.employee_id = a.manager_id)
+                         AS manager_name
+                         FROM  EMPLOYEE a,DEPARTMENT
+                         WHERE a.DEPARTMENT_ID(+)= DEPARTMENT.DEPARTMENT_ID
+                         ORDER BY  department_name,employee_name asc) 
+       LOOP
+          IF  v_previous_dname = tmp_numb.department_name THEN  
+              dbms_output.put_line(rpad(NVL(tmp_numb.employee_name,'N/A'),13)||lpad(NVL(tmp_numb.job,'N/A'),30)||lpad(NVL(tmp_numb.manager_name,'N/A'),16));
+          ELSE 
+              v_previous_dname := tmp_numb.department_name;
+              For tmp_numb_dep in (select count(employee_name) as total_employee,department_name 
+                                   from employee,department
+                                   where employee.DEPARTMENT_ID(+)= DEPARTMENT.DEPARTMENT_ID
+                                   group by department_name)  
+              LOOP
+                 IF tmp_numb_dep.department_name = tmp_numb.department_name THEN
+                    emp_number := tmp_numb_dep.total_employee;
+                 ELSE NULL;
+                 END IF;
+              END LOOP;
+                 dbms_output.put_line('===============================================================');
+                 dbms_output.put_line('The number of employees in '||upper(tmp_numb.DEPARTMENT_NAME)||' is '||to_char(emp_number));  
+                 dbms_output.put_line(rpad('EMPLOYEE NAME',13)||lpad('JOB',30)||lpad('MANAGER NAME',16));
+                 dbms_output.put_line('---------------------------------------------------------------');
+                 dbms_output.put_line(rpad(NVL(tmp_numb.employee_name,'N/A'),13)||lpad(NVL(tmp_numb.job,'N/A'),30)||lpad(NVL(tmp_numb.manager_name,'N/A'),16));
+          END IF;
+       END LOOP;
+END;
+------------------------------------------------------------------------------------------------------------------------------
+(b)
+------------------------------------------------------------------------------------------------------------------------------
+***************************************************PART IV********************************************************************

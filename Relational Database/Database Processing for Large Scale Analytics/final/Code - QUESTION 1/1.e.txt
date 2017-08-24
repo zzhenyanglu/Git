@@ -1,0 +1,36 @@
+import time,sqlite3
+
+conn = sqlite3.connect('CSC455-Final.db')
+c = conn.cursor()
+wFD = open('tweet_output.txt',"r")
+conn.text_factory = str
+
+numLines = 100000
+
+
+def tweet_container(fd,numLines):
+    createTable = '''CREATE TABLE tweet_string (
+                                        string  varchar2(7663)
+                 );'''
+    
+    conn.execute('''drop table if exists tweet_string''')
+    conn.execute(createTable)
+
+    while numLines > 0:
+        line = fd.readline()
+        conn.execute('''INSERT OR IGNORE INTO tweet_string VALUES(?)''',[line])
+        numLines = numLines - 1
+        
+    print 'inserted ',conn.execute('''select count(*) from tweet_string''').fetchall(),' records into table tweet_string'
+           
+start = time.time()
+tweet_container(wFD,numLines)
+end   = time.time()
+print "creating and populating the tweet_string table took ", (end-start), ' seconds.'
+
+conn.commit()
+#conn.close()
+
+
+# inserted  [(100000,)]  records into table tweet_string
+# creating and populating the tweet_string table took  11.0420000553  seconds.

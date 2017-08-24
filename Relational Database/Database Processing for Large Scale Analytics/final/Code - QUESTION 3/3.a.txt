@@ -1,0 +1,69 @@
+#--------------------------------------------------------------------------------------------
+# NOTICE: The following script assumes you have run part 1.c 
+#--------------------------------------------------------------------------------------------
+
+
+
+
+
+#------------------------------------------------------
+# part a 
+#------------------------------------------------------
+
+# suppose you have finished part 1.b and you have already populated the three tables.
+
+import time, pandas,sqlite3
+
+def table_to_txt(table_name='',output_name=''):
+    conn = sqlite3.connect('CSC455-Final.db')
+    conn.text_factory = str
+    data = conn.execute('select * from '+table_name)
+    
+    file_name = output_name +'.txt'
+    
+    fd = open(file_name,'a')
+    
+    table = pandas.DataFrame(data.fetchall())
+    
+    attribute = ''
+    
+    for i in data.description:
+        attribute = attribute + i[0] + ','  # write attributes into the text file
+
+    attribute.rstrip(',')
+
+    fd.writelines(attribute+'\n')       
+    
+    for i in range(len(table)):          # write tuples into the text file
+        tuple = str(i)+'. '
+        
+        for j in table.ix[i]:
+            tuple = tuple + str(j) + ','
+
+        tuple = tuple.rstrip(',')
+
+        fd.writelines(tuple+'\n')
+
+    fd.close()
+
+
+start=time.time()
+
+table_to_txt('tweets','tweets_txt')
+
+end=time.time()
+
+
+start=time.time()
+
+table_to_txt('user_entry','user_entry_txt')
+
+end=time.time()
+
+print 'output the table from SQLITE# takes ',end-start,' seconds. '
+
+#--------------------------------------------------------------------
+
+# result: output the table from SQLITE# takes  34.9079999924  seconds.
+
+#--------------------------------------------------------------------- 

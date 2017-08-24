@@ -1,0 +1,74 @@
+#question 2
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+#PART A
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+import sqlite3
+
+conn = sqlite3.connect('csc455_HW4.db')
+c = conn.cursor()
+conn.text_factory = str
+
+c.execute('''CREATE TABLE if not exists Tweet (Creat_at Date,id Number(20),text Varchar2(200),source Varchar2(80),in_reply_to_user_id number(20),retweet_count Number(4));''')
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+#PART B
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+import urllib2
+response = urllib2.urlopen('http://rasinsrv07.cstcis.cti.depaul.edu/CSC455/assignment4.txt')
+data = response.readlines()
+
+d=data.count('\n')
+
+for i in range(d):
+    data.remove('\n')
+
+for i in data:
+
+    message=i.split(',') # break a message block into small pieces
+
+    value=[]
+    
+    for j in message:
+        detail = j.split(':')
+
+        retweet=-1
+
+        if detail[0] == '{"created_at"':
+            value.append(detail[1].strip('"'))
+            
+        elif detail[0] == '"id"':
+            if long(detail[1]).bit_length() > 58:
+                value.append(long(detail[1]))
+                
+        elif detail[0] == '"text"':
+            value.append(j.strip('"text":"'))
+            
+        elif detail[0] == '"source"':
+            a=detail[len(detail)-1].find('>')
+            b=detail[len(detail)-1].find('<',a)
+            c=detail[len(detail)-1][a+1:b]
+            value.append(c)
+
+        elif detail[0] == '"in_reply_to_user_id"':
+            if detail[1] == 'null':
+                value.append(None)
+            else:
+                value.append(long(detail[1]))
+                
+        elif detail[0] == '"retweet_count"':
+            a = int(j.strip('"retweet_count":'))
+            if a > retweet:
+                value.append(a)
+                retweet = a
+            else:
+                None
+    conn.execute("INSERT INTO Tweet VALUES(?,?,?,?,?,?)",[value[0],value[1],value[2],value[3],value[4],value[5]])
+
+    
+conn.commit()
+
+    
+
+        
+

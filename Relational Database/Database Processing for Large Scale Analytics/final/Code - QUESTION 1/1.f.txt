@@ -1,0 +1,47 @@
+#---------------------------------------------------------------------------------
+
+# This part is based on part 1.e!
+
+# This script is faster, 8.15700006485 seconds, than 1.e, which takes 17.7309999466 seconds to execute
+
+#---------------------------------------------------------------------------------
+
+import time,sqlite3
+
+conn = sqlite3.connect('CSC455-Final.db')
+c = conn.cursor()
+wFD = open('tweet_output.txt',"r")
+conn.text_factory = str
+
+numLines = 100000
+batchedRows = 100
+
+
+def tweet_container(fd,numLines,batchedRows):
+    createTable = '''CREATE TABLE tweet_string (
+                                        string  varchar2(7663)
+                 );'''
+    
+    conn.execute('''drop table if exists tweet_string''')
+    conn.execute(createTable)
+
+    batchedInserts = []
+
+    while numLines > 0:
+        line = fd.readline()
+        batchedInserts.append([line])
+        numLines = numLines - 1
+
+        if len(batchedInserts) >= batchedRows or numLines == 0:
+            conn.executemany('INSERT OR IGNORE INTO tweet_string VALUES(?)', batchedInserts)
+            batchedInserts = []
+        
+    print 'inserted ',conn.execute('''select count(*) from tweet_string''').fetchall(),' records into table tweet_string'
+           
+start = time.time()
+tweet_container(wFD,numLines,batchedRows)
+end   = time.time()
+print "creating and populating the tweet_string table took ", (end-start), ' seconds.'
+
+conn.commit()
+#conn.close()

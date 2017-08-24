@@ -1,0 +1,57 @@
+#--------------------------------------------------------------------------------------------
+# NOTICE: The following script assumes you have run part 1.c 
+#--------------------------------------------------------------------------------------------
+
+
+
+
+# output the table from SQLITE# takes  2.11500000954  seconds. 
+
+import sqlite3, time
+conn = sqlite3.connect('csc455-Final.db')
+conn.execute('INSERT or ignore INTO Geo VALUES(1,\'Default\', 0, 0);')  # set default geo_id as 1 and default coordinates as (0,0)
+fd = open('tweets.txt','a')
+conn.text_factory=str
+
+
+
+start=time.time()
+
+data = conn.execute('select * from tweets')
+
+attribute=''
+
+for i in data.description:
+    attribute = attribute + i[0] +','
+
+attribute = attribute + 'text_length'+'\n'  # output attributes on the first line 
+
+fd.writelines(attribute)
+
+default_geo_id = conn.execute('select id from geo where id = 1 ;').fetchall()
+
+records = data.fetchall()
+
+for i in range(len(records)): # output entries from database
+    record = ''
+    
+    record = str(i) + '. '+str(records[i][0])+','+str(records[i][1])+','+str(records[i][2])+','+str(records[i][3])+','+str(records[i][4])+','+str(records[i][5])
+
+    if records[i][6] is not None:
+        record = record + ',' + str(records[i][6])
+
+    else:
+        record = record + ','+ str(default_geo_id[0][0])
+
+    record = record + ','+str(records[i][7])+','+str(len(records[i][2]))+'\n'
+
+    fd.writelines(record)
+
+conn.commit()
+
+fd.close()
+
+
+end=time.time()
+
+print 'output the table from SQLITE# takes ',end-start,' seconds. '

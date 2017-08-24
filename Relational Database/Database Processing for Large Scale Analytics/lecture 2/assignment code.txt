@@ -1,0 +1,67 @@
+Drop table ranks;
+Drop table books;
+Drop table publisher;
+Drop table authors;
+
+
+
+CREATE TABLE Authors( 
+   ID Number(5),
+   LastName Varchar2(16),
+   FirstName Varchar2(16),
+   BirthDate DATE,
+   
+   CONSTRAINT AuthorPK
+              PRIMARY KEY (ID)
+);
+
+CREATE TABLE Publisher( 
+   ID Number(5),
+   Name Varchar2(50),
+   Address Varchar2(50),
+   
+   CONSTRAINT PublisherPK
+              PRIMARY KEY (ID)
+);
+
+CREATE TABLE Books( 
+   ISBN Varchar2(10),
+   Title Varchar2(16),
+   ID Number(5),
+  
+   CONSTRAINT booksPK
+              PRIMARY KEY (ISBN),  
+  
+   CONSTRAINT BooksFK
+              FOREIGN KEY (ID)
+                      REFERENCES Publisher(ID)
+);
+
+CREATE TABLE Ranks( 
+   ID Number(5),
+   ISBN Varchar2(10),
+   Ranks number(1),
+   
+   CONSTRAINT RanksPK
+              PRIMARY KEY (ID,ISBN),
+   CONSTRAINT RanksFK1
+              FOREIGN KEY (ISBN)
+                      REFERENCES Books(ISBN),
+   CONSTRAINT RanksFK2
+              FOREIGN KEY (ID)
+                      REFERENCES Authors(ID)         
+);
+
+INSERT INTO Authors VALUES(2,'King','Stephen', to_date('1947-09-09', 'yyyy-mm-dd'));
+INSERT INTO Authors VALUES(4,'Asimov','Isaac',to_date('1920-01-02','yyyy-mm-dd'));
+INSERT INTO Authors VALUES(7,'Verne','Jules',to_date('1828-0208','yyyy-mm-dd'));
+INSERT INTO Publisher VALUES(17,'Bloomsbury Publishing','London Borough of Camden');
+INSERT INTO Books VALUES('1111-111','Databases R us',17);
+INSERT INTO Books VALUES('2222-222','SQL for dummies',17);
+INSERT INTO Ranks VALUES(2,'1111-111',1);
+INSERT INTO Ranks VALUES(4,'1111-111',2);
+INSERT INTO Ranks VALUES(4,'2222-222',2);
+INSERT INTO Ranks VALUES(7,'2222-222',1);
+COMMIT;
+
+

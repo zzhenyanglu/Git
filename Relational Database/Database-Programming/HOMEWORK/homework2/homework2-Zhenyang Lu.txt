@@ -1,0 +1,142 @@
+***************************PART I************************************PART I**********************
+ACCEPT p_1 PROMPT 'Please enter the employee id:'
+
+DECLARE 
+  v_1     employee.employee_id%type :=&p_1;--prompt ID
+  count_1 number(1);  -- count if there is employee having the input id
+  name_1  employee.employee_name%TYPE null; --name of the identified employee
+  job_1   employee.job%TYPE null; --job of the identified employee
+BEGIN
+  select count(*)  
+  into count_1
+  from employee
+  where employee_id = v_1; 
+       
+  if count_1=1 then       -- test if there is employee under the input id.
+    select job,employee_name
+    into job_1,name_1
+    from employee
+    where employee_id=v_1;
+    dbms_output.put_line(RPAD('NAME:',10)||upper(name_1));
+    dbms_output.put_line(rpad('JOB: ',10)||upper(job_1)); 
+  else           -- assume here there is no id shared by two different employees.so count_1 is either 1 or NULL
+    dbms_output.put_line(to_char(v_1)||' is not in the table.'); 
+  end if;
+END;
+***************************PART I*************************************PART I***********************
+
+
+
+***************************PART II*************************************PART II***********************
+accept input prompt 'please enter emploee ID: '
+
+DECLARE
+  count_1              number;
+  name_1               employee.employee_name%type;
+  id_1                 employee.employee_id%type := &input;
+  salary_1             employee.salary%type;
+  commision_1          employee.commision%type;
+  manager_name_1       name_1%type;
+  manager_id_1         id_1%type;
+  department_id_1      department.department_id%type;
+  department_name_1    department.department_name%type;
+  high_salary          employee.salary%type;
+
+BEGIN
+  select count(*)
+  into count_1 
+  from employee
+  where employee.employee_id = id_1;
+  
+  if count_1 = 1 then
+     SELECT employee_name,department_id,manager_id,salary+nvl(commision,0),commision
+     into name_1,department_id_1,manager_id_1,salary_1,commision_1
+     from employee
+     where employee_id = id_1;
+     
+     if manager_id_1 != 0 then --identify the manager`s name of the identified employee when it is not the president,
+        select employee_name 
+        into manager_name_1
+        from employee
+        where employee_id = manager_id_1;
+     else
+        manager_name_1 := 'N/A';-- if manager_id is missing, then shows N/A on the manager`s name
+     end if;
+    
+     select nvl(max(salary+nvl(commision,0)),0) -- figure out the highest salary in the department, assuming everyone on the employee list has a ID! 
+     into high_salary 
+     from employee
+     where department_id = department_id_1;
+     
+     select department_name -- look up the department_name of the identified employee, assuming every employee on the list has a ID!
+     into department_name_1
+     from department
+     where department_id = department_id_1; 
+     
+     dbms_output.put_line('NAME: ' ||NAME_1);
+     dbms_output.put_line('TOTAL PAY: ' ||SALARY_1);
+     dbms_output.put_line('MANAGER NAME: ' ||MANAGER_NAME_1);
+     dbms_output.put_line('DEPARTMENT NAME: ' ||UPPER(DEPARTMENT_NAME_1));
+     dbms_output.put_line('HIGHEST PAY: ' ||HIGH_SALARY);
+     
+  else 
+     dbms_output.put_line(id_1||' is not in the table');
+  end if;
+END;
+***************************PART II*************************************PART II************************
+
+
+
+
+***************************PART III*************************************PART III***********************
+ACCEPT p_1 PROMPT 'Please enter an integer between 30 and 70:'
+
+DECLARE
+n number:= &p_1;
+F_0 number := 0; -- variable that`s used in the loop
+F_1 number := 1;
+F_2 number := 1;
+
+
+BEGIN
+  IF n <30 OR n>70 THEN
+     dbms_output.put_line('Invalid number.'); 
+  ELSE 
+     FOR k in 2..n+3 LOOP 
+     F_2 := F_1+F_0;
+     F_0 := F_1;
+     F_1 := F_2;
+     
+        if k=n-3 then
+          dbms_output.put_line('F('||k||')='||F_2);
+        elsif k=n then
+           dbms_output.put_line('F('||k||')='||F_2);
+        elsif k=n+3 then
+           dbms_output.put_line('F('||k||')='||F_2);
+        else null;
+        end if; 
+     END LOOP;   
+  END if;
+END;
+
+
+***************************PART III*************************************PART III***********************
+
+
+
+***************************PART IV*************************************PART IV*************************
+declare
+  v_count    NUMBER;
+  v_date     DATE :='01-MAY-2012';
+begin 
+  dbms_output.put_line(rpad('DATE',10) || lpad('NUMBER OF BUGS',20));
+  WHILE v_date <= '31-MAY-2012' LOOP
+     select count(*)
+     into v_count
+     from bugs
+     where v_date >= reported_date and (v_date <= closed_date or closed_date is null);
+     DBMS_OUTPUT.PUT_LINE(rpad(v_date,10) || lpad(v_count,10));
+     v_date:= v_date+1;
+  END LOOP;
+end;  
+***************************PART IV*************************************PART IV*************************

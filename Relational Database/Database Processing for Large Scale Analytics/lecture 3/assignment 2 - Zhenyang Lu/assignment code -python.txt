@@ -1,0 +1,113 @@
+import sqlite3
+
+#read data lines from the file
+fd=open('C:/Users/felix/Dropbox/courses/CSC 455/lecture 3/data_hw2.txt','r')
+data = fd.readlines()
+fd.close()
+
+#connect to the database 
+conn = sqlite3.connect('csc455.db')
+
+# create table CLIENTS(last,first,address)
+Clients='''
+CREATE TABLE Clients 
+( First Varchar2(10),
+  Last Varchar2(10),
+  Address Varchar2(30),
+  
+  CONSTRAINT Clients_PK
+     PRIMARY KEY(First,Last)
+);'''
+
+# create table LOANS(Lnumber,interest,amount)
+Loans='''
+CREATE TABLE Loans 
+( Lnumber Number(2) PRIMARY KEY,
+  Interest Number(5,2),
+  Amount Number(10) 
+);'''
+
+# create accounts(first,last,job,lnumber)
+Accounts='''
+CREATE TABLE Accounts( 
+  First Varchar2(10),
+  Last Varchar2(10),
+  Job Varchar(20),
+  Lnumber Number(5),
+
+  CONSTRAINT AccountsFK 
+      FOREIGN KEY (First,Last)
+          REFERENCES Clients(First,Last),
+
+  CONSTRAINT AccountsFK2 
+      FOREIGN KEY (Lnumber)
+          REFERENCES Loans(Lnumber),
+          
+  CONSTRAINT Accounts_PK
+     PRIMARY KEY(First,Last,Job,Lnumber)
+);'''
+
+
+#create test Cursor that is trying read data from python database
+Select='''select * from Accounts;'''
+
+#replace existing tables
+Clients_drop='''drop table Clients;'''
+Loans_drop='''drop table Loans;'''
+Accounts_drop='''drop table Accounts;'''
+conn.execute(Clients_drop)
+conn.execute(Loans_drop)
+conn.execute(Accounts_drop)
+conn.execute(Clients)
+conn.execute(Loans)
+conn.execute(Accounts)
+
+#Create strings that contains what is going into the database
+data_Clients=[]
+data_Loans=[]
+data_Accounts=[]
+
+# this whole ITERATION tries to clean the data, transform it into what can be put into the tables and put it into different tables accordingly
+for i in range(len(data)):
+    # clean data
+    data1=data[i].strip('\n')
+    data2=data1.split(',')
+
+    for m in range(len(data2)):
+        data2[m] = data2[m].strip(' ')
+
+    data2[4]=int(data2[4])
+    data2[5]=float(data2[5])
+    data2[6]=int(data2[6])
+
+    # put the cleaned data into the strings that is going to be put into tables later. No repeated data is allowed.
+    if data_Clients.count([data2[0],data2[1],data2[2]])==0:
+        data_Clients.append([data2[0],data2[1],data2[2]])
+
+    if data_Loans.count([data2[4],data2[5],data2[6]])==0:
+        data_Loans.append([data2[4],data2[5],data2[6]])
+
+    if data_Accounts.count([data2[0],data2[1],data2[2],data2[3]])==0:
+        data_Accounts.append([data2[0],data2[1],data2[2],data2[3]])
+
+# put the strings into the tables
+conn.executemany("INSERT INTO Clients VALUES(?,?,?)",data_Clients)
+conn.executemany("INSERT INTO Loans VALUES(?,?,?)",data_Loans)
+conn.executemany("INSERT INTO Accounts VALUES(?,?,?,?)",data_Accounts)
+conn.commit()
+
+
+
+# test the script and see what's in the tables.
+for row in conn.execute("select * from Clients"):
+    print row
+
+for row in conn.execute("select * from Loans"):
+    print row
+
+for row in conn.execute("select * from Accounts"):
+    print row
+
+
+
+

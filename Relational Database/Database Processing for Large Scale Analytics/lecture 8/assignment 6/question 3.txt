@@ -1,0 +1,24 @@
+# part a.
+
+select count(*)-count(type) from tweets left outer join geo on tweets.id = geo.id;
+
+
+
+
+
+# part b.& c.
+
+tweets_counter=0
+geo_counter=0
+
+for i in conn.execute("select *from tweets left outer join geo on tweets.id = geo.id"):
+    tweets_counter = tweets_counter + 1
+
+    if i[7] is not  None:
+        geo_counter=geo_counter +1
+
+print 'there are ',geo_counter,'tweets with location available!'
+
+print 'there are ',tweets_counter-geo_counter,'without coordinates!'
+
+print float(geo_counter)/tweets_counter*100,' percent of users enable their location service!'

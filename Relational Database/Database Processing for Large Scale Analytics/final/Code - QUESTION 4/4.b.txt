@@ -1,0 +1,56 @@
+#--------------------------------------------------------------------------------------------
+# NOTICE: The following script assumes you have run part 1.c 
+#--------------------------------------------------------------------------------------------
+
+
+
+# output the table from SQLITE# takes  1.93799996376  seconds. 
+
+import time, sqlite3
+
+conn = sqlite3.connect('CSC455-Final.db')
+fd = open('user_entry.txt','a')
+conn.text_factory=str
+
+start = time.time()
+
+data = conn.execute('select * from user_entry')
+
+attribute=''
+
+for i in data.description:
+    attribute = attribute + i[0] +','  
+
+attribute = attribute.rstrip(',') +'\n'   # output attributes
+
+fd.writelines(attribute)
+
+records=data.fetchall()
+
+record = ''
+
+
+for i in range(len(records)):
+    record = ''
+    
+    record = str(i) + '. '+str(records[i][0])+','+str(records[i][1])+','+str(records[i][2])+','+str(records[i][3])+','+str(records[i][4])
+
+    last_column = False
+    
+    if records[i][2] is not None:
+        last_column = str(records[i][1]).strip() in records[i][2]
+        
+    if records[i][3] is not None:
+        last_column = last_column or str(records[i][1]).strip() in records[i][3]
+
+    record = record + ','+str(last_column) +'\n'
+
+    fd.writelines(record)
+
+
+fd.close()
+
+end=time.time()
+
+print 'output the table from SQLITE# takes ',end-start,' seconds. 
+'

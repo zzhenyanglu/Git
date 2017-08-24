@@ -1,0 +1,11 @@
+John, Smith, 111 N. Wabash Avenue, plumber, 5, 1.0, 200
+John, Smith, 111 N. Wabash Avenue, bouncer, 5, 1.0, 200
+Jane, Doe, 243 S. Wabash Avenue, waitress, 1, 5.0, 10000
+Jane, Doe, 243 S. Wabash Avenue, accountant, 2, 11.8, 7000
+Jane, Doe, 243 S. Wabash Avenue, waitress, 2, 11.8, 7000
+Jane, Doe, 243 S. Wabash Avenue, accountant, 1, 5.0, 10000
+Mike, Jackson, 1 Michigan Avenue, accountant, 7, 10.0, 100
+Mike, Jackson, 1 Michigan Avenue, accountant, 8, 20.0, 25000
+Mike, Jackson, 1 Michigan Avenue, accountant, 4, 3.3, 100000
+Mary, Who, NULL, accountant, 3, 2.0, 12000
+Mary, Who, NULL, risk analyst, 3, 2.0, 12000

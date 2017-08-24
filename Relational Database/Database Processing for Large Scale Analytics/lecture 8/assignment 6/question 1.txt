@@ -1,0 +1,41 @@
+def convertDL(value):
+   if type(value) == list:
+       print "I got a list and give you a dict"
+
+       dict_ = {}
+       for i in value:
+           dict_[i[0]]=i[1:]
+       return dict_
+           
+   elif type(value) == dict:
+       print "I got a dict and give you a list"
+
+       list_ = []
+       for i in value:
+           temp = []
+           
+           if type(value[i]) is int:   # if dict value is int type 
+               temp=[i]+[value[i]]
+           elif type(value[i]) is list:  # if dict value is list type
+               temp = [i]+[m for m in value[i]]
+           list_.append(temp)
+       return list_
+    
+   else:
+       print ' Please give me a list or dict and Try again!'
+       return 
+
+
+#test the function 
+
+
+dict1 = {'a':[1,2], 'b':[3], 'c':[4,5]}
+
+
+list1 = [['a', 1, 2], ['c', 4, 5], ['b', 3]]
+
+
+print convertDL(dict1)
+
+print convertDL(list1)
+ 

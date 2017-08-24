@@ -1,0 +1,35 @@
+def dconca(dict_a = {}, dict_b={},conflict=False):
+    dict_1 = dict_a.copy()
+    dict_2 = dict_b.copy()
+    
+    for i in dict_2.keys():
+        if dict_1.has_key(i) is True:
+            if conflict is False:
+                if type(dict_1[i]) is not []:
+                    dict_1[i]=[dict_1[i]]  # make int variable a list
+                    dict_1[i].append(dict_2[i])
+                
+                else:
+                    dict_1[i]= [i for i in dict_1[i]]  #make int variable a list
+                    for j in dict_2[i]:
+                        dict_1[i].append(j)
+                                
+            if conflict is True:
+                dict_1.update({i+'_1':dict_1.get(i)})
+                dict_1.update({i+'_2':dict_2.get(i)})
+                del dict_1[i]
+
+        elif dict_1.has_key(i) is False:
+            dict_1.update({i:dict_2.get(i)})
+    return dict_1
+
+            
+#TEST PROGRAM BELOW!##TEST PROGRAM BELOW!#
+
+alkali_metal={'Li':3,'Na':11,'K':19,'Rb':37,'Cs':55,'Fr':87}
+alkali_earth_metal = {'Be':4,'Mg':12,'Ca':20,'Sr':38,'Ba':56,'Ra':88,'Cs':1000000}  # conflict with alikali_metal 'Cs':55
+noble_gas={'He':2,'Ne':10,'Ar':18,'Kr':36,'Xe':54,'Rn':86}
+
+print 'When no conflict','\nalkali_metal is', alkali_metal, '\nnoble_gas is',noble_gas, '\nalkali_metal combines with noble_gas is', dconca(noble_gas,alkali_metal),'\n'
+print 'When conflict is True','\nalkali_metal is', alkali_metal, '\nalkali_earth_metal is',alkali_earth_metal, '\nalkali_metal combines with noble_gas is', dconca(alkali_earth_metal,alkali_metal,True),'\n'
+print 'When conflict is False','\nalkali_metal is', alkali_metal, '\nalkali_earth_metal is',alkali_earth_metal, '\nalkali_metal combines with noble_gas is',  dconca(alkali_earth_metal,alkali_metal),'\n'

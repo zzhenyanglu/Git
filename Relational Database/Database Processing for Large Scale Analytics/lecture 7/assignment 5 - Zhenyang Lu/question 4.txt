@@ -1,0 +1,24 @@
+def output_dict(dict = {}, skip_keys=[],directory = 'dictionary.txt',split = ',',output_type='a'):  #output_type is 'a' or 'w', that is parament of open() function
+    if len(dict) == 0:
+        return ' The dictionary is empty! '
+    else:
+        output=''
+        for i in dict:
+            if i not in skip_keys:
+                output = output+ '[' + i + ']'+ ':' + str(dict[i])+split
+
+        fd=open(directory,output_type)
+        fd.writelines(output[:len(output)-1])
+        return 'Writing into a txt file successfully!' 
+                
+#------------------------------------------------------------------------
+#  TEST PROGRAM
+#------------------------------------------------------------------------
+
+Chemical_element_table={'Li':3,'Na':11,'K':19,'Rb':37,'Cs':55,'Fr':87,'Be':4,'Mg':12,'Ca':20,'Sr':38,'Ba':56,'Ra':88,'Cs':1000000,'He':2,'Ne':10,'Ar':18,'Kr':36,'Xe':54,'Rn':86}
+
+skip_element = ['Li','Na','K']  # first three elements on Chemical_element_table
+
+output_dict(Chemical_element_table,skip_element)
+
+# Result is like : [Be]:4,[Fr]:87,[Ne]:10,[Ba]:56,[Mg]:12,[Kr]:36,[Ar]:18,[Ra]:88,[Rb]:37,[Sr]:38,[Cs]:1000000,[Rn]:86,[Xe]:54,[Ca]:20,[He]:2

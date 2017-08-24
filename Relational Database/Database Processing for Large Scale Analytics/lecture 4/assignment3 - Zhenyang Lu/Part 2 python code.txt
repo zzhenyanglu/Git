@@ -1,0 +1,78 @@
+######################################################################################
+
+# Scripts for PART 2 - A (There is no change to the codes provided by professor, so you
+
+# do not need to review it again. Just check the next section
+
+######################################################################################
+
+
+import sqlite3
+from sqlite3 import OperationalError
+
+conn = sqlite3.connect('csc455_HW3.db')
+c = conn.cursor()
+
+fd = open('C:/Users/felix/Dropbox/courses/CSC 455/lecture 4/ZooDatabase.sql', 'r')
+sqlFile = fd.read()
+fd.close()
+
+sqlCommands = sqlFile.split(';')
+
+for command in sqlCommands:
+    try:
+        c.execute(command)
+    except OperationalError, msg:
+        print "Command skipped: ", msg
+
+for table in ['ZooKeeper', 'Animal', 'Handles']:
+    
+    result = c.execute("SELECT * FROM %s;" % table);
+
+    rows = result.fetchall();
+
+    print "\n--- TABLE ", table, "\n"
+
+    for desc in result.description:
+        print desc[0].rjust(22, ' '),
+
+    print ""
+    for row in rows:
+        for value in row:
+            print str(value).rjust(22, ' '),
+        print ""
+
+
+######################################################################################
+
+# Continuing with scripts for PART 2 - B
+
+######################################################################################
+
+fd = open('C:/Users/felix/Dropbox/courses/CSC 455/lecture 4/part_1.txt','r')
+Commends=fd.read()
+fd.close()
+
+commends=Commends.split(';')
+
+i=1 # index of each query
+
+for commend in commends:
+
+    print "NO.",i,"QUESTION:"
+    
+    i+=1
+
+    result = c.execute(commend)
+
+    rows=result.fetchall()
+    
+    for row in rows:
+        print row
+
+    print ''
+
+#.close()
+#conn.close()
+
+

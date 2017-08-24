@@ -1,0 +1,32 @@
+def csv_to_txt(name=''):                # assume the file you want to read through is .CSV and under Python27 directory 
+
+    import pandas  
+
+    if name.find('.csv') <0:           
+        name = name+'.csv'
+
+    try:                                # report nonexistent file
+        table = pandas.read_csv(name)
+    except IOError:
+        print 'File does not exist'
+
+    table=pandas.read_csv(name)         # assume we are reading .CSV
+
+    name_output = name.strip('.csv')+'.txt'
+    
+    fd=open(name_output,'a')
+
+    attribute = 'Attributes contained: '
+    
+    for i in table:
+        attribute = attribute + i + ','  # write attributes into the text file 
+
+    fd.writelines(attribute+'\n')       
+    
+    for i in range(len(table)):          # write tuples into the text file
+        tuple = ''
+        for j in table.ix[i]:
+            tuple = tuple + str(j) + ','
+        fd.writelines(tuple+'\n')
+
+    fd.close()

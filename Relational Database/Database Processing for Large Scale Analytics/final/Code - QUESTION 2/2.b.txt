@@ -1,0 +1,72 @@
+#--------------------------------------------------------------------------------------------
+# NOTICE: The following script assumes you have run part 1.c 
+#--------------------------------------------------------------------------------------------
+
+
+
+
+
+
+#---------------------------------------------------------------------
+
+# part 1
+
+#---------------------------------------------------------------------
+
+
+import time,sqlite3
+conn = sqlite3.connect('CSC455-Final.db')
+
+column = conn.execute('select id from tweets').fetchall()
+
+def find_id(column):
+    for i in column:
+        id = str(i[0])
+        last_3 = id[len(id)-3:]
+
+        if last_3 == '300' or last_3 == '700':
+            print i
+    
+start = time.time()
+find_id(column)
+end   = time.time()
+
+
+print "finding ID ending with 700 or 300 takes", (end-start), ' seconds.'
+
+
+# result is finding ID ending with 700 or 300 takes 4.36599993706  seconds, which is mucher longer than SQL query
+
+# there are 202 id ending with 700 or 300! 
+
+
+
+#---------------------------------------------------------------------
+
+# part 2
+
+#---------------------------------------------------------------------
+
+
+import time,sqlite3
+conn = sqlite3.connect('CSC455-Final.db')
+
+column = conn.execute('select In_Reply_to_User_ID from tweets').fetchall()
+
+def find_id(column):
+    unique_tweet = []
+    
+    for i in column:
+        if unique_tweet.count(i[0]) ==0:
+            unique_tweet.append(i[0])
+    return len(unique_tweet)
+    
+start = time.time()
+print find_id(column)
+end   = time.time()
+print "finding unique reply_to_id takes", (end-start), ' seconds.'
+
+
+# there are 20497 unique  reply_to_user_id entries
+
+# finding unique reply_to_id takes 71.34565427504 seconds, which is mucher longer than SQL query

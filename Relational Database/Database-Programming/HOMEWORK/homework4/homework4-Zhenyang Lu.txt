@@ -1,0 +1,232 @@
+
+***************************************************PART I****************************************************************
+DECLARE
+    CURSOR tmp_emp (v_department department.department_name%type) IS 
+       SELECT department_name,employee_name,salary + nvl(commission,0) as salary
+       FROM employee,department
+       WHERE department.department_name = v_department AND employee.department_id = department.department_id
+       ORDER by department_name,employee_name;
+    
+    CURSOR dep_nam IS
+       SELECT DEPARTMENT_NAME,avg(salary+nvl(commission,0))*.85 as avg_sal
+       FROM department,employee
+       WHERE employee.DEPARTMENT_ID = department.DEPARTMENT_ID
+       group by department_name;
+       
+       numb number:=0;   -- count how many employees have a above 85% salary
+       v_output varchar2(200);
+       v_output_2 varchar2(200);
+
+BEGIN
+   dbms_output.put_line('DEPARTMENT NAME  NUMBER OF EMPLOYEES  EMPLOYEE NAME');
+   dbms_output.put_line('---------------------------------------------------');
+   
+   For tmp_cur in dep_nam LOOP
+   
+      numb :=0;
+      v_output :=null;
+      
+      FOR v_row in tmp_emp(tmp_cur.department_name) LOOP     -- check if there are more than 2 employees in the department having more than 85% ave salary     
+         IF v_row.salary > tmp_cur.avg_sal THEN
+            numb := numb + 1;
+            IF v_output is null THEN
+               v_output:= v_output||upper(v_row.employee_name);
+            ELSE v_output:= v_output||','||' '|| upper(v_row.employee_name);
+            END IF;
+         END IF;    
+      END LOOP;
+      
+      IF numb > 2 THEN        -- If it is qualified, display it
+         v_output_2 := lpad(upper(tmp_cur.department_name),15)||lpad(numb,21);
+         v_output := '<'||v_output||'>';
+         v_output_2 := v_output_2 || ' '||rpad(v_output,26);
+         dbms_output.put_line(v_output_2);
+      ELSE continue;
+      END IF;
+   END LOOP;     
+END;
+***************************************************PART I****************************************************************
+
+
+
+
+
+***************************************************PART II****************************************************************
+accept p_1 char format a10 prompt 'Last name: '
+
+DECLARE
+  CURSOR parent_lookup (v_name varchar2) IS
+  SELECT parent_name 
+  From regions
+  WHERE upper(child_name) = upper(v_name);
+  
+  CURSOR list_lookup (v_name varchar2) IS
+  SELECT parent_name
+  FROM regions
+  WHERE  upper(v_name) = upper(child_name)  OR  upper(v_name) = upper(parent_name);
+  
+  v_1 regions.child_name%type :='&p_1';
+  v_local  varchar2(200);
+  v_tmp regions.child_name%type;
+
+BEGIN
+
+dbms_output.put_line('----- Begin_Output -----');
+dbms_output.put_line(' ');
+
+OPEN list_lookup(v_1);
+FETCH list_lookup into v_tmp;
+
+IF list_lookup%found THEN --check if the input name is in the table.
+   FOR i in 1..20 LOOP
+      OPEN parent_lookup(v_1);
+      FETCH parent_lookup into v_tmp;
+   
+      IF parent_lookup%found THEN
+         IF v_local IS NULL THEN 
+             v_local := '('||i||') '||upper(v_1);
+         ELSE 
+            v_local := '('||i||') '||upper(v_1)||'--> '||v_local;
+         END IF;
+         v_1:= v_tmp;
+         dbms_output.put_line(v_local);
+      ELSE
+         IF v_1 is null THEN 
+            EXIT;
+         ELSE   
+            v_local := '('||i||') '||upper(v_1)||'--> '||v_local;
+            dbms_output.put_line(v_local);
+            EXIT;
+         END IF;
+      END IF;
+      CLOSE parent_lookup;
+   END LOOP;
+   CLOSE list_lookup;
+ELSE dbms_output.put_line(upper(v_1)||' is not in the table ');
+END IF;
+
+dbms_output.put_line(' ');
+dbms_output.put_line('----- End_Output -----');
+END;
+***************************************************PART II****************************************************************
+
+
+
+***************************************************PART III***************************************************************
+
+(B)
+
+accept p_1 char  'Region name: '
+
+DECLARE
+  CURSOR parent_lookup (v_name varchar2) IS
+     SELECT parent_name 
+     FROM regions
+     WHERE upper(child_name) = upper(v_name);
+  
+  CURSOR list_lookup (v_name varchar2) IS
+     SELECT parent_name
+     FROM regions
+     WHERE  upper(v_name) = upper(child_name)  OR  upper(v_name) = upper(parent_name);
+  
+  CURSOR list_lookup_2 (v_name varchar2) IS
+     SELECT parent_name
+     FROM regions
+     WHERE  upper(v_name) = upper(child_name)  OR  upper(v_name) = upper(parent_name);
+  
+  v_1 regions.child_name%type :='&p_1';
+  v_1_1 regions.child_name%type :='&p_1';
+  v_local  varchar2(200);
+  v_local_2  varchar2(200);
+  v_tmp regions.child_name%type;
+  v_tmp_2 regions.child_name%type;
+  v_first regions.parent_name%type;
+  v_3 regions.parent_name%type;
+ 
+BEGIN
+   dbms_output.put_line('----- Begin_Output -----');
+   dbms_output.put_line(' ');
+   OPEN list_lookup(v_1);
+   FETCH list_lookup into v_3;
+ 
+   IF list_lookup%found THEN   --
+      FOR i in 1..10 LOOP  
+         OPEN parent_lookup(v_1);
+         FETCH parent_lookup into v_tmp;
+         
+         IF parent_lookup%found THEN
+            IF v_local IS NULL THEN 
+               v_local := '('||i||') '||upper(v_1);
+            ELSE 
+               v_local := '('||i||') '||upper(v_1)||' --> '||v_local;
+            END IF;
+            v_1:= v_tmp;
+            dbms_output.put_line(v_local);
+         ELSE
+            IF v_1 is null THEN 
+               EXIT;
+            ELSE   
+               v_local := '('||i||') '||upper(v_1)||' --> '||v_local;
+               dbms_output.put_line(v_local);
+               EXIT;
+            END IF;
+         END IF;
+         CLOSE parent_lookup;
+      END LOOP;
+   ELSE 
+      dbms_output.put_line(upper(v_1)||' is not in the table ');
+   END IF;
+  -----------------------------------------------------------------
+  -----------------------------------------------------------------
+   OPEN list_lookup_2(v_1_1);
+   FETCH list_lookup_2 into v_3;
+   
+   IF parent_lookup%isopen THEN --open the table to find parent name 
+      CLOSE parent_lookup;
+   ELSE 
+      null;
+   END IF;
+
+   IF list_lookup_2%found THEN --check if the input name is in the table.
+      OPEN parent_lookup(v_1_1);
+      FETCH parent_lookup into v_tmp_2;
+      FETCH parent_lookup into v_tmp;
+      
+      IF v_tmp is not null THEN
+          dbms_output.put_line('=========================');
+          -----------------------------
+        FOR i in 1..10 LOOP
+             
+          IF parent_lookup%found THEN
+                IF v_local_2 IS NULL THEN 
+                   v_local_2 := '('||i||') '||upper(v_1_1);
+                ELSE 
+                   v_local_2 := '('||i||') '||upper(v_1_1)||' --> '||v_local_2;
+                END IF;
+                v_1_1:= v_tmp;
+                dbms_output.put_line(v_local_2);
+          ELSE
+            IF v_1_1 is null THEN 
+               EXIT;
+            ELSE   
+               v_local_2 := '('||i||') '||upper(v_1_1)||' --> '||v_local_2;
+               dbms_output.put_line(v_local_2);
+               EXIT;
+            END IF;
+         END IF;
+         CLOSE parent_lookup;
+         OPEN  parent_lookup(v_1_1);
+         FETCH parent_lookup into v_tmp;
+      END LOOP;
+      --------------
+      ELSE 
+         null;
+      END IF;
+  
+   ELSE 
+      null;
+   END IF;
+   
+   dbms_output.put_line(' ');
+   dbms_output.put_line('----- End_Output -----');
+END;

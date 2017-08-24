@@ -1,0 +1,38 @@
+ 
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+          line  = line.strip()
+            if not line:
+                continue;
+            jb = json.loads(line)   # this will parse the record into a map
+            dt = time.strftime('%Y-%m-%d %H:%M:%S',time.strptime(jb["created_at"],'%a %b %d %H:%M:%S +0000 %Y'))   # this transforms the string into a datetime obj in python.
+
+------------------------------------------------------------------------------------------------------------------
+
+
+tweets= jason.loads(file) and 
+data=open('assignment4.txt').read()
+tweets = json.loads(data)
+
+------------------------------------------------------------------------------------------------------
+import json
+import urllib2
+
+#Read file
+webFD=urllib2.urlopen("http://rasinsrv07.cstcis.cti.depaul.edu/CSC455/tweet_data.txt")
+tweet = webFD.readline()
+
+#print tweet
+tweet
+
+# clean up
+tweet = tweet[6:]
+
+#print tweet
+tweet
+
+#create dictionary
+dictt=json.loads(tweet)
+
+#print dictionary
+dicct

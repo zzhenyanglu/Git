@@ -1,0 +1,16 @@
+
+# -------------------------------------------------------
+# PART A
+# -------------------------------------------------------
+
+ select id, name from user_entry where friends_count = (select max(friends_count) from user_entry);
+
+
+
+# -------------------------------------------------------
+# PART B
+# -------------------------------------------------------
+
+c=conn.execute('''select id, name from user_entry where friends_count = (select max(friends_count) from user_entry)''').fetchall()
+
+print c

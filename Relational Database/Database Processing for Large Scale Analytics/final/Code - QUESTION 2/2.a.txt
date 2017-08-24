@@ -1,0 +1,135 @@
+#--------------------------------------------------------------------------------------------
+# NOTICE: The following script assumes you have run part 1.c 
+#--------------------------------------------------------------------------------------------
+
+
+
+#--------------------------------------------------------------------------------------------
+# part i
+#--------------------------------------------------------------------------------------------
+import time,sqlite3
+
+conn = sqlite3.connect('CSC455-Final.db')
+
+start = time.time()
+print conn.execute('select count(id) from tweets where id like \'%300\' OR id like \'%700\';').fetchall()
+end   = time.time()
+
+print "finding ID by SQL query ending with 700 or 300 takes", (end-start), ' seconds.'
+
+
+#--------------------------------------------------------------------------------------------
+
+# finding ID by SQL query ending with 700 or 300 takes 0.0360000133514  seconds.
+# there are 202 id ending with 700 or 300! 
+
+#--------------------------------------------------------------------------------------------
+
+
+
+
+#--------------------------------------------------------------------------------------------
+# part ii
+#--------------------------------------------------------------------------------------------
+
+import time,sqlite3
+
+conn = sqlite3.connect('CSC455-Final.db')
+
+start = time.time()
+conn.execute('select count(distinct In_Reply_to_User_ID) from tweets ;').fetchall()
+end   = time.time()
+
+print "SQL query takes", (end-start), ' seconds.'
+
+
+#--------------------------------------------------------------------------------------------
+
+# SQL query takes 0.301000118256  seconds
+# there 20497 distinct In_Reply_to_User_ID query found
+
+#--------------------------------------------------------------------------------------------
+
+
+
+
+#--------------------------------------------------------------------------------------------
+# part iii
+#--------------------------------------------------------------------------------------------
+
+import time,sqlite3
+
+conn = sqlite3.connect('CSC455-Final.db')
+
+start = time.time()
+
+conn.execute('SELECT t1.id, t2.id FROM Tweets t1, Tweets t2 WHERE t1.retweet_count = t2.retweet_count AND ((t1.geo_id IS NULL AND t2.geo_id IS NOT NULL) OR (t1.geo_id IS NOT NULL AND t2.geo_id IS NULL));').fetchall()
+
+end   = time.time()
+
+print "SQL query takes", (end-start), ' seconds.'
+
+
+#--------------------------------------------------------------------------------------------
+
+# I can't report run time when inserting 100000 values, because everytime I run it, I ended up with computer crash.
+# if just inserting 1000 values, it reports "SQL query takes 0.825000047684  seconds."
+
+#--------------------------------------------------------------------------------------------
+
+
+
+
+#--------------------------------------------------------------------------------------------
+# part iv
+#--------------------------------------------------------------------------------------------
+
+import time,sqlite3
+
+conn = sqlite3.connect('CSC455-Final.db')
+
+start = time.time()
+
+d=conn.execute('SELECT name,AVG(longitute), AVG(latitute) FROM user_entry LEFT OUTER JOIN Tweets ON Tweets.user_id = User_entry.id LEFT OUTER JOIN Geo ON Tweets.geo_id = Geo.id GROUP BY user_entry.name having AVG(longitute) is not null;').fetchall()
+
+end   = time.time()
+
+print "SQL query takes", (end-start), ' seconds.'
+
+
+#--------------------------------------------------------------------------------------------
+
+# I can't report time if I insert 100000 values into table. If inserting just 1000 values, 
+# it reports "SQL query takes 0.477999925613  seconds."
+
+#--------------------------------------------------------------------------------------------
+
+
+
+#--------------------------------------------------------------------------------------------
+# part v
+#--------------------------------------------------------------------------------------------
+
+
+import time,sqlite3
+
+conn = sqlite3.connect('CSC455-Final.db')
+
+start = time.time()
+
+for i in range(10):
+d=conn.execute('SELECT name,AVG(longitute), AVG(latitute) FROM user_entry LEFT OUTER JOIN Tweets ON Tweets.user_id = User_entry.id LEFT OUTER JOIN Geo ON Tweets.geo_id = Geo.id GROUP BY user_entry.name having AVG(longitute) is not null;').fetchall()
+
+end   = time.time()
+
+print "SQL query takes", (end-start), ' seconds.'
+
+
+
+
+#--------------------------------------------------------------------------------------------
+
+# If inserting just 1000 values, it reports "SQL query takes 4.74799990654  seconds.", which
+# is linear scale!
+
+#--------------------------------------------------------------------------------------------

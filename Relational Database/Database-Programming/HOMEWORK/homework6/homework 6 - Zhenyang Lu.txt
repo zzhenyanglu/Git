@@ -1,0 +1,114 @@
+--------------------------------------------------------------------------------------------------------------------------
+(1)
+--------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER emp_dept_trg 
+  AFTER INSERT OR UPDATE ON employee 
+  FOR EACH ROW
+  
+  DECLARE 
+     TO_DEP department.department_name%TYPE;
+     FROM_DEP department.department_name%TYPE;
+  BEGIN
+     SELECT department_name
+     INTO to_dep
+     FROM department
+     WHERE department_id = :new.department_id;
+     
+     IF INSERTING THEN
+       
+       INSERT
+       INTO emp_dept_hist VALUES
+         (
+           :new.employee_id,
+           :new.employee_name,
+           'N/A',
+           to_dep,
+           sysdate
+         );
+     ELSIF UPDATING THEN
+        IF :new.department_id != :old.department_id THEN
+           SELECT department_name
+           INTO from_dep
+           FROM department
+           WHERE department_id = :old.department_id;
+           
+           INSERT
+           INTO emp_dept_hist VALUES
+           (
+             :new.employee_id,
+             :new.employee_name,
+             from_dep,
+             to_dep,
+             sysdate
+           );
+        ELSE
+           null;
+        END IF;
+     END IF;
+END;
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+(2)
+-------------------------------------------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER emp_del_log_trg 
+   AFTER DELETE ON employee 
+   FOR EACH ROW 
+   
+   DECLARE pragma autonomous_transaction;
+   
+   BEGIN
+     INSERT
+     INTO emp_bak VALUES
+        (
+          :old.employee_id,
+          :old.employee_name,
+          :old.hire_date,
+          :old.department_id,
+          sysdate
+        );
+     COMMIT;
+   END;
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+(3)
+-------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER emp_job_sal_trg 
+  BEFORE INSERT OR UPDATE ON employee 
+  FOR EACH ROW
+  
+  DECLARE
+     mini_sal number;
+     counter number;
+     job_title employee.job%type;
+  BEGIN
+     :new.job := upper(:new.job);
+      
+     SELECT count(upper(:new.job))
+     INTO counter
+     FROM job_min_sal
+     WHERE upper(job_min_sal.job) = upper(:NEW.job);
+     
+     IF counter = 0 THEN
+        job_title := 'UNKNOWN';
+     ELSE
+        job_title := :new.job;
+     END IF;
+     
+     SELECT min_sal
+     INTO mini_sal
+     FROM job_min_sal
+     WHERE job = job_title;
+     
+     IF :new.salary<mini_sal THEN
+      :new.salary := mini_sal;
+     ELSE null;
+     END IF;
+  END;
+-------------------------------------------------------------------------------------------------------------------------------
+

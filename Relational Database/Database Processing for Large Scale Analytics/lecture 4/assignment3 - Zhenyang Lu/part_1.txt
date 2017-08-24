@@ -1,0 +1,21 @@
+select Aname,zname from Animal,handles,zookeeper
+where animal.AID = handles.animalid and zookeeper.zid=handles.zookeepid;
+
+select aname,animalid,zname from Animal left outer join handles on Aid = animalid left outer join zookeeper on zid=zookeepid;
+
+select zname,sum(timetofeed) from animal,handles,zookeeper
+where aid=animalid and zookeepid=zid
+group by zname;
+
+select zname, aname, assigned from animal,handles,zookeeper where aid = animalid and zookeepid=zid order by assigned desc;
+
+select aname, animalid from animal left outer join handles on animalid=aid 
+where animalid is null;
+
+select aname, count(zname) from handles, animal, zookeeper 
+where animalid=aid and zid=zookeepid 
+group by aname
+having count(zname) >1;
+
+select d.aname,b.aname from animal d, animal b
+where abs(d.timetofeed-b.timetofeed)<=0.25 and b.aname != d.aname;

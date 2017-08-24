@@ -1,0 +1,149 @@
+(2)
+-----------------------------------------------------------------------
+create or replace
+FUNCTION get_status_by_member_id
+(	
+p_member_id		NUMBER 
+ 	
+) RETURN CHAR AS
+
+    status CHAR;
+    v_1 number;
+
+BEGIN
+    select count(*)
+    into v_1
+    from members
+    where members.member_id = p_member_id; 
+    
+    IF v_1 = 0 THEN
+       return 'N';
+    ELSE
+       select status
+       into status
+       from members
+       where members.member_id = p_member_id;
+    END IF;
+    
+    return status;
+END get_status_by_member_id; 
+-----------------------------------------------------------------------
+
+(3)
+-----------------------------------------------------------------------
+create or replace
+FUNCTION login
+(	
+p_member_id		NUMBER,
+p_password		VARCHAR2
+ 	
+) RETURN CHAR
+AS
+   V_1 NUMBER;
+   V_2 VARCHAR2(20);
+BEGIN
+   SELECT COUNT(*)
+   INTO V_1
+   FROM MEMBERS
+   WHERE MEMBERS.MEMBER_ID = P_MEMBER_ID;
+   
+   IF V_1 = 0 THEN
+      RETURN 'N' ;
+   ELSE
+      SELECT PASSWORD
+      INTO V_2
+      FROM MEMBERS
+      WHERE MEMBERS.MEMBER_ID = P_MEMBER_ID;
+      
+      IF V_2 = P_PASSWORD THEN 
+         RETURN 'Y';
+      ELSE 
+         RETURN 'E';
+      END IF;
+   END IF;
+END LOGIN;
+-----------------------------------------------------------------------
+(4)
+-----------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE reset_password
+(	
+p_member_id		NUMBER DEFAULT 0,
+p_old_password	VARCHAR2,
+p_new_password	VARCHAR2
+) 
+AS
+   V_1 VARCHAR2(20);
+   v_2 number;
+BEGIN
+
+   select count(*)
+   into v_2
+   from members
+   where members.member_id = p_member_id;
+   
+   IF v_2 = 0 THEN 
+      dbms_output.put_line( 'Unable to reset password. ');
+               dbms_output.put_line('The member_id'||'('||p_member_id||') is not in the members table.');
+   ELSE
+      SELECT password
+      INTO V_1 
+      FROM MEMBERS
+      WHERE MEMBERS.MEMBER_ID = P_MEMBER_ID;
+   
+      IF V_1 != P_OLD_PASSWORD THEN 
+         dbms_output.put_line('Unable to reset password.') ;
+               dbms_output.put_line('The old password you entered is incorrect.');
+      ELSE
+         IF LENGTH(p_new_password) < 8 OR LENGTH(p_new_password) > 20 THEN
+            dbms_output.put_line('Unable to reset password.') ;
+                    dbms_output.put_line('The new password you entered is invalid.');
+         ELSE 
+            IF p_new_password = p_old_password THEN
+               dbms_output.put_line( 'Unable to reset password.'); 
+               dbms_output.put_line('The new password cannot be same as the old password.');
+            ELSE
+               update members
+               set password = p_new_password
+               where member_id = p_member_id;
+               
+               dbms_output.put_line('The password for 2007 has been reset.');
+            END IF;
+         END IF;
+        
+      END IF;
+   END IF;
+END reset_password;
+-----------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE get_member_info_by_member_id 
+(	
+	p_member_id 	NUMBER DEFAULT -1
+)
+AS
+    v_1 number;
+    cursor info (v_3 number) IS
+          select member_id,name,email_address,status from members
+          where member_id = v_3;
+    
+    cursor info_all IS
+          select member_id,name,email_address,status from members;
+          
+BEGIN
+    select count(*)
+    into v_1
+    from members
+    where members.member_id = p_member_id; 
+    
+    dbms_output.put_line('MEMBER ID   NAME                EMAIL ADDRESS                                     STATUS');
+    
+    IF v_1 = 0 THEN
+       FOR idx in info_all LOOP
+          dbms_output.put_line(rpad(idx.member_id,12)||rpad(idx.name,20)||rpad(idx.email_address,50)||rpad(idx.status,6));
+       END LOOP;
+    ELSE
+       FOR idx in info(p_member_id) LOOP
+             dbms_output.put_line(rpad(idx.member_id,12)||rpad(idx.name,20)||rpad(idx.email_address,50)||rpad(idx.status,6));
+       END LOOP;
+    END if;
+
+END get_member_info_by_member_id ;
+-----------------------------------------------------------------------

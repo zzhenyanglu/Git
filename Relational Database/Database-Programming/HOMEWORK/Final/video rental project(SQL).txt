@@ -1,0 +1,654 @@
+-------------------------------------------------------------------------------
+--------------------------------PACKAGE HEADER---------------------------------
+-------------------------------------------------------------------------------
+CREATE OR REPLACE PACKAGE video_rental_store_pkg  AS 
+   FUNCTION get_status_by_member_id(p_member_id NUMBER) RETURN CHAR; 
+   PROCEDURE new_member_sign_up( p_password VARCHAR2,	
+	                               p_name VARCHAR2,
+	                               p_email_address VARCHAR2, 
+ 	                               p_join_date	DATE DEFAULT sysdate);                         
+   PROCEDURE cancel_membership_by_member_id(p_member_id 	NUMBER);
+   PROCEDURE search_title( p_title VARCHAR2, 
+                           p_material_type VARCHAR2 DEFAULT NULL);                        
+   PROCEDURE video_checkout( p_member_id NUMBER, 
+                             p_copy_id NUMBER, 
+	                           p_checkout_date DATE);        
+   PROCEDURE video_return( p_copy_id NUMBER, 
+                           p_return_date DATE);                   
+   PROCEDURE print_rental_summary( p_member_id NUMBER);
+   PROCEDURE print_unreturned_video(p_member_id NUMBER);
+
+END video_rental_store_pkg;
+
+-------------------------------------------------------------------------------
+--------------------------------PACKAGE body-----------------------------------
+-------------------------------------------------------------------------------
+
+CREATE OR REPLACE PACKAGE BODY video_rental_store_pkg AS---- WHOLE PACKAGE! 
+---------------------------------------------------------------------------------------------------------------------------
+---(1) FUNCTION: GET_STATUS_BY_MEMBER_ID
+---------------------------------------------------------------------------------------------------------------------------    
+FUNCTION get_status_by_member_id -----FUNCTION: GET_STATUS_BY_MEMBER_ID
+   (p_member_id	NUMBER)  RETURN char 
+   AS
+       status CHAR;
+       v_1 number;
+
+   BEGIN
+       select count(*)
+       into v_1
+       from members
+       where members.member_id = p_member_id; 
+    
+       IF v_1 = 0 THEN
+          return 'N';
+       ELSE
+          select status
+          into status
+          from members
+          where members.member_id = p_member_id;
+       END IF;
+    
+       return status;
+   END get_status_by_member_id; 
+   
+---------------------------------------------------------------------------------------------------------------------------
+--(2) PROCEDURE: NEW_MEMBER_SING_UP
+---------------------------------------------------------------------------------------------------------------------------    
+ 
+
+PROCEDURE new_member_sign_up  -----PROCEDURE: NEW_MEMBER_SING_UP
+   (	
+	   p_password		VARCHAR2,	
+	   p_name 		VARCHAR2,
+	   p_email_address 	VARCHAR2, 
+ 	   p_join_date		DATE DEFAULT sysdate
+   ) 
+IS	
+  	 v_status  		CHAR;
+	   v_error_code	NUMBER;
+     v_error_message 	VARCHAR2(255);
+
+   BEGIN
+	   IF LENGTH(p_password) < 8 OR LENGTH(p_password) > 20 THEN 
+      		DBMS_OUTPUT.PUT_LINE('Invalid passsword!');
+		      RETURN;
+	   END IF; 
+  
+  	 IF p_name is NULL THEN 
+          DBMS_OUTPUT.PUT_LINE('Invalid name!');
+		      RETURN;
+	   END IF;
+
+     IF p_email_address is NULL THEN 
+          	DBMS_OUTPUT.PUT_LINE('Invalid email address!');
+		        RETURN;
+	   END IF;
+
+     IF TO_CHAR(p_join_date, 'yyyymmdd') > TO_CHAR(sysdate, 'yyyymmdd') THEN
+          	DBMS_OUTPUT.PUT_LINE('Invalid join date!');
+		        RETURN;
+	   END IF;
+
+	   INSERT INTO members 
+         VALUES(members_seq.NEXTVAL, p_password, UPPER(p_name), 
+			          p_email_address, p_join_date, 'A');
+	   COMMIT;
+	
+     DBMS_OUTPUT.PUT_LINE(INITCAP(p_name) || ' has been added into the members table.');
+		
+EXCEPTION
+	   WHEN OTHERS THEN
+		      v_error_code := SQLCODE;
+        	v_error_message := SQLERRM;
+        	DBMS_OUTPUT.PUT_LINE('My exception: ' || TO_CHAR(v_error_code) || '   ' || v_error_message);
+END;	
+
+---------------------------------------------------------------------------------------------------------------------------
+--(3) PROCEDURE CANCEL_MEMBERSHIP_BY_MEMBER_ID
+---------------------------------------------------------------------------------------------------------------------------    
+
+
+PROCEDURE cancel_membership_by_member_id----PROCEDURE CANCEL_MEMBERSHIP_BY_MEMBER_ID
+(p_member_id 	NUMBER) 
+IS  
+   counter number;
+   previous_status char;
+   v_error_code	NUMBER;
+   v_error_message 	VARCHAR2(255);
+  
+BEGIN   	
+   SELECT count(p_member_id)
+   INTO counter
+   FROM members
+   WHERE member_id = p_member_id;
+     
+   IF counter = 0 THEN   -- if id is not on the list
+          	DBMS_OUTPUT.PUT_LINE ('The member_id (' || p_member_id  
+     				                    || ') is not in the members table.');
+   RETURN;
+	 END IF;
+   
+   SELECT status
+   INTO previous_status
+   FROM members
+   WHERE member_id = p_member_id;
+   
+   IF previous_status = 'C' THEN   --If status is 'C'
+       DBMS_OUTPUT.PUT_LINE('The account (' || p_member_id || 
+                              ') has already been cancelled.');
+   RETURN;
+	 END IF;
+   
+   UPDATE members
+   SET status = 'C'
+   WHERE member_id = p_member_id;
+   
+   DBMS_OUTPUT.PUT_LINE('The account (' || p_member_id || 
+                           ') has been cancelled.');
+   RETURN;    
+
+EXCEPTION
+   WHEN OTHERS THEN
+      v_error_code := SQLCODE;
+      v_error_message := SQLERRM;
+       DBMS_OUTPUT.PUT_LINE('My exception: ' || TO_CHAR(v_error_code) || '   ' || v_error_message);
+            
+END;
+
+---------------------------------------------------------------------------------------------------------------------------
+---(4) PROCEDURE: SEARCH_TITLE
+---------------------------------------------------------------------------------------------------------------------------    
+
+PROCEDURE search_title -----PROCEDURE: SEARCH_TITLE
+(p_title 		VARCHAR2, 
+p_material_type 	VARCHAR2 DEFAULT NULL) 
+IS 
+
+   full_title varchar2(30);
+   counter number := 0;
+   due_date_1 rentals.due_date%type;
+   v_error_code	NUMBER;
+   v_error_message 	VARCHAR2(255);
+   
+   CURSOR show_detail (v_title VARCHAR2) IS
+      SELECT title,copies.copy_id,material_type,status as status_1,DECODE(status,'A','Available','R','Rented') as STATUS,due_date,return_date
+      FROM rentals,copies,titles
+      WHERE rentals.copy_id(+) = copies.copy_id AND titles.title_id = copies.title_id AND UPPER(titles.title) LIKE '%'|| UPPER(v_title)|| '%'
+      ORDER BY title, copy_id;
+  
+   CURSOR show_detail_2 (v_title VARCHAR2, material_type VARCHAR2 DEFAULT NULL) IS
+      SELECT title,copies.copy_id,material_type,status as status_1,DECODE(status,'A','Available','R','Rented') as STATUS,due_date,return_date
+      FROM rentals,copies,titles
+      WHERE rentals.copy_id(+) = copies.copy_id AND titles.title_id = copies.title_id AND UPPER(titles.title) LIKE '%'
+            || UPPER(v_title)|| '%' AND UPPER(titles.material_type) = upper(p_material_type)
+      ORDER BY title, copy_id; 
+   
+BEGIN 
+   IF p_material_type IS NOT NULL THEN
+      SELECT count(copy_id)
+      INTO counter
+      FROM copies, titles
+      WHERE UPPER(titles.material_type) = upper(p_material_type) AND 
+            titles.title_id = copies.title_id AND UPPER(titles.title) LIKE '%'|| UPPER(p_title)|| '%'; 
+   ELSIF p_material_type IS NULL THEN  
+      SELECT count(copy_id)
+      INTO counter
+      FROM copies,titles
+      WHERE titles.title_id = copies.title_id AND UPPER(titles.title) LIKE '%'|| UPPER(p_title)|| '%' ;
+   END IF;
+   
+   IF counter = 0 THEN
+      dbms_output.put_line('--------------------------------------------------');
+      IF p_material_type IS NULL THEN
+         DBMS_OUTPUT.PUT_LINE('0 results found for '||p_title||'.');
+      ELSE 
+         DBMS_OUTPUT.PUT_LINE('0 result found for '||p_title||' ('||p_material_type||').');
+      END IF;
+      dbms_output.put_line('--------------------------------------------------');
+      RETURN;
+   ELSE 
+      dbms_output.put_line('-----------------------------------------------------------------------------');
+      dbms_output.put_line('TITLE                 COPY_ID	MATERIAL_TYPE    STATUS      DUE_DATE');
+   
+   IF p_material_type IS NULL THEN
+      FOR idx IN show_detail(p_title) LOOP
+         IF idx.status = 'Available' THEN
+            due_date_1 := null ;
+         ELSIF idx.status ='Rented' THEN
+            due_date_1 := idx.due_date;
+         END IF;
+         
+         IF idx.return_date is null or idx.status = 'Available'THEN
+            dbms_output.put_line(rpad(idx.title,22)||rpad(idx.copy_id,8)||rpad(idx.material_type,17)||rpad(idx.status,12)||rpad(due_date_1,9));
+         END IF;      
+      END LOOP;
+   ELSIF  p_material_type IS not NULL THEN
+      FOR idx IN show_detail_2(p_title,p_material_type) LOOP
+         IF idx.status = 'Available' THEN
+            due_date_1 := null;
+         ELSIF idx.status ='Rented' THEN
+            due_date_1 := idx.due_date;
+         END IF;
+         
+         IF idx.return_date is null or idx.status = 'Available' THEN
+            dbms_output.put_line(rpad(idx.title,22)||rpad(idx.copy_id,8)||rpad(idx.material_type,17)||rpad(idx.status,12)||rpad(due_date_1,9));
+         END IF;
+      END LOOP;
+   END IF;
+   
+   IF p_material_type IS NULL THEN
+      full_title := p_title;
+   ELSE   
+      full_title := p_title ||' ('|| p_material_type||')';
+   END IF;
+
+   IF counter = 1 THEN 
+      dbms_output.put_line(counter||' result found for '||full_title);
+   ELSE 
+      dbms_output.put_line(counter||' results found for '||full_title);
+   END IF;
+      
+   dbms_output.put_line('-----------------------------------------------------------------------------');
+   RETURN;
+   END IF;
+
+EXCEPTION
+   WHEN OTHERS THEN
+      v_error_code := SQLCODE;
+      v_error_message := SQLERRM;
+       DBMS_OUTPUT.PUT_LINE('My exception: ' || TO_CHAR(v_error_code) || '   ' || v_error_message);
+
+END;
+
+---------------------------------------------------------------------------------------------------------------------------
+--(5) PROCEDURE: VIDEO_CHECKOUT
+---------------------------------------------------------------------------------------------------------------------------    
+
+PROCEDURE video_checkout   -----PROCEDURE: VIDEO_CHECKOUT
+(	 p_member_id		NUMBER, 
+	 p_copy_id 		NUMBER, 
+	 p_checkout_date 	DATE )
+IS
+   checkout_period_vhs number := 14;
+   checkout_period_dvd number := 7;
+   checkout_period_blu number := 3;
+
+   v_error_code	NUMBER;
+   v_error_message 	VARCHAR2(255);
+  
+   member_status char;
+   counter number;
+   counter_2 number;
+   counter_3 number;
+   COPY_STATUS CHAR;
+   rent_title titles.title%type;
+   rent_titleid titles.title_id%type;
+   due_date_1 number;
+   material_type_1 titles.material_type%type;
+   member_rented_copies number;
+   CHECKOUT_DATE_V date;
+   
+   CURSOR titles_lookup (title_2 titles.title%type)IS --look for copies under the same title
+      SELECT copy_id,copies.title_id,title
+      FROM copies,titles
+      WHERE title_2 = titles.title AND titles.title_id = copies.title_id;
+      
+BEGIN
+   SELECT count(member_id) -- check if the input member_id is on the list 
+   INTO counter
+   FROM members
+   WHERE members.member_id = p_member_id;
+   
+   IF counter = 0 THEN 
+      dbms_output.put_line('MEMBER ID '||p_member_id ||' IS NOT ON THE LIST');
+      RETURN;
+   END IF;
+   
+   member_status := get_status_by_member_id(p_member_id); ----assume the function has been compiled
+                                                          ---- check if membership is active 
+   IF member_status = 'C' THEN 
+      dbms_output.put_line('MEMBERSHIP WITH ID '||p_member_id ||' IS NOT ACTIVATED');
+      RETURN;
+   END IF;
+   
+   SELECT count(copy_id) -- check if the copy_id is on the list 
+   INTO counter_2
+   FROM copies
+   WHERE copies.copy_id = p_copy_id;
+   
+   IF counter_2 = 0 THEN
+      dbms_output.put_line('COPY_ID '||p_member_id ||' IS NOT ON THE LIST');
+      RETURN;
+   END IF;
+   
+   SELECT status  -- check if the copy is ready for rental
+   INTO copy_status
+   FROM copies
+   WHERE copies.copy_id = p_copy_id;
+   
+   IF copy_status = 'R' THEN
+       dbms_output.put_line('COPY_ID: '||p_copy_id ||' IS NOT AVAILABLE FOR RENTAL');
+       RETURN;
+   END IF;
+   
+   SELECT count(member_id)
+   INTO member_rented_copies 
+   FROM rentals
+   WHERE rentals.member_id = p_member_id AND rentals.return_date is null; 
+   
+   IF member_rented_copies > 4 THEN
+       dbms_output.put_line('THERE CANNOT BE MORE THAN FOUR COPIES UNDER MEMBER ID:  '||p_member_id);
+       RETURN;
+   END IF;
+   
+   IF p_checkout_date > sysdate THEN  -- check if the checkout date is ahead of current time
+      dbms_output.put_line('CHECKOUT DATE CANNOT BE AHEAD OF CURRENT DATE');
+      RETURN;
+   END IF;
+   
+   SELECT title_id --look for copies under the same title
+   INTO rent_titleid
+   FROM copies
+   WHERE p_copy_id = copies.copy_id;
+   
+   SELECT title
+   INTO rent_title
+   FROM titles
+   WHERE titles.title_id = rent_titleid;
+    
+   FOR idx IN titles_lookup(rent_title) LOOP  
+   
+      SELECT COUNT(MEMBER_ID)
+      INTO counter_3
+      FROM rentals
+      WHERE rentals.copy_id = idx.copy_id AND rentals.member_id = p_member_id AND rentals.return_date is null;
+      
+      IF counter_3 != 0  THEN 
+         dbms_output.put_line('YOU HAVE ALREADY RENT A COPY UNDER THE SAME TITLE!');
+         RETURN;
+      END IF;
+   END LOOP;
+   
+   SELECT material_type
+   INTO material_type_1
+   FROM titles
+   WHERE rent_titleid = titles.title_id;
+   
+   IF material_type_1 = 'VHS TAPE' THEN
+      due_date_1 := checkout_period_vhs + to_char(p_checkout_date,'yyyymmdd');
+   ELSIF material_type_1 = 'DVD' THEN
+      due_date_1 := checkout_period_dvd + to_char(p_checkout_date,'yyyymmdd');
+   ELSIF material_type_1 = 'BLU-RAY' THEN
+      due_date_1 := checkout_period_blu + to_char(p_checkout_date,'yyyymmdd');
+   END IF;
+      
+   INSERT INTO rentals VALUES(p_member_id,p_COPY_ID,p_CHECKOUT_DATE,to_date(due_date_1,'yyyy-mm-dd'),null);
+   
+   UPDATE copies
+   SET status = 'R'
+   WHERE copies.copy_id = p_copy_id AND copies.title_id = rent_titleid;
+   
+   dbms_output.put_line('COPY HAS BEEN SUCCESSFULLY CHECK OUT!');
+
+EXCEPTION
+   WHEN OTHERS THEN
+      v_error_code := SQLCODE;
+      v_error_message := SQLERRM;
+       DBMS_OUTPUT.PUT_LINE('My exception: ' || TO_CHAR(v_error_code) || '   ' || v_error_message);
+
+END;    
+
+---------------------------------------------------------------------------------------------------------------------------
+---(6) PROCEDURE VIDEO RETURN!!!!!
+---------------------------------------------------------------------------------------------------------------------------    
+
+PROCEDURE video_return  ------PROCEDURE VIDEO RETURN!!!!!
+(
+p_copy_id 	NUMBER, 
+p_return_date 	DATE
+)
+IS 
+
+   counter number;
+   copy_status char;  
+   checkout_date_1 date; 
+   DUE_DATE_1 DATE;
+   v_error_code	NUMBER; 
+   v_error_message 	VARCHAR2(255);  
+
+BEGIN
+   SELECT count(p_copy_id) -- check if p_copy_id is not on the list;
+   INTO counter
+   FROM copies 
+   WHERE p_copy_id = copies.copy_id; 
+   
+   IF counter = 0 THEN 
+      dbms_output.put_line('WE DO NOT HAVE A COPY UNDER COPY_ID ' ||p_copy_id);
+      RETURN;
+   END IF;
+   
+   SELECT status--CHECK IF THE COPY_ID IS RENTED.
+   INTO copy_status
+   FROM COPIES
+   WHERE p_copy_id = copies.copy_id ;
+   
+   IF copy_status = 'A' THEN 
+      dbms_output.put_line('THE COPY UNDER COPY_ID ' ||p_copy_id||' HAS NOT BEEN RENTED');
+      RETURN;
+   END IF; 
+   
+   IF p_return_date > sysdate THEN  -- check if the return date is ahead of current time
+      dbms_output.put_line('RETURN DATE CANNOT BE AHEAD OF CURRENT DATE');
+      RETURN;
+   END IF;
+   
+   SELECT checkout_date
+   INTO checkout_date_1
+   FROM RENTALS
+   WHERE p_copy_id = rentals.copy_id AND rentals.return_date is null;
+   
+   IF checkout_date_1 > p_return_date THEN --CHECK OUT IF RETURN DATE IS EARLIER THAN CHECKOUT DATE
+      dbms_output.put_line('RETURN DATE CANNOT EARLIER THAN CHECKOUT DATE! ');
+      RETURN;
+   END IF;
+   
+   SELECT due_date -- check if the copy has been returned later than due date.
+   INTO due_date_1
+   FROM rentals
+   WHERE p_copy_id = rentals.copy_id and rentals.return_date is null;
+   
+   IF due_date_1 < p_return_date THEN --CHECK OUT IF RETURN DATE IS EARLIER THAN CHECKOUT DATE
+      dbms_output.put_line('YOU MISS THE DUE DATE FOR RETURNING COPY, WATCH OUT NEXT TIME! ');
+   END IF;
+   
+   UPDATE rentals
+   SET return_date = p_return_date 
+   WHERE p_copy_id = rentals.copy_id and rentals.return_date is null;
+   
+   UPDATE copies
+   SET status = 'A'
+   WHERE p_copy_id = copies.copy_id;
+   
+   dbms_output.put_line('COPY HAS BEEN SUCCESSFULLY CHECK IN!');
+   return;
+
+EXCEPTION
+   WHEN OTHERS THEN
+      v_error_code := SQLCODE;
+      v_error_message := SQLERRM;
+       DBMS_OUTPUT.PUT_LINE('My exception: ' || TO_CHAR(v_error_code) || '   ' || v_error_message);
+
+END;
+
+---------------------------------------------------------------------------------------------------------------------------  
+---(7) PROCEDURE PRINT_UNRETURNED_VIDEO 
+---------------------------------------------------------------------------------------------------------------------------    
+
+PROCEDURE print_unreturned_video   -----PROCEDURE PRINT_UNRETURNED_VIDEO 
+(p_member_id NUMBER)
+IS
+   counter number;
+   member_status CHAR; 
+   copies_rented number;
+   v_error_code	NUMBER;
+   v_error_message 	VARCHAR2(255);
+   
+   CURSOR member_info(v_member_id members.member_id%type) IS  -- check out member info
+      SELECT name, email_address, join_date
+      FROM members
+      WHERE v_member_id = member_id;
+  
+   CURSOR copy_info (v_member_id members.member_id%type) IS --check out info about copies that have not been returned.
+      SELECT rentals.copy_id, titles.title_id, titles.title, titles.material_type,
+             rentals.checkout_date, rentals.due_date
+      FROM titles,rentals,copies
+      WHERE  v_member_id = rentals.member_id 
+            AND rentals.copy_id = copies.copy_id 
+            AND rentals.return_date is null 
+            AND titles.title_id = copies.title_id
+      ORDER BY rentals.due_date, TITLES.TITLE;
+      
+BEGIN
+   SELECT count(member_id) -- check if the input member_id is on the list 
+   INTO counter
+   FROM members
+   WHERE members.member_id = p_member_id;
+   
+   IF counter = 0 THEN 
+      dbms_output.put_line('The Member ID '||p_member_id ||' Is Not In The Members Table');
+      RETURN;
+   END IF;
+   
+   member_status := get_status_by_member_id(p_member_id); -- check if membership is active 
+
+   IF member_status = 'C' THEN 
+      dbms_output.put_line('MEMBERSHIP WITH ID '||p_member_id ||' IS NOT ACTIVATED');
+      RETURN;
+   END IF;
+   
+   SELECT count(member_id)
+   INTO counter
+   FROM rentals
+   WHERE return_date is null AND member_id = p_member_id;
+   
+   IF counter = 0 THEN 
+      dbms_output.put_line('The member has returned all videos!');
+      RETURN;
+   ELSE   
+      dbms_output.put_line('-----------------------------------------'); 
+      FOR idx IN member_info(p_member_id) LOOP
+         dbms_output.put_line(rpad('NAME:',15)|| RPAD(idx.name,26 ));
+         dbms_output.put_line(rpad('EMAIL ADDRESS:',15)||RPAD(idx.email_address,26 ));
+         dbms_output.put_line(rpad('JOIN DATE:',15)||RPAD(idx.join_date,26 ));
+      END LOOP;
+      
+      dbms_output.put_line('-----------------------------------------'); 
+      dbms_output.put_line('Number of Unreturned Videos: '||counter); 
+      dbms_output.put_line('-----------------------------------------');      
+
+      FOR idx IN copy_info(p_member_id) LOOP
+          dbms_output.put_line(rpad('Copy ID: ',16)||rpad(idx.copy_id,25));
+          dbms_output.put_line(rpad('Title: ',16)|| rpad(idx.title,25)); 
+          dbms_output.put_line(rpad('Material Type: ',16)|| rpad(idx.material_type,25)); 
+          dbms_output.put_line(rpad('Checkout Date: ',16)||  rpad(idx.checkout_date,25));
+          dbms_output.put_line(rpad('Due Date: ',16)||  rpad(idx.due_date,25));
+          dbms_output.put_line('-----------------------------------------'); 
+      END LOOP;
+   END IF;
+   RETURN;    
+
+EXCEPTION
+   WHEN OTHERS THEN
+      v_error_code := SQLCODE;
+      v_error_message := SQLERRM;
+       DBMS_OUTPUT.PUT_LINE('My exception: ' || TO_CHAR(v_error_code) || '   ' || v_error_message);
+
+END;
+
+--------------------------------------------------------------------------------------------------------------------------- 
+---(8) PROCEDURE PRINT_RENTAL_SUMMARY !!!!
+---------------------------------------------------------------------------------------------------------------------------
+
+PROCEDURE print_rental_summary   ----PROCEDURE PRINT_RENTAL_SUMMARY !!!!
+(
+p_member_id 	NUMBER
+)
+IS
+
+   counter number;
+   member_status CHAR; 
+   copies_rented number;
+   
+   v_error_code	NUMBER;
+   v_error_message 	VARCHAR2(255);
+   
+   CURSOR member_info(v_member_id members.member_id%type) IS  -- check out member info
+      SELECT name, email_address, join_date
+      FROM members
+      WHERE v_member_id = member_id;
+  
+   CURSOR copy_info (v_member_id members.member_id%type) IS --check out info about copies that have not been returned.
+      SELECT rentals.copy_id, titles.title_id, titles.title, titles.material_type,
+             rentals.checkout_date, rentals.due_date, 
+             NVL(to_char(rentals.return_date),'N/A') as return_date
+      FROM titles,rentals,copies
+      WHERE  v_member_id = rentals.member_id AND rentals.copy_id = copies.copy_id AND titles.title_id = copies.title_id
+      ORDER BY rentals.checkout_date;
+      
+BEGIN
+   SELECT count(member_id) -- check if the input member_id is on the list 
+   INTO counter
+   FROM members
+   WHERE members.member_id = p_member_id;
+   
+   IF counter = 0 THEN 
+      dbms_output.put_line('The member ID '||p_member_id ||' is not in the members table');
+      RETURN;
+   END IF;
+   
+   SELECT count(member_id)
+   INTO counter
+   FROM rentals
+   WHERE member_id = p_member_id;
+   
+   IF counter = 0 THEN 
+      dbms_output.put_line('The member has not rented any video!');
+      RETURN;
+      
+   ELSE   
+      dbms_output.put_line('-----------------------------------------'); 
+      FOR idx IN member_info(p_member_id) LOOP
+         dbms_output.put_line(rpad('NAME:',15)|| RPAD(idx.name,26 ));
+         dbms_output.put_line(rpad('EMAIL ADDRESS:',15)||RPAD(idx.email_address,26 ));
+         dbms_output.put_line(rpad('JOIN DATE:',15)||RPAD(idx.join_date,26 ));
+      END LOOP;
+      
+      dbms_output.put_line('-----------------------------------------'); 
+      dbms_output.put_line('Number of Rented Videos: '||counter); 
+      dbms_output.put_line('-----------------------------------------');      
+
+      FOR idx IN copy_info(p_member_id) LOOP
+          dbms_output.put_line(rpad('Copy ID: ',16)||rpad(idx.copy_id,25));
+          dbms_output.put_line(rpad('Title: ',16)||rpad(idx.title,25)); 
+          dbms_output.put_line(rpad('Material Type: ',16)||rpad(idx.material_type,25)); 
+          dbms_output.put_line(rpad('Checkout Date: ',16)||rpad(idx.checkout_date,25));
+          dbms_output.put_line(rpad('Due Date: ',16)||rpad(idx.due_date,25));
+          dbms_output.put_line(rpad('Return Date: ',16)||rpad(idx.due_date,25));
+          dbms_output.put_line('-----------------------------------------'); 
+      END LOOP;
+   END IF; 
+   RETURN;
+   
+EXCEPTION
+   WHEN OTHERS THEN
+      v_error_code := SQLCODE;
+      v_error_message := SQLERRM;
+       DBMS_OUTPUT.PUT_LINE('My exception: ' || TO_CHAR(v_error_code) || '   ' || v_error_message);
+
+END;
+
+---------------------------------------------------------------------------------------------------------------------------  
+---------------------------------------------------------------------------------------------------------------------------
+
+END video_rental_store_pkg;

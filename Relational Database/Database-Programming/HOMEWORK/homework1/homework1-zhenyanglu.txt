@@ -1,0 +1,40 @@
+************part II************************************************
+1. 
+select job count(*)
+from employee
+group by job
+order by job;   
+
+
+2.
+select e.employee_name,nvl(b.job,'N/A') as job, '$'||e.salary, nvl(b.employee_name,'N/A')as manager
+from employee e, employee b
+WHERE e.manager_id=b.employee_id(+)
+ORDER BY e.employee_name;
+
+3.
+select department_name, employee_name,hire_date
+from   department, employee
+where  department.department_id = employee.department_id AND
+       hire_date IN (SELECT MAX(hire_date) FROM employee GROUP BY department_id)
+order by department_name;
+
+************part II***********************************************
+
+
+
+
+************part III************************************************
+1.
+select to_char(sum(PRICE_IN_2000),'$99.00') as TOTAL_IN_2000, to_char(sum(ESTIMATED_PRICE_IN_2025),'$99.00') as TOTAL_IN_2025,
+to_char(sum(ESTIMATED_PRICE_IN_2025)-sum(PRICE_IN_2000),'$99.00') as "my output"
+from grocery_prices;
+
+
+2.
+select GROCERY_ITEM, to_char(PRICE_IN_2000,'$0.00') as TOTAL_IN_2000, to_char(ESTIMATED_PRICE_IN_2025,'$0.00') as TOTAL_IN_2025,
+to_char(((ESTIMATED_PRICE_IN_2025-PRICE_IN_2000)/PRICE_IN_2000)*100,'000.00') || '%'as "my output"
+from grocery_prices
+where ((ESTIMATED_PRICE_IN_2025-PRICE_IN_2000)/PRICE_IN_2000) = 
+   (select max((ESTIMATED_PRICE_IN_2025-PRICE_IN_2000)/PRICE_IN_2000)
+    from grocery_prices );

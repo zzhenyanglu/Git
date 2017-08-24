@@ -1,0 +1,54 @@
+#--------------------------------------------------------------------------------------------
+# NOTICE: The following script assumes you have run part 1.c 
+#--------------------------------------------------------------------------------------------
+
+
+
+
+
+
+#----------------------------------------------------------------------------
+# part 3.b 
+# NOTICE: the following script is going to read from local tweet file and output 
+#         100 pieces of tweet as dictationary 
+#----------------------------------------------------------------------------
+
+import sys,time,json,sqlite3
+
+conn = sqlite3.connect('csc455-Final.db')
+c = conn.cursor()
+conn.text_factory = str
+reload(sys)
+sys.setdefaultencoding('utf8')
+data = conn.execute('select id from tweets where id like \'%700\'').fetchall()
+
+skip_keys = [ i for i in data]    #skip keys!
+
+def output_dict(dict = {}, skip_keys=[],directory = 'dictionary.txt',split = ',',index=0):  #output_type is 'a' or 'w', that is parament of open() function
+    if len(dict) == 0:
+        return ' The dictionary is empty! '
+    else:
+        output=''
+
+        if dict['id'] not in skip_keys:
+            for i in dict:  #['created_at','id','id_str','retweeted','in_reply_to_user_id','retweet_count']:
+                output = output+ '[' + str(i) + ']'+ ':' + str(dict[i])+split
+
+        fd_2=open(directory,'a')
+        fd_2.writelines(str(index)+'. '+output[:len(output)-1]+'\n'+'\n')
+
+# test the script
+fd = open('tweet_output.txt')
+run_time = 100     # how many pieces of tweet you want to output as dictationary 
+ 
+start=time.time()
+
+for i in range(run_time):
+    dict = json.loads(fd.readline())
+    output_dict(dict,skip_keys,'tweet_dict.txt',',',i)
+
+end=time.time()
+
+print 'output the table from SQLITE# takes ',end-start,' seconds. '
+
+# output the table from SQLITE# takes 0.3407352420 seconds.
