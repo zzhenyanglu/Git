@@ -1,0 +1,62 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/05/Memory.hdl
+
+/**
+ * The complete address space of the Hack computer's memory,
+ * including RAM and memory-mapped I/O. 
+ * The chip facilitates read and write operations, as follows:
+ *     Read:  out(t) = Memory[address(t)](t)
+ *     Write: if load(t-1) then Memory[address(t-1)](t) = in(t-1)
+ * In words: the chip always outputs the value stored at the memory 
+ * location specified by address. If load==1, the in value is loaded 
+ * into the memory location specified by address. This value becomes 
+ * available through the out output from the next time step onward.
+ * Address space rules:
+ * Only the upper 16K+8K+1 words of the Memory chip are used. 
+ * Access to address>0x6000 is invalid. Access to any address in 
+ * the range 0x4000-0x5FFF results in accessing the screen memory 
+ * map. Access to address 0x6000 results in accessing the keyboard 
+ * memory map. The behavior in these addresses is described in the 
+ * Screen and Keyboard chip specifications given in the book.
+ */
+
+CHIP Memory {
+    IN in[16], load, address[15];
+    OUT out[16];
+
+    PARTS:
+    // DESCRIPTION: 
+    //    STEP 1: I will use address[13..14] as my signal to select whether
+    //            the in[16] bus will go to SCREEN, RAM16K. Address[13..14] gives 
+    //            4 signal to distribute a in[16] bus. [0,0] and [0,1] means going 
+    //            to RAM16K, [1,0] means go to SCREEN. [1,1] means Keyboard. Please 
+    //            see step 2 as to why it's like that.
+    //    STEP 2: I will use address[0..12] to choose which byte to output after
+    //            choosing either SCREEN, RAM16K or Keyboard to go. The basic idea
+    //            is 2**13 = 8196, so address[13], 13 bits, can give me 8196 unique
+    //            address. Notice Figure 5.7 of text book, we have 24576 byte totally
+    //            on our memory, which equals 8196 + 8196 + 8196 + 1. So 8196 + 8196 
+    //            is our RAM16K, another 8196 is for our SCREEN, and last piece of byte 
+    //            is our keyboard (1 bit can represent 2**8 numbers), 
+    //            which is why extended ascii table has 2**8 = 256 items. 
+    
+    // by the way, it's annoying somehow for the HDL program not to support "_" in
+    // variable naming, it took me a long long time once to figure that out, and 
+    // the variable is not so readable without "_". ^_^ 
+
+    DMux4Way(in=load, sel=address[13..14],a=loadram1,b=loadram2,c=loadscreen,d=loadkbd);
+    Or(a=loadram1, b=loadram2, out = loadram);
+
+
+    // The following Screen/Keyboard are just built-in chips
+    // RAM16K is from my own homework
+    
+    RAM16K(in = in,load = loadram, address= address[0..13], out = ramout);  // RAM16K
+    Screen(in = in,load = loadscreen, address= address[0..12], out = screenout); //screen
+    Keyboard(out = kbdout);
+
+    Mux4Way16(a=ramout ,b=ramout ,c=screenout ,d=kbdout ,sel=address[13..14],out=out);
+
+}

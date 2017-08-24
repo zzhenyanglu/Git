@@ -1,0 +1,346 @@
+
+// JACKPOT GAME!!
+
+// NOTICE: THE RANDOM NUMBER GENERATOR IS RELYING ON 
+//         THE SEED NUMBER. SAME SEED NUMBER WILL CAUSE
+//         THE RANDOM NUMBER GENERATOR TO OUTPUT THE SAME
+//         SEQUENCE OF NUMBERS FROM TIME TO TIME. SO YOU
+//         MAY WANT TO CHANGE THE SEED NUMBER TO MAKE IT 
+//         FUN!  
+
+class Jackpot {
+
+   field int pot_1, pot_2, pot_3; // THIS IS THE RANDOM NUMBERS, AKA POTS
+   field int balance;  //INITIAL BALANCE
+   field int bet;     // EACH BET
+   field int seed; // for random number generator
+
+   constructor Jackpot new() { 
+      var int i;
+	  
+	  // INITIATING SEED FOR RANDOM NUMBER GENERATOR BY PROMPTING USER
+	  do Output.moveCursor(0,0);
+     let i=0;
+     
+     while(i<22){do Output.println();let i=i+1;}
+     
+     let seed = Keyboard.readInt("PICK UP A LUCKY NUMBER FROM 1 - 100: ");
+     
+     do Screen.clearScreen();
+
+	  //INITIATE INITIAL MONEY YOU HAVE 
+     let bet=0;
+     let balance=200;    
+     
+     do welcome_screen();
+        
+     return this;
+   }
+
+   // WELCOME SCREEN, INTRODUCING RULES 
+   method void welcome_screen() {
+      var char key;
+      var int i;
+      let i=0;
+
+      do Screen.clearScreen(); 
+      // SCREEN OUTPUT FORMATTING
+      while(i<6){do Output.println();let i=i+1;}
+
+      do Output.printString("                        JACKP$$$$$$T!          ");
+
+      // SCREEN OUTPUT FORMATTING
+      let i=0;
+      while(i<11){do Output.println();let i=i+1;}
+
+      do Output.printString("                   PRESS ANY KEY TO BEGIN!");
+      do Output.println();
+      do Output.println();
+      do Output.println();
+      do Output.println();
+      do Output.printString("Intro to Computer System - Project 9");
+      do Output.println();
+      do Output.printString("Author: Zhenyang Lu");
+
+      let key = Keyboard.keyPressed();
+
+      while (key = 0) {
+         let key = Keyboard.keyPressed();
+      }
+
+      do Screen.clearScreen(); 
+      do Output.println();     
+      do Output.printString("RULES:                     ");
+      do Output.println();
+      do Output.printString("      111: 10 times your bet");  
+      do Output.println();    
+      do Output.printString("      222: 10 times your bet");
+      do Output.println();
+      do Output.printString("      333: 10 times your bet");  
+      do Output.println();    
+      do Output.printString("      444: 10 times your bet");
+      do Output.println();
+      do Output.printString("      555: 10 times your bet");
+      do Output.println();      
+      do Output.printString("      666: 10 times your bet");
+      do Output.println();
+      do Output.printString("      777: 100 times your bet");
+      do Output.println();
+      do Output.printString("      888: 10 times your bet");  
+      do Output.println();    
+      do Output.printString("      999: 10 times your bet");
+      do Output.println();
+      do Output.printString("      000: 20 times your bet"); 
+      do Output.println();
+      do Output.printString("      sum=7: 5 times your bet"); 
+      do Output.println();
+      do Output.printString("      sum=17: 5 times your bet"); 
+
+      // SCREEN OUTPUT FORMATTING
+      let i=0;
+      while(i<7){do Output.println();let i=i+1;}
+
+      do Output.printString("                   PRESS ANY KEY TO BEGIN!");
+
+      // SCREEN OUTPUT FORMATTING
+      let i=0;
+      while(i<3){do Output.println();let i=i+1;}
+
+      do Output.printString("BALANCE:  200                 "); 
+ 
+      let key = Keyboard.keyPressed();
+      
+      while (key = 0) {
+         let key = Keyboard.keyPressed();
+      }
+
+      do Screen.clearScreen(); 
+      return;
+   }
+   
+   method void bet_screen() {
+
+      var int i;
+      var int bet_input;
+      var char key;
+
+      let bet =0;
+      let i=0;
+
+      do Output.moveCursor(0,0);
+
+      while(i<22){do Output.println();let i=i+1;}
+      do Output.printString("BALANCE: "); 
+      do Output.printInt(balance); 
+ 
+      let i=0;
+      while(i<21){do Output.println();let i=i+1;}
+
+      let bet_input = Keyboard.readInt("HOW MUCH YOU BET: ");
+      do Screen.clearScreen(); 
+
+      // if bet is larger than balance, refuse it.  
+      if (bet > balance) {
+
+         let i=0;
+         while(i<21){do Output.println();let i=i+1;}
+         do Output.printString("YOU DON'T HAVE ENOUGH MONEY"); 
+         do Output.println();
+         do Output.println();
+         do Output.println();
+         do Output.printString("BALANCE: "); 
+         do Output.printInt(balance); 
+ 
+         do bet_screen();
+      }
+
+      // if bet less than balance, take it
+      else {let bet=bet_input; let balance = balance - bet;}
+
+      return;
+   }
+
+   // JACKPOT SCREEN
+   method void jackpot_screen(){
+
+      var int i, j,lost;
+      var char key;
+
+      let j =0;
+      let lost = 0;
+      let i=0;
+      
+      do Screen.clearScreen(); 
+ 
+      while(i<24){do Output.println();let i=i+1;}
+      do Output.printString("BALANCE: "); 
+      do Output.printInt(balance); 
+
+	   // simulating a jackpot process
+      while(j<15){
+        
+         do Output.moveCursor(0,0);
+
+         let i=0;
+         while(i<12){do Output.println();let i=i+1;}
+
+         let pot_1 = random(pot_1);
+         let pot_2 = random(pot_2);
+         let pot_3 = random(pot_3);
+
+         do Output.printString("             JACKPOT: ");
+         do Output.printInt(pot_1); 
+         do Output.printInt(pot_2); 
+         do Output.printInt(pot_3); 
+
+         let j=j+1;
+      }
+
+      let j =0;
+      while(j<15){
+        
+         do Output.moveCursor(0,0);
+
+         let i=0;
+         while(i<12){do Output.println();let i=i+1;}
+
+         let pot_2 = random(pot_2);
+         let pot_3 = random(pot_3);
+
+         do Output.printString("             JACKPOT: ");
+         do Output.printInt(pot_1); 
+         do Output.printInt(pot_2); 
+         do Output.printInt(pot_3); 
+
+         let j=j+1;
+      }
+
+      let j =0;
+      while(j<15){
+        
+         do Output.moveCursor(0,0);
+
+         let i=0;
+         while(i<12){do Output.println();let i=i+1;}
+
+         let pot_3 = random(pot_3);
+
+         do Output.printString("             JACKPOT: ");
+         do Output.printInt(pot_1); 
+         do Output.printInt(pot_2); 
+         do Output.printInt(pot_3); 
+
+         let j=j+1;
+      }
+
+      // output result of jackpot
+      do Output.moveCursor(0,0);
+      let i=0;
+      while(i<12){do Output.println();let i=i+1;}
+
+      do Output.printString("             JACKPOT: ");
+      do Output.printInt(pot_1); 
+      do Output.printInt(pot_2); 
+      do Output.printInt(pot_3); 
+      do Output.println();
+      do Output.println();
+
+      // if three numbers are identical
+      if ((pot_1 = pot_2) & (pot_2 = pot_3) & (pot_1 = pot_3)) 
+      { 
+         let balance = balance+ (bet*10);
+         let lost = 1;
+         do Output.println(); 
+         do Output.printString("             YOU WON!!");
+      }
+
+      // if 777 or 000
+      if ((pot_1 = 7) & (pot_2 = 7) & (pot_3 =7) )  { let balance = balance+ (bet*90);}   
+      if ((pot_1 = 0) & (pot_2 = 0) & (pot_3 =0) )  { let balance = balance+ (bet*10);}
+
+      // if sum =7
+      if ((pot_1 + pot_2 + pot_3) =7)  { 
+         let balance = balance+ (bet*5);
+         let lost = 1;
+         do Output.println();
+         do Output.printString("             YOU WON!!");
+      }  
+
+      // if sum =17
+      if ((pot_1 + pot_2 + pot_3) =17)  { 
+         let balance = balance+ (bet*5);
+         let lost = 1;
+         do Output.println(); 
+         do Output.printString("             YOU WON!!");
+      }  
+      
+      if (lost=0)
+      {
+         do Output.printString("             YOU LO$T!!");
+      }
+      
+      do Output.println(); 
+      do Output.println(); 
+      
+      do Output.printString("                   PRESS ANY KEY TO CONTINUE!");
+      let key = Keyboard.keyPressed();
+
+      while (key = 0) {
+         let key = Keyboard.keyPressed();
+      }
+
+      do Screen.clearScreen(); 
+      return;
+   }
+
+   // a naive random number generator
+   method int random(int seed) {
+      var int number;
+      var int i;
+      let i=0;
+
+      // THIS IS MY RANDOM NUMBER FORMULAR 
+      let seed = 169*seed+71;
+	   while(seed > 99){let seed = seed -93;}
+	  
+	   let number = seed;
+      while(number >9){let number = number -10;}
+
+      return number;
+   }
+
+   // game over screen
+
+
+   // game over screen
+   method void gameover_screen() {
+     var int i;
+     var char key;
+	  
+	  do Screen.clearScreen();    
+     do Output.moveCursor(0,0);
+	  
+	  let i=0;
+     while(i<12){do Output.println();let i=i+1;}
+	  
+	  do Output.printString("                        GAME OVER!!");
+	  
+	  do Output.println(); 
+     do Output.println(); 
+      
+     do Output.printString("                   PRESS ANY KEY TO QUIT");
+
+     while (key = 0) {
+        let key = Keyboard.keyPressed();
+     }
+
+     do Screen.clearScreen(); 
+	  return;
+   }
+
+   method int check_balance()
+   {
+      return balance;
+   }
+
+}

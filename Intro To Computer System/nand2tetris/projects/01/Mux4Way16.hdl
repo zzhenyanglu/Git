@@ -1,0 +1,45 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux4Way16.hdl
+
+/**
+ * 4-way 16-bit multiplexor:
+ * out = a if sel == 00
+ *       b if sel == 01
+ *       c if sel == 10
+ *       d if sel == 11
+ */
+
+CHIP Mux4Way16 {
+    IN a[16], b[16], c[16], d[16], sel[2];
+    OUT out[16];
+
+    PARTS:
+    
+    Mux16(a=a,b=b,sel=sel[0],out=outab); 
+   	Mux16(a=c,b=d,sel=sel[0],out=outcd);
+	  Mux16(a=outab,b=outcd,sel=sel[1],out=out);
+
+/* DISCLAIMER:
+  * It took me a long time to debug the following code: 
+
+  *  Mux16(a=a,b=b,sel=sel[1],out=outa);
+  *  Mux16(a=outa,b=c,sel=sel[1],out=outb);
+  *  Mux16(a=outb,b=d,sel=sel[0],out=out);
+
+  * I could not figure out why it was wrong
+  * So I googled it, and resort to the following link 
+  * https://github.com/seebees/nand2tetris/blob/master/projects/01/Mux4Way16.hdl
+ 
+  * Then I was able to figure what's the problem. 
+  * This is so counter intuitive to common programming practise. 
+  * It should be like this: sel=[sel[0],sel[1]]
+  * But it turns out to be sel=[sel[1],sel[0]] 
+  * It's like if sel =01, then sel[0] = 1, sel[1] =0
+  * In any language that I use, the indexing should be like 
+  * sel = '01', then sel[0] = 0, sel[1] = 1
+  * This is so weird!  
+*/
+
+}

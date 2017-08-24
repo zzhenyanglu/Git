@@ -1,0 +1,42 @@
+proc import datafile = 'C:\Users\felix\Dropbox\JP\FL\working_data\pair trading - canola vs soybean oil\1.csv' out= raw dbms=csv replace;
+getnames= yes;
+run;
+
+proc sort data=Sasuser.pair_o_y;
+by Datetime;
+run;
+
+Data Sasuser.pair_o_y;
+set raw(rename=(o=canola y=soybean));
+log_canola = log(canola);
+log_soybean = log(soybean);
+lag_canola = lag(canola);
+lag_soybean =lag(soybean);
+return_canola = canola/lag_canola -1;
+return_soybean = soybean/lag_soybean -1;
+diff_return_canola_soybean =return_canola-return_soybean;
+log_return_canola=log(canola/lag_canola) -1;
+log_return_soybean=log(soybean/lag_soybean) -1;
+diff_log_return_canola_soybean = log_return_canola - log_return_soybean;
+if -0.01<diff_return_canola_soybean<0.01;
+run;
+
+proc corr data=Sasuser.pair_o_y;
+run;
+
+proc univariate data=Sasuser.pair_o_y;
+var return_canola return_soybean diff_return_canola_soybean;
+histogram/normal;
+qqplot/normal(mu=est sigma=est);
+run;
+
+proc gplot data=Sasuser.pair_o_y;
+plot return_canola*datetime diff_return_canola_soybean*datetime return_soybean*datetime soybean*canola return_canola*return_soybean diff_log_return_canola_soybean*datetime canola*datetime soybean*datetime;
+run;
+
+proc arima;
+identify var = diff_return_canola_soybean nlag = 10 outcov=acf;
+run;
+
+proc print data=Sasuser.pair_o_y;
+run;
