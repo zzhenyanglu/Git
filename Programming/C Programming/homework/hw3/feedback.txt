@@ -1,0 +1,30 @@
+Feedback for zzhenyanglu
+--------------------------------------------------------------------------------
+Good
+  * Interesting algorithm with recursive palindrome algorithm
+
+What cost points
+  * Ex1 - Correct implementaion of swap                        : ERROR
+  * Ex3 - Properly skips special characters                    : ERROR
+  * "Ex3 - main driver, empty string quits, reads from keyboard,
+    outputs requested text                                      : PARTIAL"
+  * "Ex4 - pickword: skips words with special characters,
+    lowercases, picks random word from file                     : PARTIAL"
+
+Observations/Things to Improve
+  * *DO-NOT* include .c files in other .c files. Only include .h files
+  * ex3 - Homework said "Do not write anything else to the screen"
+  * ex3 - The main program should only quit if an empty line or a line
+    containing only special characters is entered    
+  * You hard coded the value for the number of words in the
+    file. While this is the correct way to pick a random number in a
+    given range. However, for the purposes of this homework, you are
+    to assume that the dictionary file can be arbitrary and the
+    number of words in it are not known beforehand. Check 'reservoir
+    sampling'
+
+Remarks
+  * Please try attend TA hours if possible. We have discussed file
+    inclusions, object files, compiling and building. Please ask
+    questions if you do not follow.
+

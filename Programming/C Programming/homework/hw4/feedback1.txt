@@ -1,0 +1,2 @@
+* At this point, there is probably no need to create the object files separately.
+  It was intended as an exercise, but in production the makefile can be simpler.

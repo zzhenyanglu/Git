@@ -1,0 +1,18 @@
+Feedback for zzhenyanglu
+--------------------------------------------------------------------------------
+Good
+  * Great use of ASCII encodings in part I. Intelligent design.
+  * Well documented and explained code.
+  * Very good scrambler that efficiently uses stack space.
+  * Good use of phony target and dependencies in make.
+
+Observations/Things to Improve
+  * Do not use magic ASCII number like 32 or 10 in code. Not reader friendly.
+  * The for loop in scramble.c is pretty awkward. Try a while loop instead.
+  * Your scramble output.txt has 2048 at the end, while the output on my machine
+    has an extra blank line instead of 2048.
+    I grade it based on my output here and do not penalize it for now.
+
+Remarks
+  * Great job.
+

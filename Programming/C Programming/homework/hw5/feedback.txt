@@ -1,0 +1,33 @@
+Feedback for zzhenyanglu
+--------------------------------------------------------------------------------
+Good
+  * Good comments, neat code
+
+What cost points
+  * Project structure - Not modified mnist.h          : CORRECT
+  * Project structure -  Working Makefile             : ERROR
+  * Project structure -  Correct filenames            : CORRECT
+  * Valgrind - Memory leaks                           : ERROR
+  * Valgrind - Memory out of bounds                   : ERROR
+  * PGM files                                         : CORRECT
+  * Details - not assuming fixed type integers        : CORRECT
+  * Details - file opened in binary mode              : CORRECT
+  * Details - return INVALID on error                 : CORRECT
+  * Details - refuses file with wrong magic number    : CORRECT
+  * Details - file is properly closed                 : partial
+  * Details - size 28x28 not hardcoded                : CORRECT
+  * Details - images stored as linked list            : CORRECT
+  * Unit tests                                        : 12/22
+  * Makefile: all target                              : CORRECT
+  * Makefile: test target (builds & runs unittests)   : PARTIAL
+  * Makefile: clean target                            : CORRECT
+  * Makefile: support for building by executable name : CORRECT
+  * Makefile: header dependencies are listed          : CORRECT
+  * Makefile: all is default target                   : CORRECT
+
+Observations/Things to Improve
+  * Memory leak
+  * memcpy - invalid read
+  * You can use a structure representing the header and do one single read
+  * File not closed while returning due to invalid magic number
+

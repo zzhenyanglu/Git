@@ -1,0 +1,13 @@
+Feedback for zzhenyanglu
+--------------------------------------------------------------------------------
+Good
+  * Good explanation on your thoughts and algorithm.
+
+What cost points
+  * compiler warning for board_test, random_test. integer to pointer casting problem.
+  * board_test has small memory leaks under valgrind.
+  * In a 4*4 run 3, computer first game, I won with move 3,2,3,2,1. Should't happen
+
+Observations/Things to Improve
+  * The computer algorithm is pretty clean but needs more fine-tuning
+

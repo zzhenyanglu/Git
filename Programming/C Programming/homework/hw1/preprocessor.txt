@@ -1,0 +1,60 @@
+
+
+
+
+#include <stdlib.h>
+#include <stdio.h>
+
+/* QEUSTION 7 : INCLUDE ANOTHER FILE CALLED PREPROCESSOR2, WHICH CONTAINS "HAHA" */
+#include "preprocessor2.txt"
+
+/* QUESTION 7: TOKEN SUBSTITUTION */
+#define print printf
+
+/* QUESTION 7: ANOTHER TOKEN SUBSTITUTION EXAMPLE */
+#define hello(name) char* hello_##name(){return "hello, " #name;}
+
+/* QUESTION 7: ANOTHER TOKEN SUB EXAMPLE, TO SHOULD SUBSTITUED TOKENS */
+hello(Jack)
+hello(Tim)
+hello(World)
+
+int main(){
+
+/* QUESTION 7: print SHOULD BE SUBED BY printf IN THE PREPROCESSED FILE */
+	print("hello, world!\n");
+        print("%s\n",hello_World());
+        print("%s\n",hello_Tim());
+        print("%s\n",hello_Jack());
+
+/* QUESTION 7: CONDITIONAL OUTPUT */
+     #ifdef hello_world
+     	printf("hello_world has been defined\n");
+     #else 
+     	printf("hello_world has not been defined\n");
+     #endif 
+	printf("Done checking existance of hello_world\n");
+}
+
+
+/* QUESTION 8 */
+/* ANSWER: replacement in a string is not feasible, please see the following example */
+
+
+#define world class 
+printf("hello, world!\n");
+
+/* EXPLANATION: If you preprocess these two lines, you will still get "hello,world" Preprocessor will skip String literal, INSTEAD you could replace it by the following way */
+
+#define name "class"
+printf("hello, "name);
+
+
+
+
+
+
+
+
+
+

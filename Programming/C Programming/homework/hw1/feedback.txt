@@ -1,0 +1,14 @@
+Feedback for zzhengyanglu
+--------------------------------------------------------------------------------
+Good
+  * Use of separate function with a prototype at the top.
+  * returning "char *" demonstrates understanding of return types
+  * detailed comments and demonstration of preprocessor features
+
+Observations/Things to Improve
+  * When you display one token next to another it does not manipulate
+    inside a string
+
+Remarks
+  * Good work
+

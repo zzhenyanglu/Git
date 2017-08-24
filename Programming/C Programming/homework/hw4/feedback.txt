@@ -1,0 +1,55 @@
+Feedback for zzhenyanglu
+--------------------------------------------------------------------------------
+Good
+  * Nice job overall and the self tesing is well structured.
+
+What cost points
+  * 1.README: README file exists                      : No file
+  * 1.README: arb_int_t choice                        : No file
+  * 1.README: algorithm used for addition/mult., etc  : No file
+  * 2.arb_test: arb_test.c provided                   : WORKS
+  * 2.arb_test: gcc flags -std=c11 -Wall -pedantic    : PARTIAL
+  * 3.self_tests: arb_from_int                        : WORKS
+  * 3.self_tests: arb_from_string                     : WORKS
+  * 3.self_tests: arb_free                            : WORKS
+  * 3.self_tests: arb_duplicate                       : WORKS
+  * 3.self_tests: arb_to_int                          : WORKS
+  * 3.self_tests: arb_to_string                       : WORKS
+  * 3.self_tests: arb_assign                          : WORKS
+  * 3.self_tests: arb_add                             : WORKS
+  * 3.self_tests: arb_subtract                        : WORKS
+  * 3.self_tests: arb_multiply                        : WORKS
+  * 3.self_tests: arb_compare                         : WORKS
+  * 4.arithmetic big numbers: +                       : WORKS
+  * 4.arithmetic big numbers: -                       : WORKS
+  * 4.arithmetic big numbers: *                       : ERROR
+  * 5.valgrind: self test clean                       : WORKS
+  * 5.valgrind: multiply clean                        : ERROR
+  * 5.valgrind: add clean                             : WORKS
+  * 5.valgrind: subtract clean                        : WORKS
+  * 6.arb_int.h: header guard                         : WORKS
+  * 6.arb_int.h: correct prototypes                   : WORKS
+  * 6.arb_int.h: prototypes only (no implementation)  : WORKS
+  * 6.arb_int.h: Comments for the prototypes          : No Comments
+  * 7.arb_int.c: with simple program passes           : WORKS
+  * 8.memory leak: arb_int.c                          : WORKS
+  * 9.test program: passes                            : WORKS
+  * 10.memory leak: arb_test                          : WORKS
+  * 11.test_script: percentage for math correct       : 66%
+  * 12.test_script: percentage for memory leak correct: 67%
+  * 13.test_scripts_working                           : WORKS
+  * 14.overall code style                             : GOOD
+  * 15.unit testing                                   : 15/21
+
+Observations/Things to Improve
+  * In arb_test.c you should include arb_int.h instead of arb_int.c; this causes
+    makefile error during linking. The interface to be exposed should always 
+    be the header, not the implementation.
+  * stack smashing happens frequently. Possibly a problem with copying strings
+    whose lengths are not properly accounted for. Copying such a string could 
+    damage the stack boundary structures.
+  * The division is extremely costly for large input. This algorithm consumes too much memory.
+
+Remarks
+  * For self testing please print out more information to present the process.
+
