@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0052)https://csil.cs.uchicago.edu/minicourses/RIntro.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John Lekberg">
+  <meta name="author" content="Maya Fraser">
+  <meta name="author" content="Andy Strayer">
+  <meta name="date" content="2015-10-14">
+  <title>R</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="./introduction to R_files/minicourses.css" type="text/css">
+</head>
+<body>
+<div id="header">
+<h1 class="title">R</h1>
+<h1 class="subtitle">An Informal Introduction</h1>
+<h2 class="author">John Lekberg</h2>
+<h2 class="author">Maya Fraser</h2>
+<h2 class="author">Andy Strayer</h2>
+<h3 class="date">2015-10-14</h3>
+</div>
+<h1 id="getting-set-up">Getting Set Up</h1>
+<p>RStudio provides a nice environment for working with R, because you edit an R file, run commands and view data all in the same window.</p>
+<div class="figure">
+<img src="./introduction to R_files/rstudio.png" title="RStudio" alt="RStudio"><p class="caption">RStudio</p>
+</div>
+<p>RStudio Download: <a href="https://www.rstudio.com/ide/">https://www.rstudio.com/ide/</a></p>
+<p>Parts of the RStudio window:</p>
+<dl>
+<dt>Bottom Left</dt>
+<dd>Manually enter commands in the console on the bottom left.
+</dd>
+<dt>Upper Left</dt>
+<dd>Write R code to a file and run it. Used for long commands you don't want to write by hand and saves work for future use.
+</dd>
+<dt>Upper Right</dt>
+<dd>Toggle between command history and a summary of the variables and datasets you're using. There's an import file button.
+</dd>
+<dt>Bottom Right</dt>
+<dd>Search for files, look at generated images, access help, and manage packages.
+</dd>
+</dl>
+<h1 id="r-basics">R Basics</h1>
+<p>R functions like a calculator. Pressing "Enter" or "Return" runs (multiple) lines of input.</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="dv">1+2</span>
+[<span class="dv">1</span>] <span class="dv">3</span>
+&gt;<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">15</span>)
+[<span class="dv">1</span>] <span class="fl">3.872983</span></code></pre>
+<p><code>&gt;</code> prefaces commands and output lines are labeled <code>[1]</code> or <code>[n]</code> for the number of output lines. The numbers reset between different lines of input. You get lines of output (<code>[1]</code>,<code>[2]</code>,<code>[3]</code>, etc) and when you enter a new command, the numbers start from <code>[1]</code> again. RStudio has blue input and black output.</p>
+<p>Use the up arrow key to access previously made commands. Access older commands by tapping the up arrow key repeatedly.</p>
+<p>Hit the "Run" button to run an entire file, or hit the command and enter key after highlighting the code that you want to run. The <code>help()</code> command is your friend.</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">help</span>()</code></pre>
+<p><code>help()</code> pulls up a help file about any command put in the brackets. A question mark prefix also pulls up command's help page.</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>?lm
+&gt;<span class="st"> </span><span class="kw">help</span>(lm)</code></pre>
+<p>If you put in some input, and when you try to run it, you get a plus sign rather than output, that means you have either an open parenthetical statement or an open bracketed command. Check your input.</p>
+<p>One of the great things about R is that there are so many packages already available with commands that you may want to use. For example, "lattice" is a commonly-used package for data visualization. To install a package you can type:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">install.packages</span>(<span class="st">'lattice'</span>)</code></pre>
+<p>Note that the package name is in single quotation marks. Once this command is used once, you do not need to use it again.</p>
+<p>After you do this, you can use the <code>require</code> command to make the functions in the package available. Usually you must use this command at the beginning of each session.</p>
+<h1 id="generating-lists-and-distributions">Generating Lists and Distributions</h1>
+<p>Let’s look at some of the statistical tools that you may want to use in R. We’ll start with <code>rnorm</code>:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>)</code></pre>
+<p>This will create a random number drawn from a random distribution centered around 0 with a standard deviation of 1 (the defaults). Now, let’s change things around:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>)</code></pre>
+<p>This will randomly generate 5 numbers, of mean 2, with a standard deviation of 2.5. Related functions include <code>dnorm</code>, <code>pnorm</code>, and <code>qnorm</code>, which are density functions, distribution functions, and quantile functions. The defaults and syntax appropriate for each can be found by using</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">help</span>(rnorm)</code></pre>
+<p>The other modifiers are <code>log=FALSE</code> or <code>log.p = FALSE</code>, which are the defaults (don’t need to be included), which, when modified to true, return the logarithm of probabilities rather than the probabilities themselves (useful in logistic regression). The last modifier is <code>lower.tail=TRUE</code>, which takes the probabilities as <code>P[X&lt;=x]</code>, as default. Modification reverses it. You can store information in vector variables using:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>a =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="fl">2.5</span>)</code></pre>
+<p>so that when you call <code>a</code>, it will have a vector of 5 randomly generated numbers of mean 10 with a standard deviation of 2.5</p>
+<p>In R there are actually 2 ways of assigning value to variables. We could also have written:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="fl">2.5</span>)</code></pre>
+<p>Using an equal sign instead of the arrow may feel more intuitive for those of you who have programmed before, but knowing what the arrow does is important if you want to be able to read code that other people have written.</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>b1 =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</code></pre>
+<p>Another important command is the <code>c()</code> command for creating lists. This collects whatever you place in between the parenthesis, whether that’s numbers, more vectors, or commands like rnorm. If you are entering sequential data, like in the case of variable <code>b</code>, you can always use this command:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>b2 =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">5</span>)s</code></pre>
+<p>This will return the exact same output for <code>b2</code> as for <code>b1</code>, and if you’re using large sequences (like <code>1:1000</code> for a for-loop, for example), this will make your life much easier. Call <code>b1</code> and <code>b2</code> to see if they’re the same. A third way of entering this data, and a much more complete way would be to use the seq() command. Follow this example below:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>b3 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span>)</code></pre>
+<p>The first parameter is the starting number for the sequence, the second is the last, and the last parameter is how they count by. In this case, it will create a vector <code>b3</code>, counting from 1 to 5 by 1. If your sequence upper bound does not land exactly on the scheduled increase by the last parameter, the sequence will terminate at the highest value reached through sequential counting. For example, try</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">3</span>)</code></pre>
+<p>The last command for putting in manual sequences of numbers is <code>rep</code>. Try</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">6</span>)</code></pre>
+<p>This will repeat the numbers 1-5 six times. If you need them to be in order, you can modify it. The repetition quantity can be a vector, not just a number. Try:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">2</span>, <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>))</code></pre>
+<p>You should get:</p>
+<pre class="sourceCode R"><code class="sourceCode r">[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span></code></pre>
+<p>A useful command is <code>sort()</code>, which will sort any vector you put into the parenthetical statement. Supposing you want to save the sorted list, you should use:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>f =<span class="st"> </span><span class="kw">sort</span>(e)</code></pre>
+<h1 id="working-with-data">Working with Data</h1>
+<p>First of all, we need to obtain the data that we are going to be working with. R reads delimited text files (csv, tsv, etc.). The most common of these is a csv (comma separated values) file. A csv file is just a text file with fields separated by commas. If you have a data file in Excel that you want to use in R, you can go to "Save as" in Excel and save it as a csv file. Similarly, if you want to bring in a <code>.dta</code> file from Stata, you can copy the data, paste it into an Excel file, and then save it as a csv.</p>
+<p>RStudio makes it very easy to import datasets. If you go to the upper right hand corner, you will see a button that says "Import dataset". Follow the instructions to import the dataset. One of the questions that it will ask is whether there is a header, meaning whether the first line of file contains variable names or values. Be certain to indicate if you have a header, otherwise R will think that those are values in the dataset.</p>
+<p>We’re going to use one of the datasets that comes with R, the <code>tree</code> dataset, which contains the heights, girths, and volumes of a set of cherry trees. To tell R that that is the dataset we want to use, use the command:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">data</span>(trees)</code></pre>
+<p>Once you do that, you should see "trees" in the upper right hand corner. If you want to look at the data, you can either click on it, or type:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">View</span>(trees)</code></pre>
+<p>For larger datasets where you might want to look at only part of the dataset, you can use <code>head</code> function or the <code>tail</code> function. <code>head</code> shows lines at the beginning and <code>tail</code> shows lines at the end.</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">head</span>(trees)
+  Girth Height Volume
+<span class="dv">1</span>   <span class="fl">8.3</span>     <span class="dv">70</span>   <span class="fl">10.3</span>
+<span class="dv">2</span>   <span class="fl">8.6</span>     <span class="dv">65</span>   <span class="fl">10.3</span>
+<span class="dv">3</span>   <span class="fl">8.8</span>     <span class="dv">63</span>   <span class="fl">10.2</span>
+<span class="dv">4</span>   <span class="fl">10.5</span>    <span class="dv">72</span>   <span class="fl">16.4</span>
+<span class="dv">5</span>   <span class="fl">10.7</span>    <span class="dv">81</span>   <span class="fl">18.8</span>
+<span class="dv">6</span>   <span class="fl">10.8</span>    <span class="dv">83</span>   <span class="fl">19.7</span></code></pre>
+<p>In working with data, you have two options: you can work with the data <em>attached</em> or <em>unattached</em>. In attached data, you can refer to variables without specifying what dataset they are in. In unattached data, you have to specify. Attaching data can make things simpler when you are only working with one dataset, but it can get confusing if you want to use more than one. To attach data we can use the command:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">attach</span>(trees)</code></pre>
+<p>Similarly, to detach, you can use:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">detach</span>(trees)</code></pre>
+<p>Let’s say you want to find the average of the height variable. With an attached dataset, you could type</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">mean</span>(Height)</code></pre>
+<p>For an unattached dataset, you must type:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">mean</span>(trees$Height)</code></pre>
+<p>The <code>$</code> indicates that you are accessing the height variable in the <code>trees</code> dataset. I’m going to use detached data because it makes your code more understandable once you get used to using the <code>$</code>’s.</p>
+<p>Now that we know how to work with variables, we can find out more about the data in our dataset. To get a summary of a variable, you can use the summary command:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">summary</span>(trees$Height)
+   Min.  1st Qu.  Median  Mean  3rd Qu.  Max.
+     <span class="dv">63</span>       <span class="dv">72</span>      <span class="dv">76</span>    <span class="dv">76</span>       <span class="dv">80</span>    <span class="dv">87</span></code></pre>
+<p>Now let’s visualize the data.</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">plot</span>(trees$Girth, trees$height)</code></pre>
+<p>At its core, the plot function uses the first variable as the independent variable (x) and the second as the dependent (y). The plot function is one of the most essential functions in R, so lets spice it up a little bit with modifiers:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">plot</span>(trees$Girth,
+       trees$height,
+       <span class="dt">main=</span><span class="st">"Girth as a Function of Height"</span>,
+       <span class="dt">xlab =</span> <span class="st">"Height (Inches)"</span>,
+       <span class="dt">ylab =</span> <span class="st">"Girth (Inches)"</span>,
+       <span class="dt">type =</span> <span class="st">"p"</span>,
+       <span class="dt">pch =</span> <span class="dv">2</span>)</code></pre>
+<p>There are many other parameters that can be varied, including color, point size and shape, fit lines, fonts, tiling multiple graphs in one display (explained below), margin sizes, and pretty much everything else. This is all contained in the <code>par</code> command (see <code>help(par)</code> ). As for the plot command above, it's all pretty self-explanatory, except for <code>type</code>, which selects point (<code>p</code>), line (<code>l</code>), or both (<code>b</code>), and <code>pch</code>, which selects dot type. If left out, it defaults to dots (try it!), <code>pch = 2</code> is triangles, and there are many more. They are conveniently missing from the help file, as well as the colors, because with each incarnation of R, they change. If you're interested in the most up to date list of supported colors and shapes (and their codes and names), check Google.</p>
+<p>Another important plot used often in R is the histogram plot. To make a histogram, use:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">hist</span>(trees$Girth,
+       <span class="dt">freq=</span><span class="ot">NULL</span>,
+       <span class="dt">xlab=</span><span class="st">"Class"</span>,
+       <span class="dt">ylab=</span><span class="st">"Frequency"</span>,
+       <span class="dt">main=</span><span class="st">"Frequency of Girths"</span>)</code></pre>
+<p>Like the <code>plot</code> function, there are many other parameters that can modify this command, accessed by <code>help(hist)</code> . I have included a few of the important ones here. As you can see, the labels work the same way as in the plot function. The most important parameter in the hist function is the <code>freq</code> parameter. This determines whether your data is plotted as frequencies or a density histogram. There is also a parameter to allow you to define your own breaks using a predefined vector. I have not included it here for the sake of simplicity, but if you ever choose to represent data in an even remotely serious setting, you must look into this parameter and appropriately define your breaks. This is particularly true if you’re using the density histogram rather than the frequency histogram.</p>
+<p>Creating new variables is also relatively easy. Let’s say that we want to create a variable that contains the height in feet instead of inches. We can use the command:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>trees$Heightfeet &lt;-<span class="st"> </span>(trees$Height)/<span class="dv">12</span></code></pre>
+<p>If we view the dataset, you will see that a new variable has been created:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">View</span>(trees)</code></pre>
+<p>You may find that you only want to work with part of your dataset. Subsetting is an easy way to do this. Subsetting allows you to specify what rows and what columns you want to work with. If we were only interested in working with the first 10 rows of data, we could define a new dataset by writing:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>firsttrees &lt;-<span class="st"> </span>trees[<span class="dv">1</span>:<span class="dv">10</span>,]</code></pre>
+<p>We are creating a new dataset called <code>firsttrees</code>. The <code>1:10</code> specifies that we want the rows from one to ten. <em>Notice the comma.</em> If you do not include a comma R will be confused. After the comma we could put specifications for what columns we want to include. Because I wanted to include all of the columns, that slot was left blank.</p>
+<p>We can also subset conditionally. If we only only want trees where the girth is greater than 16 inches and the height is greater than 80 inches, we use the command:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>largetrees &lt;-trees[trees$Height &gt;<span class="st"> </span><span class="dv">80</span> &amp;<span class="st"> </span>trees$Girth &gt;<span class="dv">16</span>,]</code></pre>
+<p>The <code>&amp;</code> symbol allows us to put multiple conditions together. Similarly, the <code>|</code> symbol means "or".</p>
+<h1 id="statistical-tests-and-regression">Statistical Tests and Regression</h1>
+<p>The last topic we should probably cover is simple testing and regression. If you want more information on the height variable, you can run a one sample t-test. Let’s say we want to test the hypothesis that the true mean value of the trees is equal to 75. The <code>mu</code> option allows you to set the value for the null hypothesis. The default value is 0.</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">t.test</span>(trees$Height, <span class="dt">mu=</span><span class="dv">75</span>)
+
+One Sample t-test
+
+data:<span class="st">  </span>trees$Height
+t =<span class="st"> </span><span class="fl">0.8738</span>, df =<span class="st"> </span><span class="dv">30</span>, p-value =<span class="st"> </span><span class="fl">0.3892</span>
+alternative hypothesis:<span class="st"> </span>true mean is not equal to <span class="dv">75</span>
+<span class="dv">95</span> percent confidence interval:
+<span class="st"> </span><span class="fl">73.6628</span> <span class="fl">78.3372</span>
+sample estimates:
+mean of x
+       <span class="dv">76</span></code></pre>
+<p>There are many other statistical tests available. Another example is <code>binom.test</code>, which performs a binomial test. If we wanted to test the probability of getting 8 heads out of 10 coin tosses, we could use the command:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">binom.test</span>(<span class="dv">8</span>,<span class="dv">10</span>,.<span class="dv">5</span>)
+
+Exact binomial test
+
+data:<span class="st">  </span><span class="dv">8</span> and <span class="dv">10</span>
+number of successes =<span class="st"> </span><span class="dv">8</span>, number of trials =<span class="st"> </span><span class="dv">10</span>, p-value =<span class="st"> </span><span class="fl">0.1094</span>
+alternative hypothesis:<span class="st"> </span>true probability of success is not equal to <span class="fl">0.5</span>
+<span class="dv">95</span> percent confidence interval:
+<span class="st"> </span><span class="fl">0.4439045</span> <span class="fl">0.9747893</span>
+sample estimates:
+probability of success
+                   <span class="fl">0.8</span></code></pre>
+<p>Other tests include:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>chisq.test
+&gt;<span class="st"> </span>mantelhaen.test
+&gt;<span class="st"> </span>poisson.test
+&gt;<span class="st"> </span>fisher.test</code></pre>
+<p>These are the tests you will use 99% of the time, but should you need a rare one, use</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>??test</code></pre>
+<p>to access the full list of default tests available in R. Remember that you can also download packages for many more complicated tests.</p>
+<p>To do simple linear regression, use the command:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">lm</span>(trees$Girth~trees$Height)</code></pre>
+<p>The <code>~</code> means "as described by," so in this case, we would be modeling girth as described by height. This will return an intercept and a slope. If you’re interested in more details, use:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(trees$Girth~trees$Height))
+
+Call:
+<span class="kw">lm</span>(<span class="dt">formula =</span> trees$Girth ~<span class="st"> </span>trees$Height)
+
+Residuals:
+<span class="st">    </span>Min      1Q  Median     3Q    Max
+-<span class="fl">4.2386</span> -<span class="fl">1.9205</span> -<span class="fl">0.0714</span> <span class="fl">2.7450</span> <span class="fl">4.5384</span>
+
+Coefficients:
+<span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(&gt;<span class="er">|</span>t|)
+(Intercept)  -<span class="fl">6.18839</span>    <span class="fl">5.96020</span>  -<span class="fl">1.038</span>  <span class="fl">0.30772</span>
+trees$Height  <span class="fl">0.25575</span>    <span class="fl">0.07816</span>  <span class="fl">3.272</span>   <span class="fl">0.00276</span> **
+---
+Signif. codes:<span class="st"> </span><span class="dv">0</span> <span class="st">''</span>**<span class="er">*</span><span class="st">''</span> <span class="fl">0.001</span> <span class="st">''</span>**<span class="st">''</span> <span class="fl">0.01</span> <span class="st">''</span>*<span class="st">''</span> <span class="fl">0.05</span> <span class="st">''</span>.<span class="st">''</span> <span class="fl">0.1</span> <span class="st">' '' 1</span>
+
+<span class="st">Residual standard error: 2.728 on 29 degrees of freedom</span>
+<span class="st">Multiple R-squared: 0.2697,Adjusted R-squared: 0.2445</span>
+<span class="st">F-statistic: 10.71 on 1 and 29 DF, p-value: 0.002758</span></code></pre>
+<p>This will return residual quartiles, t-values of each estimated parameter and the associated p-value, and also the R-squared value. For a moment, let’s go back to our plot. Try this:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">plot</span>(trees$Height, trees$Girth)
+&gt;<span class="st"> </span><span class="kw">abline</span>(<span class="kw">lm</span>(trees$Girth~trees$Height))</code></pre>
+<p>You can of course modify this with the parameters you’ve learned earlier, but this will create a scatter plot and fit your model to that scatter plot. There are also commands to fit in error bars, make a qq plot, and plot confidence and prediction bands.</p>
+<p>If you save your model, it will also automatically generate some of these plots:</p>
+<pre class="sourceCode R"><code class="sourceCode r">&gt;<span class="st"> </span>model &lt;-<span class="st"> </span><span class="kw">lm</span>(trees$Girth~trees$Height)
+&gt;<span class="st"> </span><span class="kw">plot</span>(model)</code></pre>
+<p>At the command line you will see:</p>
+<pre class="sourceCode R"><code class="sourceCode r">Hit &lt;Return&gt;<span class="st"> </span>to see next plot:</code></pre>
+<p>Hit Enter and you will see a series of plots (residual plot, qqplot, etc.) in the right hand corner of your window.</p>
+<p>Notes: You’ll notice that the dependent and independent variables are switched in location in the lm commands (the response variable comes before the predictor variable).</p>
+<p>If you are really interested in making plots and figures, I recommend a package called <code>ggplot2</code>. It produces really dressy plots.</p>
+<p>This barely scratches the surface. If you’re interested in more complex analysis, R is capable of fitting linear and non-linear models, as well as survival analysis (Kaplan-Meier estimates and curves), multiple regression, Poisson and logistic regression, and non-parametric modeling such as the Wilcoxon rank sum and signed rank tests. In addition, R is capable of running simple programs and executing infinitely nested for loops, while commands, and nested if-then statements.</p>
+<p>Further resources:</p>
+<ul>
+<li>Peter Dalgaard’s Introductory Statistics with R</li>
+<li><a href="http://www.r-project.org/">http://www.r-project.org/</a>. This website contains the official R documentation.</li>
+<li><a href="http://cran.r-project.org/doc/manuals/R-intro.pdf">http://cran.r-project.org/doc/manuals/R-intro.pdf</a>. An Introduction to R</li>
+<li>The Internet! Chances are if you want to do something or are having a problem, someone else has written about it extensively. On-line forums can be very helpful.</li>
+</ul>
+
+
+</body></html>

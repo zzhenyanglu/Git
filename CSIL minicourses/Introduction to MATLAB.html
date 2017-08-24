@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0052)https://csil.cs.uchicago.edu/minicourses/MATLAB.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="R Yang">
+  <meta name="author" content="J Chee">
+  <meta name="author" content="John Lekberg">
+  <meta name="date" content="2015-10-14">
+  <title>MATLAB</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="./Introduction to MATLAB_files/minicourses.css" type="text/css">
+</head>
+<body>
+<div id="header">
+<h1 class="title">MATLAB</h1>
+<h2 class="author">R Yang</h2>
+<h2 class="author">J Chee</h2>
+<h2 class="author">John Lekberg</h2>
+<h3 class="date">2015-10-14</h3>
+</div>
+<p>Welcome to MATLAB! This will be a minicourse directed toward getting you familiar with the basics of working with MATLAB. The target audience for this program will be people who have no programming background - if you have programmed before, you might find some of what we cover tedious.</p>
+<h1 id="interface">Interface</h1>
+<p>We will begin with MATLAB's graphical user interface.</p>
+<p>Most of your work for now will be done in MATLAB's COMMAND WINDOW. Here, you can give commands to MATLAB and the results of your computations will be displayed.</p>
+<p>You can also open the EDITOR by going to <code>File -&gt; New -&gt; Blank M-File</code>. We will return to this element of the interface later in this session.</p>
+<p>There is also a WORKSPACE which lists what variables and pieces of data you have loaded into MATLAB, a COMMAND HISTORY which lists previous commands that you have entered, and a CURRENT FOLDER which details the current directory you are working with (this is important when you are importing and exporting datasets).</p>
+<h1 id="language-basics">Language Basics</h1>
+<p>Try entering the following in your Command Window and pressing Enter:</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; <span class="fl">5</span>
+ans =
+    <span class="fl">5</span>
+&gt;&gt; <span class="fl">5</span>;</code></pre>
+<p>Whenever we enter something at the command prompt, MATLAB takes the expression that we entered, evaluates the value of the expression, and prints that value back at us. Not that when we put a semicolon (<code>;</code>) at the end of the line, there is no output -- it is suppressed. For a slightly more complex example, try:</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; <span class="fl">5</span> + <span class="fl">5</span>
+ans =
+    <span class="fl">10</span></code></pre>
+<p>Like your calculator, MATLAB can do arithmetic! Your usual <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> operations work here, along with parentheses for order of operations (although they have special meanings in certain contexts as we will see later on).</p>
+<p>Most of the time, you won't be working with literal values, but instead variables which hold values. In the following example, we assign the value of <code>5</code> to the variable <code>x</code> using the equal sign.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; x = <span class="fl">5</span>
+x =
+    <span class="fl">5</span>
+&gt;&gt; x
+x =
+    <span class="fl">5</span></code></pre>
+<p>If we do arithmetic with <code>x</code>, MATLAB will evaluate the expression with the value <code>5</code> for <code>x</code>.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; x + <span class="fl">1</span>
+ans =
+    <span class="fl">6</span></code></pre>
+<h1 id="matrices">Matrices</h1>
+<p>MATLAB's speciality is working with arrays and matrices.</p>
+<p>We declare matrices using square brackets <code>[</code> <code>]</code>, separating the elements of each column with commas and the elements of each row with semicolons.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; [<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>]
+ans =
+    <span class="fl">1</span>    <span class="fl">2</span>    <span class="fl">3</span>
+&gt;&gt; [<span class="fl">1</span>;<span class="fl">2</span>;<span class="fl">3</span>]
+ans =
+    <span class="fl">1</span>
+    <span class="fl">2</span>
+    <span class="fl">3</span>
+&gt;&gt; [<span class="fl">1</span>,<span class="fl">2</span>;<span class="fl">3</span>,<span class="fl">4</span>]
+ans =
+    <span class="fl">1</span>    <span class="fl">2</span>
+    <span class="fl">3</span>    <span class="fl">4</span></code></pre>
+<p>Matrices are assigned to variables the same way that normal values are.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; a = [<span class="fl">1</span>,<span class="fl">2</span>;<span class="fl">3</span>,<span class="fl">4</span>]
+a  =
+   <span class="fl">1</span>    <span class="fl">2</span>
+   <span class="fl">3</span>    <span class="fl">4</span>
+&gt;&gt; b = [<span class="fl">1</span>,<span class="fl">2</span>]
+b  =
+   <span class="fl">1</span>    <span class="fl">2</span></code></pre>
+<p>We reference individual elements of an array using parentheses. If the matrix is one-dimensional, we simply write:</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; b(<span class="fl">1</span>)
+ans =
+    <span class="fl">1</span>
+&gt;&gt; b(<span class="fl">2</span>)
+ans =
+    <span class="fl">2</span></code></pre>
+<p>If the matrix is two-dimensional, we write <code>matrixname(r,c)</code> where <code>r</code> is the row and <code>c</code> is the column of the element that we want.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; a(<span class="fl">1</span>,<span class="fl">1</span>)
+ans =
+    <span class="fl">1</span>
+&gt;&gt; a(<span class="fl">1</span>,<span class="fl">2</span>)
+ans =
+    <span class="fl">2</span>
+&gt;&gt; a(<span class="fl">2</span>,<span class="fl">1</span>)
+ans =
+    <span class="fl">3</span></code></pre>
+<p>If you come from another programming language, note that MATLAB starts counting places in a matrix from <code>1</code>, not <code>0</code> which is what you might be used to.</p>
+<p>We can generate ranges of numbers using colons; this is useful for both generating matrices and retrieving elements of matrices. We use the format <code>initial:end</code>, which generates one-by-one the numbers between <code>initial</code> and <code>end</code>, inclusive. We can also use <code>initial:increment:end</code> to step by <code>increment</code> rather than by ones.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; c = <span class="fl">1</span>:<span class="fl">5</span>
+c =
+  <span class="fl">1</span>     <span class="fl">2</span>       <span class="fl">3</span>       <span class="fl">4</span>       <span class="fl">5</span>
+&gt;&gt; c = <span class="fl">1</span>:<span class="fl">2</span>:<span class="fl">10</span>
+c =
+  <span class="fl">1</span>     <span class="fl">3</span>       <span class="fl">5</span>       <span class="fl">7</span>       <span class="fl">9</span>
+&gt;&gt; c(<span class="fl">1</span>:<span class="fl">3</span>)
+ans =
+    <span class="fl">1</span>    <span class="fl">3</span>    <span class="fl">5</span>
+&gt;&gt; c(<span class="fl">2</span>:<span class="fl">4</span>)
+ans =
+    <span class="fl">3</span>    <span class="fl">5</span>    <span class="fl">7</span></code></pre>
+<p>Using the colon alone means 'everything'. This way, you can retrieve an entire column or an entire row.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; a(:,<span class="fl">1</span>)
+ans =
+    <span class="fl">1</span>
+    <span class="fl">3</span>
+&gt;&gt; a(<span class="fl">1</span>,:)
+ans =
+    <span class="fl">1</span>   <span class="fl">2</span></code></pre>
+<p>We can also use a method called logical indexing to access items in a matrix.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; m = [<span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span> ; <span class="fl">4</span> <span class="fl">5</span> <span class="fl">6</span>]
+m =
+    <span class="fl">1</span>   <span class="fl">2</span>   <span class="fl">3</span>
+    <span class="fl">4</span>   <span class="fl">5</span>   <span class="fl">6</span>
+&gt;&gt; m(:, [false false true])
+ans =
+    <span class="fl">3</span>
+    <span class="fl">6</span></code></pre>
+<p>The colon indicates that we are selecting all rows, and the the second vector matrix indicates that we are selecting the last column only.</p>
+<p>We can do matrix arithmetic on these matrices. If you use an operation between a matrix and a singular value, MATLAB will apply that operation and value to each element of the matrix. If you use the operation between two matrices, though, MATLAB will perform the matrix operation (e.g. matrix multiplication).</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; a + <span class="fl">1</span>
+ans =
+    <span class="fl">2</span>   <span class="fl">3</span>
+    <span class="fl">4</span>   <span class="fl">5</span>
+&gt;&gt; a * <span class="fl">5</span>
+ans =
+    <span class="fl">5</span>   <span class="fl">10</span>
+    <span class="fl">15</span>  <span class="fl">20</span>
+&gt;&gt; a + a
+ans =
+    <span class="fl">2</span>   <span class="fl">4</span>
+    <span class="fl">6</span>   <span class="fl">8</span>
+&gt;&gt; a * a
+ans =
+    <span class="fl">7</span>   <span class="fl">10</span>
+    <span class="fl">15</span>  <span class="fl">22</span>
+&gt;&gt; a * b
+ans =
+    <span class="fl">5</span>
+    <span class="fl">11</span></code></pre>
+<p>If you want to perform the operation between the elements of two matrices ('element-wise'), then you must denote this with a period before the operation.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; b .* b
+ans =
+    <span class="fl">1</span>
+    <span class="fl">4</span>
+&gt;&gt; b * b
+??? Error using ==&gt; mtimes
+Inner matrix dimensions must agree.</code></pre>
+<p>Here are some other common functions to use with matrices.</p>
+<p>Transpose</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; a'
+ans =
+    <span class="fl">1</span>   <span class="fl">3</span>
+    <span class="fl">2</span>   <span class="fl">4</span></code></pre>
+<p>Diagonal (both access and generation)</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; diag(a)
+ans =
+    <span class="fl">1</span>
+    <span class="fl">4</span>
+&gt;&gt; diag(diag(a))
+ans =
+    <span class="fl">1</span>   <span class="fl">0</span>
+    <span class="fl">0</span>   <span class="fl">4</span></code></pre>
+<p>Sum (first across rows, then across columns - you can specify which dimension)</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; sum(a)
+ans =
+    <span class="fl">4</span>   <span class="fl">6</span>
+&gt;&gt; sum(a,<span class="fl">2</span>)
+ans =
+    <span class="fl">3</span>
+    <span class="fl">7</span>
+&gt;&gt; sum(sum(a))
+ans =
+    <span class="fl">10</span></code></pre>
+<p>Zero - generate an nxn or nxm matrix of zeros</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; zeros(<span class="fl">2</span>)
+ans =
+    <span class="fl">0</span>   <span class="fl">0</span>
+    <span class="fl">0</span>   <span class="fl">0</span>
+&gt;&gt; zeros(<span class="fl">1</span>,<span class="fl">2</span>)
+ans =
+    <span class="fl">0</span>   <span class="fl">0</span></code></pre>
+<p>Ones - generate an nxn or nxm matrix of ones</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; ones(<span class="fl">2</span>)
+ans =
+    <span class="fl">1</span>   <span class="fl">1</span>
+    <span class="fl">1</span>   <span class="fl">1</span>
+&gt;&gt; ones(<span class="fl">2</span>,<span class="fl">1</span>)
+ans =
+    <span class="fl">1</span>
+    <span class="fl">1</span></code></pre>
+<p>Identity</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; eye(<span class="fl">2</span>)
+ans =
+    <span class="fl">1</span>   <span class="fl">0</span>
+    <span class="fl">0</span>   <span class="fl">1</span></code></pre>
+<p>Random (random numbers between 0 and 1)</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; rand(<span class="fl">2</span>)
+ans =
+    <span class="fl">0.8947</span>      <span class="fl">0.1270</span>
+    <span class="fl">0.9058</span>      <span class="fl">0.9243</span></code></pre>
+<h1 id="conditionals-and-loops">Conditionals and Loops</h1>
+<p>We can use conditional statements and loops to control how MATLAB executes segments of code - this comes in importantly when we are writing code rather than simply interacting with the MATLAB Command Window.</p>
+<p>The building block of these controls are Boolean statements - <code>1</code> or <code>0</code>, i.e. True or False. These values come from expressions like the following:</p>
+<p><code>a == b</code> tests if a and b are equal</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; <span class="fl">1</span> == <span class="fl">1</span>
+ans =
+    <span class="fl">1</span></code></pre>
+<p><code>a ~= b</code> tests if a and b are nonequal (not <code>!=</code> as you might see in other languages)</p>
+<pre class="sourceCode MATlAB"><code class="sourceCode matlab">&gt;&gt; <span class="fl">1</span> ~= <span class="fl">1</span>
+ans =
+    <span class="fl">0</span></code></pre>
+<p>Similarly, we have <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>. These statements can all be composed with <code>&amp;&amp;</code> for logical AND and <code>||</code> or logical OR.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; (<span class="fl">5</span> &gt; <span class="fl">3</span>) &amp;&amp; (<span class="fl">5</span> &lt; <span class="fl">7</span>)
+ans =
+    <span class="fl">1</span>
+
+&gt;&gt; (<span class="fl">3</span> &gt;= <span class="fl">5</span>) || (<span class="fl">10</span> ~= <span class="fl">11</span>)
+ans =
+    <span class="fl">1</span></code></pre>
+<p>If we apply these operations to a matrix, it is applied to each element of that matrix.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; a &lt; <span class="fl">2</span>
+ans =
+    <span class="fl">1</span>   <span class="fl">0</span>
+    <span class="fl">0</span>   <span class="fl">0</span></code></pre>
+<p>If (Else) Statements</p>
+<p>These statements boil down to saying "If X is true, do A" or "If X is true, do A, or else do B".</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">if (boolean value)
+   do something
+end</code></pre>
+<p>So we can write:</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; if <span class="fl">5</span> &gt; <span class="fl">2</span>
+n = <span class="fl">5</span>
+end
+
+n =
+  <span class="fl">5</span>
+
+&gt;&gt; if <span class="fl">2</span> &gt; <span class="fl">5</span>
+n = <span class="fl">0</span>
+end
+&gt;&gt;</code></pre>
+<p>Notice how the first section executed, but the second section did not.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; if <span class="fl">2</span> &gt; <span class="fl">5</span>
+n = <span class="fl">0</span>
+else
+n = <span class="fl">1</span>
+end
+
+n =
+  <span class="fl">1</span></code></pre>
+<p>In the above example, first MATLAB checked if <code>2 &gt; 5</code>. This was false, so it executed the part after <code>else</code> rather than the part after <code>if</code>.</p>
+<p>In fact, we can nest these <code>if-else</code> statements.</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; if n == <span class="fl">0</span>
+n = <span class="fl">1</span>
+else if n == <span class="fl">1</span>
+n = <span class="fl">0</span>
+else
+n = <span class="fl">5</span>
+end</code></pre>
+<p>For Loops</p>
+<p>For Loops allow you to repeat a segment of code a set number of times. They follow the following structure:</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">for loopvariable = array
+    action
+end</code></pre>
+<p>For each element in the array, MATLAB performs the action one time. During the iteration that corresponds with the <code>i</code>th element of the array, <code>loopvariable</code> is set to equal the value of the <code>i</code>th element of the array. This is best demonstrated with an example.</p>
+<p>We could calculate the factorial of 5 by doing the following:</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; fact = <span class="fl">1</span>;
+&gt;&gt; fact = fact * <span class="fl">2</span>;
+&gt;&gt; fact = fact * <span class="fl">3</span>;
+&gt;&gt; fact = fact * <span class="fl">4</span>;
+&gt;&gt; fact = fact * <span class="fl">5</span>
+ans =
+    <span class="fl">120</span></code></pre>
+<p>or the more verbose:</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; fact = <span class="fl">1</span>;
+&gt;&gt; i = <span class="fl">2</span>;
+&gt;&gt; fact = fact * i;
+&gt;&gt; i = <span class="fl">3</span>;
+&gt;&gt; fact = fact * i;
+&gt;&gt; i = <span class="fl">4</span>;
+&gt;&gt; fact = fact * i;
+&gt;&gt; i = <span class="fl">5</span>;
+&gt;&gt; fact = fact * i
+ans =
+    <span class="fl">120</span></code></pre>
+<p>This is equivalent to the following for loop:</p>
+<pre class="sourceCode MATLAB"><code class="sourceCode matlab">&gt;&gt; fact = <span class="fl">1</span>;
+&gt;&gt; for i = [<span class="fl">2</span>:<span class="fl">5</span>]
+fact = fact * i
+end
+
+fact =
+     <span class="fl">2</span>
+fact =
+     <span class="fl">6</span>
+fact =
+    <span class="fl">24</span>
+fact =
+   <span class="fl">120</span></code></pre>
+<h1 id="exercise">Exercise</h1>
+<p>As a test of the previous core concepts, write a script or function that computes all the prime numbers between 1 and 100.</p>
+<p>We can break this problem down into two main components: * Test if a function is prime * Test all numbers between 1 and 100</p>
+<p>Note: You may find the function <code>mod</code> useful, e.g. <code>mod(6,3) = 0</code>, <code>mod(6,5) = 1</code>.</p>
+
+
+</body></html>

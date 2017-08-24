@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0056)https://csil.cs.uchicago.edu/minicourses/LatexIntro.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="John Lekberg">
+  <meta name="author" content="Mame Maloney">
+  <meta name="date" content="2015-10-07">
+  <title>Introduction to Latex</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="./Introduction to Latex_files/minicourses.css" type="text/css">
+  <script src="./Introduction to Latex_files/MathJax.js.download" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">Introduction to Latex</h1>
+<h2 class="author">John Lekberg</h2>
+<h2 class="author">Mame Maloney</h2>
+<h3 class="date">2015-10-07</h3>
+</div>
+<h1 id="introduction">Introduction</h1>
+<p>Latex is a professional-quality typesetting program, written by the legendary Donald Knuth. Latex is portable, light, secure, and free. Latex is smart by default, but also allows for fine control of all aspects of your document.</p>
+<h1 id="parts-of-the-latex-source-code">Parts of the Latex Source Code</h1>
+<p>A Latex document has two main parts: the preamble and the body.</p>
+<h2 id="preamble">Preamble</h2>
+<p>The preamble is at the beginning of the Latex file and includes commands that will effect how your content is displayed.</p>
+<p>The first line of your LaTeX document will be the <code>\documentclass</code> command, followed by a list of options and the name of a style. A standard example is</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">\documentclass[12pt]{article}</code></pre>
+<p>Between the curly brackets, put your document class. Your choices are <code>article</code>, <code>report</code>, <code>book</code>, <code>letter</code>. Between the square brackets, put options, separated by commas. With the options, you can control things such as font size, paper size, and paper orientation. Here are the default options for the article document class:</p>
+<table>
+<colgroup>
+<col width="27%">
+<col width="34%">
+<col width="37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Category</th>
+<th align="left">Default</th>
+<th align="left">Other Options</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p>Body Text Point Size</p></td>
+<td align="left"><p>10pt</p></td>
+<td align="left"><ul>
+<li>11pt</li>
+<li>12pt</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Paper Size</p></td>
+<td align="left"><p>8.5x11 (use <code>letterpaper</code>)</p></td>
+<td align="left"><ul>
+<li><code>a4paper</code></li>
+<li><code>a5paper</code></li>
+<li><code>b5paper</code></li>
+<li><code>legalpaper</code></li>
+<li><code>executive paper</code></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Orientation</p></td>
+<td align="left"><p><code>portrait</code></p></td>
+<td align="left"><p><code>landscape</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Print Side</p></td>
+<td align="left"><p><code>oneside</code></p></td>
+<td align="left"><p>duplex (use <code>twoside</code>)</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Title Page</p></td>
+<td align="left"><p><code>notitlepage</code></p></td>
+<td align="left"><p>Title Page (use <code>titlepage</code>)</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Columns</p></td>
+<td align="left"><p><code>onecolumn</code></p></td>
+<td align="left"><p><code>twocolumn</code></p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Display Equations</p></td>
+<td align="left"><p>Centered</p></td>
+<td align="left"><p>Flush Left (use <code>fleqn</code>)</p></td>
+</tr>
+</tbody>
+</table>
+<h2 id="more-about-packages">More About Packages</h2>
+<p>Because Latex is so lightweight, many options and functions are not included by default (for example, mathematical fonts). You can tell your Latex document to include special functionality by including packages.</p>
+<p>After the <code>\documentclass</code> command, you can include some packages with the <code>\usepackage</code> command, followed by the name of your package in curly brackets. For instance, use <code>\usepackage{amssymb}</code> for the AMS math symbols.</p>
+<p>Most packages you will use are already installed on the computers in the lab (but you still have to use the <code>\usepackage</code> command in order to apply them to your document). If you need a package that is not already installed, download the appropriate <code>.sty</code> file and put it where Latex can "find" it (a good place is your working directory).</p>
+<p>Download packages from <code>http://ctan.org</code>.</p>
+<p>Some common packages you might want to use:</p>
+<table>
+<colgroup>
+<col width="18%">
+<col width="72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Package</th>
+<th align="left">Uses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>color</code></p></td>
+<td align="left"><p>Change the color of your text.</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>graphics</code></p></td>
+<td align="left"><p>Include graphics.</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>fullpage</code></p></td>
+<td align="left"><p>Have smaller margins (default margins are large).</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>setspace</code></p></td>
+<td align="left"><p>Switch between single, double, and 1.5 spacing.</p></td>
+</tr>
+</tbody>
+</table>
+<h2 id="body">Body</h2>
+<p>Put your content that you want to typeset between <code>\begin{document}</code> and <code>\end{document}</code> tags.</p>
+<p>Most things that you type in the body of your document are typeset and show up in your final output document. Some exceptions: commands, spacing, special characters, comments.</p>
+<h2 id="commands">Commands</h2>
+<p>Commands alter the formatting of your text in the final output document. They are preceded by a single backslash. Some commands take arguments in curly brackets. We will discuss specific commands later.</p>
+<h2 id="spacing">Spacing</h2>
+<p>Spacing in your &nbsp; source code does not correspond to spacing in the typeset final product. For instance, if you see something like this in your text editor:</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">The          quick    brown
+fox     jumped                over
+the lazy          dog</code></pre>
+<p>the typeset version in your final output document will look like this:</p>
+<p>The quick brown fox jumped over the lazy dog.</p>
+<p>For a paragraph break, use: a line or more of blank space in your source code.</p>
+<p>For a line break, use: <code>\\</code> (this will give you a blank line in between two chunks of text)</p>
+<p>For a page break, put <code>\newpage</code>.</p>
+<p>To skip space vertically, use: <code>\smallskip</code> , <code>\medskip</code>, <code>\bigskip</code>, or <code>\vspace{length}</code>. Replace <code>length</code> with a unit of measurement (see table below).</p>
+<p>To skip a space horizontally, use <code>\thinspace</code> (which inserts <span class="math">\(\frac{1}{12}\)</span> em of blank space), <code>\enspace</code> (which inserts <span class="math">\(\frac{1}{2}\)</span> em), <code>\quad</code> (which inserts 1 em), or <code>\hspace{length}</code> (which inserts as much blank space as you specify). In math mode, you can also use <code>\;</code> and <code>\,</code>.</p>
+<h3 id="units-of-measurement">Units of Measurement</h3>
+<table>
+<colgroup>
+<col width="16%">
+<col width="62%">
+<col width="20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">latex name</th>
+<th align="left">long name</th>
+<th align="left">conversion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p>pt</p></td>
+<td align="left"><p>point</p></td>
+<td align="left"><p>72.27pt = 1in</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>in</p></td>
+<td align="left"><p>inch</p></td>
+<td align="left"><p>1in = 25.4mm</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>mm</p></td>
+<td align="left"><p>millimeter</p></td>
+<td align="left"><p>1mm = 2.845pt</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>cm</p></td>
+<td align="left"><p>centimeter</p></td>
+<td align="left"><p>1cm = 10mm</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>ex</p></td>
+<td align="left"><p>height of the letter x in the the current font</p></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><p>em</p></td>
+<td align="left"><p>width of the letter M in the current font</p></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>sp</p></td>
+<td align="left"><p>scaled point</p></td>
+<td align="left"><p>1sp = 65536pt</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>bp</p></td>
+<td align="left"><p>big point (PostScript point)</p></td>
+<td align="left"><p>72bp = 1in</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>dd</p></td>
+<td align="left"><p>didot point</p></td>
+<td align="left"><p>1dd = 0.376mm</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>pc</p></td>
+<td align="left"><p>pica</p></td>
+<td align="left"><p>1pc = 12pt</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>cc</p></td>
+<td align="left"><p>cicero</p></td>
+<td align="left"><p>1cc = 12dd</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>mu</p></td>
+<td align="left"><p>math unit</p></td>
+<td align="left"><p>18mu = 1em</p></td>
+</tr>
+</tbody>
+</table>
+<h3 id="special-characters">Special Characters</h3>
+<p>Some special characters are reserved by Latex , and must be preceded by a backslash if you want them to show up in your document: <code>&amp;</code>, <code>$</code>, <code>#</code>, <code>%</code>, <code>^</code>, <code>{</code>, and <code>}</code>.</p>
+<p>The backslash is also a special character, and you have to type <code>\backslash</code> to get one to appear in your document.</p>
+<h3 id="comments">Comments</h3>
+<p>Every line preceded by a <code>%</code> sign is a comment and will not show up in your typeset document.</p>
+<p>Comments are good for writing little notes or explanations within your Latex file---good if you want someone else to read and understand the organization of your source code, or if you want to remember it yourself. Comments are also useful when writing papers; if you want to take out a paragraph but don't want to delete it entirely, just comment it out.</p>
+<h1 id="maths">Maths</h1>
+<h2 id="environments">Environments</h2>
+<p>You can include math in-line ("math mode"), centered on a line by itself ("math display mode"), or centered on a new line with numbered equations ("equation mode").</p>
+<h3 id="math-mode">Math Mode</h3>
+<p>To include math in-line, surround the math with dollar-signs as delimiters. For example:</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">$\exp(x) = \sum_{n = 0}^{\infty}\frac{x^n}{n!}
+         = \lim_{n \rightarrow \infty} \left( 1 + \frac{x}{n}\right)^n$</code></pre>
+<p>This is the result: <span class="math">\(\exp(x) = \sum_{n = 0}^{\infty}\frac{x^n}{n!}          = \lim_{n \rightarrow \infty} \left( 1 + \frac{x}{n}\right)^n\)</span> It shows up in-line with the rest of your text.</p>
+<h3 id="math-display-mode">Math Display Mode</h3>
+<p>To put the math on a separate line, larger, and centered, use double dollar-signs as delimiters. This is the result of typesetting the same code as above(but with different delimiters):</p>
+<p><span class="math">\[\exp(x) = \sum_{n = 0}^{\infty}\frac{x^n}{n!}
+         = \lim_{n \rightarrow \infty} \left( 1 + \frac{x}{n}\right)^n\]</span></p>
+<p>Notice how the sum and limit behave differently.</p>
+<h3 id="equation-mode">Equation Mode</h3>
+<p>To display one-line equations that will be numbered automatically, surround your math code by <code>\begin{equation}</code> and <code>\end{equation}</code>.</p>
+<p>You will get the following result:</p>
+
+<p>If you use equation mode again later in your paper, it will pick up the numbering where it left off:</p>
+
+<h3 id="math-on-multiple-lines">Math on Multiple Lines</h3>
+<p>For multi-line equations, use <code>\begin{align}</code> and <code>\end{align}</code>. In order to use this tag, you need to include the <code>amsmath</code> package. The following code</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">\begin{align}
+
+\exp(x) &amp; = \sum_{n = 0}^{\infty}\frac{x^n}{n!} \\
+
+&amp; = \lim_{n \rightarrow \infty} \left( 1 + \frac{x}{n}\right)^n
+
+\end{align}</code></pre>
+<p>Produces this output:</p>
+
+<p>Use <code>&amp;</code> signs where you want your math to line up in a column. You can include as many <code>&amp;</code>s as you want, but be sure to use the same number on each line. Also notice that <code>align</code> automatically numbers lines. For un-numbered lines, use <code>align*</code> instead.</p>
+<h2 id="special-characters-1">Special Characters</h2>
+<p>Special mathy characters are inserted with a backslash and the name of the character. For instance, <code>$\Omega$, $\alpha$</code> produces: <span class="math">\(\Omega\)</span>, <span class="math">\(\alpha\)</span>.</p>
+<p>For a comprehensive list of special characters, consult <code>symbols-letters.pdf</code> (which you can find at <a href="http://www.ctan.org/tex-archive/info/symbols/comprehensive/symbols-letter.pdf">http://www.ctan.org/tex-archive/info/symbols/comprehensive/symbols-letter.pdf</a>). This document lists all the special symbols you could want, and the packages in which they are included.</p>
+<h2 id="superscripts-and-subscripts">Superscripts and Subscripts</h2>
+<p>Use the <code>^</code> and <code>_</code> characters.</p>
+<p>In-line, <code>$x_i^y$</code> produces <span class="math">\(x_i^y\)</span>. If you want to force the super- and sub-scripts into the height of one line, use <code>$x{}_i^y$</code> to get <span class="math">\(x{}_i^y\)</span>. You can also nest super- and sub-scripts by using curly brackets. For instance, <code>$x_{i_j}^{y_k^r}$</code> produces <span class="math">\(x_{i_j}^{y_k^r}\)</span>.</p>
+<p>As you saw above, in math display mode <code>$$</code>, the super- and sub-scripts spread out in relationship to the main character when you're working with sums, products, integrals, and limits. If you want to force this positioning within a single line, use <code>$\sum\limits_{i=1}^N$</code> to get <span class="math">\(\sum\limits_{i=1}^N\)</span>.</p>
+<h2 id="delimeters">Delimeters</h2>
+<table>
+<colgroup>
+<col width="30%">
+<col width="30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">code</th>
+<th align="left">produces</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>( )</code></p></td>
+<td align="left"><p>( )</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>[ ]</code></p></td>
+<td align="left"><p>[ ]</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>\{ \}</code></p></td>
+<td align="left"><p>{ }</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>$\langle \rangle$</code></p></td>
+<td align="left"><p><span class="math">\(\langle \rangle\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Latex will size your delimiters for you, so <code>$\left( x \left( \frac{\left( y + z \right)}{2z} \right) \right)$</code> produces <span class="math">\(\left( x \left( \frac{\left( y+ z \right)}{2z} \right) \right)\)</span>.</p>
+<h2 id="putting-things-on-top-of-other-things">Putting Things on Top of Other Things</h2>
+<table>
+<colgroup>
+<col width="15%">
+<col width="42%">
+<col width="42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Thing</th>
+<th align="left">Code</th>
+<th align="left">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p>Roots</p></td>
+<td align="left"><p><code>$\sqrt{4} + \sqrt[3]{x + y}$</code></p></td>
+<td align="left"><p><span class="math">\(\sqrt{4} + \sqrt[3]{x + y}\)</span></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Fractions</p></td>
+<td align="left"><p><code>$\frac{1}{x+y}$</code></p></td>
+<td align="left"><p><span class="math">\(\frac{1}{x+y}\)</span></p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Choose</p></td>
+<td align="left"><p><code>$x \choose y$</code></p></td>
+<td align="left"><p><span class="math">\(x \choose y\)</span></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Atop</p></td>
+<td align="left"><p><code>$x \atop y$</code></p></td>
+<td align="left"><p><span class="math">\(x \atop y\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<h1 id="tables">Tables</h1>
+<p>Sample code:</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">\begin{tabular}{ c | c c c }
+
+
+&amp; col1 &amp; col2 &amp; col3 \\
+
+\hline
+row1 &amp; 11 &amp; 12 &amp; 13\\
+
+row2 &amp; 21 &amp; 22 &amp; 23\\
+
+$\vdots$ &amp; &amp; $\ddots$ &amp; \\
+
+\end{tabular}</code></pre>
+<p>Resulting Table:</p>
+
+<p>Edit the arguments in the second set of curly brackets like so: each letter (<code>l</code>, <code>c</code>, or <code>r</code>) denotes a column aligned left, center, or right (respectively). A pipe (<code>|</code>) between columns creates a vertical line between them.</p>
+<p>Within the body of your table, separate columns with <code>&amp;</code>, and end a row with <code>\\</code>. To include a horizontal line between rows, use <code>\hline</code>.</p>
+<h1 id="lists">Lists</h1>
+<h2 id="enumerate"><code>enumerate</code></h2>
+<p>Enumerate is numbered automatically, and you can nest enumerated lists up to four times.</p>
+<p>You can change the character sets Latex uses to enumerate by including the following code in your preface: <code>\renewcommand{\labelenumii}{\alph{enumi}}</code>. Replace <code>enumi</code> with <code>enumii</code> for the second level, <code>enumiii</code> for the third, and <code>enumiv</code> for the fourth. Here, <code>\alph</code> produces lower-case letters; replace it with <code>\Alph</code> for upper-case, <code>\arabic</code> for regular numerals, <code>\Roman</code> for big Roman numerals, and <code>\roman</code> for little Roman numerals.</p>
+<p>Here is an example of enumerate at work in its default way:</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">\begin{enumerate}
+  \item first thing.
+      \begin{enumerate}
+        \item another thing.
+          \begin{enumerate}
+            \item nesting.
+              \begin{enumerate}
+                \item nest up to four times!
+                  \end{enumerate}
+            \end{enumerate}
+        \item don't forget to end the nests, though.
+      \end{enumerate}
+  <span class="co">% \item second thing.</span>
+  \item third thing.
+\end{enumerate}</code></pre>
+<p>Produces:</p>
+
+<h2 id="itemize"><code>itemize</code></h2>
+<p>For un-numbered lists; uses bullet points. You can change the bullet points Latex uses by including the following command in your preface: <code>\renewcommand{\labelitemi}{$\star$}</code>. Replace <code>\labelitemi</code> with <code>\labelitemii</code>, <code>\labelitemiii</code>, and <code>\labelitemiv</code> . Replace <code>$\star$</code> with basically any symbol you want (notice that <code>$\star$</code> is in math mode).</p>
+<h2 id="decscription"><code>decscription</code></h2>
+<p>Description is for giving short definitions or descriptions:</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">\begin{description}
+  \item[Newton] 18th century physicist.
+  \item[Descartes] 18th century philosopher.
+\end{description}</code></pre>
+<p>Produces:</p>
+<dl>
+<dt>Newton</dt>
+<dd><p>18th century physicist.</p>
+</dd>
+<dt>Descartes</dt>
+<dd><p>18th century philosopher.</p>
+</dd>
+</dl>
+<h1 id="paper-writing">Paper Writing</h1>
+<p>Latex can do everything you're used to your WYSIWYG editor being able to do. Some of these things, Latex does more simply and cleanly (but some things are less intuitive).</p>
+<h2 id="text-flow">Text Flow</h2>
+<p>Center with <code>\begin{center}</code> and <code>\end{center}</code>.</p>
+<p>Adjust line spacing by including <code>\usepackage{setspace}</code>. Then, within your document, use <code>\doublespacing</code>, <code>\onehalfspacing</code>, and <code>\singlespacing</code>. All text following your command will be spaced as specified, until a new line-spacing command is issued.</p>
+<p>Latex includes a nice block-quote environment: <code>\begin{quote}</code> and <code>\end{quote}</code> This environment is not automatically single-spaced.</p>
+<h2 id="organization">Organization</h2>
+<p>You might notice the wonderful, clean, and easy-to-follow organization of this document <code>;-)</code>.</p>
+<p>To start off different parts of your document, use:</p>
+<pre class="sourceCode latex"><code class="sourceCode latex">\chapter{Chapter Name}
+
+\section{Section Name}
+
+\subsection{Subsection Name}
+
+\subsubsection{Sub-subsection Name}
+
+\paragraph{Paragraph Name}
+
+\subparagraph{Sub-paragraph Name}</code></pre>
+<p>Latex automatically numbers the sections for you (so if you add or remove a section, you don't have to re-number anything by hand).</p>
+<p>Also notice that you don't have to begin and end the sections.</p>
+<h2 id="footnotes">Footnotes</h2>
+<p>Include a footnote with <code>\footnote{Content of footnote}</code>. <a href="https://csil.cs.uchicago.edu/minicourses/LatexIntro.html#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<h2 id="font-sizes">Font Sizes</h2>
+<table>
+<colgroup>
+<col width="25%">
+<col width="16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Size (pt)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>\tiny</code></p></td>
+<td align="left"><p>5 pt</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>\scriptsize</code></p></td>
+<td align="left"><p>7 pt</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>\footnotesize</code></p></td>
+<td align="left"><p>8 pt</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>\small</code></p></td>
+<td align="left"><p>9 pt</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>\normalsize</code></p></td>
+<td align="left"><p>10 pt</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>\large</code></p></td>
+<td align="left"><p>12 pt</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>\Large</code></p></td>
+<td align="left"><p>14 pt</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>\LARGE</code></p></td>
+<td align="left"><p>18 pt</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>\huge</code></p></td>
+<td align="left"><p>20 pt</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>\Huge</code></p></td>
+<td align="left"><p>24 pt</p></td>
+</tr>
+</tbody>
+</table>
+<p>You can modify font size in two ways: surround the text to be modified by curly brackets, or use the tag without curly brackets (in which case it is applied until you next include a text-modifying tag).</p>
+<h2 id="text-style">Text Style</h2>
+<table>
+<colgroup>
+<col width="18%">
+<col width="29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Style</th>
+<th align="left">Latex Command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p>Bold</p></td>
+<td align="left"><p><code>\textbf{text}</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Underline</p></td>
+<td align="left"><p><code>\underline{text}</code></p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Italic</p></td>
+<td align="left"><p><code>\textit{text}</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Slanty</p></td>
+<td align="left"><p><code>\textsl{text}</code></p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Small Caps</p></td>
+<td align="left"><p><code>\textsc{text}</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Emphasized</p></td>
+<td align="left"><p><code>\emph{text}</code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>\emph</code> tag is handy; it makes things italic, unless you're already writing in italics, in which case it makes the words not-italic. Good for emphasizing words in (e.g.) a quote written in a foreign language.</p>
+<p>To switch between font families:</p>
+<table>
+<colgroup>
+<col width="30%">
+<col width="25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Font Family</th>
+<th align="left">Latex Command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p>Roman (normal) font</p></td>
+<td align="left"><p><code>\textrm{text}</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Sans-Serif</p></td>
+<td align="left"><p><code>\textsf{text}</code></p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Typewriter</p></td>
+<td align="left"><p><code>\texttt{text}</code></p></td>
+</tr>
+</tbody>
+</table>
+<p>As with the font sizes, you can use these tags by surrounding the text to be modified by curly brackets. Alternatively, you can use the tags <code>\bf</code> (for bold), <code>\sl</code> (for slanty), <code>\em</code> (for emphasis), and <code>\sc</code> (for small caps), etc. These tags apply until you include a different font-modifying command.</p>
+<h1 id="for-more-information">For More Information</h1>
+<p>If you don't know how to do something, as always, you are welcome to ask the MacLab tutors at the front desk (many of us know Latex). If you're using Latex at home and run into trouble, an internet search for "latex" plus the thing you want to know how to do is almost always fruitful.</p>
+<p>Here are some personal favorite Latex-related websites:</p>
+<dl>
+<dt>Latex: A document preparation system</dt>
+<dd><a href="http://www.latex-project.org/">http://www.latex-project.org/</a>
+</dd>
+<dd><p>(complete with official lion mascot)</p>
+</dd>
+<dt>Word Processors: Stupid and Inefficient</dt>
+<dd><a href="http://ricardo.ecn.wfu.edu/~cottrell/wp.html">http://ricardo.ecn.wfu.edu/~cottrell/wp.html</a>
+</dd>
+<dd><p>(particularly heavy-handed, but includes good information)</p>
+</dd>
+<dt>The Tex showcase</dt>
+<dd><a href="http://www.tug.org/texshowcase/">http://www.tug.org/texshowcase/</a>
+</dd>
+<dd><p>(some absurdly complicated, awesome functionality)</p>
+</dd>
+</dl>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Footnotes are automatically numbered, and appear at the bottom of the page.</p>
+<p>They can also include</p>
+<p>line breaks.<a href="https://csil.cs.uchicago.edu/minicourses/LatexIntro.html#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+</body></html>

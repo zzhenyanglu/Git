@@ -1,0 +1,169 @@
+/*
+Heading Styles
+==============
+
+Here are the suggestions given at the Purdue Online Writing Lab (Clements et al. 2011),
+
+Level 1 Headings --- Centered, Boldface or Italic Type, Headline-style Capitalization
+Level 2 Headings --- Centered, Regular Type, Headline-style Capitalization
+Level 3 Headings --- Flush Left, Boldface or Italix Type, Headline-style Capitalization
+Level 4 Headings --- Flush left, roman type, sentence-style capitalizatoin
+
+If you are using more than 4 layers of headings, you are doing something wrong.
+That kind of complexity doesn't belong in a mini course.
+
+I use bold type instead of italic type because, according to Matthew Butterick,
+
+	If you're using a sans serif font, skip italic and use bold for emphasis.
+	It's not usually worth italicizing sans serif fonts---unlike serif fonts,
+	which look quite different when italicized, most sans serif italic fonts
+	just have a gentle slan that doesn't stand out on the page.
+	(Butterick)
+
+References
+==========
+
+Clements, Jessica, Elizabeth Angeli, Karen Schiller, S. C. Gooch, Laurie Pinkert, and Allen Brizee.
+	“General Format," The Purdue OWL, October 12, 2011, Purdue University.
+	https://owl.english.purdue.edu/owl/resource/717/02/
+
+Butterick, Matthew. "bold or italic," Butterick's Practical Typography.
+	http://practicaltypography.com/bold-or-italic.html
+*/
+
+h1 {
+	display: block;
+	text-align: center;
+    font-weight: bold;
+}
+h2 {
+	display: block;
+	text-align: center;
+	font-weight: normal;
+}
+h3 {
+	display: block;
+	text-align: left;
+	font-weight: bold;
+}
+h4 {
+	display: block;
+	text-align: left;
+	font-weight: normal;
+}
+
+/*
+Paragraphs
+==========
+
+I justify the paragraphs because "[c]ompared to left-aligned text, justification gives text a cleaner, more formal look." (Butterick "justified text")
+Butterick suggests that "a first-line indent should be no smaller than the point size of the text . . . [and] no bigger than four times the point size." (Butterick "first-line indents")
+I have arbitrarily chosen to use two ems of space for indents.
+The first paragraph following a heading is not indented because,
+
+	The function of a paragraph indent is to mark a pause, setting the paragraph apart from what precedes it.
+	If a paragraph is preceded by a title or subhead, the indent is superfluous and can therefore be omitted.
+	(MetaFilter)
+
+I have set margin-top and margin-bottom to 0 so that there is no space between paragraphs.
+I have turned on hyphenation because "in justified text, hyphenation is mandatory." (Butterick "hyphenation")
+Hyphenation is set to manual, so you need to supply your own suggested line breaks.
+See the link below for more information.
+
+	https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens#Suggesting_line_break_opportunities
+
+References
+==========
+
+Butterick, Matthew. "justified text," Butterick's Practical Typography.
+	http://practicaltypography.com/justified-text.html
+
+Butterick, Matthew. "first-line indents," Butterick's Practical Typography.
+	http://practicaltypography.com/first-line-indents.html
+
+MetaFilter. "No indentation of initial paragraphs?" Ask MetaFilter.
+	http://ask.metafilter.com/18872/No-indentation-of-initial-paragraphs
+
+Butterick, Matthew. "hyphenation," Butterick's Practical Typography.
+	http://practicaltypography.com/hyphenation.html
+*/
+
+p {
+	text-align: justify;
+	text-indent: 2em;
+	margin-top: 0;
+	margin-bottom: 0;
+	hyphens: manual;
+}
+
+h1 + p, h2 + p, h3 + p, h4 + p {
+	text-indent: 0;
+}
+
+/*
+The Body
+========
+
+I have arbitrarily chosen to make the body font Arial.
+The sans-serif font gives the document a sleeker look, in my opinion.
+Buttericks says "[i]n print, the optimal point size for body text is 10--12 point. On the web, the optimal size is 15--25 pixels." (Butterick "point size")
+I have not chosen to use pixels, but I picked an arbitrary size of 18pt.
+Butterick suggests aiming "for an average line length of 45--90 characters." (Butterick "line length")
+I have arbitrarily chosen a line length of 80 characters, which is within that range.
+I have margin set to auto, so that the left and the right margins are equal.
+
+References
+==========
+
+Butterick, Matthew. "line length," Butterick's Practical Typography.
+	http://practicaltypography.com/line-length.html
+
+Butterick, Matthew. "point size," Butterick's Practical Typography.
+	http://practicaltypography.com/point-size.html
+*/
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	width: 80ch;
+	margin: auto;
+}
+
+
+/*
+Code Blocks
+===========
+
+We set white-space to pre-wrap and word-wrap to break-word, because this fixes a display issue where code blocks run out of bounds horizontally.
+I have arbitrarily set the font-family as Courier for code blocks.
+I recommend using a monospaced font, because that's how people usually see code displayed.
+ */
+
+pre code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+code {
+	font-family: Courier, monospace;
+}
+
+/*
+Figures & Captions
+==================
+
+I have arbitrarily chosen to center images and their captions.
+I have also added an em of space above and below the figure to help differentiate it from the surrounding content.
+Because paragraphs are set by default to indent, I have explicitly set no indent for the caption text.
+*/
+
+div.figure {
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+p.caption {
+	text-align: center;
+	text-indent: 0;
+}

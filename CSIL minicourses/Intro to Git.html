@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0049)https://csil.cs.uchicago.edu/minicourses/Git.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Patrick Dougherty">
+  <meta name="date" content="2016-03-16">
+  <title>Intro to Git</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="./Intro to Git_files/minicourses.css" type="text/css">
+</head>
+<body>
+<div id="header">
+<h1 class="title">Intro to Git</h1>
+<h2 class="author">Patrick Dougherty</h2>
+<h3 class="date">2016-03-16</h3>
+</div>
+<h1 id="what-is-git-and-why-do-we-use-it">What is Git and Why do we use it?</h1>
+<p>Git is an open source version control software. It is used to let you "version" your own projects. Why is this good? It's hard to make big changes all at once. Most command line software accepts a "--version" flag. Whn you run it, it prints out the version. For example, if you run "git --version" it will tell you what version you are running. I have 2.5.4. Every new period is a more specific sub-version, and these are defined however you feel. Generally, 1.0 is the first time something does what you say it does. Facebook 1.0 might just have the friend and status functionality. Snapchat 1.0 might let you send pictures to contacts that are erased after 10 seconds but have no filters or friendship scores.</p>
+<p>So what does this have to do with Git and you. Consider writing your own soon-to-be-number-one app, or perhaps a school project. Git allows you to make versions of your code so that you can save it in specific places. Maybe you want to save it the first time it compiles. Or maybe it finally is giving output, even if that output is wrong.</p>
+<p>Let's say you are partway through your project and you realize that you have been doing a specific part all wrong. You've edited ten different files, you've moved some around, and you don't even remember what else you did. Git lets you say, "let's go back to right before I started working on this." And then you tell Git to put you back there, and everything is exactly the way it was before you made the mistake.</p>
+<p>The uses extend far beyond handling mistakes, this situation is meant merely as a motivating example of why you might want to version your software. Git in its most basic form acts as a way to save your progress and mark milestones. You can tell it things to remember, and it will remember them exactly. So later, when you want to compare everything you've done to, say, the first time it started working, Git can tell you everything that has happened.</p>
+<h1 id="personal-project">Personal Project</h1>
+<p>So let's start with a personal project. Some of you may know about using Github, Gitlab, or another Git hosting service with a group of people, but it makes sense to start at the beginning. So here we are.</p>
+<h2 id="git-init">Git Init</h2>
+<p>We are going to walk through the setup and general use of a personal git project. To us, that means we need to come up with a name and an idea, but on the computer, that means we need a folder. So let's make one called "Git Example." This is where we will be working, so let's change directory into it. So now we are inside the home of our project, and we want to tell Git that we want its help. So we say:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> init</code></pre>
+<p>Now what did that do? On the surface, it looks like nothing. We ran the command and it spit out a very helpful:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">Initialized</span> empty Git repository in /path/to/project</code></pre>
+<p>Ok, so what's a repository? Repository is a commonly used word when working with Git. It is important to note that people frequently shorten it to just "repo". A repository is mostly a fancy word for a folder. To be more specific, it usually means the top-most folder in the project tree (maybe too technical...). So when we say "the Git repository" or "the Git repo," we typically mean the main folder of the project. In this case, "Git Example." So Git is telling us that it is set up in this folder and ready to work.</p>
+<p>FOOTNOTE: The more adventerous among you may poke around and see that Git has, in fact, made something. There is now a ".git" folder that Git uses to do what it does. Hands off, you will probably never need to touch it.</p>
+<h2 id="git-status">Git Status</h2>
+<p>Before we go any further, I would like to introduce what I would say is the most useful Git command. It will frequently tell you exactly what to do to get out of any situation. It is also a great sanity check to make sure that you are doing what you want to do and nothing is broken. This command is:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> status</code></pre>
+<p>So let's run it, and see what it looks like:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">On</span> branch master
+
+<span class="kw">Initial</span> commit
+
+<span class="kw">nothing</span> to commit (create/copy files and use <span class="st">"git add"</span> to track)</code></pre>
+<p>Ok, there are three lines here. Let's forget about the first for a bit, we will talk about branches later. So, looking at the second line, "Initial commit." Git is telling us that it doesn't know anything, and is waiting for us to tell it something. Luckily, the very next line tells us what to do! There is nothing currently in the folder for it to work on, so we should "create/copy files." A great first file to make is a README. This will tell people what your software does and/or how to use it. Let's create this file using our favorite text editor (<code>gedit</code>, <code>vim</code>, <code>nano</code>, <code>emacs</code>, <code>ed</code>). And fill it with some helpful information like: "This is my first Git repository."</p>
+<p>And now when we run <code>git status</code>, we see</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">On</span> branch master
+
+<span class="kw">Initial</span> commit
+
+<span class="kw">Untracked</span> files:
+  <span class="kw">(use</span> <span class="st">"git add &lt;file&gt;..."</span> to include in what will be committed<span class="kw">)</span>
+
+    <span class="kw">README</span>
+
+<span class="kw">nothing</span> added to commit but untracked files present (use <span class="st">"git add"</span> to track)</code></pre>
+<p>So now the first two lines are the same, but Git knows about what we have done. When we talked earlier about Git knowing about the changes you make to a file, we were talking about "tracking." Here Git is telling us that it is not currently tracking the README file.</p>
+<h2 id="git-add-and-git-commit">Git Add and Git Commit</h2>
+<p>Our task is then to inform Git that we would like it to keep track of our README file. This is a simple task, we simply run:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> add <span class="kw">&lt;</span>file<span class="kw">&gt;</span></code></pre>
+<p>We treat <code>&lt;file&gt;</code> like a variable, and fill it in with the actual file that we want Git to track. For example, we would use <code>git add README</code>. Now when we check the status, we see:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">On</span> branch master
+
+<span class="kw">Initial</span> commit
+
+<span class="kw">Changes</span> to be committed:
+  <span class="kw">(use</span> <span class="st">"git rm --cached &lt;file&gt;..."</span> to unstage<span class="kw">)</span>
+
+    <span class="kw">new</span> file:   README</code></pre>
+<p>Now Git knows about the README file, and our changes are "staged" for commit. That means that we have not officially saved the changes yet, but we are getting ready to. In fact, we are going to do it right now:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> commit -m <span class="st">"Our first commit"</span></code></pre>
+<p>We have now made our first commit. This is the idea of saving that we talked about before. We tell Git that we have some changes that we want it to know about, and we want to mark our repository as it is right now. That is what our message is for. Any time you make a commit in Git, you have to include a message with it. This is how you can tell the difference between your commits. Good commit messages are very useful. For example, in the situation we had earlier where we needed to undo all our changes, it would be much easier to say "I want to go back to the commit with message 'Part 1 working'" than try to guess at what number it was. So here, we use the <code>-m</code> flag to set the commit message in the command. If you run plain <code>git commit</code> a text file will open for you to edit and save. I always use <code>git commit -m "&lt;Helpful message&gt;"</code>. But that is mostly a preference thing.</p>
+<p>The output of <code>git commit</code> is mostly self explanatory, it tells you how things changed because of that commit. For example, you can see the number of files changed, what files were created, and some more information when bigger changes are made. But let's return to our favorite <code>git status</code> command, and see what Git has to tell us now.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">On</span> branch master
+<span class="kw">nothing</span> to commit, working directory clean</code></pre>
+<p>Awesome, Git is telling us that we have not made any changes since our last commit. Everything is exactly like we last told Git it should be.</p>
+<p>We have now seen the full lifecycle of a basic commit. You make a change, you let Git know that you want it to track this change (with <code>git add</code>), and then you save those changes (with <code>git commit</code>). This knowledge alone is enough to get started with Git. You can now start developing and coding to your heart's content knowing that Git has your back if something goes wrong.</p>
+<p>A note about my use of <code>git status</code>. I am using it quite frequently here. To be honest, this is about how often I use it when I am working with Git. But that is merely due to personal preference. I like to use it as a sanity check because it lets me constantly monitor exactly what I am doing. You may use it differently or not at all. I just want to impress on you that the first course of action when you have a problem is to run git status. 9/10 it will tell you what needs to be done.</p>
+<h1 id="remote-project">Remote Project</h1>
+<p>Now our example project is all well and good, but let's say you get home and want to work on your code on your desktop. There are a bunch of really terrible ways you could get your project onto your desktop and then transfer files back and forth whenever you make changes. Luckily there is also a good way.</p>
+<h2 id="using-remote-repositories">Using Remote Repositories</h2>
+<p>Let's pause for a moment and think about Git. Git is a service that tracks and saves changes. So imagine that we all have this minicourse file on our computers. They are all identical because they are just copies of the one I have. Now suppose I developed this minicourse using Git, and I accidentally gave all of you a version that wasn't finished. So I quickly make some changes, but then how do I get them out to you?</p>
+<p>Well, Git is incredibly well suited for this task. If I make and commit my changes, then Git knows exactly what it needs to do to get from the version you all have to my updated version. So then the question is: how do you tell Git to make my changes?</p>
+<p>Now we can introduce the idea of a remote repository. If we remember from earlier that a repository is basically just a Git folder, we can interpret this idea as "a folder in a different place." So why would we want to deal with remote repositories? Well there are two immediate cases to consider. The first is like the hypothetical above. You are interested in the changes I made to my version of the minicourse. So you need Git to know about the remote repo on my computer. Case two, you want to be able to access your own code from multiple computers. Suppose I work on my desktop when I am at home, and my laptop everywhere else. I'll need some way to refer to the same Git repository if I want to work on the same code.</p>
+<p>So let's think more about how this remote repo will work. The repo can live on your computer or another computer, but most of the time, you will be dealing with remotes on Git hosting services. There are a lot of these, and you may have heard of some: GitHub, GitLab, Bitbucket, etc. These sites offer hosting for your Git repositories. Basically, they will be storage for your code and hold Git's version of the repo. By that I just mean that the only way to change the code in the remote is through Git. You can't just modify the code on the hosting services because you have no way of logging on to them or editing the files. I have tried to motivate why we use remote repos, but an example will hopefully make things clearer.</p>
+<h2 id="git-clone-git-pull-and-git-push">Git Clone, Git Pull, and Git Push</h2>
+<p>Let's pick up where we left off with the minicourse example above. I have now made changes in my Git tracked repository to the minicourse file, and all of you want access to the updated file, not only to see the updates, but also to take notes, or review, or just keep for later. So how do you go about getting my Git repository on your computer? Well now we get back to using Git! It's time for a new command, <code>clone</code>.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> clone <span class="kw">&lt;</span>url<span class="kw">&gt;</span></code></pre>
+<p>So what just happened? You now have an exact replica of my Git repository, including my recent updates! Ok, great you have my updates. But what if I realize that I forgot to mention something very important? I update my file, but now we are in the position we were before. I have updates but you don't. Now we need to somehow get the changes from my repo into yours. But we already have the files now, and they are managed by Git. In fact, because we cloned it, Git knows that it came from my computer. So we can now get theses updates with a simple command:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> pull</code></pre>
+<p>This looks a bit like the output of <code>commit</code>. The first chunk is just about connecting to the remote repository and getting the info from it. The second is the stats about the changes like we saw in the output of <code>commit</code>. We just applied my commit to your files. Now, whenever I make a change, you can just pull and Git will update your repository. Cloning and pulling is a great way to use open source software. You can clone it and use it, and then whenever there are updates, you just have to pull the updates.</p>
+<p>There is one more command to know before you have the basics of using remote repositories, and that is <code>push</code>. As you might be able to guess from the name, this command does the opposite of <code>pull</code>. It takes your commits and applies them to my repo. Let's say I wanted everyone who ever took this minicourse to put their name at the bottom of the file. The easiest way to do that would just be to have each write your name at the bottom of the page and then push that change. To do that, all you would have to do is:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">vim</span> Git.md (edit the file)
+<span class="kw">git</span> add Git.md
+<span class="kw">git</span> commit -m <span class="st">"Added my name to the minicourse"</span>
+<span class="kw">git</span> push</code></pre>
+<p>Hopefully, you all know what is going on here, but it's always good to review. So we made a change to the file. Then we used <code>add</code> to tell Git that we were making a change. Then we used <code>commit</code> to tell Git that we had made all the changes we wanted, making sure to provide a helpful commit message. And then we used <code>push</code> to send that commit to me.</p>
+<p>In the whole scenario above, my computer played the role of the source of the repository. You cloned from me and you pushed back to me. This is the purpose of GitHub and other hosting services. The code sits there and you can push to it and pull from it from anywhere. This allows you to work on your codebase from essentially any computer.</p>
+<h1 id="miscellaneous">Miscellaneous</h1>
+<p>You now have the basics of using Git. There are many more commands and utilities that Git provides, but it would take more than the time we have here to cover all of it. Below you can find some brief tutorials for other important commands that you should hopefully be able to learn by yourself now that you have a solid foundation.</p>
+<h2 id="branching">Branching</h2>
+<p>One of the most important parts of Git etiquette is called "branching". To get a good intuitive understanding of branching, it first makes sense to think about the ways in which Git works like a tree. (Pictures will most likely be heavily abused in this section, probably on whiteboard) We start on the main branch, this is almost always called "master". If we look back to the first time we ran <code>git status</code>, we can see that it told us we were on the master branch.</p>
+<p>But what about other branches? Well, sometimes you want to develop separately from your master branch. Suppose I wanted to rewrite a portion of this minicourse. I would still need this version to teach from until I completely finished the rewrite. So to accomplish that, I would create a branch.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> branch rewrite master</code></pre>
+<p>This command will make a new branch that, for the moment, is the same as master. It is important to note, this command simply creates the branch, it does not move us onto it. To see this, we can run:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> branch</code></pre>
+<p>and we will get some output that tells us about the branches. In our case, it will look like this:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">*</span> master
+  <span class="kw">rewrite</span></code></pre>
+<p>This tells us there are two branches, called "master" and "rewrite", and the asterisk tells us which branch we are currently on. At this exact moment, the two branches are the same. But any changes we make will only be to the branch we are currently on. For example, we could edit our README file to have a line "On master" in it, making sure to add and commit that change. Let's now switch to the rewrite branch.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> checkout rewrite</code></pre>
+<p>We now are on the rewrite branch. If we ran <code>git branch</code>, we would see the asterisk next to "rewrite". If we open the README file, the "On master" line won't be there. We have grown the master branch past the rewrite branch. If we now make a bunch of our planned changes, add, and commit them, we can switch back to the mater branch and nothing has changed.</p>
+<p>Branches are a powerful and safe tool. If you have a branch for development, you can always test the code before it moves to production. Groups working on the same code can work without affecting each other. Each person can use a personal branch, and then put it back on master when they are ready.</p>
+<p>Once you are done with a branch, you can use the <code>-d</code> flag, for example:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> branch -d rewrite</code></pre>
+<h2 id="merging">Merging</h2>
+<p>This now brings us to the question of what to do once you are ready to add your code from a branch back into master. This can be a bit tricky. But let's start with a simple case. Knowing what we do about branches now, let's revisit the idea we had before about having each of you put your name at the bottom of the minicourse file. So each one of you would make a branch, edit the file, and bring it back in. You can do it like this:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> checkout -b YOUR_NAME
+<span class="kw">vim</span> Git.md (add your name)
+<span class="kw">git</span> add Git.md
+<span class="kw">git</span> commit -m <span class="st">"Added my name to the minicourse"</span>
+<span class="kw">git</span> checkout master
+<span class="kw">git</span> merge YOUR_NAME</code></pre>
+<p>So the only new line is <code>git merge YOUR_NAME</code>. This is pretty simple, and you may be able to guess what it does. We run it from the master branch, and we are asking Git to apply all the tracked changes on the branch YOUR_NAME to the master branch. When you merge, you will have to give a message similar to when you commit. The default is decently descriptive, but you can write something more if you want.</p>
+<p>If just one of you were doing this, it would be easy. Git would just add your new line to the end of the file. But let's say all of you have to do it. When the first person does it, Git knows it just has to add the name to the end. But when the second person tries, Git has an issue. On the master branch, Git has the last line as NAME_1. But on the attempted merge, that name is not there. So how should it react? Well, it tries to be safe, so it asks you to resolve it. This is the dreaded "merge conflict" that causes many headaches. But no fear! We can handle this. Let's look at the problem file. We see:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt; Head
+p1
+======
+p2
+&gt;&gt;&gt;&gt;&gt;&gt; Other branch</code></pre>
+<p>How do we resolve this? First, we should undertand what it is saying. The <code>======</code> divides the differing code. If we look above that line, we can see the code that belongs to <code>HEAD</code>, and below what belongs to <code>Other branch</code>. Our task is to tell Git what we want it to keep, and how to put it together. Because we want both names, we can simply delete the lines Git added in and end with just:</p>
+<pre><code>p1
+p2</code></pre>
+<p>We have now resolved the merge conflict. So we just run:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> add README
+<span class="kw">git</span> commit -m <span class="st">"Resolved merge conflict from Other Branch"</span></code></pre>
+<p>And the merge finishes. As an example of a slightly more complicated merge conflict, imagine we had:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+p1
+p3
+======
+p2
+p4
+&gt;&gt;&gt;&gt;&gt;&gt; Other branch</code></pre>
+<p>To fix this, we would like to put these in order. So we do!</p>
+<pre><code>p1
+p2
+p3
+p4</code></pre>
+<p>We deleted Git's lines, and simply reordered what was left. Again, once we are done, we simply add and commit it.</p>
+<h2 id="utilities">Utilities</h2>
+<p>There are still many more commands to talk about, but here are two final ones that come up frequently. Note, you can always learn more about a command by using the <code>--help</code> flag. For example:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> pull --help</code></pre>
+<p>This will give you more information on the <code>pull</code> command. You can also always refer to the online Git documentation linked at the bottom.</p>
+<h3 id="git-log">Git Log</h3>
+<p>If you ever want to review your commit history, you can use <code>git log</code>, which will output some useful data about recent commits. Here is an example from the repo that I used to generate most of the content above:</p>
+<pre><code>commit 72c1cbacfe6639a4dabf5c67ccd2ac059c5b210b
+Author: Patrick Dougherty &lt;myemail@example.com&gt;
+Date:   Fri Mar 25 10:40:43 2016 -0500
+
+    Added p4's name
+
+commit e0afcee3337ded1651b0aa482b7afb59087a0c3e
+Author: Patrick Dougherty &lt;myemail@example.com&gt;
+Date:   Fri Mar 25 10:40:09 2016 -0500
+
+    Added p3's name
+
+commit 55bc3e87e56ac86333fa864af0d44b3b1bcec008
+Author: Patrick Dougherty &lt;myemail@example.com&gt;
+Date:   Fri Mar 25 10:39:27 2016 -0500
+
+    Trying merge conflict again</code></pre>
+<p>Here you can see the three most recent commits I made. The first line is a checksum of the commit, but for all practical purposes it is just an ID. Next you see the name and contact information for the person who made the commit and the date that that commit happened. Finally, there is the very helpful commit message that I can use to figure out which commit I am interested in.</p>
+<p>Once you run the command, note that Git will takeover. This means you will need to scroll with the arrow keys. Also, simply type <code>q</code> to quit.</p>
+<h3 id="git-diff">Git Diff</h3>
+<p>Another useful command is <code>git diff</code>. Running just that will show the changes you have made since you last added the file. At the time of writing, if I use it, I get:</p>
+<pre><code>diff --git a/Git.md b/Git.md
+index d9b8fce..03ddf13 100644
+--- a/Git.md
++++ b/Git.md
+@@ -5,11 +5,12 @@ author:
+date: 2016-03-16
+...
+ 
+-# What is git and Why do we use it?
++# What is Git and Why do we use it?</code></pre>
+<p>This holds a fair bit of information, but the most important part to know how to read is the part below the ellipsis. When reading this, lines that have a <code>-</code> at the beginning are the old version of the code and lines with a <code>+</code> are the current state. If we look in the header part above the ellipsis, we can see that there is actually a small legend for us. <code>git diff</code> is actually a comparison command. When you don't add any arguments, Git compares the current state of the file and the last time you added it.</p>
+<p>But you can also specify what comparison you want to make. With a single argument, you can compare against a branch or commit. For example:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> diff rewrite
+<span class="kw">git</span> diff 55bc</code></pre>
+<p>The first compares against the rewrite branch, and the second compares against the "Trying merge conflict again" commit. You can specify a commit with at least the first four characters of the commit SHA. That is the identifier we talked about in the log. If two commits have the same first four characters, then you have to give enough for Git to know the difference.</p>
+<h2 id="gitignore">Gitignore</h2>
+<p>Frequently when you work on a project, there are a bunch of excess files. For example, when you compile a C file, you get object files (files that end with .o). But there's no reason to keep those because they are just automatically generated by the compiler.</p>
+<p>As another example, consider writing an app where you have a file that lists the passwords you need. If you were to post your code publicly on GitHub or something, you would want to make sure that file doesn't make it there.</p>
+<p>Git has a built-in method for purposefully preventing files from being tracked. If you create a ".gitignore" file, Git will check it before adding anything. Back to our examples from above, let's say we want to prevent any file with a .o ending from being tracked by Git. If we add a line "*.o", then Git will not let you add a file ending with ".o". You can create more complex patterns to match more specific files. In fact, you could even just write a specific name on a line.</p>
+<p>There are lots of ways to use gitignores, but in the general case, you can usually use the ones provided from the link below. They are quite comprehensive. Additionally, they can be useful when you are new to a language and are not sure what exactly should be ignored. They even provide some nice examples of how to write the patterns.</p>
+<p>https://github.com/github/gitignore (set of useful gitignores)</p>
+<h1 id="references-for-further-reading-experimentation-or-refreshers">References for further reading, experimentation, or refreshers</h1>
+<p>https://git-scm.com/doc (Git documentation)</p>
+<p>https://try.github.io/levels/1/challenges/1 (Github lesson)</p>
+<p>http://gitimmersion.com/ (A full walkthrough)</p>
+<p>https://www.codecademy.com/learn/learn-git (standard codecademy)</p>
+<p>http://git-scm.com/docs/gittutorial (Git's intro to Git)</p>
+<p>http://rogerdudler.github.io/git-guide/ (other guide)</p>
+<p>And never forget that google can be your best friend.</p>
+
+
+</body></html>
