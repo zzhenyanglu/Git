@@ -1,0 +1,19 @@
+from math import *
+
+def pro_1_4(a,b,c):
+    a = float(a)
+    b = float(b)
+    c = float(c)
+    print 
+    if a == 0:
+        print 'x = ',float(c)/b
+    elif 1 < 4*(a/b)*(c/b):
+        print 'there is no real root for this function!'
+    elif (abs(log10(abs(a))) >= 16 or abs(log10(abs(b))) > 16) or abs(log10(abs(c))) > 16: ##overflow problem
+        if b<0:
+            print 'x =' , (-1+(1-4*(a/abs(b))*(c/abs(b)))**.5)/(2*a/b), ((-1)-(1-4*(a/abs(b))*c/abs(b))**.5)/(2*a/b)
+        if b>0:
+            print 'x = ',(-1-(1-(4*(a/abs(b))*(c/abs(b))))**.5)/(2*a/b), (2*c/b)/(-1-(1-(4*(a/abs(b))*(c/abs(b))))**.5)
+    else:
+        print 'x = ' , ((-b)+(b**2-4*a*c)**.5)/(2*a), ((-b)-(b**2-4*a*c)**.5)/(2*a)
+        

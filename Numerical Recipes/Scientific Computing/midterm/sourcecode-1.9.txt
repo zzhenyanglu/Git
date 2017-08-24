@@ -1,0 +1,27 @@
+from numeric import Matrix
+
+def inverse(A): # A is a matrix that satisfy the given assumption
+    r = A.rows
+    B = A
+    I = Matrix.identity(r)
+    for j in range(0,r):   # convert it into diagonal matrix
+        if B.values[j*r+j] == 0:
+            for i in range(0,r-1):
+                if B.values[i*r+j] !=0:
+                    B.swap_rows(j,i)
+                    I.swap_rows(j,i)
+                    break
+
+    for j in range(0,r):   # convert in into inverse of input A
+        for i in range(r):
+            I.values[j*r+i] = I.values[j*r+i]/B.values[j*r+j]
+    return I
+
+1:49 2013/2/8
+
+                
+
+x=Matrix.from_list([[10,0,0,0,0],[0,0,0,0,8],[0,3,0,0,0],[0,0,9,0,0],[0,0,0,1,0]])
+y=Matrix.from_list([[1,0,0],[0,0,9],[0,4,0]])
+A=inverse(y)
+

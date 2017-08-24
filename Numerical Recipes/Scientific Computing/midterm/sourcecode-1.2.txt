@@ -1,0 +1,11 @@
+from math import *
+
+
+def pro2(n, precision = 10):
+    while (1+1.0/n)!=1:
+        n= (n*precision)
+        print 1+1.0/n, n
+    print "precision = ", precision, "|n = ",n," |minimum 1/n is ", 1./n
+    
+pro2(1)
+

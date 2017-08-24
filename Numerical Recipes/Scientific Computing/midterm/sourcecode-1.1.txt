@@ -1,0 +1,23 @@
+#1.1
+
+from math import *
+
+def convergence(x,n):   # n is how many expansions for the taylor series, x is indep variable 
+    fn = 0.0
+    for i in range(1,n):
+        fn = fn + ((-1)**(i+1))*(x**i)/i
+        print "taylor series with ",i," expansion(s) is ",fn
+    print "true value of ln(1+x)is ", log(1+x)
+    return 'job processed!'
+
+from math import *
+
+def convergence(x,n=20):
+    fn=0.0
+    for i in range(1,n):
+        fn=fn+((-1)**(i+1))*(x**i)/i
+        reminder = log(1+x) - fn
+        print "reminder for taylor series with ",i," expansion(s) is ",reminder
+    print "true value of ln(1+x) is ",log(1+x)
+    print "simulated value of ln(1+x) is ",log(1+x)
+    return 'job processed!'

@@ -1,0 +1,23 @@
+from math import *
+from random import *
+
+def pro_1_5_1(x=[]):
+    total=0.0
+    mean = float(sum(x))/len(x)
+    for i in range(len(x)):
+        total = total + (x[i]-mean)**2
+    return total/len(x)
+
+def pro_1_5_2(x=[]):
+    total =0.0
+    mean=float(sum(x))/len(x)
+    for i in range(len(x)):
+        total = total + x[i]**2
+    return (total - len(x)*(mean**2))/len(x)
+
+
+x = [ 1 for i in range(300)]
+
+for i in range(len(x)):
+    x[i] = float(x[i])/1000000
+
