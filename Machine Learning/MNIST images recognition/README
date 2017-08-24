@@ -1,0 +1,54 @@
+0. Thank-you note 
+
+Professor Kimpe/Naik, 
+
+Thanks very much for your help during the quarter. It's a very tough course, many homeworks, many new stuff to digest. For a moment, I felt I would fail this course, but finally I'm glad that I survived. 
+
+1. Structure of the program 
+
+This homework contains 4 parts. 
+   a. MNIST library from homework 5 (mnist.c mnist.h test_mnist.c)
+   b. Distance library (distance.h distance.c test_distance.c)
+   c. knn logic (knn.c knn.h test_knn.c)
+   d. ocr application (ocr.c)
+
+2. brief discussion of each part
+   a. MNIST:
+      this part is from homework 5. I mended the unit test of this part to make it work, which was not wokring when I submitted it as homework5. I also spend      as much time as spent on finishing this final project on trying to fixing the memory leak problem that my mnist libary has (especially the mnist_create      and mnist_image_begin parts), but it turned out to be not very fruitful.   
+ 
+      There is a NEW function added to mnist library, which give out a random sample mnist dataset. The basic idea is like: for given number of images in the      dataset, create a new mnist dataset and add randome images to it. Initially this function was implemented with other mnist functions, like call 
+      mnist_image_next many times until it reaches the destination image for specified times, but when I used it to test knn logic, it's very very slow. So I
+      modified the mnist_open_sample function to allow direct access to the image/label data in that dataset with array indexing rather than go through the        linked list of images. This little change saves almost 80% of running time.  
+
+   b. Distance libary:
+      I implemented all 5 distance functions, and a distance function caller to allow initiating distance function with a function name(euclid, reduced..) as      arguments. distance_t was implemented as a pointer to struct, which stores a distance function pointer and a function type(1:euclid, 2:reduced...) as 
+      struct memebers. One thing I'm not very satisfied, because of the flawed design, distance function can only take two parameters. Some of the functions
+      , like threshold, crop, should be able to take another parameter (how many pixels of boarders of the crop to trim out, what's the threshold value). But      for now, I can only change them within the functions definition. These functions are very simple in terms of algorithm. I'm not going to spend time 
+      talking about it. I made very clear comments inside distance.c 
+
+      In a nutshell, euclid function gives out the best accuracy when guessing the images. When the train size is around 10000, it will obtain more than 95%
+      accuracy rate, downsample and crop are slightly lower than euclid. reduced and threshold are worst, they only get a around 20% rate, which slightly 
+      higher than random guess. 
+
+   c. knn logic:
+      knn.c file consists of two parts. First, knn function, which takes in a image and a train dataset and call the specified distance function to 
+      return the distances between the image and all images from the dataset. Second part is a quicksort function, which sorts the distances array given by 
+      the specified distance function and take a guess at the test image based on the closet neighbors (smallest distances). 
+
+   d. ocr application:
+      ocr.c file also contains two parts. First one, ocr function, which takes in test dataset, train dataset, distance function name, train size and k as 
+      parameters and call mnist, distance and knn functions accordingly. Second, main() thread, which is also the entrance of the whole application, deals
+      with the arguments passed in, like how to handle 'all' specified for K, train size and distance functions. Finally, it creates a report to show the 
+      accuracy rates obtained by different K, train_size and distance function types.
+
+3. Other things
+   My ocr application handles a single large size of train dataset fine, though like I mentioned in the 2. section. MNIST library always has memory leaks
+   So, it turns to be slower after it processes the first 50 images (which takes around 30 seconds). But approximately, when things becomes very slow,it can    process around 15 images every minute as I've sit there and count down the clock for so many times. I've tried my best to optimize its performance. 
+
+
+thanks very much again for the quarter! 
+
+regards,
+
+zhenyang 
+

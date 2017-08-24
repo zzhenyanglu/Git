@@ -1,0 +1,53 @@
+error/loss function: 
+
+   L1 loss(accuracy): error =1 when y != h(x)
+   L2 loss(squared error): (y-h(x))^2
+   other kind (quadratic)
+
+
+how to do model selection: which model has empirical error.
+   E(error(x)) (calls generalization error: average error value of all x), estimated by sample E(error(x)), called empirical error. 
+
+how to do hypothesis optimization: 
+   train your model on training dataset and calculate empirical error on test dataset. 
+   as sample size increases, empirical error decreases in proportion to 1/n, LLN.
+
+   k fold cross validation(textbook, k fold cross validation) 
+   用cross validation ，只使用training dataset，在一个 model 上, 然后得到这个model的average error。 每次 validation的时候 parameters可能不一样，但是是同一类的model比如 univariate model。 最终的model要重新在training dataset上重新train parameters。 It gives average error function of a type of model family, so it's only used to select among models. within each k fold CV, model does not change, for each k.
+
+   So general steps to model training: 
+
+   1. divide whole dataset into training and test.
+   2. divide training one into k sub ones and do k fold cross validation on candidate models.
+   3. get the model that has smallest error(x) and use this mode to train parameters on whole training dataset(training error). 
+   4. test the model on test dataset to get generalization error(test error).
+
+   So a general description of relationship between test error and training error: 
+   1. training error decreases to 0. 
+   2. test error decrease first, then increases, U shape, left underfit, right: overfit';/. 
+   3. so we need to choose the model with smallest test error, not training error
+
+   four reasons why f(x) != h(x), aka why we could not get the realy function f.(on textbook)
+   1. f is unrealizable. bias is too high
+   2. variance. 
+   3. inherent randomness 
+   4. computational intrackable. 0 in Logistic regression, but many in other 
+
+   what's inherent randomness: 
+   y = f(x) + epsilon(which is normally distributed, N(0,o^2))
+   So L2 error: E[(y-h(x))^2] = O_y^2 + Var(h(x)) + (E[h(x)] - f(x))^2    ( exam content)
+
+   O_y^2 : irreducible error   
+   Var(h(x)): depends on how h is influenced by the training set, 
+   (E[h(x)] - f(x))^2: bias square, does not depende on the training set, it's from independent value's randomness
+
+   proof: E[(y-h(x))^2] = Var(y-h(x)) + E[y-h(x)]^2 = ...
+
+   two sources of randomness: 1. epsilon(first term)
+                              2. using a random training set(third term)
+
+
+   SEE PICTURE ON THE CURRENT FOLDER! on the picture: variance is O_y^2. 
+   good explanation of the picture https://en.wikipedia.org/wiki/Generalization_error    
+
+   
