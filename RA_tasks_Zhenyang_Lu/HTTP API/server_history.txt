@@ -1,0 +1,112 @@
+[2018-02-27 12:17:57]Sent JSON Object to client: {'records': [{'chunk': u'Workbar Union \x89\xdb\xd2 $350 / month full-time open workspace, $500+ / month dedicated desk\xe5\xca\x89\xdb\xd2 The newest Workbar location, this space opened recently in Union Square.', 'hid': u'3Z56AA6EK4NH75BWXWOOTVU9TXG6MP', 'has_space': 1}]}
+[2018-02-27 12:17:58]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=32FESTC2NHDP0UP6GPSD653D25TUCW', fragment='')
+[2018-02-27 12:17:58]Requested HID: 32FESTC2NHDP0UP6GPSD653D25TUCW
+[2018-02-27 12:17:58]Sent JSON Object to client: {'records': [{'chunk': u'Cloudmin is our cloud computing control panel, to allow creation and management of virtual machines in an easy to use web-based UI. Offering support for KVM, Xen, LXC, OpenVZ, Amazon EC2, and Google Compute Engine, it is a flexible interface to integrate internal and external cloud services under one UI. Cloudmin provides a central view of your cloud resources, including update information, analytics, monitoring, and more. Cloudmin is integrated with Webmin and Virtualmin, to make it easy to manage cloud-based web hosting infrastructure.', 'hid': u'32FESTC2NHDP0UP6GPSD653D25TUCW', 'has_space': 0}]}
+[2018-02-27 12:17:59]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=3ZVPAMTJWNQA1EDUEHTRRL18THRGZ', fragment='')
+[2018-02-27 12:17:59]Requested HID: 3ZVPAMTJWNQA1EDUEHTRRL18THRGZ
+[2018-02-27 12:17:59]Requested HID not found: 3ZVPAMTJWNQA1EDUEHTRRL18THRGZ
+[2018-02-27 12:18:00]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=38LRF35D5LJ1NUTNNWHCD2ZJWSGU3Y', fragment='')
+[2018-02-27 12:18:00]Requested HID: 38LRF35D5LJ1NUTNNWHCD2ZJWSGU3Y
+[2018-02-27 12:18:00]Sent JSON Object to client: {'records': [{'chunk': u'\rPBworks  / Help\rTerms of use / Privacy policy\r', 'hid': u'38LRF35D5LJ1NUTNNWHCD2ZJWSGU3Y', 'has_space': 0}]}
+[2018-02-27 12:18:01]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=39RRBHZ0AUO2L2PGDTMQDP6HPUOVZL', fragment='')
+[2018-02-27 12:18:01]Requested HID: 39RRBHZ0AUO2L2PGDTMQDP6HPUOVZL
+[2018-02-27 12:18:01]Sent JSON Object to client: {'records': [{'chunk': u'Photo credit: Ed Wonsek', 'hid': u'39RRBHZ0AUO2L2PGDTMQDP6HPUOVZL', 'has_space': 0}]}
+[2018-02-27 12:18:02]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=3GMLHYZ0LEK23XQBCHA23WVW5TBYU8', fragment='')
+[2018-02-27 12:18:02]Requested HID: 3GMLHYZ0LEK23XQBCHA23WVW5TBYU8
+[2018-02-27 12:18:02]Sent JSON Object to client: {'records': [{'chunk': u'In 2009 the main tenant of our space folded, leaving us with the option to either vacate or get creative with 5000 square feet.\xe5\xcaWe quickly developed our plans for a coworking space and pitched the landlords on our concept.\xe5\xcaLuckily they were intrigued and gave us a chance to experiment with the idea.', 'hid': u'3GMLHYZ0LEK23XQBCHA23WVW5TBYU8', 'has_space': 1}]}
+[2018-02-27 12:18:03]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=32L724R85L73LS3ARDP572E97TLPIX', fragment='')
+[2018-02-27 12:18:03]Requested HID: 32L724R85L73LS3ARDP572E97TLPIX
+[2018-02-27 12:18:03]Sent JSON Object to client: {'records': [{'chunk': u'Workbar\xe5\xcaCambridge \x89\xdb\xd2 $350 / month full-time open workspace, $600 / month dedicated desk \x89\xdb\xd2 One of Workbar\x89\xdb\xaas two locations is in Central Square. Options for part-time access and dedicated offices as well.', 'hid': u'32L724R85L73LS3ARDP572E97TLPIX', 'has_space': 1}]}
+[2018-02-27 12:18:04]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=3LG268AV38TCH0H38M33RIGWG2ER5', fragment='')
+[2018-02-27 12:18:04]Requested HID: 3LG268AV38TCH0H38M33RIGWG2ER5
+[2018-02-27 12:18:04]Requested HID not found: 3LG268AV38TCH0H38M33RIGWG2ER5
+[2018-02-27 12:18:05]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=32ZCLEW0BZ7ZG3NG9VA5J3T9K8APJ9', fragment='')
+[2018-02-27 12:18:05]Requested HID: 32ZCLEW0BZ7ZG3NG9VA5J3T9K8APJ9
+[2018-02-27 12:18:05]Sent JSON Object to client: {'records': [{'chunk': u'HELLO! We\x89\xdb\xaare glad you found us. Commoncove was recently launched as a brand of cowork spaces for suburban and near urban workers. Our first location, at Chelsea\x89\xdb\xaas Admiral\x89\xdb\xaas Hill Marina, is Greater Boston\x89\xdb\xaas first coworking space on the waterfront.\xe5\xca We provide the ideal \x89\xdb\xcfhome office\x89\xdb\x9d by being close to home but not in your home \x89\xdb\xd2 a dynamic workspace with both dedicated and floating desks, shared worktables, phone booths, meeting rooms \x89\xdb\xd2 all just steps from the harbor.\xe5\xca We offer flexible, affordable, memberships to accommodate your particular schedule and budget.', 'hid': u'32ZCLEW0BZ7ZG3NG9VA5J3T9K8APJ9', 'has_space': 1}]}
+[2018-02-27 12:18:06]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:06] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:07]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:07] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:08]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:08] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:09]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:09] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:10]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:10] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:11]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:11] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:12]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:12] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:13]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:13] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:14]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:14] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:15]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:15] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:16]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:16] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:17]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:17] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:18]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:18] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:19]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:19] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:20]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:20] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:22]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:22] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:23]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:23] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:24]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:24] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:25]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:25] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:26]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:26] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:18:41]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=33BFF6QPI1YEFYISIWWDVQKGH8R3Z', fragment='')
+[2018-02-27 12:18:41]Requested HID: 33BFF6QPI1YEFYISIWWDVQKGH8R3Z
+[2018-02-27 12:18:41]Requested HID not found: 33BFF6QPI1YEFYISIWWDVQKGH8R3Z
+[2018-02-27 12:18:42]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=3HUR21WDDUCUK1K6HMLPN3U0ZBSYX0', fragment='')
+[2018-02-27 12:18:42]Requested HID: 3HUR21WDDUCUK1K6HMLPN3U0ZBSYX0
+[2018-02-27 12:18:42]Sent JSON Object to client: {'records': [{'chunk': u'Contact: The C3 team at MakemeC3@cic.us -- Additional information at www.cambridgecoworking.com.', 'hid': u'3HUR21WDDUCUK1K6HMLPN3U0ZBSYX0', 'has_space': 0}]}
+[2018-02-27 12:18:43]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=3566S7OX5D63FG3CNKAIFH62QX517B', fragment='')
+[2018-02-27 12:18:43]Requested HID: 3566S7OX5D63FG3CNKAIFH62QX517B
+[2018-02-27 12:18:43]Sent JSON Object to client: {'records': [{'chunk': u'A powerful tool for developers, the MySQL Database Server module provides a schema editor, table data browser, dump and execute SQL features, and the ability to stop and start the MySQL server from the GUI. Virtualmin also provides a similarly capable PostgreSQL module, and Install Scripts for phpmyadmin and phppgadmin.', 'hid': u'3566S7OX5D63FG3CNKAIFH62QX517B', 'has_space': 0}]}
+[2018-02-27 12:18:44]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=3GV1I4SEO9CX1NTBXKN9TIFKTSQ6LN', fragment='')
+[2018-02-27 12:18:44]Requested HID: 3GV1I4SEO9CX1NTBXKN9TIFKTSQ6LN
+[2018-02-27 12:18:44]Sent JSON Object to client: {'records': [{'chunk': u'Easy access to T, Hubway, and parking', 'hid': u'3GV1I4SEO9CX1NTBXKN9TIFKTSQ6LN', 'has_space': 0}]}
+[2018-02-27 12:18:45]Received GET request: ParseResult(scheme='', netloc='', path='/get', params='', query='hid=37SDSEDIN9P7FU8VXP2OTH2X1HB18Y', fragment='')
+[2018-02-27 12:18:45]Sent JSON Object to client: {'records': [{'chunk': u'Check out our Private 
+[2018-02-27 12:18:45]Requested HID: 37SDSEDIN9P7FU8VXP2OTH2X1HB18Y
+[2018-02-27 12:19:03]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:03] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:04]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:04] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:05]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:05] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:06]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:06] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:07]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:07] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:08]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:08] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:09]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:09] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:10]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:10] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:11]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:11] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:12]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:12] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:13]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:13] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:14]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:14] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:15]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:15] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:16]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:16] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:18]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:18] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:19]Received POST : [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
+[2018-02-27 12:19:19] Writing new record received: [{u'chunk': u'test_chunk', u'hid': u'test_hid', u'has_space': u'0'}]
